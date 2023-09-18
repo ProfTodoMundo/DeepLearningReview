@@ -1,0 +1,43 @@
+---
+title: "Revisión de Deep Learning"
+author: "Carlos Ernesto Martinez"
+date: "5-Septiembre-2023"
+documentclass: article
+output:
+  pdf_document:
+    toc: yes  # Cambiado a "no" para eliminar la tabla de contenidos
+    number_sections: yes
+header-includes:
+  - \usepackage{multicol}
+  - \usepackage{fancyhdr}
+  - \usepackage[document]{ragged2e}
+  - \pagestyle{fancy}
+  - \fancyhf{}
+  - \fancyfoot[C]{\thepage}
+  - \fancyfoot[L]{\ifodd\value{page}\textit{\small Revisión de Deep Learning}\else\textit{\small Carlos E Martínez-Rodríguez}\fi}
+  - \fancyfoot[R]{\ifodd\value{page}\textit{\small Carlos E Martínez-Rodríguez}\else\textit{\small Revisión de Deep Learning}\fi}
+  - \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+  - \fancyhead[LE,RO]{\nouppercase{\rightmark}}
+  - \fancyhead[LO,RE]{\nouppercase{\leftmark}}
+---
+
+
+\section{Introducción y antecedentes}
+
+Este es un primer estudio estadístico de la Certificación en la Universidad Autónoma de la Ciudad de México (UACM).
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+\section{Artículo 1: }
+
+
+\section{Artículo 2: }
+
+
+
+\section{Referencias}
+
+

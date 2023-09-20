@@ -24,14 +24,17 @@ header-includes:
 
 \section{Introducción y antecedentes}
 
-Este es un primer estudio estadístico de la Certificación en la Universidad Autónoma de la Ciudad de México (UACM).
+Revisión bibliográfica sobre **Bioingeniería**
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-\section{Artículo 1: }
+\section{Artículo 1: Machine Learning in Enzyme Engineering}
+Título: [Machine Learning in Enzyme Engineering, Stanislav Mazurenko, Zbynek Prokop, and Jiri Damborsky.](https://pubs.acs.org/doi/full/10.1021/acscatal.9b04321)
+
+Enzyme engineering is the process of customizing new biocatalysts with improved properties by altering their constituting sequences of amino acids.
 
 
 \section{Artículo 2: }

@@ -1,0 +1,6 @@
+\babel@toc {spanish}{}
+\contentsline {section}{\numberline {1}Introducci\'on y antecedentes}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Art\IeC {\'\i }culo 1: Machine Learning in Enzyme Engineering}{1}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}The essence of Machine Learning}{2}{subsection.1.2}
+\contentsline {section}{\numberline {2}Art\IeC {\'\i }culo 2: }{3}{section.2}
+\contentsline {section}{\numberline {3}Referencias}{3}{section.3}

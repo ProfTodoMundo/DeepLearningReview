@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  20 SEP 2023 16:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  21 SEP 2023 14:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -457,369 +457,61 @@ LaTeX Info: Redefining \% on input line 1.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<Figura2.png, id=88, 587.19376pt x 830.10126pt>
+<Figura2.png, id=87, 587.19376pt x 830.10126pt>
 File: Figura2.png Graphic file (type png)
 <use Figura2.png>
 Package pdftex.def Info: Figura2.png  used on input line 57.
 (pdftex.def)             Requested size: 264.23474pt x 373.54211pt.
- [2 <./Figura2.png>]
-[3] [4] [5]
+ [2] [3 <./Figura2.png>]
+[4] [5]
 Overfull \hbox (14.56075pt too wide) in paragraph at lines 165--166
 []\OT1/cmr/bx/n/12 Enantioselectividades: \OT1/cmr/m/n/12 Al-gu-nas en-zi-mas p
 ue-den dis-cri-mi-nar en-tre enan-ti^^Some-ros (is^^Some-
  []
 
-[6]
+[6] [7]
 Overfull \hbox (6.68582pt too wide) in paragraph at lines 211--211
 []\OT1/cmr/bx/n/14.4 MACHINE LEAR-NING AP-PLI-CA-TIONS TO ENZY-ME EN-
  []
 
 
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.214 ...ors aimed at elucidating the structure−
-                                                  function relationships cru...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-[7] [8]
-
-LaTeX Warning: Citation `70' on page 9 undefined on input line 231.
-
-
-LaTeX Warning: Citation `71' on page 9 undefined on input line 231.
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.231 ...nzyme for a new stereodivergent carbon−
-                                                  silicon bond formation. Th...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-[9] [10]
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.313 development of stereodivergent carbon−
-                                              silicon bond forma-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-[11] [12]
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.409 ...and Beyond. BioTechniques 2019, 66, 60−
-                                                  63.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.411 ...ics. Nucleic Acids Res. 2018, 46, 2159−
-                                                  2168.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.413 ...cs. Dev., Growth Differ. 2019, 61, 316−
-                                                  326
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.415 ...urr. Opin. Struct. Biol. 2018, 48, 149−
-                                                  156.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.417 ...Curr. Opin. Struct. Biol. 2017, 45, 36−
-                                                  44.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.419 ...in Science. Nat. Methods 2014, 11, 801−
-                                                  807.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.421 ...urr. Opin. Struct. Biol. 2018, 50, 117−
-                                                  125.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.423 ...dge. Nucleic Acids Res. 2018, 47, D506−
-                                                  D515.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.425 ...ture Prediction Abstracts; 2018; pp 11−
-                                                  12.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.427 ...: Struct., Funct., Genet. 2011, 79, 21−
-                                                  36.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-[13]
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.429 ... C., Ed.; Springer: Cham, 2016; pp 225−
-                                                  298.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.431 ...mbining Structure,Sequence and Protein−
-                                                  Protein Interaction Inform...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.431 ...ion. Nucleic Acids Res. 2017, 45, W291−
-                                                  W299.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.433 ...oteomes. Bioinformatics 2012, 28, 2687−
-                                                  2688.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.435 ...Learning. Bioinformatics 2018, 34, 760−
-                                                  769.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.437 ...ction. Nat. Chem. Biol. 2018, 14, 1109−
-                                                  1117.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.439 ...l. Acad. Sci. U. S. A. 2009, 106, 4201−
-                                                  4206.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.441 ...l. Acad. Sci. U. S. A. 2017, 114, 2265−
-                                                  2270.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.446 ...ubility. Bioinformatics 2019, 35, 4640−
-                                                  4646.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! LaTeX Error: Unicode character − (U+2212)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.448 ...Biocatalysts. ACS Catal. 2019, 9, 1033−
-                                                  1054.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-[14] (./MiRevision.aux
+Overfull \hbox (24.13147pt too wide) in paragraph at lines 219--220
+[]\OT1/cmr/m/n/12 predicting the ca-taly-tic ac-ti-vity or subs-tra-te spe-ci-f
+i-city for a known se-quen-ce/structure. 
+ []
+
+[8] [9] [10] [11] [12] [13] [14] [15] [16] (./MiRevision.aux
 LaTeX Info: Redefining \. on input line 34.
 LaTeX Info: Redefining \% on input line 34.
 )
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `MiRevision.out' has not changed.
-(rerunfilecheck)             Checksum: 87AC4EB125FBB3760B7C6B9457EBADC3;2777.
+(rerunfilecheck)             Checksum: 7F14A4A1FB7EFD203253F7B89C389C7C;3146.
  ) 
 Here is how much of TeX's memory you used:
- 11683 strings out of 478287
- 181172 string characters out of 5849290
- 502726 words of memory out of 5000000
- 29655 multiletter control sequences out of 15000+600000
- 479373 words of font info for 67 fonts, out of 8000000 for 9000
+ 11731 strings out of 478287
+ 181482 string characters out of 5849290
+ 503248 words of memory out of 5000000
+ 29677 multiletter control sequences out of 15000+600000
+ 479710 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,11n,63p,3897b,463s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.p
-fb>
-Output written on MiRevision.pdf (14 pages, 729423 bytes).
+ 60i,11n,63p,1251b,484s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texm
+f/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on MiRevision.pdf (16 pages, 741314 bytes).
 PDF statistics:
- 277 PDF objects out of 1000 (max. 8388607)
- 232 compressed objects within 3 object streams
- 67 named destinations out of 1000 (max. 500000)
- 94 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 343 PDF objects out of 1000 (max. 8388607)
+ 294 compressed objects within 3 object streams
+ 92 named destinations out of 1000 (max. 500000)
+ 102 words of extra memory for PDF output out of 10000 (max. 10000000)
 

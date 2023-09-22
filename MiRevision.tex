@@ -351,8 +351,36 @@ extensive use of deep neural networks. Sophisticated neural network architecture
 
 
 
-\section{Artículo 2: }
+\section{Artículo 2: A general model to predict small molecule substrates of enzymes based on machine and deep learning}
 
+Enzymes evolved to efﬁciently catalyze one or more speciﬁc chemical reactions, increasing reaction rates up to over a million-fold over the spontaneous rates1. In addition, most enzymes are promiscuous, i.e.,
+they catalyze further, physiologically irrelevant or even harmful
+reactions2–4. Accordingly, a comprehensive mapping of enzyme-
+substrate relationships plays a crucial role in pharmaceutical
+research and bio-engineering, e.g., for the production of drugs, che-
+micals, food, and biofuels5–7.
+Unfortunately, it is both expensive and time-consuming to
+determine experimentally which reactions are catalyzed by a given
+enzyme. There is thus a huge imbalance between the number of pro-
+teins predicted to be enzymes and the experimental knowledge about
+their substrate scopes. While the UniProt database8 contains entries
+for over 36 million different enzymes, more than 99% of these lack
+high-quality annotations of the catalyzed reactions. Efforts are
+underway to develop high-throughput methods for the experimental
+determination of enzyme-substrate relationships, but these are still in
+their infancy9–11. Furthermore, even high-throughput methods cannot
+deal with the vast search space of all possible small molecule sub-
+strates, but require the experimenter to choose a small subset for
+testing.
+Our goal in this study was to develop a single machine learning
+model capable of predicting enzyme-substrate relationships across all
+proteins, thereby providing a tool that helps to focus experimental
+efforts on enzyme-small molecule pairs likely to be biologically rele-
+vant. Developing such a model faces two major challenges. First, a
+numerical representation of each enzyme that is maximally informa-
+tive for the downstream prediction task must be obtained12. To be as
+broadly applicable as possible, these representations should be based
+solely on the enzymes’ primary sequence and not require additional
 
 
 \section{Referencias}
@@ -459,6 +487,11 @@ extensive use of deep neural networks. Sophisticated neural network architecture
 \bibitem{100} Szegedy, C.; Zaremba, W.; Sutskever, I.; Bruna, J.; Erhan, D.; Goodfellow, I.; Fergus, R. Intriguing Properties of Neural Networks. arXiv preprint arXiv:1312.6199 201
 
 \bibitem{101} Yu, M. K.; Ma, J.; Fisher, J.; Kreisberg, J. F.; Raphael, B. J.; Ideker, T. Visible Machine Learning for Biomedicine. Cell 2018, 173, 1562-1565.
+
+% Lista de referencias del segundo articulo
+
+
+
 \end{thebibliography}
 
 

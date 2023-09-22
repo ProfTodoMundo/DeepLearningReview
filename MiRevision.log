@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  21 SEP 2023 14:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  22 SEP 2023 14:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -480,16 +480,22 @@ Overfull \hbox (24.13147pt too wide) in paragraph at lines 219--220
 i-city for a known se-quen-ce/structure. 
  []
 
-[8] [9] [10] [11] [12] [13] [14] [15] [16] (./MiRevision.aux
+[8] [9] [10] [11] [12] [13] [14] [15] [16] [17] (./MiRevision.aux
 LaTeX Info: Redefining \. on input line 34.
 LaTeX Info: Redefining \% on input line 34.
 )
-Package rerunfilecheck Info: File `MiRevision.out' has not changed.
-(rerunfilecheck)             Checksum: 7F14A4A1FB7EFD203253F7B89C389C7C;3146.
+
+Package rerunfilecheck Warning: File `MiRevision.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `MiRevision.out':
+(rerunfilecheck)             Before: 7F14A4A1FB7EFD203253F7B89C389C7C;3146
+(rerunfilecheck)             After:  FAF31E333164C423CEFAFB7F8CF7E46B;3681.
  ) 
 Here is how much of TeX's memory you used:
- 11731 strings out of 478287
- 181482 string characters out of 5849290
+ 11732 strings out of 478287
+ 181489 string characters out of 5849290
  503248 words of memory out of 5000000
  29677 multiletter control sequences out of 15000+600000
  479710 words of font info for 68 fonts, out of 8000000 for 9000
@@ -508,10 +514,10 @@ pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texm
 f/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on MiRevision.pdf (16 pages, 741314 bytes).
+Output written on MiRevision.pdf (17 pages, 741840 bytes).
 PDF statistics:
- 343 PDF objects out of 1000 (max. 8388607)
- 294 compressed objects within 3 object streams
- 92 named destinations out of 1000 (max. 500000)
+ 347 PDF objects out of 1000 (max. 8388607)
+ 297 compressed objects within 3 object streams
+ 93 named destinations out of 1000 (max. 500000)
  102 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -185,7 +185,7 @@ Existen varias nuevas técnicas emergentes tales como
 \item[i ] Secuenciación de nueva generación.
 \item[ii ] Clasificación de células activadas por fluorescencia.
 \item[iii ]  Exploración mutacional profunda, y  
-\item[iv ] Microﬂuidos.
+\item[iv ] Microfluidos
 
 \end{itemize}
 
@@ -212,11 +212,12 @@ Cuando se combinan con la secuenciación de próxima generación, los ensayos de
 
 \begin{itemize}
 
-\item Despite being a relatively new ﬁeld of study, machine Learning for enzyme engineering has already been applied for several challenging predictions. First consider predictors aimed at elucidating the structure function relationships crucial for enzymes on both sides:
+\item Despite being a relatively new field of study,  machine Learning for enzyme engineering has already been applied for several challenging predictions.  First consider predictors aimed at elucidating the structure function relationships crucial for enzymes on both sides:
 
 \begin{itemize}
 \item predicting the structure for a known sequence, and 
-\item predicting the catalytic activity or substrate speciﬁcity for a known sequence/structure. 
+
+\item predicting the catalytic activity or substrate specificity for a known sequence-structure. 
 \item solubility and stability, from the point of view of amino acid substitutions,
 
 \end{itemize}
@@ -231,7 +232,7 @@ Cuando se combinan con la secuenciación de próxima generación, los ensayos de
 The AlphaFold network was trained on the PDB entries to predict the distances between C-beta atoms of residues using multiple sequence alignments\cite{60} and received the highest score at the competition. Out of 124 targets, around two-thirds of AlphaFold predictions had a $GDT_TS$ score above 50, which is indicative of a topologically correct structure \cite{61}.
 \end{Note}
 
-\item Apart from predicting protein structures, predicting catalytic activities is another active ﬁeld of research currently. 
+\item Apart from predicting protein structures, predicting catalytic activities is another active field of research currently. 
 
 \item Computational methods for the protein function prediction range from sequence-to structure-based and from gene-to genome- and interactome-based\cite{62}. 
 
@@ -244,7 +245,7 @@ The AlphaFold network was trained on the PDB entries to predict the distances be
 \item Recently, deep learning was also applied to predict EC numbers on the basis of a protein sequence using both sequence-length-dependent features, such as raw sequence one-hot encoding, and sequence-length-independent features, such as functional domain encoding \cite{65}.
 
 
-\item The former type of features introduced nonuniformity in feature dimensionality, and the authors presented a framework to perform simultaneously dimensionality uniformization, feature selection, and classiﬁcation model training. 
+\item The former type of features introduced non uniformity in feature dimensionality, and the authors presented a framework to perform simultaneously dimensionality uniformization,  feature selection, and  classification model training. 
 
 \item The large data sets of enzyme structures and activities accumulated to date already allow using deep learning in the engineering of catalytic activity. 
 
@@ -253,24 +254,26 @@ The AlphaFold network was trained on the PDB entries to predict the distances be
 
 
 \begin{Note}
-Data from the label-free mass spectroscopy-based assay of 91 substrates and 54 enzymes derived from the plant Arabidopsis thaliana were used for functional prediction. The authors trained sequence-based decision trees, systematically varying combinations of physicochemical properties, e.g. log P, molecular area, and number/type of nucleophilic groups, and structural information, e.g. scaﬀold type and functional groups. The resulting predictor was successfully tested on four individually selected gene sequences as well as two complete families of enzymes from four diﬀerent organisms, which highlights the tremendous potential of training ML predictors on the newly acquired data from high-throughput data collection methods. 
+Data from the label-free mass spectroscopy-based assay of 91 substrates and 54 enzymes derived from the plant Arabidopsis thaliana were used for functional prediction. The authors trained sequence-based decision trees, systematically varying combinations of physicochemical  properties,  e.g. log P, molecular area, and number/type of nuclephilic groups, and structural information, e.g.  scaffold type and functional groups. The resulting predictor was successfully tested on four individually selected gene sequences as well as two complete families of enzymes from four different organisms, which highlights the tremendous potential of training ML predictors on the newly acquired data from high-throughput data collection methods. 
 \end{Note}
 
-\item In their recent paper \cite{35} Han and coauthors considered seven diﬀerent binary and continuous ML algorithms: logistic regression, decision tree, support vector machines, Naive Bayes, conditional random forest, XGboost, and artiﬁcial neural networks. 
+\item In their recent paper \cite{35} Han and coauthors considered seven different binary and continuous ML algorithms: logistic regression, decision tree, support vector machines,  Naive Bayes,  conditional random forest,  XGBoost, and artificial neural networks. 
 
-\item The authors attempted to use generative adversarial networks to synthesize more data. This is a pair of two neural networks competing against each other: one learns to generate artiﬁcial examples and the other to distinguish them from real data. 
+\item The authors attempted to use generative adversarial networks to synthesize more data. This is a pair of two neural networks competing against each other: one learns to generate artifficial examples and the other to distinguish them from real data. 
 
-\item Another point of view on protein solubility prediction is studying the eﬀects of individual mutations. The recent successes in the application of deep mutational scanning to collect the data on protein solubility changes upon mutations\cite{68} are likely to promote the development of more sophisticated ML-based protein solubility predictors in the nearest future. 
+\item Another point of view on protein solubility prediction is studying the effects of individual mutations. The recent successes in the application of deep mutational scanning to collect the data on protein solubility changes upon mutations\cite{68} are likely to promote the development of more sophisticated ML-based protein solubility predictors in the nearest future. 
 
-\item Predicting the eﬀects of amino acid substitutions is not only limited to solubility: stability, substrate speciﬁcity, catalytic activity, and enantioselectivity can also be targeted if suﬃcient data are available.
+\item Predicting the effects of amino acid substitutions is not only limited to solubility: stability, substrate specificity, catalytic activity, and enantioselectivity can also be targeted if sufficient data are available.
+
 
 \item Protein stability predictors are perhaps those with the most abundant data sets of this type available for ML training
 
-\item The authors also presented a random forest classiﬁer trained using 1106 features from the following groups: experimental conditions, conservation and coevolution scores for mutated positions, amino acid substitutions and their physicochemical properties, neighborhood features for 11 positions before and after substitution sites, and thermodynamic sequence-based features extracted from ProtDCal\cite{69}. 
+\item The authors also presented a random forest classiffier trained using 1106 features from the following groups: experimental conditions, conservation and coevolution scores for mutated positions, amino acid substitutions and their physicochemical properties, neighborhood features for 11 positions before and after substitution sites, and thermodynamic sequence-based features extracted from ProtDCal \cite{69}. 
+
 
 \item PON-tstab is a three-class predictor (stability increasing, decreasing, unchanged) and achieved the correct prediction ratio of around 0.5 versus the value 0.33 for a random predictor. This implies that, even with a data set of higher quality, predicting protein stability remains an extremely challenging task \cite{5}.
 
-\item Another intriguing application of ML in protein engineering is to design smart combinatorial libraries for directed protein evolution\cite{70}. This has the potential to both reduce the experimental eﬀort and improve the exploration of the sequence space by mutating multiple positions simultaneously. Moreover, it can approximate the empirical ﬁtness landscape to suggest a reﬁned set of variants for the next round of screening.
+\item Another intriguing application of ML in protein engineering is to design smart combinatorial libraries for directed protein evolution\cite{70}. This has the potential to both reduce the experimental effort and improve the exploration of the sequence space by mutating multiple positions simultaneously. Moreover, it can approximate the empirical fitness landscape to suggest a refined set of variants for the next round of screening.
 
 \item Wu et al\cite{71} used ML assisted directed evolution to engineer an enzyme for a new stereodivergent carbon-silicon bond formation. The authors selected the reaction of phenyldimethyl silane with ethyl 2-diazopropanoate catalyzed by a putative nitric oxide dioxygenase from Rhodothermus marinus. They tested a variety of ML algorithms such as linear and kernel models, shallow neural networks, and ensemble methods to improve the enzyme enantioselectivity.
 
@@ -282,7 +285,7 @@ Data from the label-free mass spectroscopy-based assay of 91 substrates and 54 e
 
 \begin{itemize}
 
-\item One of the main challenges in applications of ML to enzyme engineering stems from the intrinsic multi-disciplinarity of the approach. Biochemists, molecular biologists, mathematicians, and computer scientists have to ﬁnd a common language to clarify goals, carry out rigorous analysis and training, and avoid common pitfalls, wrongful usage of methods, and misinterpretations.
+\item One of the main challenges in applications of ML to enzyme engineering stems from the intrinsic multidisciplinarity of the approach. Biochemists, molecular biologists, mathematicians, and computer scientists have to find a common language to clarify goals, carry out rigorous analysis and training, and avoid common pitfalls, wrongful usage of methods, and misinterpretations.
 
 \item The No Free Lunch theorem \cite{85} claims that no single ML method is superior to others a priori \cite{86}; 
 
@@ -291,7 +294,7 @@ Data from the label-free mass spectroscopy-based assay of 91 substrates and 54 e
 
 \item With the continuous growth of ML applications in enzyme engineering, the need for robust comparison of various predictors is of growing importance. This comparison is mainly obstructed by the lack of both standardized protocols for comparison and new data sets for testing. 
 
-\item The lack of benchmark data sets, discrepancies in the performance measurements used, inaccurate or insuﬃcient disclosure in publications, and the diﬃculty in ﬁnding reviewers with suﬃciently broad expertise \cite{87} are among the most pressing issues. 
+\item The lack of benchmark data sets, discrepancies in the performance measurements used, inaccurate or insufficient disclosure in publications, and the difficulty in finding reviewers with sufficiently broad expertise \cite{87} are among the most pressing issues. 
 
 \item Researchers working on some applications with a long track record in bioinformatics, such as protein structure or function predictions, have already established several platforms that can be used for comparison of the ML predictors, i.e. CASP, CAFA, EFI, and COMBREX.
 
@@ -300,30 +303,29 @@ Data from the label-free mass spectroscopy-based assay of 91 substrates and 54 e
 \begin{itemize}
 \item[i] a sufficiently large community of researchers working on development of such applications, 
 \item[ii] a sufficient amount of new high-quality data being collected regularly, and 
-\item[iii] a leader that will take on responsibility and invest time and eﬀort into coordinating this activity. 
+\item[iii] a leader that will take on responsibility and invest time and effort into coordinating this activity. 
 \end{itemize}
 
-\item Few papers go beyond simple ROC analysis: e.g., resample cross-validation to estimate its statistical signiﬁcance, explore the reasons for weak predictions, and analyze learning curves. Why does a particular predictor have a better performance? What features are critical for the performance of a predictor on a global scale? What ranges for feature values and what parts of the feature space are most critical for a particular data point to be classiﬁed correctly?
-
+\item Few papers go beyond simple ROC analysis: e.g., resample cross-validation to estimate its statistical significance, explore the reasons for weak predictions, and analyze learning curves. Why does a particular predictor have a better performance? What features are critical for the performance of a predictor on a global scale? What ranges for feature values and what parts of the feature space are most critical for a particular data point to be classiffied correctly?
 \end{itemize}
 
 \subsection{Emerging Trends in ML-Based Methods for Enzyme Engineering}
 
 
 \begin{itemize}
-\item With the accumulation of more data by virtue of the emerging high-throughput experimental methods, the development of benchmark data sets and uniﬁed performance measurements is only a matter of time.
+\item With the accumulation of more data by virtue of the emerging high-throughput experimental methods, the development of benchmark data sets and unified performance measurements is only a matter of time.
 
-\item Recently, an intriguing algorithm based on semisupervised learning has been presented to allow benchmarking in ﬁve diﬀerent prediction tasks related to protein engineering, including secondary structure, ﬂuorescence landscape, and stability landscape predictions \cite{88}
+\item Recently, an intriguing algorithm based on semisupervised learning has been presented to allow benchmarking in five different prediction tasks related to protein engineering, including secondary structure, fluorescence landscape, and stability landscape predictions \cite{88}
 
 \item As the data generation is streamlined, a data set from a single experiment is starting to have the size large enough for training ML algorithms to guide the design of future experiments, as was the case in the development of stereodivergent carbon silicon bond formation\cite{71} and the application of Gaussian processes to the directed evolution of cytochromes\cite{89}.
 
-\item The increase in the available data will prompt more
-extensive use of deep neural networks. Sophisticated neural network architectures, such as recurrent or graph-based neural networks, simultaneous training of several types of predictors (multitasking), combining structurally diﬀerent input data (multimodal design), ML-based modeling of data sets (generative models), and retraining predictors used in one area by new data from another area (transfer learning) have only recently been applied in genomics\cite{14}
-
-\item Several attempts have recently been made to apply some of those advanced techniques to proteins: using generative models to create soluble and functional malate dehydrogenase variants\cite{90} or predict mutational eﬀects with high correlation with those actually observed in 42 high-throughput deep mutational scanning experiments\cite{91}
+\item The increase in the available data will prompt more extensive use of deep neural networks. Sophisticated neural network architectures, such as recurrent or graph-based neural networks, simultaneous training of several types of predictors (multitasking), combining structurally different input data (multimodal design), ML-based modeling of data sets (generative models), and retraining predictors used in one area by new data from another area (transfer learning) have only recently been applied in genomics\cite{14}
 
 
-\item More data will also allow improving the existing methods, i.e. learning the optimal architecture of a predictor from the data (hyperparameter optimization)\cite{92}, smart aggregation of several predictions from multiple methods\cite{93}, and introducing robust conﬁdence scores for predictions\cite{94}. In enzyme engineering, this new level of algorithmic complexity will further save time and resources wasted on validating misleading predictions but will also require more sophisticated computer architecture, e.g. an increased use of parallel computing and stochastic training methods, which have already become standard techniques for the acceleration of deep neural network training.
+\item Several attempts have recently been made to apply some of those advanced techniques to proteins: using generative models to create soluble and functional malate dehydrogenase variants\cite{90} or predict mutational effects with high correlation with those actually observed in 42 high-throughput deep mutational scanning experiments\cite{91}
+
+
+\item More data will also allow improving the existing methods, i.e. learning the optimal architecture of a predictor from the data (hyperparameter optimization)\cite{92}, smart aggregation of several predictions from multiple methods\cite{93}, and introducing robust conffidence scores for predictions\cite{94}. In enzyme engineering, this new level of algorithmic complexity will further save time and resources wasted on validating misleading predictions but will also require more sophisticated computer architecture, e.g. an increased use of parallel computing and stochastic training methods, which have already become standard techniques for the acceleration of deep neural network training.
 
 
 
@@ -334,7 +336,7 @@ extensive use of deep neural networks. Sophisticated neural network architecture
 
 
 
-\item Such an approach favors predictors whose parameters can provide such guidance: e.g., linear predictors over more ﬂexible yet harder to interpret artiﬁcial neural networks (Figure 3). Linear predictors allow analytical design on the basis of the coeffiients\cite{99} in contrast, sophisticated predictors are usually prone to pathological behavior, i.e. sudden misclassiﬁcation after a slight and almost imperceptible perturbation of input\cite{100}.
+\item Such an approach favors predictors whose parameters can provide such guidance: e.g., linear predictors over more flexible yet harder to interpret artifficial neural networks (Figure 3). Linear predictors allow analytical design on the basis of the coefficients \cite{99} in contrast, sophisticated predictors are usually prone to pathological behavior, i.e. sudden misclassiffication after a slight and almost imperceptible perturbation of input\cite{100}.
 
 
 \item Another promising approach is to use interpretable architectures of predictors already at the design stage, e.g. the visible neural networks\cite{101}. The design of such networks is guided by the knowledge of the underlying biological mechanism, e.g. the choice of layers and the connections between layers may mimic the hierarchical organization of transcriptional regulatory factors in the cell nucleus.
@@ -361,14 +363,12 @@ research and bio-engineering, e.g., for the production of drugs, che-
 micals, food, and biofuels5–7.
 Unfortunately, it is both expensive and time-consuming to
 determine experimentally which reactions are catalyzed by a given
-enzyme. There is thus a huge imbalance between the number of pro-
-teins predicted to be enzymes and the experimental knowledge about
-their substrate scopes. While the UniProt database8 contains entries
+enzyme. There is thus a huge imbalance between the number of proteins predicted to be enzymes and the experimental knowledge about their substrate scopes. While the UniProt database8 contains entries
 for over 36 million different enzymes, more than 99% of these lack
 high-quality annotations of the catalyzed reactions. Efforts are
 underway to develop high-throughput methods for the experimental
 determination of enzyme-substrate relationships, but these are still in
-their infancy9–11. Furthermore, even high-throughput methods cannot
+their infancy 9-11. Furthermore, even high-throughput methods cannot
 deal with the vast search space of all possible small molecule sub-
 strates, but require the experimenter to choose a small subset for
 testing.

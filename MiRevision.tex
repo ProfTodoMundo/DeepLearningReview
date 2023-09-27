@@ -355,32 +355,68 @@ Data from the label-free mass spectroscopy-based assay of 91 substrates and 54 e
 
 \section{Artículo 2: A general model to predict small molecule substrates of enzymes based on machine and deep learning}
 
-Enzymes evolved to efﬁciently catalyze one or more speciﬁc chemical reactions, increasing reaction rates up to over a million-fold over the spontaneous rates1. In addition, most enzymes are promiscuous, i.e.,
-they catalyze further, physiologically irrelevant or even harmful
-reactions2–4. Accordingly, a comprehensive mapping of enzyme-
-substrate relationships plays a crucial role in pharmaceutical
-research and bio-engineering, e.g., for the production of drugs, che-
-micals, food, and biofuels5–7.
-Unfortunately, it is both expensive and time-consuming to
-determine experimentally which reactions are catalyzed by a given
-enzyme. There is thus a huge imbalance between the number of proteins predicted to be enzymes and the experimental knowledge about their substrate scopes. While the UniProt database8 contains entries
-for over 36 million different enzymes, more than 99% of these lack
-high-quality annotations of the catalyzed reactions. Efforts are
-underway to develop high-throughput methods for the experimental
-determination of enzyme-substrate relationships, but these are still in
-their infancy 9-11. Furthermore, even high-throughput methods cannot
-deal with the vast search space of all possible small molecule sub-
-strates, but require the experimenter to choose a small subset for
-testing.
-Our goal in this study was to develop a single machine learning
-model capable of predicting enzyme-substrate relationships across all
-proteins, thereby providing a tool that helps to focus experimental
-efforts on enzyme-small molecule pairs likely to be biologically rele-
-vant. Developing such a model faces two major challenges. First, a
-numerical representation of each enzyme that is maximally informa-
-tive for the downstream prediction task must be obtained12. To be as
-broadly applicable as possible, these representations should be based
-solely on the enzymes’ primary sequence and not require additional
+
+Las enzimas han evolucionado de manera eficiente para catalizar eficientemente una o más reacciones químicas incrementando las tasas de reacción hasta más de un millón. Además la mayoría de las enzimas son promiscuas, es decir, se catalizan más, fisiológicamente irrelevantes o reacciones inofensivas \cite{2.2, 2.4}
+
+Un mapeo exhaustivo de las relaciones enzima-sustrato desempeña un papel crucial en la investigación farmacéutica y bioingeniería, por ejemplo, para la producción de medicamentos, productos químicos, alimentos y biocombustibles \cite{2.5, 2.6,2.7}.
+
+
+La base de datos UniProt contiene entradas de más de 36 millones de enzimas diferentes, más del $99\%$ de ellas carecen de anotaciones de alta calidad de las reacciones catalizadas. Se están realizando esfuerzos para desarrollar métodos de alto rendicmiento para la determinación experimentarl de relaciones entre enzimas y sustratos, esfuerzos que se encuentran en su etapa inicial\cite{2.9,2.10,2.11}.
+
+
+Se han realizado esfuerzos por desarrollar metodos de alto rendimiento para determinar las relaciones experimentales de las relaciones enzima-sustratos. El objetivo en este trabajo es desarrollar un modelo de Machine Learning (ML) con la capacidad de predecir las relaciones enzima-sustratos a traves de todas las proteínas, por tanto contar con una herramienta que ayude a focalizar esfuerzos experimentales en pares de moléculas de pequeñas enzimas parece ser biológicamente relevantes. Los principales retos son que la representación numérica de caeda enzima que máximamente informativa para la predicción rio abajo, para ser lo más ampliamente posible, estas representaciones deben basarse de manera única en la secuencia primaria de las enzimas sin información adicional. Otro reto es que las bases de datos públicas de enzimas, solamente enlista instancias positivas, es decir, moleculas con las cuales las enzimas despliegan actividades medibes \cite{2.13}. 
+
+\begin{itemize}
+\item Para entrenar un modelo de predicción, es necesario idear una estrategia automatizada para obtener instancias adecuadas de enzimas y pequeñas moléculas que sean negativas y no se unan. Los enfoques de aprendizaje automático existentes para predecir pares enzima-sustrato fueron desarrollados específicamente para familias de enzimas pequeñas para las cuales existen conjuntos de datos de entrenamiento inusualmente completos \cite{2.13}-\cite{2.18}.
+
+\item Mou et al.\cite{2.14} desarrollaron modelos para predecir los sustratos de las nitrilasas bacterianas, utilizando características de entrada basadas en las estructuras tridimensionales y sitios activos de las enzimas. Entrenaron varios modelos de aprendizaje automático basados en evidencia experimental para todas las posibles combinaciones de enzima y molécula pequeña dentro del alcance de predicción de los modelos (N = 240). 
+
+
+\item Yang et al.\cite{2.15} predijeron el alcance de sustratos de las glicosiltransferasas de plantas entre un conjunto predefinido de moléculas pequeñas. Entrenaron un modelo basado en árboles de decisión con un conjunto de datos que cubría casi todas las posibles combinaciones de enzimas y moléculas pequeñas relevantes. 
+
+
+\item Pertusi et al.\cite{2.13} entrenaron cuatro máquinas de vectores de soporte (SVM) diferentes, cada una para una enzima específica. Como características de entrada, sus modelos solo utilizan información sobre los sustratos (potenciales), así como no sustratos extraídos manualmente de la literatura; no se utilizó información explícita sobre las enzimas.
+
+
+\item Roettig et al.\cite{2.16} y Chevrette et al.\cite{2.17} predijeron los alcances de sustratos de familias de enzimas pequeñas, entrenando modelos de aprendizaje automático con información estructural relacionada con los sitios activos de las enzimas. 
+
+
+\item Visani et al.\cite{2.19} implementaron un modelo de aprendizaje automático general para predecir clases EC adecuadas para un sustrato dado. Para entrenar este modelo, se utilizaron todas las clases EC que no están asociadas con un sustrato específico como puntos de datos negativos, lo que resultó en una baja proporción promedio de positivos a negativos de 0.0032. Visani et al. no utilizaron información sobre las enzimas más allá de la clase EC como entrada del modelo, y por lo tanto, el modelo no puede distinguir entre diferentes enzimas asignadas a la misma clase EC.
+
+
+\end{itemize}
+
+
+
+\begin{Note}
+
+\begin{itemize}
+\item Todos estos modelos no pueden aplicarse a enzimas individuales o intentan predecir sustratos solo para una enzima o familia de enzimas. 
+
+\item Aquellos modelos que hacen predicciones para enzimas específicas se basan en datos de entrenamiento experimentales muy densos, es decir, resultados experimentales para todas o casi todas las posibles combinaciones de enzima-sustrato.
+
+
+
+\item Para la gran mayoría de familias de enzimas, no está disponible un conjunto de datos de entrenamiento tan extenso. 
+
+\item Hasta el momento, no ha habido intentos publicados de formular y entrenar un modelo general que pueda aplicarse para predecir sustratos para enzimas específicas en familias de enzimas ampliamente diferentes. 
+
+\item Los modelos de aprendizaje profundo se han utilizado para predecir funciones de enzimas ya sea prediciendo su asignación a clases EC20–22, o prediciendo dominios funcionales dentro de la secuencia de proteínas\cite{2.23}
+
+\item Predecir directamente sustratos específicos para enzimas representa un paso importante más allá de esos métodos previos y puede ayudar a predecir la función de la enzima de manera más específica y precisa.
+
+\item Los enfoques de vanguardia en este dominio son basados en características, es decir, se utilizan representaciones numéricas de la proteína y la molécula del sustrato como entrada para modelos de aprendizaje automático\cite{2.25}-\cite{2.29}. 
+
+\item Como descripciones numéricas de la molécula del sustrato, estos enfoques utilizan representaciones SMILES30, huellas digitales expertas\cite{2.31} o huellas digitales creadas con redes neuronales gráficas\cite{2.32,2.33}. 
+
+\item Las proteínas suelen codificarse numéricamente mediante representaciones basadas en el aprendizaje profundo de las secuencias de aminoácidos\cite{2.34}-\cite{2.36}.
+
+\end{itemize}
+
+\end{Note}
+
+
+
 
 
 \section{Referencias}
@@ -490,7 +526,71 @@ solely on the enzymes’ primary sequence and not require additional
 
 % Lista de referencias del segundo articulo
 
+\bibitem{2.2} Copley, S. D. Shining a light on enzyme promiscuity. Curr. Opin. Struct. Biol. 47, 167–175 (2017).
 
+\bibitem{2.4} Nobeli, I., Favia, A. D. and Thornton, J. M. Protein promiscuity and its implications for biotechnology. Nat. Biotechnol. 27, 157–167 (2009)
+
+\bibitem{2.5} Adrio, J. L. and Demain, A. L. Microbial enzymes: tools for biotechnological processes. Biomolecules 4, 117–139 (2014).
+
+\bibitem{2.6} Wang, S. et al. Engineering a synthetic pathway for gentisate in pseudomonas chlororaphis p3. Front. Bioeng. Biotechnol. 8, 1588 (2021).
+
+\bibitem{2.7} Wu, M.-C., Law, B., Wilkinson, B. and Mickleﬁeld, J. Bioengineering natural product biosynthetic pathways for therapeutic applications. Curr. Opin. Biotechnol. 23, 931–940 (2012)
+
+
+\bibitem{2.9} Rembeza, E., Boverio, A., Fraaije, M. W. and Engqvist, M. K. Discovery of two novel oxidases using a high-throughput activity screen. ChemBioChem 23, e202100510 (2022).
+
+\bibitem{2.10} Longwell, C. K., Labanieh, L. and Cochran, J. R. High-throughput screening technologies for enzyme engineering. Curr. Opin. Biotechnol. 48, 196–202 (2017).
+
+\bibitem{2.11} Black, G. W. et al. A high-throughput screening method for determining the substrate scope of nitrilases. Chem. Commun. 51, 2660–2662 (2015).
+
+\bibitem{2.13} Pertusi, D. A. et al. Predicting novel substrates for enzymes with minimal experimental effort with active learning. Metab. Eng. 44,171-181 (2017).
+
+\bibitem{2.14} Mou, Z. et al. Machine learning-based prediction of enzyme substrate scope: Application to bacterial nitrilases. Proteins Struct. Funct. Bioinf. 89, 336-347 (2021).
+
+\bibitem{2.15} Yang, M. et al. Functional and informatics analysis enables glycosyltransferase activity prediction. Nat. Chem. Biol. 14, 1109–1117 (2018).
+
+\bibitem{2.16} Rottig, M., Rausch, C. and Kohlbacher, O. Combining structure and sequence information allows automated prediction of substrate speciﬁcities within enzyme families. PLoS Comput. Biol. 6, e1000636 (2010).
+
+\bibitem{2.17} Chevrette, M. G., Aicheler, F., Kohlbacher, O., Currie, C. R. and Medema, M. H. Sandpuma: ensemble predictions of nonribosomal peptide chemistry reveal biosynthetic diversity across actinobacteria. Bioinformatics 33, 3202-3210 (2017).
+
+\bibitem{2.18} Goldman, S., Das, R., Yang, K. K. and Coley, C. W. Machine learning modeling of family wide enzyme-substrate speciﬁcity screens. PLoS Comput. Biol. 18, e1009853 (2022).
+
+\bibitem{2.19} Visani, G. M., Hughes, M. C. and Hassoun, S. Enzyme promiscuity prediction using hierarchy-informed multi-label classiﬁcation. Bioinformatics 37, 2017-2024 (2021).
+
+\bibitem{2.20} Ryu, J. Y., Kim, H. U. and Lee, S. Y. Deep learning enables high-quality and high-throughput prediction of enzyme commission numbers. PNAS 116, 13996-14001 (2019).
+
+\bibitem{2.21} Li, Y. et al. DEEPre: sequence-based enzyme EC number prediction by deep learning. Bioinformatics 34, 760-769 (2017).
+
+\bibitem{2.22} Sanderson, T., Bileschi, M. L., Belanger, D. and Colwell, L. J. Proteinfer, deep neural networks for protein functional inference. eLife 12, e80942 (2023).
+
+\bibitem{2.23} Bileschi, M. L. et al. Using deep learning to annotate the protein universe. Nat. Biotechnol.https://doi.org/10.1038/s41587-021-01179-w (2022).
+
+\bibitem{2.24} Rembeza, E. and Engqvist, M. K. Experimental and computational investigation of enzyme functional annotations uncovers misannotation in the ec 1.1. 3.15 enzyme class. PLoS Comput. Biol. 17, e1009446 (2021).
+
+\bibitem{2.25} Ozturk, H., Ozgur, A. and Ozkirimli, E. Deepdta: deep drugtarget binding afﬁnity prediction. Bioinformatics 34, i821-i829 (2018).
+
+\bibitem{2.26} Feng, Q., Dueva, E., Cherkasov, A. and Ester, M. Padme: A deep learning-based framework for drug-target interaction prediction. Preprint at https://doi.org/10.48550/arXiv.1807.09741 (2018).
+
+\bibitem{2.27} Karimi, M., Wu, D., Wang, Z. and Shen, Y. Deepaffinity: interpretable deep learning of compound–protein affinity through uniﬁed recurrent and convolutional neural networks. Bioinformatics 35, 3329-3338 (2019).
+
+\bibitem{2.28} Kroll, A., Engqvist, M. K., Heckmann, D. and Lercher, M. J. Deep learning allows genome-scale prediction of michaelis constants from structural features. PLoS Biol. 19, e3001402 (2021).
+
+\bibitem{2.29} Li, F. et al. Deep learning-based k cat prediction enables improved enzyme-constrained model reconstruction. Nat. Catal. 5, 662-672 (2022).
+
+\bibitem{2.30} Weininger, D. SMILES, a chemical language and information system. 1. introduction to methodology and encoding rules. J. Chem. Inf. Comput. Sci. 28, 31-36 (1988).
+
+\bibitem{2.31} Rogers, D. and Hahn, M. Extended-connectivity ﬁngerprints. J. Chem. Inf. Model. 50, 742-754 (2010).
+
+\bibitem{2.32} Zhou, J. et al. Graph neural networks: A review of methods and applications. AI Open 1, 57-81 (2020).
+
+\bibitem{2.33} Yang, K. et al. Analyzing learned molecular representations for property prediction. J. Chem. Inf. Model. 59, 3370-3388 (2019).
+
+
+\bibitem{2.34} Rives, A. et al. Biological structure and function emerge from scaling unsupervised learning to 250 million protein sequences. PNAS 118, e2016239118 (2021).
+
+\bibitem{2.35} Alley, E. C., Khimulya, G., Biswas, S., AlQuraishi, M. and Church, G. M. Uniﬁed rational protein engineering with sequence-based deep representation learning. Nat. Methods. 16, 1315-1322 (2019).
+
+\bibitem{2.36} Xu, Y. et al. Deep dive into machine learning models for protein engineering. J. Chem. Inf. Model. 60, 2773–2790 (2020).
 
 \end{thebibliography}
 

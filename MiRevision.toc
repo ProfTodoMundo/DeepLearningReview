@@ -10,4 +10,9 @@
 \contentsline {subsubsection}{\numberline {1.4.1}Current Challenges Related to ML-Aided}{11}{subsubsection.1.4.1}%
 \contentsline {subsection}{\numberline {1.5}Emerging Trends in ML-Based Methods for Enzyme Engineering}{12}{subsection.1.5}%
 \contentsline {section}{\numberline {2}Artículo 2: A general model to predict small molecule substrates of enzymes based on machine and deep learning}{13}{section.2}%
-\contentsline {section}{\numberline {3}Referencias}{15}{section.3}%
+\contentsline {subsection}{\numberline {2.1}About the existence techniques}{13}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}About the ML techniques}{14}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}About the approuch of existing models}{14}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}About the work in this article}{15}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}About the obtained results}{16}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Referencias}{21}{section.3}%

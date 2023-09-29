@@ -355,17 +355,28 @@ Data from the label-free mass spectroscopy-based assay of 91 substrates and 54 e
 
 \section{Artículo 2: A general model to predict small molecule substrates of enzymes based on machine and deep learning}
 
+\subsection{About the existence techniques}
 
-Las enzimas han evolucionado de manera eficiente para catalizar eficientemente una o más reacciones químicas incrementando las tasas de reacción hasta más de un millón. Además la mayoría de las enzimas son promiscuas, es decir, se catalizan más, fisiológicamente irrelevantes o reacciones inofensivas \cite{2.2, 2.4}
+\begin{Note}
+\begin{itemize}
+\item Las enzimas han evolucionado de manera eficiente para catalizar eficientemente una o más reacciones químicas incrementando las tasas de reacción hasta más de un millón. Además la mayoría de las enzimas son promiscuas, es decir, se catalizan más, fisiológicamente irrelevantes o reacciones inofensivas \cite{2.2, 2.4}
 
-Un mapeo exhaustivo de las relaciones enzima-sustrato desempeña un papel crucial en la investigación farmacéutica y bioingeniería, por ejemplo, para la producción de medicamentos, productos químicos, alimentos y biocombustibles \cite{2.5, 2.6,2.7}.
+\item Un mapeo exhaustivo de las relaciones enzima-sustrato desempeña un papel crucial en la investigación farmacéutica y bioingeniería, por ejemplo, para la producción de medicamentos, productos químicos, alimentos y biocombustibles \cite{2.5, 2.6,2.7}.
 
 
-La base de datos UniProt contiene entradas de más de 36 millones de enzimas diferentes, más del $99\%$ de ellas carecen de anotaciones de alta calidad de las reacciones catalizadas. Se están realizando esfuerzos para desarrollar métodos de alto rendicmiento para la determinación experimentarl de relaciones entre enzimas y sustratos, esfuerzos que se encuentran en su etapa inicial\cite{2.9,2.10,2.11}.
+\item La base de datos UniProt contiene entradas de más de 36 millones de enzimas diferentes, más del $99\%$ de ellas carecen de anotaciones de alta calidad de las reacciones catalizadas. Se están realizando esfuerzos para desarrollar métodos de alto rendicmiento para la determinación experimentarl de relaciones entre enzimas y sustratos, esfuerzos que se encuentran en su etapa inicial\cite{2.9,2.10,2.11}.
 
 
-Se han realizado esfuerzos por desarrollar metodos de alto rendimiento para determinar las relaciones experimentales de las relaciones enzima-sustratos. El objetivo en este trabajo es desarrollar un modelo de Machine Learning (ML) con la capacidad de predecir las relaciones enzima-sustratos a traves de todas las proteínas, por tanto contar con una herramienta que ayude a focalizar esfuerzos experimentales en pares de moléculas de pequeñas enzimas parece ser biológicamente relevantes. Los principales retos son que la representación numérica de caeda enzima que máximamente informativa para la predicción rio abajo, para ser lo más ampliamente posible, estas representaciones deben basarse de manera única en la secuencia primaria de las enzimas sin información adicional. Otro reto es que las bases de datos públicas de enzimas, solamente enlista instancias positivas, es decir, moleculas con las cuales las enzimas despliegan actividades medibes \cite{2.13}. 
+\item Se han realizado esfuerzos por desarrollar metodos de alto rendimiento para determinar las relaciones experimentales de las relaciones enzima-sustratos. El objetivo en este trabajo es desarrollar un modelo de Machine Learning (ML) con la capacidad de predecir las relaciones enzima-sustratos a traves de todas las proteínas, por tanto contar con una herramienta que ayude a focalizar esfuerzos experimentales en pares de moléculas de pequeñas enzimas parece ser biológicamente relevantes. 
 
+\item Los principales retos son que la representación numérica de caeda enzima que máximamente informativa para la predicción rio abajo, para ser lo más ampliamente posible, estas representaciones deben basarse de manera única en la secuencia primaria de las enzimas sin información adicional. Otro reto es que las bases de datos públicas de enzimas, solamente enlista instancias positivas, es decir, moleculas con las cuales las enzimas despliegan actividades medibes \cite{2.13}. 
+
+\end{itemize}
+\end{Note}
+
+\subsection{About the ML techniques}
+
+\begin{Note}
 \begin{itemize}
 \item Para entrenar un modelo de predicción, es necesario idear una estrategia automatizada para obtener instancias adecuadas de enzimas y pequeñas moléculas que sean negativas y no se unan. Los enfoques de aprendizaje automático existentes para predecir pares enzima-sustrato fueron desarrollados específicamente para familias de enzimas pequeñas para las cuales existen conjuntos de datos de entrenamiento inusualmente completos \cite{2.13}-\cite{2.18}.
 
@@ -385,8 +396,9 @@ Se han realizado esfuerzos por desarrollar metodos de alto rendimiento para dete
 
 
 \end{itemize}
+\end{Note}
 
-
+\subsection{About the approuch of existing models}
 
 \begin{Note}
 
@@ -394,8 +406,6 @@ Se han realizado esfuerzos por desarrollar metodos de alto rendimiento para dete
 \item Todos estos modelos no pueden aplicarse a enzimas individuales o intentan predecir sustratos solo para una enzima o familia de enzimas. 
 
 \item Aquellos modelos que hacen predicciones para enzimas específicas se basan en datos de entrenamiento experimentales muy densos, es decir, resultados experimentales para todas o casi todas las posibles combinaciones de enzima-sustrato.
-
-
 
 \item Para la gran mayoría de familias de enzimas, no está disponible un conjunto de datos de entrenamiento tan extenso. 
 
@@ -411,6 +421,287 @@ Se han realizado esfuerzos por desarrollar metodos de alto rendimiento para dete
 
 \item Las proteínas suelen codificarse numéricamente mediante representaciones basadas en el aprendizaje profundo de las secuencias de aminoácidos\cite{2.34}-\cite{2.36}.
 
+\end{itemize}
+
+\end{Note}
+
+\subsection{About the work in this article}
+
+\begin{Note}
+\begin{itemize}
+
+\item In this work, we go beyond the current state-of-the-art by creating maximally informative protein representations, using a customized, task-speciﬁc version of the ESM-1b transformer model34. 
+
+\item The model contains an extra 1280-dimensional token, which was trained end-to-end to store enzyme-related information salient to the downstream prediction task. 
+
+\item This general approach was ﬁrst introduced for natural language processing37, but has not yet been applied to protein feature prediction. 
+
+\item We created negative training examples using data augmentation, by randomly sampling small molecules similar to the substrates in experimentally conﬁrmed enzyme-substrate pairs.
+
+\item we sampled all negative data points from a limited set of metabolites, the set of ~ 1400 substrates that occur among all experimentally conﬁrmed enzyme-substrate pairs of our dataset. 
+
+\item Thus, we do not sample from the space of all possible alternative reactants similar to the true substrates, but only consider small molecules likely to occur in at least some biological cells. 
+
+\item While many enzymes are rather promiscuous2–4, it is likely that most of the potential secondary substrates are not contained in this restricted set for any given enzyme, and hence the chance of sampling false negative data points was likely small. 
+
+\item We numerically represented all small molecules with task-speciﬁc ﬁngerprints that we created with graph neural networks (GNNs)38–40. 
+
+\item A gradient-boosted decision tree model was trained on the combined protein and small molecule representations for a high-quality dataset with ~18,000 very diverse, experimentally conﬁrmed positive enzyme-substrate pairs (Fig. 1). 
+
+\item The resulting Enzyme Substrate Prediction model-ESP-achieves high prediction accuracy for those ~1400 substrates that have been part of our training set and outperforms previously published enzyme family-speciﬁc prediction models.
+\end{itemize}
+
+\end{Note}
+
+\subsection{About the obtained results}
+
+\begin{Note}
+\begin{itemize}
+
+
+\item A data set with experimentally conﬁrmed enzyme-substrate
+pairs using the GO annotation database for UniProt IDs41  was created.
+
+\item For training the machine learning models, they extracted 18,351 enzyme-substrate pairs with experimental evidence for binding, comprised of 12,156 unique enzymes and 1379 unique metabolites. 
+
+\item Also extracted 274,030 enzyme-substrate pairs with phylogenetically inferred evidence, i.e., these enzymes are evolutionarily closely related to enzymes associated with the same reactions. These “guilt by association” assignments are much less reliable than direct experimental evidence, and we only used them during pre-training to create task-speciﬁc enzyme representations-numerical vectors aimed at capturing information relevant to the prediction task from the enzyme amino acid sequences. 
+
+\item The validations demonstrate that using phylogenetically inferred functions for the construction of appropriate enzyme representations has a positive effect on the prediction of experimentally conﬁrmed enzyme-substrate pairs.
+
+\item There is no systematic information on negative enzyme-small molecule pairs, i.e., pairs where the molecule is not a substrate of the enzyme.
+
+\item We hypothesized that such negative data points could be created artiﬁcially through random sampling, which is a common strategy in classiﬁcation tasks that lack negative training data42.
+
+
+
+enzyme-small molecule pairs where the small molecule is structurally
+similar to a known true substrate. However, we only considered small
+molecules included among the experimentally conﬁrmed enzyme-
+substrate pairs in our dataset. Among such a limited and biased subset,
+enzymes are quite speciﬁc catalysts, and therefore most of the
+potential secondary substrates are not included for the majority of
+enzymes. Thus, we assumed that the frequency of incorrectly created
+negative labels is sufﬁciently low to not adversely affect model per-
+formance. This assumption was conﬁrmed by the high model accuracy
+on independent test data, as detailed below.
+To select putatively non-binding small molecules that are struc-
+turally similar to the known substrates, we used a similarity score
+based on molecular ﬁngerprints, with values ranging from 0 (no
+similarity) to 1 (identity; see Methods, “Sampling negative data
+points”). For every positive enzyme-substrate pair, we sampled three
+molecules with similarity scores between 0.75 and 0.95 to the actual
+substrate of the enzyme, and used them to construct negative enzyme-
+molecule pairs. We opted for creating more negative data points than
+we have positive data points, as this not only provided us with more
+data, but it also more closely reﬂects the true distribution of positive
+and negative data points compared to a balanced distribution.
+Our ﬁnal dataset comprises 69,365 entries. We split this data into a
+training set (80%) and a test set (20%). In many machine learning
+
+domains, it is standard practice to split the data into training and test
+set completely at random. However, when dealing with protein
+sequences, this strategy often leads to test sets with amino acid
+sequences that are almost identical to those of proteins in the training
+set. Such close homologs often share the same function43, and the
+assessment of model performance could thus be overly optimistic. It is
+therefore common practice to split such datasets into training, vali-
+dation, and test sets based on protein sequences similarities44. Here,
+we made sure that no enzyme in the test set has a sequence identity
+higher than 80% compared to any enzyme in the training set. To show
+that despite this sequence-based partitioning, enzymes from the
+training and test sets follow the same distribution, we used dimen-
+sionality reduction to map all enzymes to a two-dimensional subspace
+and plotted the corresponding data points (Supplementary Fig. 1). To
+evaluate how well our ﬁnal model performs for different levels of
+enzyme similarities, we divided the test set further into three subsets
+with maximal sequence identities between 0–40%, 40–60%, and
+60–80% compared to all enzymes in the training set
+For the numerical encoding, one classiﬁes bond types and calculates
+feature vectors with information about every atom (types, masses,
+valences, atomic numbers, atom charges, and number of attached
+hydrogen atoms)31. Afterwards, these identiﬁers are updated for a ﬁxed
+number of steps by iteratively applying predeﬁned functions to sum-
+marize aspects of neighboring atoms and bonds. After the iteration
+process, all identiﬁers are converted into a single binary vector with
+structural information about the molecule. The number of iterations
+and the dimension of the ﬁngerprint can be chosen freely. We set them
+to the default values of 3 and 1024, respectively. For comparison, we
+also created 512- and 2048-dimensional ECFPs, but these led to slightly
+inferior predictions (Supplementary Fig. 2). Using ECFPs can lead to
+identical representations for structurally very similar molecules, e.g.,
+for some molecules that differ only by the length of a chain of carbon
+atoms. In our dataset, 182 out of 1379 different molecules shared an
+identical ﬁngerprint with a structurally similar molecule.
+As an alternative to expert-crafted ﬁngerprints such as ECFPs,
+neural networks can be used to learn how to map graph representa-
+tions of small molecules to numerical vectors. Such networks are
+referred to as graph neural networks (GNNs)38–40. We trained a GNN for
+the binary task of predicting if a small molecule is a substrate for a
+given enzyme. While training for this task, the GNN is challenged to
+store all information about the small molecule that is relevant for
+solving the prediction task in a single numerical vector. After training,
+we extracted these 100-dimensional task-speciﬁc vectors for all small
+molecules in our dataset. It has been observed that pre-training GNNs
+for a related task can signiﬁcantly improve model performance45,46.
+Thus, we ﬁrst pre-trained a GNN for the related task of predicting the
+Michaelis constants KM of enzyme-substrate pairs (see Methods,
+“Calculating task-speciﬁc ﬁngerprints for small molecules”). As shown
+below (see “Successful prediction of enzyme-substrate pairs”), pre-
+training indeed improved prediction performance signiﬁcantly. In
+contrast to ECFPs, GNN-generated ﬁngerprints lead to much fewer
+cases of identical representations for different molecules. In our
+dataset, identical ﬁngerprints occurred for 42 out of 1379 molecules.training of ESM-1b, ~15% of the amino acids in a protein’s sequence are
+randomly masked and the model is trained to predict the identity of
+the masked amino acids (Fig. 2a). This training procedure forces the
+model to store both local and global information about the protein
+sequence in one 1280-dimensional representation vector for each
+individual amino acid. In order to create a single ﬁxed-length numer-
+ical representation of the whole protein, one typically calculates the
+element-wise mean across all amino acid representations34,35,49. We
+refer to these protein representations as ESM-1b vectors.
+However, simply taking the element-wise mean results in infor-
+mation loss and does not consider the task for which the representa-
+tions shall be used, which can lead to subpar performance12. To
+overcome these issues, we created task-speciﬁc enzyme representa-
+tions optimized for the prediction of enzyme-substrate pairs. We
+slightly modiﬁed the architecture of the ESM-1b model, adding one
+additional 1280-dimensional token to represent the complete enzyme,
+intended to capture information salient to the downstream prediction
+task (Fig. 2b). The extra token is not adding input information to the
+model, but it allows an easier extraction of enzyme information from
+the trained model. This whole-enzyme representation was updated in
+the same way as the regular ESM-1b amino acid representations.
+After a predeﬁned number of update steps, the enzyme repre-
+sentation was concatenated with the small molecule ECFP-vector. The
+combined vector was used as the input for a fully connected neural
+network (FCNN), which was then trained end-to-end to predict whe-
+ther the small molecule is a substrate for the enzyme. This approach
+facilitates the construction of a single, optimized, task-speciﬁc repre-
+sentation. The ESM-1b model contains many parameters and thus
+requires substantial training data. Therefore, in the pre-training that
+produces the task-speciﬁc enzyme representations, we added phylo-
+genetically inferred evidence to our training set; this resulted in a total
+of ~287,000 data points used for training the task-speciﬁc enzyme
+representation. After training, we used the network to extract the
+1280-dimensional task-speciﬁc representations for all enzymes in our
+dataset. In the following, these representations are called ESM-1bts
+vectors.
+Fine-tuning of a state-of-the-art protein embedding model
+The ESM-1b model is a state-of-the-art transformer network47, trained
+with ~27 million proteins from the UniRef50 dataset48 in a self-
+supervised fashion34. This model takes an amino acid sequence as its
+input and puts out a numerical representation of the sequence; these
+representations are often referred to as protein embeddings. During
+
+we estimated
+prediction quality on our test set when using machine learning models
+
+with each of the four combinations of enzyme and small molecule
+representations. In each case, we concatenated one of the two 1280-
+dimensional enzyme representations with one of the two small mole-
+cule representations to create a single input vector for every enzyme-
+small molecule pair. We used these inputs to train gradient-boosted
+decision tree models50 for the binary classiﬁcation task of predicting
+whether the small molecule is a substrate for the enzyme.
+We performed hyperparameter optimizations for all four models,
+including the parameters learning rate, depth of trees, number of
+iterations, and regularization coefﬁcients. For this, we performed a
+random grid search with a 5-fold cross-validation (CV) on the training
+set. To challenge the model to learn to predict the substrate scope of
+enzymes not included in the training data, we made sure that each
+enzyme occurred in only one of the ﬁve subsets used for cross-
+validation (Methods, “Hyperparameter optimization of the gradient
+boosting models”). To account for the higher number of negative
+compared to positive training data, we also included a weight para-
+meter that lowered the inﬂuence of the negative data points. The
+results of the cross-validations are displayed as boxplots in Fig. 3a. The
+best sets of hyperparameters are listed in Supplementary Table 1. After
+hyperparameter optimization, the models were trained with the best
+set of hyperparameters on the whole training set and were validated on
+our independent test set, which had not been used for model training
+or hyperparameter selection. It is noteworthy that for some input
+combinations, the accuracies on the test set are higher than the
+accuracies achieved during cross-validation (Fig. 3a). This improved
+performance on the test set may result from the fact that before vali-
+dation on the test set, models are trained with approximately 11,000
+more samples than before each cross-validation; the number of
+training samples has a substantial inﬂuence on model performance
+(see below, “Model performance increases with increased training
+set size”). To compare the gradient boosting model to alternative machine
+learning models, we also trained a logistic regression model and a
+random forest model for the task of predicting enzyme-substrate pairs
+from the combined ESM-1bts and GNN vectors. However, these models
+performed worse compared to the gradient boosting model. To investigate the importance of the added token for the
+observed superior performance, we alternatively re-trained the ESM-1b
+without such an extra token.
+
+
+
+Good predictions even for unseen enzymes
+It appears likely that prediction quality is best for enzymes that are
+highly similar to enzymes in the training set, and decreases for
+enzymes that are increasingly dissimilar to the enzymes used for
+training. How strong is that dependence? To answer this question, we
+ﬁrst calculated the maximal enzyme sequence identity compared to
+the enzymes in the training set for all 2291 enzymes in the test set.
+Next, we split the test set into three subgroups: data points with
+enzymes with a maximal sequence identity to training data between 0
+and 40%, between 40% and 60%, and between 60% and 80%.
+
+Low model performance for unseen small molecules
+In the previous subsection, we showed that model performance is
+highest for enzymes that are similar to proteins in the training set.
+Similarly, it appears likely that the model performs better when making
+predictions for small molecules that are also in the training set. To test
+this hypothesis, we divided the test set into data points with small
+molecules that occurred in the training set (N = 13,459) and those with
+small molecules that did not occur in the training set (N = 530).
+The ESP model does not perform well for data points with small
+molecules not present in the training set. When considering only
+enzyme-small molecules pairs with small molecules not represented in
+the training set and an enzyme sequence identity level of 0–40%
+compared to the training data, ESP achieves an accuracy of 71%, ROC-
+AUC score 0.59, and MCC 0.15. At an enzyme sequence identity level of
+40–60%, accuracy improves to 83%, with ROC-AUC score 0.78, and
+MCC 0.25 for unseen small molecules.For those test data points with small molecules not present in the
+training set, we wondered if a high similarity of the small molecule
+compared to at least one substrate in the training set leads to
+improved predictions, analogous to what we observed for enzymes
+with higher sequence identities. For each small molecules not present
+in the training set, we calculated the maximal pairwise similarity score
+compared to all substrates in the training set. We could not ﬁnd any
+evidence that a higher maximal similarity score leads to better model
+performance (Supplementary Fig. 3). Hence, we conclude that ESP only
+achieves high accuracies for new enzyme-small molecule pairs if the
+small molecule was present among the ~1 400 substrates of our
+training set.
+How many training data points with identical substrates are nee-
+ded to achieve good model performance? For every small molecule in
+the test set, we counted how many times the same molecule occurs as
+an experimentally conﬁrmed substrate in the training set. Supple-
+mentary Fig. 4 shows that having as few as two positive training data
+points for a given small molecule leads to good accuracy when pairing
+the same small molecule with other enzymes.Model performance increases with increased training set size
+The previous subsections suggest that a bigger training set with a more
+diverse set of enzymes and small molecules should lead to improved
+performance. However, using more data does not guarantee an
+improved model performance. For example, there could be a limita-
+tion in the model architecture that prevents the model from better
+ﬁtting the data. To test how our model performs with different
+amounts of training data and to analyze if more data is expected to
+lead to higher generalizability, we trained the gradient boosting model
+with different training set sizes, ranging from 30% to 100% of the
+available training data.Internally, our trained classiﬁcation model does not simply output the
+positive or negative class as a prediction. Mou et al.14 trained four different machine learning models
+(logistic regression, random forest, gradient-boosted decision trees,
+and support vector machines) to predict substrates of bacterial nitri-
+lases. For model training and validation, they used a dataset with all
+possible combinations of 12 enzymes and 20 small molecules
+(N = 240), randomly split into 80% training data and 20% test data. Instead, it outputs a predic-
+tion score between 0 and 1,Yang et al.15 published a decision tree-based model, GT-Predict,
+for predicting the substrate scope of glycosyltransferases of plants.All software was coded in Python57. We implemented and trained the
+neural networks using the deep learning library PyTorch58. We ﬁtted
+the gradient boosting models using the library XGBoost50.
 \end{itemize}
 
 \end{Note}

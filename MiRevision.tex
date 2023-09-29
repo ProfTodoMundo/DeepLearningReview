@@ -470,39 +470,27 @@ pairs using the GO annotation database for UniProt IDs41  was created.
 
 \item There is no systematic information on negative enzyme-small molecule pairs, i.e., pairs where the molecule is not a substrate of the enzyme.
 
-\item We hypothesized that such negative data points could be created artiﬁcially through random sampling, which is a common strategy in classiﬁcation tasks that lack negative training data42.
+\item It was hypothesized that such negative data points could be created artiﬁcially through random sampling, which is a common strategy in classiﬁcation tasks that lack negative training data \cite{2.42}.
 
 
+\item Only were considered small molecules included among the experimentally conﬁrmed enzyme-substrate pairs in our dataset. 
 
-enzyme-small molecule pairs where the small molecule is structurally
-similar to a known true substrate. However, we only considered small
-molecules included among the experimentally conﬁrmed enzyme-
-substrate pairs in our dataset. Among such a limited and biased subset,
-enzymes are quite speciﬁc catalysts, and therefore most of the
-potential secondary substrates are not included for the majority of
-enzymes. Thus, we assumed that the frequency of incorrectly created
-negative labels is sufﬁciently low to not adversely affect model per-
-formance. This assumption was conﬁrmed by the high model accuracy
-on independent test data, as detailed below.
-To select putatively non-binding small molecules that are struc-
-turally similar to the known substrates, we used a similarity score
-based on molecular ﬁngerprints, with values ranging from 0 (no
-similarity) to 1 (identity; see Methods, “Sampling negative data
-points”). For every positive enzyme-substrate pair, we sampled three
-molecules with similarity scores between 0.75 and 0.95 to the actual
-substrate of the enzyme, and used them to construct negative enzyme-
-molecule pairs. We opted for creating more negative data points than
-we have positive data points, as this not only provided us with more
-data, but it also more closely reﬂects the true distribution of positive
-and negative data points compared to a balanced distribution.
-Our ﬁnal dataset comprises 69,365 entries. We split this data into a
-training set (80%) and a test set (20%). In many machine learning
+\item Among such a limited and biased subset, enzymes are quite speciﬁc catalysts, and therefore most of the potential secondary substrates are not included for the majority of enzymes.
 
-domains, it is standard practice to split the data into training and test
-set completely at random. However, when dealing with protein
-sequences, this strategy often leads to test sets with amino acid
-sequences that are almost identical to those of proteins in the training
-set. Such close homologs often share the same function43, and the
+\item It was assumed that the frequency of incorrectly created negative labels is sufﬁciently low to not adversely affect model performance. This assumption was conﬁrmed by the high model accuracy on independent test data.
+
+\item To select putatively non-binding small molecules that are structurally similar to the known substrates, it was used a similarity score based on molecular ﬁngerprints, with values ranging from 0 (no similarity) to 1 (identity; see Methods, “Sampling negative data points”). 
+
+\item For every positive enzyme-substrate pair, it was sampled three molecules with similarity scores between 0.75 and 0.95 to the actual substrate of the enzyme, and used them to construct negative enzyme-molecule pairs. 
+
+\item it was opted for creating more negative data points than positive data points, as this not only provided us with more data, but it also more closely reﬂects the true distribution of positive and negative data points compared to a balanced distribution.
+
+\item Our ﬁnal dataset comprises 69,365 entries. We split this data into a training set ($80\%$) and a test set ($20\%$). 
+
+\item In many machine learning domains, it is standard practice to split the data into training and test set completely at random. However, when dealing with protein sequences, this strategy often leads to test sets with amino acid sequences that are almost identical to those of proteins in the training set. 
+
+
+Such close homologs often share the same function43, and the
 assessment of model performance could thus be overly optimistic. It is
 therefore common practice to split such datasets into training, vali-
 dation, and test sets based on protein sequences similarities44. Here,
@@ -882,6 +870,8 @@ the gradient boosting models using the library XGBoost50.
 \bibitem{2.35} Alley, E. C., Khimulya, G., Biswas, S., AlQuraishi, M. and Church, G. M. Uniﬁed rational protein engineering with sequence-based deep representation learning. Nat. Methods. 16, 1315-1322 (2019).
 
 \bibitem{2.36} Xu, Y. et al. Deep dive into machine learning models for protein engineering. J. Chem. Inf. Model. 60, 2773–2790 (2020).
+
+\bibitem{2.42} Bekker, J. and Davis, J. Learning from positive and unlabeled data: A survey. Mach. Learn. 109, 719-760 (2020)
 
 \end{thebibliography}
 

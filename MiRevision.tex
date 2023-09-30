@@ -430,25 +430,25 @@ Data from the label-free mass spectroscopy-based assay of 91 substrates and 54 e
 \begin{Note}
 \begin{itemize}
 
-\item In this work, we go beyond the current state-of-the-art by creating maximally informative protein representations, using a customized, task-speciﬁc version of the ESM-1b transformer model34. 
+\item In this work, we go beyond the current state-of-the-art by creating maximally informative protein representations, using a customized,  task-specific version of the ESM-1b transformer model \cite{2.34}. 
 
 \item The model contains an extra 1280-dimensional token, which was trained end-to-end to store enzyme-related information salient to the downstream prediction task. 
 
-\item This general approach was ﬁrst introduced for natural language processing37, but has not yet been applied to protein feature prediction. 
+\item This general approach was first introduced for natural language processing37, but has not yet been applied to protein feature prediction. 
 
-\item We created negative training examples using data augmentation, by randomly sampling small molecules similar to the substrates in experimentally conﬁrmed enzyme-substrate pairs.
+\item We created negative training examples using data augmentation, by randomly sampling small molecules similar to the substrates in experimentally confirmed enzyme-substrate pairs.
 
-\item we sampled all negative data points from a limited set of metabolites, the set of ~ 1400 substrates that occur among all experimentally conﬁrmed enzyme-substrate pairs of our dataset. 
+\item we sampled all negative data points from a limited set of metabolites, the set of ~ 1400 substrates that occur among all experimentally confirmed enzyme-substrate pairs of our dataset. 
 
 \item Thus, we do not sample from the space of all possible alternative reactants similar to the true substrates, but only consider small molecules likely to occur in at least some biological cells. 
 
-\item While many enzymes are rather promiscuous2–4, it is likely that most of the potential secondary substrates are not contained in this restricted set for any given enzyme, and hence the chance of sampling false negative data points was likely small. 
+\item While many enzymes are rather promiscuous 2-4, it is likely that most of the potential secondary substrates are not contained in this restricted set for any given enzyme, and hence the chance of sampling false negative data points was likely small. 
 
-\item We numerically represented all small molecules with task-speciﬁc ﬁngerprints that we created with graph neural networks (GNNs)38–40. 
+\item We numerically represented all small molecules with task-specific fingerprints that we created with graph neural networks (GNNs)\cite{2.38,2.39,2.40}. 
 
-\item A gradient-boosted decision tree model was trained on the combined protein and small molecule representations for a high-quality dataset with ~18,000 very diverse, experimentally conﬁrmed positive enzyme-substrate pairs (Fig. 1). 
+\item A gradient-boosted decision tree model was trained on the combined protein and small molecule representations for a high-quality dataset with ~18,000 very diverse, experimentally confirmed positive enzyme-substrate pairs. 
 
-\item The resulting Enzyme Substrate Prediction model-ESP-achieves high prediction accuracy for those ~1400 substrates that have been part of our training set and outperforms previously published enzyme family-speciﬁc prediction models.
+\item The resulting Enzyme Substrate Prediction model-ESP-achieves high prediction accuracy for those ~1400 substrates that have been part of our training set and outperforms previously published enzyme family-specific prediction models.
 \end{itemize}
 
 \end{Note}
@@ -459,41 +459,38 @@ Data from the label-free mass spectroscopy-based assay of 91 substrates and 54 e
 \begin{itemize}
 
 
-\item A data set with experimentally conﬁrmed enzyme-substrate
-pairs using the GO annotation database for UniProt IDs41  was created.
+\item A data set with experimentally confirmed enzyme-substrate pairs using the GO annotation database  for Uniprot IDs\cite{2.41} was created.
 
 \item For training the machine learning models, they extracted 18,351 enzyme-substrate pairs with experimental evidence for binding, comprised of 12,156 unique enzymes and 1379 unique metabolites. 
 
-\item Also extracted 274,030 enzyme-substrate pairs with phylogenetically inferred evidence, i.e., these enzymes are evolutionarily closely related to enzymes associated with the same reactions. These “guilt by association” assignments are much less reliable than direct experimental evidence, and we only used them during pre-training to create task-speciﬁc enzyme representations-numerical vectors aimed at capturing information relevant to the prediction task from the enzyme amino acid sequences. 
+\item Also extracted 274,030 enzyme-substrate pairs with phylogenetically inferred evidence, i.e., these enzymes are evolutionarily closely related to enzymes associated with the same reactions. These guilt by associations assignments are much less reliable than direct experimental evidence, and we only used them during pre-training to create task-specific enzyme representations-numerical vectors aimed at capturing information relevant to the prediction task from the enzyme amino acid sequences. 
 
-\item The validations demonstrate that using phylogenetically inferred functions for the construction of appropriate enzyme representations has a positive effect on the prediction of experimentally conﬁrmed enzyme-substrate pairs.
+\item The validations demonstrate that using phylogenetically inferred functions for the construction of appropriate enzyme representations has a positive effect on the prediction of experimentally confirmed enzyme-substrate pairs.
 
 \item There is no systematic information on negative enzyme-small molecule pairs, i.e., pairs where the molecule is not a substrate of the enzyme.
 
-\item It was hypothesized that such negative data points could be created artiﬁcially through random sampling, which is a common strategy in classiﬁcation tasks that lack negative training data \cite{2.42}.
+\item It was hypothesized that such negative data points could be created  artificially through random sampling, which is a common strategy in  classification tasks that lack negative training data \cite{2.42}.
 
 
-\item Only were considered small molecules included among the experimentally conﬁrmed enzyme-substrate pairs in our dataset. 
+\item Only were considered small molecules included among the experimentally confirmed enzyme-substrate pairs in our dataset. 
 
-\item Among such a limited and biased subset, enzymes are quite speciﬁc catalysts, and therefore most of the potential secondary substrates are not included for the majority of enzymes.
+\item Among such a limited and biased subset, enzymes are quite specific catalyst, and therefore most of the potential secondary substrates are not included for the majority of enzymes.
 
-\item It was assumed that the frequency of incorrectly created negative labels is sufﬁciently low to not adversely affect model performance. This assumption was conﬁrmed by the high model accuracy on independent test data.
+\item It was assumed that the frequency of incorrectly created negative labels is sufficiently low o not adversely affect model performance. This assumption was confirmed by the high model accuracy on independent test data.
 
-\item To select putatively non-binding small molecules that are structurally similar to the known substrates, it was used a similarity score based on molecular ﬁngerprints, with values ranging from 0 (no similarity) to 1 (identity; see Methods, “Sampling negative data points”). 
+\item To select putatively non-binding small molecules that are structurally similar to the known substrates, it was used a similarity score based on molecular fingerprints with values ranging from 0 (no similarity) to 1 (identity; see Methods, sampling negative data points). 
 
 \item For every positive enzyme-substrate pair, it was sampled three molecules with similarity scores between 0.75 and 0.95 to the actual substrate of the enzyme, and used them to construct negative enzyme-molecule pairs. 
 
-\item it was opted for creating more negative data points than positive data points, as this not only provided us with more data, but it also more closely reﬂects the true distribution of positive and negative data points compared to a balanced distribution.
+\item it was opted for creating more negative data points than positive data points, as this not only provided us with more data, but it also more closely reflects the true distribution of positive and negative data points compared to a balanced distribution.
 
-\item Our ﬁnal dataset comprises 69,365 entries. We split this data into a training set ($80\%$) and a test set ($20\%$). 
+\item Our final dataset comprises 69,365 entries. We split this data into a training set ($80\%$) and a test set ($20\%$). 
 
 \item In many machine learning domains, it is standard practice to split the data into training and test set completely at random. However, when dealing with protein sequences, this strategy often leads to test sets with amino acid sequences that are almost identical to those of proteins in the training set. 
 
+\item It is common practice to split such datasets into training, validation, and test sets based on protein sequences similarities \cite{2.44}.
 
-Such close homologs often share the same function43, and the
-assessment of model performance could thus be overly optimistic. It is
-therefore common practice to split such datasets into training, vali-
-dation, and test sets based on protein sequences similarities44. Here,
+Here,
 we made sure that no enzyme in the test set has a sequence identity
 higher than 80% compared to any enzyme in the training set. To show
 that despite this sequence-based partitioning, enzymes from the

@@ -490,203 +490,95 @@ Data from the label-free mass spectroscopy-based assay of 91 substrates and 54 e
 
 \item It is common practice to split such datasets into training, validation, and test sets based on protein sequences similarities \cite{2.44}.
 
-Here,
-we made sure that no enzyme in the test set has a sequence identity
-higher than 80% compared to any enzyme in the training set. To show
-that despite this sequence-based partitioning, enzymes from the
-training and test sets follow the same distribution, we used dimen-
-sionality reduction to map all enzymes to a two-dimensional subspace
-and plotted the corresponding data points (Supplementary Fig. 1). To
-evaluate how well our ﬁnal model performs for different levels of
-enzyme similarities, we divided the test set further into three subsets
-with maximal sequence identities between 0–40%, 40–60%, and
-60–80% compared to all enzymes in the training set
-For the numerical encoding, one classiﬁes bond types and calculates
-feature vectors with information about every atom (types, masses,
-valences, atomic numbers, atom charges, and number of attached
-hydrogen atoms)31. Afterwards, these identiﬁers are updated for a ﬁxed
-number of steps by iteratively applying predeﬁned functions to sum-
-marize aspects of neighboring atoms and bonds. After the iteration
-process, all identiﬁers are converted into a single binary vector with
-structural information about the molecule. The number of iterations
-and the dimension of the ﬁngerprint can be chosen freely. We set them
-to the default values of 3 and 1024, respectively. For comparison, we
-also created 512- and 2048-dimensional ECFPs, but these led to slightly
-inferior predictions (Supplementary Fig. 2). Using ECFPs can lead to
-identical representations for structurally very similar molecules, e.g.,
-for some molecules that differ only by the length of a chain of carbon
-atoms. In our dataset, 182 out of 1379 different molecules shared an
-identical ﬁngerprint with a structurally similar molecule.
-As an alternative to expert-crafted ﬁngerprints such as ECFPs,
-neural networks can be used to learn how to map graph representa-
-tions of small molecules to numerical vectors. Such networks are
-referred to as graph neural networks (GNNs)38–40. We trained a GNN for
-the binary task of predicting if a small molecule is a substrate for a
-given enzyme. While training for this task, the GNN is challenged to
-store all information about the small molecule that is relevant for
-solving the prediction task in a single numerical vector. After training,
-we extracted these 100-dimensional task-speciﬁc vectors for all small
-molecules in our dataset. It has been observed that pre-training GNNs
-for a related task can signiﬁcantly improve model performance45,46.
-Thus, we ﬁrst pre-trained a GNN for the related task of predicting the
-Michaelis constants KM of enzyme-substrate pairs (see Methods,
-“Calculating task-speciﬁc ﬁngerprints for small molecules”). As shown
-below (see “Successful prediction of enzyme-substrate pairs”), pre-
-training indeed improved prediction performance signiﬁcantly. In
-contrast to ECFPs, GNN-generated ﬁngerprints lead to much fewer
-cases of identical representations for different molecules. In our
-dataset, identical ﬁngerprints occurred for 42 out of 1379 molecules.training of ESM-1b, ~15% of the amino acids in a protein’s sequence are
-randomly masked and the model is trained to predict the identity of
-the masked amino acids (Fig. 2a). This training procedure forces the
-model to store both local and global information about the protein
-sequence in one 1280-dimensional representation vector for each
-individual amino acid. In order to create a single ﬁxed-length numer-
-ical representation of the whole protein, one typically calculates the
-element-wise mean across all amino acid representations34,35,49. We
-refer to these protein representations as ESM-1b vectors.
-However, simply taking the element-wise mean results in infor-
-mation loss and does not consider the task for which the representa-
-tions shall be used, which can lead to subpar performance12. To
-overcome these issues, we created task-speciﬁc enzyme representa-
-tions optimized for the prediction of enzyme-substrate pairs. We
-slightly modiﬁed the architecture of the ESM-1b model, adding one
-additional 1280-dimensional token to represent the complete enzyme,
-intended to capture information salient to the downstream prediction
-task (Fig. 2b). The extra token is not adding input information to the
-model, but it allows an easier extraction of enzyme information from
-the trained model. This whole-enzyme representation was updated in
-the same way as the regular ESM-1b amino acid representations.
-After a predeﬁned number of update steps, the enzyme repre-
-sentation was concatenated with the small molecule ECFP-vector. The
-combined vector was used as the input for a fully connected neural
-network (FCNN), which was then trained end-to-end to predict whe-
-ther the small molecule is a substrate for the enzyme. This approach
-facilitates the construction of a single, optimized, task-speciﬁc repre-
-sentation. The ESM-1b model contains many parameters and thus
-requires substantial training data. Therefore, in the pre-training that
-produces the task-speciﬁc enzyme representations, we added phylo-
-genetically inferred evidence to our training set; this resulted in a total
-of ~287,000 data points used for training the task-speciﬁc enzyme
-representation. After training, we used the network to extract the
-1280-dimensional task-speciﬁc representations for all enzymes in our
-dataset. In the following, these representations are called ESM-1bts
-vectors.
-Fine-tuning of a state-of-the-art protein embedding model
-The ESM-1b model is a state-of-the-art transformer network47, trained
-with ~27 million proteins from the UniRef50 dataset48 in a self-
-supervised fashion34. This model takes an amino acid sequence as its
-input and puts out a numerical representation of the sequence; these
-representations are often referred to as protein embeddings. During
+\item It was made sure that no enzyme in the test set has a sequence identity higher than $80\%$ compared to any enzyme in the training set.  To show that despite this sequence-based partitioning, enzymes from the training and test sets follow the same distribution, we used dimensionality reduction to map all enzymes to a two-dimensional subspace and plotted the corresponding data points. 
 
-we estimated
-prediction quality on our test set when using machine learning models
+\item To evaluate how well the final  model performs for different levels of enzyme similarities, it was  divided the test set further into three subsets with maximal sequence identities between $0–40\%$, $40–60\%$, and $60–80\%$ compared to all enzymes in the training set.
 
-with each of the four combinations of enzyme and small molecule
-representations. In each case, we concatenated one of the two 1280-
-dimensional enzyme representations with one of the two small mole-
-cule representations to create a single input vector for every enzyme-
-small molecule pair. We used these inputs to train gradient-boosted
-decision tree models50 for the binary classiﬁcation task of predicting
-whether the small molecule is a substrate for the enzyme.
-We performed hyperparameter optimizations for all four models,
-including the parameters learning rate, depth of trees, number of
-iterations, and regularization coefﬁcients. For this, we performed a
-random grid search with a 5-fold cross-validation (CV) on the training
-set. To challenge the model to learn to predict the substrate scope of
-enzymes not included in the training data, we made sure that each
-enzyme occurred in only one of the ﬁve subsets used for cross-
-validation (Methods, “Hyperparameter optimization of the gradient
-boosting models”). To account for the higher number of negative
-compared to positive training data, we also included a weight para-
-meter that lowered the inﬂuence of the negative data points. The
-results of the cross-validations are displayed as boxplots in Fig. 3a. The
-best sets of hyperparameters are listed in Supplementary Table 1. After
-hyperparameter optimization, the models were trained with the best
-set of hyperparameters on the whole training set and were validated on
-our independent test set, which had not been used for model training
-or hyperparameter selection. It is noteworthy that for some input
-combinations, the accuracies on the test set are higher than the
-accuracies achieved during cross-validation (Fig. 3a). This improved
-performance on the test set may result from the fact that before vali-
-dation on the test set, models are trained with approximately 11,000
-more samples than before each cross-validation; the number of
-training samples has a substantial inﬂuence on model performance
-(see below, “Model performance increases with increased training
-set size”). To compare the gradient boosting model to alternative machine
-learning models, we also trained a logistic regression model and a
-random forest model for the task of predicting enzyme-substrate pairs
-from the combined ESM-1bts and GNN vectors. However, these models
-performed worse compared to the gradient boosting model. To investigate the importance of the added token for the
-observed superior performance, we alternatively re-trained the ESM-1b
+\item For the numerical encoding, one classiffies  bond types and calculates feature vectors with information about every atom (types, masses, valences, atomic numbers, atom charges, and number of attached hydrogen atoms)\cite{2.31}.  Afterwards, these identifiers are updated for a fixed number of steps by iteratively applying predefined functions to summarize aspects of neighboring atoms and bonds. 
+
+\item After the iteration process, all identiffiers are converted into a single binary vector with structural information about the molecule. \textsl{The number of iterations and the dimension of the fingerprint can be chosen freely, in this case they were set to the default values of 3 and 1024, respectively, also was created 512- and 2048-dimensional ECFPs, but these led to slightly inferior predictions. Using ECFPs can lead to identical representations for structurally very similar molecules, e.g., for some molecules that differ only by the length of a chain of carbon atoms.  In our dataset, 182 out of 1379 different molecules shared an identical fingerprint with a structurally similar molecule.}
+
+\item As an alternative to expert-crafted fingerprints such as ECFPs, neural networks can be used to learn how to map graph representations of small molecules to numerical vectors, such networks are referred to as graph neural networks (GNNs)\cite{2.38,2.39,2.40} 
+
+\item We trained a GNN for the binary task of predicting if a small molecule is a substrate for a given enzyme. While training for this task, the GNN is challenged to store all information about the small molecule that is relevant for solving the prediction task in a single numerical vector. 
+
+\item After training, were extracted these 100-dimensional task-specific vectors for all small molecules in our dataset. It has been observed that pre-training GNNs for a related task can signifficantly improve model performance\cite{2.45,2.46}.
+
+\item Thus,  first were pre-trained the GNN for the related task of predicting the Michaelis constants $K$M of enzyme-substrate pairs (see Methods,  pre-training indeed improved prediction performance significantly.  In contrast to ECFPs, GNN-generated fingerprints lead to much fewer cases of identical representations for different molecules. 
+
+\item In the dataset, identical fingerprints occurred for 42 out of 1379 molecules training of $ESM-1b, ~15\%$ of the amino acids in a protein’s sequence are randomly masked and the model is trained to predict the identity of the masked amino acids. This training procedure forces the model to store both local and global information about the protein sequence in one 1280-dimensional representation vector for each individual amino acid. 
+
+\item In order to create a single fixed-length numerical representation of the whole protein, one typically calculates the element-wise mean across all amino acid representations\cite{2.34,2.35,2.49}. it was refered to these protein representations as ESM-1b vectors
+
+\begin{Note}
+Simply taking the element-wise mean results in information loss and does not consider the task for which the representations shall be used, which can lead to subpar performance. To overcome these issues, we created task-specific enzyme representations optimized for the prediction of enzyme-substrate pairs. 
+
+We slightly modified  the architecture of the ESM-1b model, adding one additional 1280-dimensional token to represent the complete enzyme, intended to capture information salient to the downstream prediction task. The extra token is not adding input information to the model, but it allows an easier extraction of enzyme information from the trained model. This whole-enzyme representation was updated in the same way as the regular ESM-1b amino acid representations.
+\end{Note}
+
+\item After a predefined number of update steps, the enzyme representation was concatenated with the small molecule ECFP-vector. The combined vector was used as the input for a fully connected neural network (FCNN), which was then trained end-to-end to predict whether the small molecule is a substrate for the enzyme. 
+
+\item This approach facilitates the construction of a single, optimized, task-specific representation. The ESM-1b model contains many parameters and thus requires substantial training data. Therefore, in the pre-training that produces the task-specific enzyme representations, we added phylogenetically inferred evidence to our training set; this resulted in a total of ~287,000 data points used for training the task-specific enzyme representation. 
+
+
+\item After training, we used the network to extract the 1280-dimensional task-specific representations for all enzymes in our
+dataset, these representations are called ESM-1bts vectors.
+
+\item The ESM-1b model is a state-of-the-art transformer network\cite{2.47}, trained with ~27 million proteins from the UniRef dataset\cite{2.48} in a self-supervised fashion\cite{2.34}. This model takes an amino acid sequence as its input and puts out a numerical representation of the sequence; these representations are often referred to as protein embeddings.
+
+
+\item we estimated prediction quality on our test set when using machine learning models with each of the four combinations of enzyme and small molecule representations. In each case, we concatenated one of the two 1280-dimensional enzyme representations with one of the two small molecule representations to create a single input vector for every enzyme- small molecule pair. 
+
+\item We used these inputs to train gradient-boosted decision tree models\cite{2.50} for the binary classification task of predicting whether the small molecule is a substrate for the enzyme.
+
+\item We performed hyperparameter optimizations for all four models, including the parameters learning rate, depth of trees, number of iterations, and regularization coefficients.
+
+\item For this, we performed a random grid search with a 5-fold cross-validation (CV) on the training set. To challenge the model to learn to predict the substrate scope of enzymes not included in the training data, we made sure that each enzyme occurred in only one of the five subsets used for cross-validation. 
+ 
+\item To account for the higher number of negative compared to positive training data, we also included a weight parameter that lowered the influence of the negative data points. 
+
+\item After hyperparameter optimization, the models were trained with the best  set of hyperparameters on the whole training set and were validated on our independent test set, which had not been used for model training or hyperparameter selection. It is noteworthy that for some input combinations, the accuracies on the test set are higher than the accuracies achieved during cross-validation.
+
+\item This improved performance on the test set may result from the fact that before validation on the test set, models are trained with approximately 11,000 more samples than before each cross-validation; the number of training samples has a substantial influence on model performance.
+
+\item To compare the gradient boosting model to alternative machine learning models, we also trained a logistic regression model and a
+random forest model for the task of predicting enzyme-substrate pairs from the combined ESM-1bts and GNN vectors. However, these models performed worse compared to the gradient boosting model. 
+
+\item To investigate the importance of the added token for the observed superior performance, we alternatively re-trained the ESM-1b
 without such an extra token.
 
+\item Good predictions even for unseen enzymes It appears likely that prediction quality is best for enzymes that are highly similar to enzymes in the training set, and decreases for enzymes that are increasingly dissimilar to the enzymes used for training. 
+
+\item How strong is that dependence? To answer this question, we first calculated the maximal enzyme sequence identity compared to
+the enzymes in the training set for all 2291 enzymes in the test set. Next, we split the test set into three subgroups: data points with
+enzymes with a maximal sequence identity to training data between 0 and $40\%$, between $40\%$ and $60\%$ and between $60\%$ and $80\%$.
 
 
-Good predictions even for unseen enzymes
-It appears likely that prediction quality is best for enzymes that are
-highly similar to enzymes in the training set, and decreases for
-enzymes that are increasingly dissimilar to the enzymes used for
-training. How strong is that dependence? To answer this question, we
-ﬁrst calculated the maximal enzyme sequence identity compared to
-the enzymes in the training set for all 2291 enzymes in the test set.
-Next, we split the test set into three subgroups: data points with
-enzymes with a maximal sequence identity to training data between 0
-and 40%, between 40% and 60%, and between 60% and 80%.
+\item It was shown model performance is highest for enzymes that are similar to proteins in the training set. Similarly, it appears likely that the model performs better when making predictions for small molecules that are also in the training set. To test this hypothesis, we divided the test set into data points with small molecules that occurred in the training set (N = 13,459) and those with small molecules that did not occur in the training set (N = 530).
 
-Low model performance for unseen small molecules
-In the previous subsection, we showed that model performance is
-highest for enzymes that are similar to proteins in the training set.
-Similarly, it appears likely that the model performs better when making
-predictions for small molecules that are also in the training set. To test
-this hypothesis, we divided the test set into data points with small
-molecules that occurred in the training set (N = 13,459) and those with
-small molecules that did not occur in the training set (N = 530).
-The ESP model does not perform well for data points with small
-molecules not present in the training set. When considering only
-enzyme-small molecules pairs with small molecules not represented in
-the training set and an enzyme sequence identity level of 0–40%
-compared to the training data, ESP achieves an accuracy of 71%, ROC-
-AUC score 0.59, and MCC 0.15. At an enzyme sequence identity level of
-40–60%, accuracy improves to 83%, with ROC-AUC score 0.78, and
-MCC 0.25 for unseen small molecules.For those test data points with small molecules not present in the
-training set, we wondered if a high similarity of the small molecule
-compared to at least one substrate in the training set leads to
-improved predictions, analogous to what we observed for enzymes
-with higher sequence identities. For each small molecules not present
-in the training set, we calculated the maximal pairwise similarity score
-compared to all substrates in the training set. We could not ﬁnd any
-evidence that a higher maximal similarity score leads to better model
-performance (Supplementary Fig. 3). Hence, we conclude that ESP only
-achieves high accuracies for new enzyme-small molecule pairs if the
-small molecule was present among the ~1 400 substrates of our
-training set.
-How many training data points with identical substrates are nee-
-ded to achieve good model performance? For every small molecule in
-the test set, we counted how many times the same molecule occurs as
-an experimentally conﬁrmed substrate in the training set. Supple-
-mentary Fig. 4 shows that having as few as two positive training data
-points for a given small molecule leads to good accuracy when pairing
-the same small molecule with other enzymes.Model performance increases with increased training set size
-The previous subsections suggest that a bigger training set with a more
-diverse set of enzymes and small molecules should lead to improved
-performance. However, using more data does not guarantee an
-improved model performance. For example, there could be a limita-
-tion in the model architecture that prevents the model from better
-ﬁtting the data. To test how our model performs with different
-amounts of training data and to analyze if more data is expected to
-lead to higher generalizability, we trained the gradient boosting model
-with different training set sizes, ranging from 30% to 100% of the
-available training data.Internally, our trained classiﬁcation model does not simply output the
-positive or negative class as a prediction. Mou et al.14 trained four different machine learning models
-(logistic regression, random forest, gradient-boosted decision trees,
-and support vector machines) to predict substrates of bacterial nitri-
-lases. For model training and validation, they used a dataset with all
-possible combinations of 12 enzymes and 20 small molecules
-(N = 240), randomly split into 80% training data and 20% test data. Instead, it outputs a predic-
-tion score between 0 and 1,Yang et al.15 published a decision tree-based model, GT-Predict,
-for predicting the substrate scope of glycosyltransferases of plants.All software was coded in Python57. We implemented and trained the
-neural networks using the deep learning library PyTorch58. We ﬁtted
-the gradient boosting models using the library XGBoost50.
+
+\item The ESP model does not perform well for data points with small molecules not present in the training set. When considering only
+enzyme-small molecules pairs with small molecules not represented in the training set and an enzyme sequence identity level of $0–40\%$ compared to the training data, ESP achieves an accuracy of $71\%$, ROC- AUC score 0.59, and MCC 0.15. At an enzyme sequence identity level of $40–60\%$, accuracy improves to $83\%$, with ROC-AUC score 0.78, and MCC 0.25 for unseen small molecules.
+
+
+\item For those test data points with small molecules not present in the training set, we wondered if a high similarity of the small molecule compared to at least one substrate in the training set leads to improved predictions, analogous to what we observed for enzymes with higher sequence identities. 
+
+\item For each small molecules not present in the training set, we calculated the maximal pairwise similarity score compared to all substrates in the training set. 
+
+\item we conclude that ESP only achieves high accuracies for new enzyme-small molecule pairs if the small molecule was present among the ~1 400 substrates of our training set.
+
+
+\item How many training data points with identical substrates are needed to achieve good model performance? For every small molecule in the test set, we counted how many times the same molecule occurs as an experimentally confirmed substrate in the training set. 
+
+\item Model performance increases with increased training set size The previous subsections suggest that a bigger training set with a more diverse set of enzymes and small molecules should lead to improved performance. However, using more data does not guarantee an improved model performance. 
+
+\item To test how our model performs with different amounts of training data and to analyze if more data is expected to lead to higher generalizability, we trained the gradient boosting model with different training set sizes, ranging from $30\%$ to $100\%$ of the available training data.
+
+\item Internally, our trained classification  model does not simply output the positive or negative class as a prediction. Mou et al.\cite{2.14} trained four different machine learning models (logistic regression, random forest, gradient-boosted decision trees,
+and support vector machines) to predict substrates of bacterial nitrilases. 
+
+\item For model training and validation, they used a dataset with all possible combinations of 12 enzymes and 20 small molecules
+(N = 240), randomly split into $80\%$ training data and $20\%$ test data. Instead, it outputs a prediction score between 0 and 1,Yang et al.15 published a decision tree-based model, GT-Predict, for predicting the substrate scope of glycosyltransferases of plants.All software was coded in Python57. We implemented and trained the neural networks using the deep learning library PyTorch58. We fitted the gradient boosting models using the library XGBoost50.
 \end{itemize}
 
 \end{Note}
@@ -780,7 +672,7 @@ the gradient boosting models using the library XGBoost50.
 
 \bibitem{91} Riesselman, A. J.; Ingraham, J. B.; Marks, D. S. Deep Generative Models of Genetic Variation Capture the Effects of Mutations. Nat. Methods 2018, 15, 816-822.
 
-\bibitem{92} Thornton, C.; Hutter, F.; Hoos, H. H.; Leyton-Brown, K. Auto- WEKA: Combined Selection and Hyperparameter Optimization of Classiﬁcation Algorithms. In Proceedings of the 19th ACM SIGKDD international conference on Knowledge discovery and data mining; 2013; pp 847-855.
+\bibitem{92} Thornton, C.; Hutter, F.; Hoos, H. H.; Leyton-Brown, K. Auto- WEKA: Combined Selection and Hyperparameter Optimization of Classiffication Algorithms. In Proceedings of the 19th ACM SIGKDD international conference on Knowledge discovery and data mining; 2013; pp 847-855.
 
 \bibitem{93} Polikar, R. Ensemble based systems in decision making. IEEE Circuits and systems magazine 2006, 6, 21-45.
 
@@ -788,13 +680,13 @@ the gradient boosting models using the library XGBoost50.
 
 \bibitem{95} Samek, W.; Wiegand, T.; Müller, K. Explainable Artificial Intelligence: Understanding, Visualizing and Interpreting Deep Learning Models. ITU Journal: ICT Discoveries 2017, 39-48. 
 
-\bibitem{96} Shrikumar, A.; Greenside, P.; Kundaje, A. Learning Important Features through Propagating Activation Diﬀerences. In Proceedings of the 34th International Conference on Machine Learning; 2017; Vol. 70, pp 3145-3153.
+\bibitem{96} Shrikumar, A.; Greenside, P.; Kundaje, A. Learning Important Features through Propagating Activation differences. In Proceedings of the 34th International Conference on Machine Learning; 2017; Vol. 70, pp 3145-3153.
 
-\bibitem{97} Simonyan, K.; Vedaldi, A.; Zisserman, A. Deep Inside Convolutional Networks: Visualising Image Classiﬁcation Models and Saliency Maps. arXiv preprint arXiv:1312.6034 2013.
+\bibitem{97} Simonyan, K.; Vedaldi, A.; Zisserman, A. Deep Inside Convolutional Networks: Visualising Image Classiffication Models and Saliency Maps. arXiv preprint arXiv:1312.6034 2013.
 
 \bibitem{98} Brookes, D. H.; Park, H.; Listgarten, J. Conditioning by Adaptive Sampling for Robust Design. In Proceedings of the 36th International Conference on Machine Learning; 2019; Vol. 97, pp 773-782.
 
-\bibitem{99} Ribeiro, M. T.; Singh, S.; Guestrin, C. “Why Should I Trust You?” Explaining the Predictions of Any Classiﬁer. In Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining; 2016; pp 1135-1144.
+\bibitem{99} Ribeiro, M. T.; Singh, S.; Guestrin, C. “Why Should I Trust You?” Explaining the Predictions of Any Classiffier. In Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining; 2016; pp 1135-1144.
 
 \bibitem{100} Szegedy, C.; Zaremba, W.; Sutskever, I.; Bruna, J.; Erhan, D.; Goodfellow, I.; Fergus, R. Intriguing Properties of Neural Networks. arXiv preprint arXiv:1312.6199 201
 
@@ -810,7 +702,7 @@ the gradient boosting models using the library XGBoost50.
 
 \bibitem{2.6} Wang, S. et al. Engineering a synthetic pathway for gentisate in pseudomonas chlororaphis p3. Front. Bioeng. Biotechnol. 8, 1588 (2021).
 
-\bibitem{2.7} Wu, M.-C., Law, B., Wilkinson, B. and Mickleﬁeld, J. Bioengineering natural product biosynthetic pathways for therapeutic applications. Curr. Opin. Biotechnol. 23, 931–940 (2012)
+\bibitem{2.7} Wu, M.-C., Law, B., Wilkinson, B. and micklefied, J. Bioengineering natural product biosynthetic pathways for therapeutic applications. Curr. Opin. Biotechnol. 23, 931–940 (2012)
 
 
 \bibitem{2.9} Rembeza, E., Boverio, A., Fraaije, M. W. and Engqvist, M. K. Discovery of two novel oxidases using a high-throughput activity screen. ChemBioChem 23, e202100510 (2022).
@@ -825,13 +717,13 @@ the gradient boosting models using the library XGBoost50.
 
 \bibitem{2.15} Yang, M. et al. Functional and informatics analysis enables glycosyltransferase activity prediction. Nat. Chem. Biol. 14, 1109–1117 (2018).
 
-\bibitem{2.16} Rottig, M., Rausch, C. and Kohlbacher, O. Combining structure and sequence information allows automated prediction of substrate speciﬁcities within enzyme families. PLoS Comput. Biol. 6, e1000636 (2010).
+\bibitem{2.16} Rottig, M., Rausch, C. and Kohlbacher, O. Combining structure and sequence information allows automated prediction of substrate specificities within enzyme families. PLoS Comput. Biol. 6, e1000636 (2010).
 
 \bibitem{2.17} Chevrette, M. G., Aicheler, F., Kohlbacher, O., Currie, C. R. and Medema, M. H. Sandpuma: ensemble predictions of nonribosomal peptide chemistry reveal biosynthetic diversity across actinobacteria. Bioinformatics 33, 3202-3210 (2017).
 
-\bibitem{2.18} Goldman, S., Das, R., Yang, K. K. and Coley, C. W. Machine learning modeling of family wide enzyme-substrate speciﬁcity screens. PLoS Comput. Biol. 18, e1009853 (2022).
+\bibitem{2.18} Goldman, S., Das, R., Yang, K. K. and Coley, C. W. Machine learning modeling of family wide enzyme-substrate specificity screens. PLoS Comput. Biol. 18, e1009853 (2022).
 
-\bibitem{2.19} Visani, G. M., Hughes, M. C. and Hassoun, S. Enzyme promiscuity prediction using hierarchy-informed multi-label classiﬁcation. Bioinformatics 37, 2017-2024 (2021).
+\bibitem{2.19} Visani, G. M., Hughes, M. C. and Hassoun, S. Enzyme promiscuity prediction using hierarchy-informed multi-label classiffication Bioinformatics 37, 2017-2024 (2021).
 
 \bibitem{2.20} Ryu, J. Y., Kim, H. U. and Lee, S. Y. Deep learning enables high-quality and high-throughput prediction of enzyme commission numbers. PNAS 116, 13996-14001 (2019).
 
@@ -843,11 +735,11 @@ the gradient boosting models using the library XGBoost50.
 
 \bibitem{2.24} Rembeza, E. and Engqvist, M. K. Experimental and computational investigation of enzyme functional annotations uncovers misannotation in the ec 1.1. 3.15 enzyme class. PLoS Comput. Biol. 17, e1009446 (2021).
 
-\bibitem{2.25} Ozturk, H., Ozgur, A. and Ozkirimli, E. Deepdta: deep drugtarget binding afﬁnity prediction. Bioinformatics 34, i821-i829 (2018).
+\bibitem{2.25} Ozturk, H., Ozgur, A. and Ozkirimli, E. Deepdta: deep drugtarget binding affinity prediction. Bioinformatics 34, i821-i829 (2018).
 
 \bibitem{2.26} Feng, Q., Dueva, E., Cherkasov, A. and Ester, M. Padme: A deep learning-based framework for drug-target interaction prediction. Preprint at https://doi.org/10.48550/arXiv.1807.09741 (2018).
 
-\bibitem{2.27} Karimi, M., Wu, D., Wang, Z. and Shen, Y. Deepaffinity: interpretable deep learning of compound–protein affinity through uniﬁed recurrent and convolutional neural networks. Bioinformatics 35, 3329-3338 (2019).
+\bibitem{2.27} Karimi, M., Wu, D., Wang, Z. and Shen, Y. Deep affinity: interpretable deep learning of compound–protein affinity through UNIFIED recurrent and convolutional neural networks. Bioinformatics 35, 3329-3338 (2019).
 
 \bibitem{2.28} Kroll, A., Engqvist, M. K., Heckmann, D. and Lercher, M. J. Deep learning allows genome-scale prediction of michaelis constants from structural features. PLoS Biol. 19, e3001402 (2021).
 
@@ -855,7 +747,7 @@ the gradient boosting models using the library XGBoost50.
 
 \bibitem{2.30} Weininger, D. SMILES, a chemical language and information system. 1. introduction to methodology and encoding rules. J. Chem. Inf. Comput. Sci. 28, 31-36 (1988).
 
-\bibitem{2.31} Rogers, D. and Hahn, M. Extended-connectivity ﬁngerprints. J. Chem. Inf. Model. 50, 742-754 (2010).
+\bibitem{2.31} Rogers, D. and Hahn, M. Extended-connectivity fingerprints. J. Chem. Inf. Model. 50, 742-754 (2010).
 
 \bibitem{2.32} Zhou, J. et al. Graph neural networks: A review of methods and applications. AI Open 1, 57-81 (2020).
 
@@ -864,11 +756,29 @@ the gradient boosting models using the library XGBoost50.
 
 \bibitem{2.34} Rives, A. et al. Biological structure and function emerge from scaling unsupervised learning to 250 million protein sequences. PNAS 118, e2016239118 (2021).
 
-\bibitem{2.35} Alley, E. C., Khimulya, G., Biswas, S., AlQuraishi, M. and Church, G. M. Uniﬁed rational protein engineering with sequence-based deep representation learning. Nat. Methods. 16, 1315-1322 (2019).
+\bibitem{2.35} Alley, E. C., Khimulya, G., Biswas, S., AlQuraishi, M. and Church, G. M. Unified rational protein engineering with sequence-based deep representation learning. Nat. Methods. 16, 1315-1322 (2019).
 
 \bibitem{2.36} Xu, Y. et al. Deep dive into machine learning models for protein engineering. J. Chem. Inf. Model. 60, 2773–2790 (2020).
 
 \bibitem{2.42} Bekker, J. and Davis, J. Learning from positive and unlabeled data: A survey. Mach. Learn. 109, 719-760 (2020)
+
+
+\bibitem{2.38} Kearnes, S., McCloskey, K., Berndl, M., Pande, V. and  Riley, P. Mole- cular graph convolutions: moving beyond !ngerprints. J. Comput. -Aided Mol. Des. 30, 595–608 (2016).
+
+\bibitem{2.39} Duvenaud, D. K. et al. Convolutional networks on graphs for learning molecular fingerprints. In Advances in Neural Information Processing Systems, 2224-2232 (2015).
+
+\bibitem{2.40} Zhou, J. et al. Graph neural networks: A review of methods and applications. AI Open 1, 57–81 (2020).
+
+\bibitem{2.45} Hu, W. et al. Strategies for pre-training graph neural networks. Preprint at https://doi.org/10.48550/arXiv.1905.12265 (2019). 
+
+
+
+\bibitem{2.46} Capela, F., Nouchi, V., Van Deursen, R., Tetko, I. V. and  Godin, G. Multitask learning on graph neural networks applied to molecular property predictions. Preprint at https://doi.org/10.48550/arXiv. 1910.13124 (2019).
+
+\bibitem{2.47}  Vaswani, A. et al. Attention is all you need. In Advances in neural information processing systems, 5998–6008 (2017).
+
+\bibitem{2,48} Suzek, B. E. et al. Uniref clusters: a comprehensive and scalable alternative for improving sequence similarity searches. Bioinfor- matics 31, 926–932 (2015).
+\bibitem{2.49} Elnaggar, A. et al. Prottrans: Towards cracking the language of lifes code through self-supervised deep learning and high performance computing. IEEE Trans. Pattern Anal. Mach. Intell. PP https://doi. org/10.1109/TPAMI.2021.3095381 (2021).
 
 \end{thebibliography}
 

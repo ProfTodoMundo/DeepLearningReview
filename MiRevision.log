@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  29 SEP 2023 19:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  2 OCT 2023 13:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -456,704 +456,80 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
  [8] [9] [10]
 [11] [12] [13] [14] [15]
 
-LaTeX Warning: Citation `2.38' on page 16 undefined on input line 447.
-
-
-LaTeX Warning: Citation `2.39' on page 16 undefined on input line 447.
-
-
-LaTeX Warning: Citation `2.40' on page 16 undefined on input line 447.
-
-
 LaTeX Warning: Citation `2.41' on page 16 undefined on input line 462.
 
 [16]
 
 LaTeX Warning: Citation `2.44' on page 17 undefined on input line 491.
 
+[17]
 
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
+LaTeX Warning: Command \textendash invalid in math mode on input line 495.
 
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.500 evaluate how well our ﬁ
-                               nal model performs for different levels of
-You may provide a definition with
-\DeclareUnicodeCharacter 
 
+LaTeX Warning: Command \textendash invalid in math mode on input line 495.
 
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
 
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.504 For the numerical encoding, one classiﬁ
-                                               es bond types and calculates
-You may provide a definition with
-\DeclareUnicodeCharacter 
+LaTeX Warning: Command \textendash invalid in math mode on input line 495.
 
+[18]
 
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
+LaTeX Warning: Citation `2.48' on page 19 undefined on input line 527.
 
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.507 ...gen atoms)31. Afterwards, these identiﬁ
-                                                  ers are updated for a ﬁxed
-You may provide a definition with
-\DeclareUnicodeCharacter 
 
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.507 ... these identiﬁers are updated for a ﬁ
-                                                  xed
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.508 ...of steps by iteratively applying predeﬁ
-                                                  ned functions to sum-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.510 process, all identiﬁ
-                            ers are converted into a single binary vector with
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.512 and the dimension of the ﬁ
-                                  ngerprint can be chosen freely. We set them
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.519 identical ﬁ
-                   ngerprint with a structurally similar molecule.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.520 As an alternative to expert-crafted ﬁ
-                                             ngerprints such as ECFPs,
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.528 ...acted these 100-dimensional task-speciﬁ
-                                                  c vectors for all small
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.530 for a related task can signiﬁ
-                                     cantly improve model performance45,46.
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.531 Thus, we ﬁ
-                  rst pre-trained a GNN for the related task of predicting the
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.533 “Calculating task-speciﬁ
-                                  c ﬁngerprints for small molecules”). A...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.533 “Calculating task-speciﬁc ﬁ
-                                       ngerprints for small molecules”). A...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.535 ... improved prediction performance signiﬁ
-                                                  cantly. In
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.536 contrast to ECFPs, GNN-generated ﬁ
-                                          ngerprints lead to much fewer
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.538 dataset, identical ﬁ
-                            ngerprints occurred for 42 out of 1379 molecules...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.543 ...ino acid. In order to create a single ﬁ
-                                                  xed-length numer-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.550 ...me these issues, we created task-speciﬁ
-                                                  c enzyme representa-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 slightly modiﬁ
-                      ed the architecture of the ESM-1b model, adding one
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.559 After a predeﬁ
-                      ned number of update steps, the enzyme repre-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.564 ...ion of a single, optimized, task-speciﬁ
-                                                  c repre-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.567 produces the task-speciﬁ
-                                c enzyme representations, we added phylo-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.569 ...oints used for training the task-speciﬁ
-                                                  c enzyme
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.571 1280-dimensional task-speciﬁ
-                                    c representations for all enzymes in our
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-[17] [18]
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.589 ...on tree models50 for the binary classiﬁ
-                                                  cation task of predicting
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.593 iterations, and regularization coefﬁ
-                                            cients. For this, we performed a
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.597 enzyme occurred in only one of the ﬁ
-                                            ve subsets used for cross-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬂ (U+FB02)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.601 meter that lowered the inﬂ
-                                  uence of the negative data points. The
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬂ (U+FB02)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.613 training samples has a substantial inﬂ
-                                              uence on model performance
-You may provide a definition with
-\DeclareUnicodeCharacter 
+LaTeX Warning: Citation `2.50' on page 19 undefined on input line 532.
 
 [19]
 
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.630 ﬁ
-         rst calculated the maximal enzyme sequence identity compared to
-You may provide a definition with
-\DeclareUnicodeCharacter 
+LaTeX Warning: Command \textendash invalid in math mode on input line 561.
 
 
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
+LaTeX Warning: Command \textendash invalid in math mode on input line 561.
 
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.657 ...tes in the training set. We could not ﬁ
-                                                  nd any
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.666 an experimentally conﬁ
-                              rmed substrate in the training set. Supple-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.675 ﬁ
-         tting the data. To test how our model performs with different
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.679 ...ng data.Internally, our trained classiﬁ
-                                                  cation model does not simp...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.688 ...e deep learning library PyTorch58. We ﬁ
-                                                  tted
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-[20] [21] [22] [23]
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.783 ... Hyperparameter Optimization of Classiﬁ
-                                                  cation Algorithms. In Proc...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬀ (U+FB00)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.791 ...ures through Propagating Activation Diﬀ
-                                                  erences. In Proceedings of...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.793 ...nal Networks: Visualising Image Classiﬁ
-                                                  cation Models and Saliency...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.797 ...plaining the Predictions of Any Classiﬁ
-                                                  er. In Proceedings of the ...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-[24]
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.813 ...-C., Law, B., Wilkinson, B. and Mickleﬁ
-                                                  eld, J. Bioengineering nat...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.828 ...utomated prediction of substrate speciﬁ
-                                                  cities within enzyme famil...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.832 ... of family wide enzyme-substrate speciﬁ
-                                                  city screens. PLoS Comput....
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.834 ... hierarchy-informed multi-label classiﬁ
-                                                  cation. Bioinformatics 37,...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-[25]
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.846 ...E. Deepdta: deep drugtarget binding afﬁ
-                                                  nity prediction. Bioinform...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 848--849
+[20] [21] [22] [23] [24] [25]
+Underfull \hbox (badness 10000) in paragraph at lines 740--741
 []\OT1/cmr/m/n/12 Feng, Q., Due-va, E., Cher-ka-sov, A. and Es-ter, M. Pad-me: 
 A deep
  []
 
 
-Underfull \hbox (badness 6461) in paragraph at lines 848--849
+Underfull \hbox (badness 6461) in paragraph at lines 740--741
 \OT1/cmr/m/n/12 learning-based fra-me-work for drug-target in-ter-ac-tion pre-d
 ic-tion. Pre-print at
  []
 
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.850 ...ompound–protein affinity through uniﬁ
-                                                  ed recurrent and convoluti...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.858 ...D. and Hahn, M. Extended-connectivity ﬁ
-                                                  ngerprints. J. Chem. Inf. ...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-! Package inputenc Error: Unicode character ﬁ (U+FB01)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.867 ..., AlQuraishi, M. and Church, G. M. Uniﬁ
-                                                  ed rational protein engine...
-
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
 [26]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 876.
- [27]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 876.
+Underfull \hbox (badness 1939) in paragraph at lines 772--773
+[]\OT1/cmr/m/n/12 Hu, W. et al. Stra-te-gies for pre-training graph neu-ral net
+-works. Pre-print at
+ []
+
+[27]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 786.
+ [28]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 786.
  (./MiRevision.aux
 LaTeX Info: Redefining \. on input line 24.
 LaTeX Info: Redefining \% on input line 24.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 876.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 876.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 786.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 786.
 Package rerunfilecheck Info: File `MiRevision.out' has not changed.
 (rerunfilecheck)             Checksum: B79CE4CC65B633E29062536C989AACAA;1553.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 876.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 786.
  ) 
 Here is how much of TeX's memory you used:
- 7802 strings out of 492649
- 109999 string characters out of 6129622
- 235515 words of memory out of 5000000
- 11439 multiletter control sequences out of 15000+600000
- 13754 words of font info for 53 fonts, out of 8000000 for 9000
+ 7819 strings out of 492649
+ 110136 string characters out of 6129622
+ 225739 words of memory out of 5000000
+ 11445 multiletter control sequences out of 15000+600000
+ 14106 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 28i,11n,35p,1242b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,11n,35p,1242b,523s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pf
 b></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
@@ -1164,12 +540,13 @@ r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
 local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/lo
 cal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local
 /texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/te
-xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
-live/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on MiRevision.pdf (27 pages, 760689 bytes).
+xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/tex
+live/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
+ive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on MiRevision.pdf (28 pages, 779225 bytes).
 PDF statistics:
- 475 PDF objects out of 1000 (max. 8388607)
- 427 compressed objects within 5 object streams
- 146 named destinations out of 1000 (max. 500000)
+ 508 PDF objects out of 1000 (max. 8388607)
+ 458 compressed objects within 5 object streams
+ 156 named destinations out of 1000 (max. 500000)
  142 words of extra memory for PDF output out of 10000 (max. 10000000)
 

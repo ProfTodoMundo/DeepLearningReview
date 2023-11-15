@@ -1,0 +1,626 @@
+\documentclass{book}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[margin=0.75in]{geometry}  % Ajusta los márgenes
+
+
+
+\begin{document}
+
+\title{Libro sobre Ciencia de Datos y Deep Learning}
+\author{Tú Nombre}
+\date{\today}
+\maketitle
+
+\tableofcontents
+% <<==>>  <<==>>  <<==>>  <<==>>  <<==>> 
+\chapter{Ciencia de Datos y Machine Learning}
+% <<==>>  <<==>>  <<==>>  <<==>>  <<==>> 
+
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Algoritmos de Aprendizaje Supervisado}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+%__________________________________
+\subsection{Regresión Lineal y Logística}
+%__________________________________
+    % Contenido sobre regresión lineal y logística
+\subsubsection{Regresión Lineal}
+
+La regresión lineal es un modelo que busca modelar la relación lineal entre una variable dependiente \(Y\) y una o más variables independientes \(X\). El modelo se define como:
+
+\[
+Y = \beta_0 + \beta_1 X + \varepsilon
+\]
+
+donde:
+\begin{itemize}
+    \item \(Y\) es la variable dependiente que queremos predecir.
+    \item \(X\) es la variable independiente que utilizamos para la predicción.
+    \item \(\beta_0\) es la ordenada al origen, que representa el valor de \(Y\) cuando \(X\) es cero.
+    \item \(\beta_1\) es la pendiente de la recta, que indica cuánto cambia \(Y\) por un cambio unitario en \(X\).
+    \item \(\varepsilon\) es el término de error que captura la variabilidad no explicada por el modelo.
+\end{itemize}
+
+El objetivo es encontrar los valores de \(\beta_0\) y \(\beta_1\) que minimizan la suma de los cuadrados de los errores \(\varepsilon\):
+
+\[
+\min_{\beta_0, \beta_1} \sum_{i=1}^{n} (Y_i - (\beta_0 + \beta_1 X_i))^2
+\]
+
+Esto se puede hacer utilizando técnicas como el método de mínimos cuadrados.
+
+\subsubsection{Regresión Logística}
+
+La regresión logística es un modelo utilizado para problemas de clasificación binaria. Se emplea la función logística, también conocida como la función sigmoide, para transformar la salida de la regresión lineal en un valor entre 0 y 1, que se interpreta como la probabilidad de pertenecer a la clase positiva. La función sigmoide está definida como:
+
+\[
+P(Y=1) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X)}}
+\]
+
+donde:
+\begin{itemize}
+    \item \(P(Y=1)\) es la probabilidad de pertenecer a la clase positiva.
+    \item \(e\) es la base del logaritmo natural.
+\end{itemize}
+
+El modelo de regresión logística busca encontrar los valores de \(\beta_0\) y \(\beta_1\) que maximizan la función de verosimilitud. La función de verosimilitud es el producto de las probabilidades condicionales de observar las etiquetas de clase dados los valores de \(X\):
+
+\[
+\max_{\beta_0, \beta_1} \mathcal{L}(\beta_0, \beta_1) = \prod_{i=1}^{n} P(Y_i)^{y_i} \cdot (1 - P(Y_i))^{1 - y_i}
+\]
+
+donde:
+\begin{itemize}
+    \item \(\mathcal{L}(\beta_0, \beta_1)\) es la función de verosimilitud.
+    \item \(y_i\) es la etiqueta de la clase para la observación \(i\).
+\end{itemize}
+
+La regresión logística se ajusta típicamente maximizando la log-verosimilitud para obtener estimaciones de \(\beta_0\) y \(\beta_1\).
+
+\subsubsection{Implementacion}
+\begin{verbatim}
+# Ejemplo de Regresión Lineal
+set.seed(123)
+# Crear datos de ejemplo
+X <- rnorm(100)
+Y <- 2 * X + rnorm(100)
+
+# Ajustar el modelo de regresión lineal
+modelo_lineal <- lm(Y ~ X)
+
+# Imprimir resultados
+summary(modelo_lineal)
+
+# Graficar el modelo
+plot(X, Y, main = "Regresión Lineal", xlab = "X", ylab = "Y")
+abline(modelo_lineal, col = "red")
+
+# Ejemplo de Regresión Logística
+set.seed(123)
+# Crear datos de ejemplo para clasificación binaria
+X <- rnorm(100)
+probabilidades <- exp(2 * X) / (1 + exp(2 * X))
+Y_binario <- rbinom(100, 1, probabilidades)
+
+# Ajustar el modelo de regresión logística
+modelo_logistico <- glm(Y_binario ~ X, family = binomial)
+
+# Imprimir resultados
+summary(modelo_logistico)
+
+# Graficar el modelo
+plot(X, Y_binario, main = "Regresión Logística", 
+         xlab = "X", ylab = "Y", col = Y_binario + 1)
+curve(predict(modelo_logistico, 
+           data.frame(X = x), type = "response"), 
+           add = TRUE, col = "red")
+\end{verbatim}
+
+
+%__________________________________
+\subsection{Máquinas de Soporte Vectorial (SVM)}
+%__________________________________
+    % Contenido sobre SVM
+
+\begin{enumerate}
+    \item \textbf{Hiperplano:}
+        En un espacio de características $n$-dimensional, un hiperplano es un subespacio de dimensión $n-1$. Para un problema de clasificación binaria, un hiperplano divide el espacio en dos regiones, asignando puntos a una clase u otra.
+
+    \item \textbf{Margen:}
+        El margen es la distancia perpendicular desde el hiperplano a los puntos más cercanos de cada clase. SVM busca el hiperplano que maximiza este margen, lo que se traduce en una mayor robustez y generalización del modelo.
+
+    \item \textbf{Vectores de Soporte:}
+        Estos son los puntos de datos más cercanos al hiperplano y tienen un papel crucial en la definición del margen. Cambiar estos vectores de soporte afecta directamente al modelo, y son los únicos puntos que importan para la determinación del hiperplano.
+
+    \item \textbf{Función de Decisión:}
+        La función de decisión de SVM es el hiperplano que se utiliza para clasificar nuevos puntos de datos. Dada una entrada, la función de decisión evalúa de qué lado del hiperplano cae el punto y asigna la etiqueta correspondiente.
+
+    \item \textbf{Kernel Trick:}
+        SVM puede manejar eficientemente datos no lineales mediante el uso de funciones de kernel. Estas funciones transforman el espacio de características original en uno de mayor dimensión, permitiendo así que los datos sean separados de manera no lineal en el espacio transformado.
+
+    \item \textbf{Parámetros de SVM:}
+        \begin{itemize}
+            \item \textbf{C (Parámetro de Regularización):} Controla el equilibrio entre tener un margen más amplio y clasificar correctamente los puntos de entrenamiento.
+            \item \textbf{Kernel:} Define la función de kernel utilizada (lineal, polinómica, radial, etc.).
+            \item \textbf{Gamma (para kernels no lineales):} Controla el alcance de influencia de un solo punto de datos en la decisión.
+        \end{itemize}
+
+    \item \textbf{Proceso de Entrenamiento:}
+        Dado un conjunto de datos de entrenamiento etiquetado, SVM busca el hiperplano óptimo que maximiza el margen entre las clases. Esto se realiza a través de técnicas de optimización cuadrática.
+
+    \item \textbf{SVM para Regresión:}
+        Además de la clasificación, SVM se puede utilizar para problemas de regresión. En este caso, el objetivo es ajustar un hiperplano de modo que contenga la mayor cantidad posible de puntos dentro de un margen predefinido.
+
+    \item \textbf{Ventajas y Desventajas:}
+        \begin{itemize}
+            \item \textbf{Ventajas:} Efectivo en espacios de alta dimensión, eficaz en conjuntos de datos pequeños y versátil gracias al kernel trick.
+            \item \textbf{Desventajas:} Sensible a la escala de las características, puede ser computacionalmente costoso para grandes conjuntos de datos y requiere la elección cuidadosa de parámetros.
+        \end{itemize}
+
+    \item \textbf{Aplicaciones:}
+        SVM se utiliza en una variedad de campos, como reconocimiento de escritura, clasificación de imágenes, diagnóstico médico, entre otros.
+
+\end{enumerate}
+
+
+\subsubsection{Elementos Matemáticos de las SVM}
+
+\begin{enumerate}
+    \item \textbf{Hiperplano:}
+        Un hiperplano se define como \(w \cdot x - b = 0\), donde \(w\) es el vector de pesos, \(x\) es el vector de entrada, y \(b\) es el sesgo.
+
+    \item \textbf{Margen:}
+        El margen \(M\) entre un hiperplano y un punto \(x_i\) se define como \(M = \frac{1}{\|w\|} |w \cdot x_i - b|\).
+
+    \item \textbf{Vectores de Soporte:}
+        Los vectores de soporte son los puntos \(x_i\) que cumplen la condición \(|w \cdot x_i - b| = 1/\|w\|\).
+
+    \item \textbf{Función de Decisión:}
+        La función de decisión es \(f(x) = w \cdot x - b\). Si \(f(x) > 0\), el punto \(x\) se clasifica como clase 1; si \(f(x) < 0\), se clasifica como clase -1.
+
+    \item \textbf{Kernel Trick:}
+        La función de kernel \(K(x, x')\) representa el producto escalar en un espacio de características de mayor dimensión. Ejemplos comunes incluyen el kernel lineal (\(K(x, x') = x \cdot x'\)), kernel polinómico (\(K(x, x') = (x \cdot x' + 1)^d\)), y kernel radial (\(K(x, x') = \exp(-\gamma \|x - x'\|^2)\)).
+
+    \item \textbf{Parámetros de SVM:}
+        \begin{itemize}
+            \item \(C\) (Parámetro de Regularización): Se introduce en la función de pérdida para controlar el equilibrio entre tener un margen más amplio y clasificar correctamente los puntos de entrenamiento.
+            \item \(w\) (Vector de Pesos): Aprende durante el entrenamiento y define la orientación del hiperplano.
+            \item \(b\) (Sesgo): Parámetro de ajuste del hiperplano.
+            \item \(\gamma\) (para kernels no lineales): Controla el alcance de influencia de un solo punto de datos en la decisión.
+        \end{itemize}
+
+    \item \textbf{Proceso de Entrenamiento:}
+        El proceso de entrenamiento implica la minimización de la función de pérdida, que incluye el término de regularización \(C\|w\|^2\) y la función de pérdida hinge.
+
+    \item \textbf{SVM para Regresión:}
+        Para regresión, el objetivo es ajustar un hiperplano de modo que \(|w \cdot x_i - b| \leq \epsilon\) para puntos de entrenamiento \(x_i\).
+
+    \item \textbf{Ventajas y Desventajas:}
+        \begin{itemize}
+            \item Ventajas: Efectivo en espacios de alta dimensión, eficaz en conjuntos de datos pequeños y versátil gracias al kernel trick.
+            \item Desventajas: Sensible a la escala de las características, puede ser computacionalmente costoso para grandes conjuntos de datos y requiere la elección cuidadosa de parámetros.
+        \end{itemize}
+
+    \item \textbf{Aplicaciones:}
+        SVM se aplica en una variedad de problemas, como reconocimiento de escritura, clasificación de imágenes y diagnóstico médico.
+\end{enumerate}
+    
+    
+  
+%__________________________________
+\subsection{Árboles de Decisión y Bosques Aleatorios}
+%__________________________________
+    % Contenido sobre árboles de decisión y bosques aleatorios
+\begin{enumerate}
+    \item \textbf{Definición:}
+        Un árbol de decisión es una estructura jerárquica en forma de árbol que se utiliza para representar decisiones y sus posibles consecuencias. Cada nodo interno del árbol representa una prueba en una característica, cada rama representa un resultado posible de la prueba, y cada hoja representa un resultado final o una decisión.
+
+    \item \textbf{Proceso de Construcción:}
+        El árbol se construye de manera recursiva. En cada paso, se elige la mejor característica para dividir el conjunto de datos en función de algún criterio, como la ganancia de información o la impureza de Gini. Este proceso se repite hasta que se alcanza algún criterio de parada, como la profundidad máxima del árbol o un número mínimo de puntos en una hoja.
+
+    \item \textbf{Criterios de División:}
+        Los criterios comunes para la división incluyen:
+        \begin{itemize}
+            \item \textbf{Ganancia de Información:} Mide cuánta información nueva proporciona una característica.
+            \item \textbf{Impureza de Gini:} Mide la probabilidad de clasificar incorrectamente un elemento si es etiquetado aleatoriamente.
+        \end{itemize}
+
+    \item \textbf{Ventajas y Desventajas:}
+        \begin{itemize}
+            \item \textbf{Ventajas:} Fácil interpretación, no requiere normalización de datos, manejo natural de características categóricas.
+            \item \textbf{Desventajas:} Propenso al sobreajuste, especialmente en conjuntos de datos pequeños y ruidosos.
+        \end{itemize}
+\end{enumerate}
+
+\subsubsection{Bosques Aleatorios}
+
+\begin{enumerate}
+    \item \textbf{Definición:}
+        Un bosque aleatorio es una colección de árboles de decisión entrenados en subconjuntos aleatorios del conjunto de datos y utilizando técnicas de agregación para mejorar la precisión y controlar el sobreajuste.
+
+    \item \textbf{Proceso de Construcción:}
+        Se crean múltiples árboles de decisión utilizando diferentes subconjuntos del conjunto de datos de entrenamiento y características aleatorias en cada división. Luego, las predicciones de cada árbol se promedian (en regresión) o se votan (en clasificación) para obtener la predicción final del bosque.
+
+    \item \textbf{Técnica de Bagging:}
+        La construcción de árboles en subconjuntos aleatorios del conjunto de datos se conoce como bagging (bootstrap aggregating). Esto ayuda a reducir la varianza y evitar el sobreajuste al promediar los errores.
+
+    \item \textbf{Importancia de Características:}
+        Los bosques aleatorios proporcionan una medida de la importancia de las características, que indica cuánto contribuye cada característica a la precisión del modelo. Esto es útil para la selección de características.
+
+    \item \textbf{Ventajas y Desventajas:}
+        \begin{itemize}
+            \item \textbf{Ventajas:} Reducción del sobreajuste en comparación con un solo árbol, manejo automático del sobreajuste, buen rendimiento en conjuntos de datos grandes y complejos.
+            \item \textbf{Desventajas:} Menos interpretables que los árboles de decisión individuales.
+        \end{itemize}
+\end{enumerate}
+
+\subsubsection{Elementos Matemáticos de Árboles de Decisión}
+
+\begin{enumerate}
+    \item \textbf{Definición:}
+        Un árbol de decisión se representa como una función \(T(x)\) que asigna una instancia \(x\) a una hoja del árbol. Cada nodo interno \(j\) realiza una prueba en una característica \(f_j(x)\), y cada rama representa una condición de prueba. La estructura del árbol se define por las funciones indicadoras \(I(x, j)\) que indican si la instancia \(x\) llega al nodo \(j\).
+        
+        \[ T(x) = \sum_{j=1}^{J} I(x, j) \cdot C_j \]
+
+        Donde \(J\) es el número de nodos, \(C_j\) es el valor en la hoja correspondiente al nodo \(j\), y \(I(x, j)\) es 1 si la instancia \(x\) llega al nodo \(j\) y 0 de lo contrario.
+
+    \item \textbf{Proceso de Construcción:}
+        La construcción del árbol implica seleccionar la mejor característica \(f_j\) y el umbral \(t_j\) en cada nodo \(j\) para maximizar la ganancia de información o reducir la impureza de Gini.
+        
+        \[ \textrm{Ganancia de Información: } Gain(D, j, t) = H(D) - \frac{N_L}{N} H(D_L) - \frac{N_R}{N} H(D_R) \]
+
+        \[ \textrm{Impureza de Gini: } Gini(D) = 1 - \sum_{k=1}^{K} \left(\frac{|C_k|}{|D|}\right)^2 \]
+
+        Donde \(D\) es el conjunto de datos en el nodo, \(D_L\) y \(D_R\) son los conjuntos de datos en los nodos izquierdo y derecho después de la división, \(N\) es el número total de instancias en \(D\), y \(N_L\) y \(N_R\) son los números de instancias en los nodos izquierdo y derecho.
+
+    \item \textbf{Ventajas y Desventajas:}
+        \begin{itemize}
+            \item \textbf{Ventajas:} Fácil interpretación, no requiere normalización de datos, manejo natural de características categóricas.
+            \item \textbf{Desventajas:} Propenso al sobreajuste, especialmente en conjuntos de datos pequeños y ruidosos.
+        \end{itemize}
+\end{enumerate}
+
+\subsubsection{Bosques Aleatorios}
+
+\begin{enumerate}
+    \item \textbf{Definición:}
+        Un bosque aleatorio es una colección de \(B\) árboles de decisión \(T_b(x)\), donde cada árbol se entrena en un subconjunto aleatorio de los datos de entrenamiento. La predicción se obtiene promediando (en regresión) o votando (en clasificación) las predicciones individuales de los árboles.
+
+        \[ \textrm{Predicción del Bosque: } \hat{Y}(x) = \frac{1}{B} \sum_{b=1}^{B} T_b(x) \]
+
+    \item \textbf{Proceso de Construcción:}
+        Cada árbol en el bosque se construye utilizando bagging, que consiste en seleccionar aleatoriamente un subconjunto de las instancias de entrenamiento con reemplazo. Además, en cada división de nodo, se selecciona un subconjunto aleatorio de características.
+
+        \[ \textrm{Bagging: } D_b = \{(x_i, y_i)\} \textrm{ con } i \sim \textrm{Uniforme}(1, N) \]
+
+        \[ \textrm{Características Aleatorias: } f_j \textrm{ con } j \sim \textrm{Uniforme}(1, P) \]
+
+    \item \textbf{Importancia de Características:}
+        La importancia de la característica \(f_j\) se mide mediante la disminución promedio en la ganancia de impureza o la reducción en el error cuadrático medio cuando se utiliza \(f_j\) para dividir los nodos a lo largo de todos los árboles.
+
+        \[ \textrm{Importancia de } f_j = \frac{1}{B} \sum_{b=1}^{B} \sum_{j \textrm{ en } T_b} \textrm{Importancia de } f_j \textrm{ en } T_b \]
+
+\end{enumerate}    
+    
+\newpage
+%__________________________________
+\subsection{Redes Neuronales}
+%__________________________________
+    % Contenido sobre redes neuronales
+\newpage
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Aprendizaje No Supervisado}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+%__________________________________
+\subsection{K-Means y Clustering Jerárquico}
+%__________________________________
+    % Contenido sobre K-Means y clustering jerárquico
+\newpage
+%__________________________________
+\subsection{Análisis de Componentes Principales (PCA)}
+%__________________________________
+    % Contenido sobre PCA
+\newpage
+%__________________________________
+\subsection{Algoritmos de Asociación}
+%__________________________________
+    % Contenido sobre algoritmos de asociación
+\newpage
+%__________________________________
+\subsection{Mapas Autoorganizados (SOM)}
+%__________________________________
+    % Contenido sobre SOM
+\newpage
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+%__________________________________
+\section{Evaluación de Modelos y Métricas}
+%__________________________________
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\newpage
+%__________________________________
+\subsection{Precisión, Sensibilidad, Especificidad}
+%__________________________________
+    % Contenido sobre métricas de evaluación
+\newpage
+%__________________________________
+\subsection{Curvas ROC y Área Bajo la Curva (AUC-ROC)}
+%__________________________________
+    % Contenido sobre ROC y AUC-ROC
+\newpage
+%__________________________________
+\subsection{Matriz de Confusión}
+%__________________________________
+    % Contenido sobre matriz de confusión
+\newpage
+%__________________________________
+\subsection{Validación Cruzada}
+%__________________________________
+    % Contenido sobre validación cruzada
+\newpage
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Preprocesamiento de Datos}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+%__________________________________
+\subsection{Normalización y Estandarización}
+%__________________________________
+    % Contenido sobre normalización y estandarización
+\newpage
+%__________________________________
+\subsection{Manejo de Datos Faltantes}
+%__________________________________
+    % Contenido sobre manejo de datos faltantes
+\newpage
+%__________________________________
+\subsection{Ingeniería de Características}
+%__________________________________
+    % Contenido sobre ingeniería de características
+\newpage
+%__________________________________
+\subsection{Selección de Características}
+%__________________________________
+    % Contenido sobre selección de características
+\newpage
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Optimización de Modelos}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+%__________________________________
+\subsection{Hiperparámetros y Búsqueda en Cuadrícula}
+%__________________________________
+    % Contenido sobre hiperparámetros y búsqueda en cuadrícula
+\newpage
+%__________________________________
+\subsection{Optimización Bayesiana}
+%__________________________________
+    % Contenido sobre optimización bayesiana
+\newpage
+%__________________________________
+\subsection{Regularización}
+%__________________________________
+    % Contenido sobre regularización
+\newpage
+%__________________________________
+\subsection{Redes Neuronales Convolucionales (CNN) y Recurrentes (RNN)}
+%__________________________________
+    % Contenido sobre CNN y RNN
+\newpage
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Aprendizaje por Refuerzo}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+%__________________________________
+\subsection{Q-Learning}
+%__________________________________
+    % Contenido sobre Q-Learning
+\newpage
+%__________________________________
+\subsection{Algoritmos de Políticas}
+%__________________________________
+    % Contenido sobre algoritmos de políticas
+\newpage
+%__________________________________
+\subsection{Exploración y Explotación}
+%__________________________________
+    % Contenido sobre exploración y explotación
+\newpage
+%__________________________________
+\subsection{Funciones de Valor}
+%__________________________________
+    % Contenido sobre funciones de valor
+\newpage
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Ética en el Machine Learning}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+%__________________________________
+\subsection{Sesgo y Equidad}
+%__________________________________
+    % Contenido sobre sesgo y equidad
+\newpage
+%__________________________________
+\subsection{Transparencia y Explicabilidad}
+%__________________________________
+    % Contenido sobre transparencia y explicabilidad
+\newpage
+%__________________________________
+\subsection{Privacidad y Seguridad}
+%__________________________________
+    % Contenido sobre privacidad y seguridad
+\newpage
+%__________________________________
+\subsection{Responsabilidad en el Despliegue de Modelos}
+%__________________________________
+    % Contenido sobre responsabilidad en el despliegue de modelos
+\newpage
+
+% <<==>>  <<==>>  <<==>>  <<==>>  <<==>> 
+\chapter{Guía de Estudio de Deep Learning}
+% <<==>>  <<==>>  <<==>>  <<==>>  <<==>> 
+
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Redes Neuronales Profundas}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+
+%__________________________________
+\subsection{Perceptrones Multicapa (MLP)}
+%__________________________________
+    % Contenido sobre MLP
+\newpage
+%__________________________________
+\subsection{Funciones de Activación: ReLU, Sigmoid, Tanh}
+%__________________________________
+    % Contenido sobre funciones de activación
+\newpage
+%__________________________________
+\subsection{Backpropagation}
+%__________________________________
+    % Contenido sobre backpropagation
+\newpage
+%__________________________________
+\subsection{Regularización en Redes Neuronales}
+%__________________________________
+    % Contenido sobre regularización en redes neuronales
+\newpage
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Redes Neuronales Convolucionales (CNN)}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+%__________________________________
+\subsection{Convolutional Layers}
+%__________________________________
+    % Contenido sobre convolutional layers
+\newpage
+%__________________________________
+\subsection{Pooling Layers}
+%__________________________________
+    % Contenido sobre pooling layers
+\newpage
+%__________________________________
+\subsection{Transfer Learning con CNN}
+%__________________________________
+    % Contenido sobre transfer learning con CNN
+\newpage
+%__________________________________
+\subsection{Aplicaciones en Visión por Computadora}
+%__________________________________
+    % Contenido sobre aplicaciones en visión por computadora
+\newpage
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Redes Neuronales Recurrentes (RNN)}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+%__________________________________
+\subsection{Arquitecturas de RNN}
+%__________________________________
+    % Contenido sobre arquitecturas de RNN
+\newpage
+%__________________________________
+\subsection{Long Short-Term Memory (LSTM)}
+%__________________________________
+    % Contenido sobre LSTM
+\newpage
+%__________________________________
+\subsection{Gated Recurrent Unit (GRU)}
+    % Contenido sobre GRU
+%__________________________________
+\newpage
+%__________________________________
+\subsection{Aplicaciones en Procesamiento de Lenguaje Natural}
+%__________________________________
+    % Contenido sobre aplicaciones en procesamiento de lenguaje natural
+\newpage
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Redes Generativas}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+%__________________________________
+\subsection{Generative Adversarial Networks (GAN)}
+%__________________________________
+    % Contenido sobre GAN
+\newpage
+%__________________________________
+\subsection{Variational Autoencoders (VAE)}
+%__________________________________
+    % Contenido sobre VAE
+\newpage
+%__________________________________
+\subsection{Aplicaciones en Generación de Imágenes y Texto}
+%__________________________________
+    % Contenido sobre aplicaciones en generación de imágenes y texto
+\newpage
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Transferencia de Aprendizaje en Deep Learning}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+%__________________________________
+\subsection{Fine-Tuning de Modelos Preentrenados}
+%__________________________________
+    % Contenido sobre fine-tuning
+\newpage
+%__________________________________
+\subsection{Domain Adaptation}
+%__________________________________
+    % Contenido sobre domain adaptation
+\newpage
+%__________________________________
+\subsection{Modelos Preentrenados como BERT, GPT}
+%__________________________________
+    % Contenido sobre modelos preentrenados
+\newpage
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Técnicas Avanzadas}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+
+%__________________________________
+\subsection{Normalización por Lotes (Batch Normalization)}
+%__________________________________
+    % Contenido sobre batch normalization
+\newpage
+%__________________________________
+\subsection{Dropout}
+%__________________________________
+    % Contenido sobre dropout
+\newpage
+%__________________________________
+\subsection{Redes Siamesas}
+%__________________________________
+    % Contenido sobre redes siamesas
+\newpage
+%__________________________________
+\subsection{Redes Neuronales Adversarias Condicionales (cGAN)}
+%__________________________________
+    % Contenido sobre cGAN
+\newpage
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+\section{Herramientas y Frameworks}
+% ===_-_===_-_===_-_===_-_===_-_===_-_===
+
+
+%__________________________________
+\subsection{TensorFlow}
+%__________________________________
+    % Contenido sobre TensorFlow
+\newpage
+%__________________________________
+\subsection{PyTorch}
+%__________________________________
+    % Contenido sobre PyTorch
+\newpage
+%__________________________________
+\subsection{Keras}
+%__________________________________
+    % Contenido sobre Keras
+\newpage
+%__________________________________
+\subsection{TensorBoard para Visualización}
+%__________________________________
+    % Contenido sobre TensorBoard
+\newpage
+
+
+\end{document}

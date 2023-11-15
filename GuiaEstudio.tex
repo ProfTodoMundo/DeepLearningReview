@@ -1,0 +1,294 @@
+\documentclass{article}
+
+\usepackage[margin=0.75in]{geometry}  % Ajustar márgenes
+\usepackage{hyperref}
+
+
+\title{Gu\'ia de estudio en Machine Learning y  Deep Learning}
+\author{Carlos E Mart\'inez-Rodr\'iguez}
+\date{14  de noviembre de 2023}  % Eliminar la fecha automática
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Guia de estudio de Machine Learning}
+
+\begin{itemize}
+    \item Algoritmos de aprendizaje supervisado:
+        \begin{itemize}
+            \item Regresión lineal y logística
+            \item Máquinas de soporte vectorial (SVM)
+            \item Árboles de decisión y bosques aleatorios
+            \item Redes neuronales
+        \end{itemize}
+    \item Aprendizaje no supervisado:
+        \begin{itemize}
+            \item K-Means y clustering jerárquico
+            \item Análisis de componentes principales (PCA)
+            \item Algoritmos de asociación
+            \item Mapas autoorganizados (SOM)
+        \end{itemize}
+    \item Evaluación de modelos y métricas:
+        \begin{itemize}
+            \item Precisión, sensibilidad, especificidad
+            \item Curvas ROC y área bajo la curva (AUC-ROC)
+            \item Matriz de confusión
+            \item Validación cruzada
+        \end{itemize}
+    \item Preprocesamiento de datos:
+        \begin{itemize}
+            \item Normalización y estandarización
+            \item Manejo de datos faltantes
+            \item Ingeniería de características
+            \item Selección de características
+        \end{itemize}
+    \item Optimización de modelos:
+        \begin{itemize}
+            \item Hiperparámetros y búsqueda en cuadrícula
+            \item Optimización bayesiana
+            \item Regularización
+            \item Redes neuronales convolucionales (CNN) y recurrentes (RNN)
+        \end{itemize}
+    \item Aprendizaje por refuerzo:
+        \begin{itemize}
+            \item Q-Learning
+            \item Algoritmos de políticas
+            \item Exploración y explotación
+            \item Funciones de valor
+        \end{itemize}
+    \item Ética en el machine learning:
+        \begin{itemize}
+            \item Sesgo y equidad
+            \item Transparencia y explicabilidad
+            \item Privacidad y seguridad
+            \item Responsabilidad en el despliegue de modelos
+        \end{itemize}
+\end{itemize}
+
+
+\subsection{SVM}
+
+\begin{enumerate}
+    \item \textbf{Hiperplano:}
+        En un espacio de características $n$-dimensional, un hiperplano es un subespacio de dimensión $n-1$. Para un problema de clasificación binaria, un hiperplano divide el espacio en dos regiones, asignando puntos a una clase u otra.
+
+    \item \textbf{Margen:}
+        El margen es la distancia perpendicular desde el hiperplano a los puntos más cercanos de cada clase. SVM busca el hiperplano que maximiza este margen, lo que se traduce en una mayor robustez y generalización del modelo.
+
+    \item \textbf{Vectores de Soporte:}
+        Estos son los puntos de datos más cercanos al hiperplano y tienen un papel crucial en la definición del margen. Cambiar estos vectores de soporte afecta directamente al modelo, y son los únicos puntos que importan para la determinación del hiperplano.
+
+    \item \textbf{Función de Decisión:}
+        La función de decisión de SVM es el hiperplano que se utiliza para clasificar nuevos puntos de datos. Dada una entrada, la función de decisión evalúa de qué lado del hiperplano cae el punto y asigna la etiqueta correspondiente.
+
+    \item \textbf{Kernel Trick:}
+        SVM puede manejar eficientemente datos no lineales mediante el uso de funciones de kernel. Estas funciones transforman el espacio de características original en uno de mayor dimensión, permitiendo así que los datos sean separados de manera no lineal en el espacio transformado.
+
+    \item \textbf{Parámetros de SVM:}
+        \begin{itemize}
+            \item \textbf{C (Parámetro de Regularización):} Controla el equilibrio entre tener un margen más amplio y clasificar correctamente los puntos de entrenamiento.
+            \item \textbf{Kernel:} Define la función de kernel utilizada (lineal, polinómica, radial, etc.).
+            \item \textbf{Gamma (para kernels no lineales):} Controla el alcance de influencia de un solo punto de datos en la decisión.
+        \end{itemize}
+
+    \item \textbf{Proceso de Entrenamiento:}
+        Dado un conjunto de datos de entrenamiento etiquetado, SVM busca el hiperplano óptimo que maximiza el margen entre las clases. Esto se realiza a través de técnicas de optimización cuadrática.
+
+    \item \textbf{SVM para Regresión:}
+        Además de la clasificación, SVM se puede utilizar para problemas de regresión. En este caso, el objetivo es ajustar un hiperplano de modo que contenga la mayor cantidad posible de puntos dentro de un margen predefinido.
+
+    \item \textbf{Ventajas y Desventajas:}
+        \begin{itemize}
+            \item \textbf{Ventajas:} Efectivo en espacios de alta dimensión, eficaz en conjuntos de datos pequeños y versátil gracias al kernel trick.
+            \item \textbf{Desventajas:} Sensible a la escala de las características, puede ser computacionalmente costoso para grandes conjuntos de datos y requiere la elección cuidadosa de parámetros.
+        \end{itemize}
+
+    \item \textbf{Aplicaciones:}
+        SVM se utiliza en una variedad de campos, como reconocimiento de escritura, clasificación de imágenes, diagnóstico médico, entre otros.
+
+\end{enumerate}
+
+
+\subsubsection{Elementos Matemáticos de las SVM}
+
+\begin{enumerate}
+    \item \textbf{Hiperplano:}
+        Un hiperplano se define como \(w \cdot x - b = 0\), donde \(w\) es el vector de pesos, \(x\) es el vector de entrada, y \(b\) es el sesgo.
+
+    \item \textbf{Margen:}
+        El margen \(M\) entre un hiperplano y un punto \(x_i\) se define como \(M = \frac{1}{\|w\|} |w \cdot x_i - b|\).
+
+    \item \textbf{Vectores de Soporte:}
+        Los vectores de soporte son los puntos \(x_i\) que cumplen la condición \(|w \cdot x_i - b| = 1/\|w\|\).
+
+    \item \textbf{Función de Decisión:}
+        La función de decisión es \(f(x) = w \cdot x - b\). Si \(f(x) > 0\), el punto \(x\) se clasifica como clase 1; si \(f(x) < 0\), se clasifica como clase -1.
+
+    \item \textbf{Kernel Trick:}
+        La función de kernel \(K(x, x')\) representa el producto escalar en un espacio de características de mayor dimensión. Ejemplos comunes incluyen el kernel lineal (\(K(x, x') = x \cdot x'\)), kernel polinómico (\(K(x, x') = (x \cdot x' + 1)^d\)), y kernel radial (\(K(x, x') = \exp(-\gamma \|x - x'\|^2)\)).
+
+    \item \textbf{Parámetros de SVM:}
+        \begin{itemize}
+            \item \(C\) (Parámetro de Regularización): Se introduce en la función de pérdida para controlar el equilibrio entre tener un margen más amplio y clasificar correctamente los puntos de entrenamiento.
+            \item \(w\) (Vector de Pesos): Aprende durante el entrenamiento y define la orientación del hiperplano.
+            \item \(b\) (Sesgo): Parámetro de ajuste del hiperplano.
+            \item \(\gamma\) (para kernels no lineales): Controla el alcance de influencia de un solo punto de datos en la decisión.
+        \end{itemize}
+
+    \item \textbf{Proceso de Entrenamiento:}
+        El proceso de entrenamiento implica la minimización de la función de pérdida, que incluye el término de regularización \(C\|w\|^2\) y la función de pérdida hinge.
+
+    \item \textbf{SVM para Regresión:}
+        Para regresión, el objetivo es ajustar un hiperplano de modo que \(|w \cdot x_i - b| \leq \epsilon\) para puntos de entrenamiento \(x_i\).
+
+    \item \textbf{Ventajas y Desventajas:}
+        \begin{itemize}
+            \item Ventajas: Efectivo en espacios de alta dimensión, eficaz en conjuntos de datos pequeños y versátil gracias al kernel trick.
+            \item Desventajas: Sensible a la escala de las características, puede ser computacionalmente costoso para grandes conjuntos de datos y requiere la elección cuidadosa de parámetros.
+        \end{itemize}
+
+    \item \textbf{Aplicaciones:}
+        SVM se aplica en una variedad de problemas, como reconocimiento de escritura, clasificación de imágenes y diagnóstico médico.
+\end{enumerate}
+
+
+\subsection{Árboles de Decisión}
+
+\begin{enumerate}
+    \item \textbf{Definición:}
+        Un árbol de decisión es una estructura jerárquica en forma de árbol que se utiliza para representar decisiones y sus posibles consecuencias. Cada nodo interno del árbol representa una prueba en una característica, cada rama representa un resultado posible de la prueba, y cada hoja representa un resultado final o una decisión.
+
+    \item \textbf{Proceso de Construcción:}
+        El árbol se construye de manera recursiva. En cada paso, se elige la mejor característica para dividir el conjunto de datos en función de algún criterio, como la ganancia de información o la impureza de Gini. Este proceso se repite hasta que se alcanza algún criterio de parada, como la profundidad máxima del árbol o un número mínimo de puntos en una hoja.
+
+    \item \textbf{Criterios de División:}
+        Los criterios comunes para la división incluyen:
+        \begin{itemize}
+            \item \textbf{Ganancia de Información:} Mide cuánta información nueva proporciona una característica.
+            \item \textbf{Impureza de Gini:} Mide la probabilidad de clasificar incorrectamente un elemento si es etiquetado aleatoriamente.
+        \end{itemize}
+
+    \item \textbf{Ventajas y Desventajas:}
+        \begin{itemize}
+            \item \textbf{Ventajas:} Fácil interpretación, no requiere normalización de datos, manejo natural de características categóricas.
+            \item \textbf{Desventajas:} Propenso al sobreajuste, especialmente en conjuntos de datos pequeños y ruidosos.
+        \end{itemize}
+\end{enumerate}
+
+\subsubsection{Bosques Aleatorios}
+
+\begin{enumerate}
+    \item \textbf{Definición:}
+        Un bosque aleatorio es una colección de árboles de decisión entrenados en subconjuntos aleatorios del conjunto de datos y utilizando técnicas de agregación para mejorar la precisión y controlar el sobreajuste.
+
+    \item \textbf{Proceso de Construcción:}
+        Se crean múltiples árboles de decisión utilizando diferentes subconjuntos del conjunto de datos de entrenamiento y características aleatorias en cada división. Luego, las predicciones de cada árbol se promedian (en regresión) o se votan (en clasificación) para obtener la predicción final del bosque.
+
+    \item \textbf{Técnica de Bagging:}
+        La construcción de árboles en subconjuntos aleatorios del conjunto de datos se conoce como bagging (bootstrap aggregating). Esto ayuda a reducir la varianza y evitar el sobreajuste al promediar los errores.
+
+    \item \textbf{Importancia de Características:}
+        Los bosques aleatorios proporcionan una medida de la importancia de las características, que indica cuánto contribuye cada característica a la precisión del modelo. Esto es útil para la selección de características.
+
+    \item \textbf{Ventajas y Desventajas:}
+        \begin{itemize}
+            \item \textbf{Ventajas:} Reducción del sobreajuste en comparación con un solo árbol, manejo automático del sobreajuste, buen rendimiento en conjuntos de datos grandes y complejos.
+            \item \textbf{Desventajas:} Menos interpretables que los árboles de decisión individuales.
+        \end{itemize}
+\end{enumerate}
+
+\subsubsection{Elementos Matemáticos de Árboles de Decisión}
+
+\begin{enumerate}
+    \item \textbf{Definición:}
+        Un árbol de decisión se representa como una función \(T(x)\) que asigna una instancia \(x\) a una hoja del árbol. Cada nodo interno \(j\) realiza una prueba en una característica \(f_j(x)\), y cada rama representa una condición de prueba. La estructura del árbol se define por las funciones indicadoras \(I(x, j)\) que indican si la instancia \(x\) llega al nodo \(j\).
+        
+        \[ T(x) = \sum_{j=1}^{J} I(x, j) \cdot C_j \]
+
+        Donde \(J\) es el número de nodos, \(C_j\) es el valor en la hoja correspondiente al nodo \(j\), y \(I(x, j)\) es 1 si la instancia \(x\) llega al nodo \(j\) y 0 de lo contrario.
+
+    \item \textbf{Proceso de Construcción:}
+        La construcción del árbol implica seleccionar la mejor característica \(f_j\) y el umbral \(t_j\) en cada nodo \(j\) para maximizar la ganancia de información o reducir la impureza de Gini.
+        
+        \[ \textrm{Ganancia de Información: } Gain(D, j, t) = H(D) - \frac{N_L}{N} H(D_L) - \frac{N_R}{N} H(D_R) \]
+
+        \[ \textrm{Impureza de Gini: } Gini(D) = 1 - \sum_{k=1}^{K} \left(\frac{|C_k|}{|D|}\right)^2 \]
+
+        Donde \(D\) es el conjunto de datos en el nodo, \(D_L\) y \(D_R\) son los conjuntos de datos en los nodos izquierdo y derecho después de la división, \(N\) es el número total de instancias en \(D\), y \(N_L\) y \(N_R\) son los números de instancias en los nodos izquierdo y derecho.
+
+    \item \textbf{Ventajas y Desventajas:}
+        \begin{itemize}
+            \item \textbf{Ventajas:} Fácil interpretación, no requiere normalización de datos, manejo natural de características categóricas.
+            \item \textbf{Desventajas:} Propenso al sobreajuste, especialmente en conjuntos de datos pequeños y ruidosos.
+        \end{itemize}
+\end{enumerate}
+
+\subsubsection{Bosques Aleatorios}
+
+\begin{enumerate}
+    \item \textbf{Definición:}
+        Un bosque aleatorio es una colección de \(B\) árboles de decisión \(T_b(x)\), donde cada árbol se entrena en un subconjunto aleatorio de los datos de entrenamiento. La predicción se obtiene promediando (en regresión) o votando (en clasificación) las predicciones individuales de los árboles.
+
+        \[ \textrm{Predicción del Bosque: } \hat{Y}(x) = \frac{1}{B} \sum_{b=1}^{B} T_b(x) \]
+
+    \item \textbf{Proceso de Construcción:}
+        Cada árbol en el bosque se construye utilizando bagging, que consiste en seleccionar aleatoriamente un subconjunto de las instancias de entrenamiento con reemplazo. Además, en cada división de nodo, se selecciona un subconjunto aleatorio de características.
+
+        \[ \textrm{Bagging: } D_b = \{(x_i, y_i)\} \textrm{ con } i \sim \textrm{Uniforme}(1, N) \]
+
+        \[ \textrm{Características Aleatorias: } f_j \textrm{ con } j \sim \textrm{Uniforme}(1, P) \]
+
+    \item \textbf{Importancia de Características:}
+        La importancia de la característica \(f_j\) se mide mediante la disminución promedio en la ganancia de impureza o la reducción en el error cuadrático medio cuando se utiliza \(f_j\) para dividir los nodos a lo largo de todos los árboles.
+
+        \[ \textrm{Importancia de } f_j = \frac{1}{B} \sum_{b=1}^{B} \sum_{j \textrm{ en } T_b} \textrm{Importancia de } f_j \textrm{ en } T_b \]
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+\section{Referencias}
+\begin{itemize}
+    \item Libros:
+        \begin{enumerate}
+            \item "The Hundred-Page Machine Learning Book" por Andriy Burkov
+            \item "Machine Learning: A Probabilistic Perspective" por Kevin P. Murphy
+            \item "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow" por Aurélien Géron
+            \item "Pattern Recognition and Machine Learning" por Christopher M. Bishop
+            \item "Deep Learning" por Ian Goodfellow, Yoshua Bengio y Aaron Courville
+        \end{enumerate}
+    \item Cursos:
+        \begin{enumerate}
+            \item "Machine Learning" por Andrew Ng en Coursera
+            \item "Applied Data Science with Python" por la Universidad de Míchigan en Coursera
+            \item "Deep Learning Specialization" por Andrew Ng en Coursera
+            \item "Machine Learning Crash Course" por Google
+            \item "Introduction to Machine Learning" por la Universidad de Columbia en edX
+        \end{enumerate}
+    \item Sitios web:
+        \begin{enumerate}
+            \item Kaggle
+            \item GitHub
+            \item Towards Data Science
+            \item Machine Learning Mastery
+            \item Google AI
+        \end{enumerate}
+\end{itemize}
+
+
+Fuentes:
+\begin{enumerate}
+    \item Machine Learning citation style [Update October 2023] - Paperpile
+    \item ICML2021 Template - Overleaf, Online LaTeX Editor
+    \item Machine Learning | Submission guidelines - Springer
+    \item Journal of Machine Learning Research
+\end{enumerate}
+
+\end{document}

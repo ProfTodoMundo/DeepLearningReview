@@ -1,0 +1,77 @@
+\contentsline {chapter}{\numberline {1}Ciencia de Datos y Machine Learning}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}Algoritmos de Aprendizaje Supervisado}{5}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Regresi\IeC {\'o}n Lineal y Log\IeC {\'\i }stica}{5}{subsection.1.1.1}
+\contentsline {subsubsection}{Regresi\IeC {\'o}n Lineal}{5}{section*.2}
+\contentsline {subsubsection}{Regresi\IeC {\'o}n Log\IeC {\'\i }stica}{5}{section*.3}
+\contentsline {subsubsection}{Implementacion}{6}{section*.4}
+\contentsline {subsection}{\numberline {1.1.2}M\IeC {\'a}quinas de Soporte Vectorial (SVM)}{6}{subsection.1.1.2}
+\contentsline {subsubsection}{Elementos Matem\IeC {\'a}ticos de las SVM}{7}{section*.5}
+\contentsline {subsection}{\numberline {1.1.3}\IeC {\'A}rboles de Decisi\IeC {\'o}n y Bosques Aleatorios}{8}{subsection.1.1.3}
+\contentsline {subsubsection}{Bosques Aleatorios}{8}{section*.6}
+\contentsline {subsubsection}{Elementos Matem\IeC {\'a}ticos de \IeC {\'A}rboles de Decisi\IeC {\'o}n}{9}{section*.7}
+\contentsline {subsubsection}{Bosques Aleatorios}{9}{section*.8}
+\contentsline {subsection}{\numberline {1.1.4}Redes Neuronales}{11}{subsection.1.1.4}
+\contentsline {section}{\numberline {1.2}Aprendizaje No Supervisado}{12}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}K-Means y Clustering Jer\IeC {\'a}rquico}{12}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}An\IeC {\'a}lisis de Componentes Principales (PCA)}{13}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}Algoritmos de Asociaci\IeC {\'o}n}{14}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.4}Mapas Autoorganizados (SOM)}{15}{subsection.1.2.4}
+\contentsline {section}{\numberline {1.3}Evaluaci\IeC {\'o}n de Modelos y M\IeC {\'e}tricas}{16}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Precisi\IeC {\'o}n, Sensibilidad, Especificidad}{17}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Curvas ROC y \IeC {\'A}rea Bajo la Curva (AUC-ROC)}{18}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Matriz de Confusi\IeC {\'o}n}{19}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}Validaci\IeC {\'o}n Cruzada}{20}{subsection.1.3.4}
+\contentsline {section}{\numberline {1.4}Preprocesamiento de Datos}{21}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Normalizaci\IeC {\'o}n y Estandarizaci\IeC {\'o}n}{21}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}Manejo de Datos Faltantes}{22}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {1.4.3}Ingenier\IeC {\'\i }a de Caracter\IeC {\'\i }sticas}{23}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {1.4.4}Selecci\IeC {\'o}n de Caracter\IeC {\'\i }sticas}{24}{subsection.1.4.4}
+\contentsline {section}{\numberline {1.5}Optimizaci\IeC {\'o}n de Modelos}{25}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}Hiperpar\IeC {\'a}metros y B\IeC {\'u}squeda en Cuadr\IeC {\'\i }cula}{25}{subsection.1.5.1}
+\contentsline {subsection}{\numberline {1.5.2}Optimizaci\IeC {\'o}n Bayesiana}{26}{subsection.1.5.2}
+\contentsline {subsection}{\numberline {1.5.3}Regularizaci\IeC {\'o}n}{27}{subsection.1.5.3}
+\contentsline {subsection}{\numberline {1.5.4}Redes Neuronales Convolucionales (CNN) y Recurrentes (RNN)}{28}{subsection.1.5.4}
+\contentsline {section}{\numberline {1.6}Aprendizaje por Refuerzo}{29}{section.1.6}
+\contentsline {subsection}{\numberline {1.6.1}Q-Learning}{29}{subsection.1.6.1}
+\contentsline {subsection}{\numberline {1.6.2}Algoritmos de Pol\IeC {\'\i }ticas}{30}{subsection.1.6.2}
+\contentsline {subsection}{\numberline {1.6.3}Exploraci\IeC {\'o}n y Explotaci\IeC {\'o}n}{31}{subsection.1.6.3}
+\contentsline {subsection}{\numberline {1.6.4}Funciones de Valor}{32}{subsection.1.6.4}
+\contentsline {section}{\numberline {1.7}\IeC {\'E}tica en el Machine Learning}{33}{section.1.7}
+\contentsline {subsection}{\numberline {1.7.1}Sesgo y Equidad}{33}{subsection.1.7.1}
+\contentsline {subsection}{\numberline {1.7.2}Transparencia y Explicabilidad}{34}{subsection.1.7.2}
+\contentsline {subsection}{\numberline {1.7.3}Privacidad y Seguridad}{35}{subsection.1.7.3}
+\contentsline {subsection}{\numberline {1.7.4}Responsabilidad en el Despliegue de Modelos}{36}{subsection.1.7.4}
+\contentsline {chapter}{\numberline {2}Gu\IeC {\'\i }a de Estudio de Deep Learning}{37}{chapter.2}
+\contentsline {section}{\numberline {2.1}Redes Neuronales Profundas}{37}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Perceptrones Multicapa (MLP)}{37}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Funciones de Activaci\IeC {\'o}n: ReLU, Sigmoid, Tanh}{38}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Backpropagation}{39}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}Regularizaci\IeC {\'o}n en Redes Neuronales}{40}{subsection.2.1.4}
+\contentsline {section}{\numberline {2.2}Redes Neuronales Convolucionales (CNN)}{41}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Convolutional Layers}{41}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Pooling Layers}{42}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Transfer Learning con CNN}{43}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Aplicaciones en Visi\IeC {\'o}n por Computadora}{44}{subsection.2.2.4}
+\contentsline {section}{\numberline {2.3}Redes Neuronales Recurrentes (RNN)}{45}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Arquitecturas de RNN}{45}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Long Short-Term Memory (LSTM)}{46}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Gated Recurrent Unit (GRU)}{47}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}Aplicaciones en Procesamiento de Lenguaje Natural}{48}{subsection.2.3.4}
+\contentsline {section}{\numberline {2.4}Redes Generativas}{49}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Generative Adversarial Networks (GAN)}{49}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Variational Autoencoders (VAE)}{50}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}Aplicaciones en Generaci\IeC {\'o}n de Im\IeC {\'a}genes y Texto}{51}{subsection.2.4.3}
+\contentsline {section}{\numberline {2.5}Transferencia de Aprendizaje en Deep Learning}{52}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Fine-Tuning de Modelos Preentrenados}{52}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Domain Adaptation}{53}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}Modelos Preentrenados como BERT, GPT}{54}{subsection.2.5.3}
+\contentsline {section}{\numberline {2.6}T\IeC {\'e}cnicas Avanzadas}{55}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}Normalizaci\IeC {\'o}n por Lotes (Batch Normalization)}{55}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2}Dropout}{56}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.3}Redes Siamesas}{57}{subsection.2.6.3}
+\contentsline {subsection}{\numberline {2.6.4}Redes Neuronales Adversarias Condicionales (cGAN)}{58}{subsection.2.6.4}
+\contentsline {section}{\numberline {2.7}Herramientas y Frameworks}{59}{section.2.7}
+\contentsline {subsection}{\numberline {2.7.1}TensorFlow}{59}{subsection.2.7.1}
+\contentsline {subsection}{\numberline {2.7.2}PyTorch}{60}{subsection.2.7.2}
+\contentsline {subsection}{\numberline {2.7.3}Keras}{61}{subsection.2.7.3}
+\contentsline {subsection}{\numberline {2.7.4}TensorBoard para Visualizaci\IeC {\'o}n}{62}{subsection.2.7.4}

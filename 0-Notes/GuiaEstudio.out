@@ -1,9 +1,114 @@
-\BOOKMARK [1][-]{section.1}{Guia de estudio de Machine Learning}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{SVM}{section.1}% 2
-\BOOKMARK [3][-]{subsubsection.1.1.1}{Elementos Matem\341ticos de las SVM}{subsection.1.1}% 3
-\BOOKMARK [2][-]{subsection.1.2}{\301rboles de Decisi\363n}{section.1}% 4
-\BOOKMARK [3][-]{subsubsection.1.2.1}{Bosques Aleatorios}{subsection.1.2}% 5
-\BOOKMARK [3][-]{subsubsection.1.2.2}{Elementos Matem\341ticos de \301rboles de Decisi\363n}{subsection.1.2}% 6
-\BOOKMARK [3][-]{subsubsection.1.2.3}{Bosques Aleatorios}{subsection.1.2}% 7
-\BOOKMARK [1][-]{section.2}{Guia de estudio de Deep Learning}{}% 8
-\BOOKMARK [1][-]{section.3}{Referencias}{}% 9
+\BOOKMARK [1][-]{section.1}{An\341lisis de Componentes Principales}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Introduction to Principal Components Analysis - Kristin L. Sainani}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Principal component analysis - Herve Abdi and Lynne J. Williams}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Guia de estudio de Machine Learning}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{SVM}{section.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Elementos Matem\341ticos de las SVM}{subsection.2.1}% 6
+\BOOKMARK [2][-]{subsection.2.2}{\301rboles de Decisi\363n}{section.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Bosques Aleatorios}{subsection.2.2}% 8
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Elementos Matem\341ticos de \301rboles de Decisi\363n}{subsection.2.2}% 9
+\BOOKMARK [3][-]{subsubsection.2.2.3}{Bosques Aleatorios}{subsection.2.2}% 10
+\BOOKMARK [1][-]{section.3}{Referencias}{}% 11
+\BOOKMARK [1][-]{section.4}{Bioinformatics: New revision}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{A bayesian framework for combining gene predictions - Pavlovic}{section.4}% 13
+\BOOKMARK [1][-]{section.5}{Random Forest: Explanation in Mathematical Terms}{}% 14
+\BOOKMARK [1][-]{section.6}{Deep Learning: Overview}{}% 15
+\BOOKMARK [1][-]{section.7}{Example of Implementation in R:}{}% 16
+\BOOKMARK [2][-]{subsection.7.1}{Install and Load the Keras Library:}{section.7}% 17
+\BOOKMARK [2][-]{subsection.7.2}{Build a Simple Neural Network:}{section.7}% 18
+\BOOKMARK [2][-]{subsection.7.3}{Compile and Train the Neural Network:}{section.7}% 19
+\BOOKMARK [2][-]{subsection.7.4}{Evaluate the Model:}{section.7}% 20
+\BOOKMARK [1][-]{section.8}{Impurity Measures in Random Forest}{}% 21
+\BOOKMARK [2][-]{subsection.8.1}{Gini Index for Classification}{section.8}% 22
+\BOOKMARK [2][-]{subsection.8.2}{Mean Squared Error for Regression}{section.8}% 23
+\BOOKMARK [1][-]{section.9}{Construcci\363n del \301rbol de Decisi\363n}{}% 24
+\BOOKMARK [2][-]{subsection.9.1}{Teor\355a:}{section.9}% 25
+\BOOKMARK [2][-]{subsection.9.2}{Elementos Matem\341ticos:}{section.9}% 26
+\BOOKMARK [1][-]{section.10}{Reducci\363n de Varianza en Random Forest}{}% 27
+\BOOKMARK [2][-]{subsection.10.1}{Teor\355a:}{section.10}% 28
+\BOOKMARK [3][-]{subsubsection.10.1.1}{Bagging \(Bootstrap Aggregating\):}{subsection.10.1}% 29
+\BOOKMARK [3][-]{subsubsection.10.1.2}{Random Subspace:}{subsection.10.1}% 30
+\BOOKMARK [2][-]{subsection.10.2}{Elementos Matem\341ticos:}{section.10}% 31
+\BOOKMARK [1][-]{section.11}{Votaci\363n y Promedio en Random Forest}{}% 32
+\BOOKMARK [2][-]{subsection.11.1}{Teor\355a:}{section.11}% 33
+\BOOKMARK [3][-]{subsubsection.11.1.1}{Para Problemas de Clasificaci\363n:}{subsection.11.1}% 34
+\BOOKMARK [3][-]{subsubsection.11.1.2}{Para Problemas de Regresi\363n:}{subsection.11.1}% 35
+\BOOKMARK [2][-]{subsection.11.2}{Elementos Matem\341ticos:}{section.11}% 36
+\BOOKMARK [1][-]{section.12}{Resumen}{}% 37
+\BOOKMARK [2][-]{subsection.12.1}{Ejemplo en R: Random Forest}{section.12}% 38
+\BOOKMARK [2][-]{subsection.12.2}{Deep Learning}{section.12}% 39
+\BOOKMARK [1][-]{section.13}{Algoritmos de Aprendizaje Supervisado}{}% 40
+\BOOKMARK [2][-]{subsection.13.1}{Regresi\363n Lineal y Log\355stica}{section.13}% 41
+\BOOKMARK [3][-]{subsubsection.13.1.1}{Regresi\363n Lineal}{subsection.13.1}% 42
+\BOOKMARK [3][-]{subsubsection.13.1.2}{Regresi\363n Log\355stica}{subsection.13.1}% 43
+\BOOKMARK [3][-]{subsubsection.13.1.3}{Implementacion}{subsection.13.1}% 44
+\BOOKMARK [2][-]{subsection.13.2}{M\341quinas de Soporte Vectorial \(SVM\)}{section.13}% 45
+\BOOKMARK [3][-]{subsubsection.13.2.1}{Elementos Matem\341ticos de las SVM}{subsection.13.2}% 46
+\BOOKMARK [2][-]{subsection.13.3}{\301rboles de Decisi\363n y Bosques Aleatorios}{section.13}% 47
+\BOOKMARK [3][-]{subsubsection.13.3.1}{Bosques Aleatorios}{subsection.13.3}% 48
+\BOOKMARK [3][-]{subsubsection.13.3.2}{Elementos Matem\341ticos de \301rboles de Decisi\363n}{subsection.13.3}% 49
+\BOOKMARK [3][-]{subsubsection.13.3.3}{Bosques Aleatorios}{subsection.13.3}% 50
+\BOOKMARK [2][-]{subsection.13.4}{Redes Neuronales}{section.13}% 51
+\BOOKMARK [1][-]{section.14}{Aprendizaje No Supervisado}{}% 52
+\BOOKMARK [2][-]{subsection.14.1}{K-Means y Clustering Jer\341rquico}{section.14}% 53
+\BOOKMARK [2][-]{subsection.14.2}{An\341lisis de Componentes Principales \(PCA\)}{section.14}% 54
+\BOOKMARK [2][-]{subsection.14.3}{Algoritmos de Asociaci\363n}{section.14}% 55
+\BOOKMARK [2][-]{subsection.14.4}{Mapas Autoorganizados \(SOM\)}{section.14}% 56
+\BOOKMARK [1][-]{section.15}{Evaluaci\363n de Modelos y M\351tricas}{}% 57
+\BOOKMARK [2][-]{subsection.15.1}{Precisi\363n, Sensibilidad, Especificidad}{section.15}% 58
+\BOOKMARK [2][-]{subsection.15.2}{Curvas ROC y \301rea Bajo la Curva \(AUC-ROC\)}{section.15}% 59
+\BOOKMARK [2][-]{subsection.15.3}{Matriz de Confusi\363n}{section.15}% 60
+\BOOKMARK [2][-]{subsection.15.4}{Validaci\363n Cruzada}{section.15}% 61
+\BOOKMARK [1][-]{section.16}{Preprocesamiento de Datos}{}% 62
+\BOOKMARK [2][-]{subsection.16.1}{Normalizaci\363n y Estandarizaci\363n}{section.16}% 63
+\BOOKMARK [2][-]{subsection.16.2}{Manejo de Datos Faltantes}{section.16}% 64
+\BOOKMARK [2][-]{subsection.16.3}{Ingenier\355a de Caracter\355sticas}{section.16}% 65
+\BOOKMARK [2][-]{subsection.16.4}{Selecci\363n de Caracter\355sticas}{section.16}% 66
+\BOOKMARK [1][-]{section.17}{Optimizaci\363n de Modelos}{}% 67
+\BOOKMARK [2][-]{subsection.17.1}{Hiperpar\341metros y B\372squeda en Cuadr\355cula}{section.17}% 68
+\BOOKMARK [2][-]{subsection.17.2}{Optimizaci\363n Bayesiana}{section.17}% 69
+\BOOKMARK [2][-]{subsection.17.3}{Regularizaci\363n}{section.17}% 70
+\BOOKMARK [2][-]{subsection.17.4}{Redes Neuronales Convolucionales \(CNN\) y Recurrentes \(RNN\)}{section.17}% 71
+\BOOKMARK [1][-]{section.18}{Aprendizaje por Refuerzo}{}% 72
+\BOOKMARK [2][-]{subsection.18.1}{Q-Learning}{section.18}% 73
+\BOOKMARK [2][-]{subsection.18.2}{Algoritmos de Pol\355ticas}{section.18}% 74
+\BOOKMARK [2][-]{subsection.18.3}{Exploraci\363n y Explotaci\363n}{section.18}% 75
+\BOOKMARK [2][-]{subsection.18.4}{Funciones de Valor}{section.18}% 76
+\BOOKMARK [1][-]{section.19}{\311tica en el Machine Learning}{}% 77
+\BOOKMARK [2][-]{subsection.19.1}{Sesgo y Equidad}{section.19}% 78
+\BOOKMARK [2][-]{subsection.19.2}{Transparencia y Explicabilidad}{section.19}% 79
+\BOOKMARK [2][-]{subsection.19.3}{Privacidad y Seguridad}{section.19}% 80
+\BOOKMARK [2][-]{subsection.19.4}{Responsabilidad en el Despliegue de Modelos}{section.19}% 81
+\BOOKMARK [1][-]{section.20}{Redes Neuronales Profundas}{}% 82
+\BOOKMARK [2][-]{subsection.20.1}{Perceptrones Multicapa \(MLP\)}{section.20}% 83
+\BOOKMARK [2][-]{subsection.20.2}{Funciones de Activaci\363n: ReLU, Sigmoid, Tanh}{section.20}% 84
+\BOOKMARK [2][-]{subsection.20.3}{Backpropagation}{section.20}% 85
+\BOOKMARK [2][-]{subsection.20.4}{Regularizaci\363n en Redes Neuronales}{section.20}% 86
+\BOOKMARK [1][-]{section.21}{Redes Neuronales Convolucionales \(CNN\)}{}% 87
+\BOOKMARK [2][-]{subsection.21.1}{Convolutional Layers}{section.21}% 88
+\BOOKMARK [2][-]{subsection.21.2}{Pooling Layers}{section.21}% 89
+\BOOKMARK [2][-]{subsection.21.3}{Transfer Learning con CNN}{section.21}% 90
+\BOOKMARK [2][-]{subsection.21.4}{Aplicaciones en Visi\363n por Computadora}{section.21}% 91
+\BOOKMARK [1][-]{section.22}{Redes Neuronales Recurrentes \(RNN\)}{}% 92
+\BOOKMARK [2][-]{subsection.22.1}{Arquitecturas de RNN}{section.22}% 93
+\BOOKMARK [2][-]{subsection.22.2}{Long Short-Term Memory \(LSTM\)}{section.22}% 94
+\BOOKMARK [2][-]{subsection.22.3}{Gated Recurrent Unit \(GRU\)}{section.22}% 95
+\BOOKMARK [2][-]{subsection.22.4}{Aplicaciones en Procesamiento de Lenguaje Natural}{section.22}% 96
+\BOOKMARK [1][-]{section.23}{Redes Generativas}{}% 97
+\BOOKMARK [2][-]{subsection.23.1}{Generative Adversarial Networks \(GAN\)}{section.23}% 98
+\BOOKMARK [2][-]{subsection.23.2}{Variational Autoencoders \(VAE\)}{section.23}% 99
+\BOOKMARK [2][-]{subsection.23.3}{Aplicaciones en Generaci\363n de Im\341genes y Texto}{section.23}% 100
+\BOOKMARK [1][-]{section.24}{Transferencia de Aprendizaje en Deep Learning}{}% 101
+\BOOKMARK [2][-]{subsection.24.1}{Fine-Tuning de Modelos Preentrenados}{section.24}% 102
+\BOOKMARK [2][-]{subsection.24.2}{Domain Adaptation}{section.24}% 103
+\BOOKMARK [2][-]{subsection.24.3}{Modelos Preentrenados como BERT, GPT}{section.24}% 104
+\BOOKMARK [1][-]{section.25}{T\351cnicas Avanzadas}{}% 105
+\BOOKMARK [2][-]{subsection.25.1}{Normalizaci\363n por Lotes \(Batch Normalization\)}{section.25}% 106
+\BOOKMARK [2][-]{subsection.25.2}{Dropout}{section.25}% 107
+\BOOKMARK [2][-]{subsection.25.3}{Redes Siamesas}{section.25}% 108
+\BOOKMARK [2][-]{subsection.25.4}{Redes Neuronales Adversarias Condicionales \(cGAN\)}{section.25}% 109
+\BOOKMARK [1][-]{section.26}{Herramientas y Frameworks}{}% 110
+\BOOKMARK [2][-]{subsection.26.1}{TensorFlow}{section.26}% 111
+\BOOKMARK [2][-]{subsection.26.2}{PyTorch}{section.26}% 112
+\BOOKMARK [2][-]{subsection.26.3}{Keras}{section.26}% 113
+\BOOKMARK [2][-]{subsection.26.4}{TensorBoard para Visualizaci\363n}{section.26}% 114

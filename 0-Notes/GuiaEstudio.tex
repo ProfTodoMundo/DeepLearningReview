@@ -24,6 +24,7 @@
 \newtheorem{Sol}{Soluci\'on}[section]
 \newtheorem{Prop}{Proposici\'on}[section]
 \newtheorem{Coro}{Corolario}[section]
+\newtheorem{Quest}{Pregunta}[section]
 
 \title{Gu\'ia de estudio en Machine Learning y  Deep Learning}
 \author{Carlos E Mart\'inez-Rodr\'iguez}
@@ -53,6 +54,83 @@ Herve  Abdi  and Lynne J. Williams}
 
 
 PCA analyzes a data table representing observations described by several dependent vari- ables, which are, in general, inter-correlated. Its goal is to extract the important information from the data table and to express this information as a set of new orthogonal variables called principal components. PCA also represents the pattern of similarity of the observations and the variables by displaying them as points in maps
+
+\subsection{Approximate Statistical Test for comparing Supervised Classification Learning Algortihms - Dietterich Thomas}
+
+El objetivo  de esta investigaci\'on es encontrar el mejor clasificador o el mejor algoritmo de aprendizaje para ser aplicado en ese dominio. Un objetivo principal en ML es encontrar algoritmos que trabajen bien en un amplio rango de aplicaciones.
+
+\begin{Note}
+Un clasificador es una funci\'on que dada un ejemplo de entrada,  a ese ejemplo se le asigne una de las $K$ clases.
+\end{Note}
+
+
+\begin{Note}
+Un algoritmo de aprendizaje es una funci\'on  que dado un conjunto de ejemplos y sus clases, construya un clasificador.
+\end{Note}
+
+\begin{Note}
+En un principio, el objetivo es encontrar el mejor clasificador y estimar su precisi\'on en futuros ejemplos.  En algunas aplicaciones se seleccionar\'a el mejor algoritmo de aprendizaje m\'as que el mejor clasificador.
+\end{Note}
+
+\includegraphics[scale=.5]{TaxonomicalQuestion.pdf} 
+
+El siguiente nivel distingue entre estimar la precisi\'on y elegir clasificadores o algoritmos. El nivel m\'as bajo est\'a relacionado con la cantidad de datos disponibles, si se tiene una gran cantidad de datos, entonces se pueden fijar un conjunto de ellos para ser considerados como datos de prueba para evaluar los clasificadores. En muchos de los casos, la cantidad de datos es limitada y se requeire utilizar todos como datos de entrada a los algoritmos de aprendizaje, esto quiere decir que se requiere utilizar algunas t\'ecnicas de remuestreo para realizar an\'alisis estad\'isticos.
+
+\begin{Note}\textbf{Nueve Preguntas}\\
+Se supone que todos los puntos de datos se obtienen de manrea independiente de una distribuci\'on de probabilidad fija definida por el problema en particular.
+\begin{Quest}
+Sup\'ongase que se tiene una muestra de datos grande y un clasificador $C$. El clasificador pudo haber sido construido utilizando parte de los datos, pero a\'un existen datos para conformar un conjunto de datos de prueba. Por tanto se puede medir la precisi\'on de $C$ en el conjunto de datos de prueba y construir un intervalo de confianza binomial. El clasificador pudo haber sido generado por cualquier m\'etodo y no necesariamente por un algoritmo de aprendizaje.
+\end{Quest}
+
+\begin{Quest}
+Dado un conjunto de datos peque\~no $S$, sup\'ongase que se aplica un algoritmo de aprendizaje $A$ a $S$ para construir un clasificador $C_{A}$, qu\'e tan preciso es el clasificador $C_A$ para nuevos ejemplos. Dado que no se tienen conjuntos de datos separados no es posible responder la pregunta directamente. Es posible predecir la precisi\'on del algoritmo $A$ cuando se entrena en conjuntos de datos seleccionados aleatoriamente de aproximadamente el mismo tama\~no que $S$. Si esto es posible entonces se puede predecir la precisi\'on de $C_A$ que fue obtenido  despues de ser entrenado en $S$. 
+
+\end{Quest}
+
+
+\begin{Quest}
+Dados dos clasificadores $C_A$ y $C_B$ y suficientes datos para tener un conjunto de datos de prueba, determinar cual clasificador ser\'a m\'as preciso en nuevos ejemplos de prueba.  Esto se puede responder midiendo la precisi\'on de cada clasificador en los datos de prueba y aplicando la prueba de McNemar.
+
+\end{Quest}
+
+
+\begin{Quest}
+
+
+\end{Quest}
+
+
+\begin{Quest}
+
+
+\end{Quest}
+
+
+\begin{Quest}
+
+
+\end{Quest}
+
+
+\begin{Quest}
+
+
+\end{Quest}
+
+
+\begin{Quest}
+
+
+\end{Quest}
+
+
+\begin{Quest}
+
+
+\end{Quest}
+
+\end{Note}
+
 
 
 \newpage

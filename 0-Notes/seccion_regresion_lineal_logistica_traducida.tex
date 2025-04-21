@@ -1,0 +1,55 @@
+
+\section{Introducción a la regresión lineal y logística}
+
+Existen distintos tipos de regresión dependiendo de los objetivos de la investigación y del formato de las variables. La regresión lineal es una de las más frecuentemente utilizadas. Esta analiza resultados continuos (es decir, aquellos que pueden sumarse, restarse, multiplicarse o dividirse significativamente, como el peso) y supone que la relación entre la variable dependiente y las independientes sigue una línea recta (por ejemplo, a mayor consumo calórico, mayor ganancia de peso).
+
+Para evaluar el efecto de una sola variable independiente sobre un resultado continuo (por ejemplo, el efecto del consumo calórico sobre la ganancia de peso), se realiza una regresión lineal simple. Sin embargo, para considerar múltiples factores simultáneamente (por ejemplo, consumo calórico, ejercicio semanal y edad), es preferible la regresión lineal múltiple, que permite identificar la contribución única de cada variable controlando por las demás.
+
+La ecuación básica de la regresión lineal múltiple es:
+
+\[
+\hat{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i
+\]
+
+\begin{itemize}
+  \item $\beta_0$ es la ordenada al origen, el punto donde la línea toca el eje Y.
+  \item $\beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i$ representa cada variable independiente ponderada por su coeficiente beta. Estos coeficientes indican cuánto se incrementa el resultado por cada unidad de incremento en la variable correspondiente.
+\end{itemize}
+
+A pesar de su uso común, la regresión lineal no es apropiada para ciertos resultados médicos, especialmente binarios como la mortalidad. En estos casos, se utiliza la \textbf{regresión logística}, que puede incluir una o múltiples variables independientes. La regresión logística retiene muchas características de la regresión lineal, pero con transformaciones en escala logit para resultados binarios.
+
+La ecuación de la probabilidad de un resultado es:
+
+\[
+\text{Probabilidad de } \hat{Y}_i = \frac{e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}}{1 + e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}}
+\]
+
+Donde:
+
+\begin{enumerate}
+  \item En regresión logística, $\hat{Y}_i$ representa la probabilidad estimada de pertenecer a una categoría binaria.
+  \item La ecuación exponencial representa la versión transformada en logit de la regresión lineal.
+\end{enumerate}
+
+Esta transformación es necesaria ya que los valores predichos deben estar entre 0 y 1. Así, se transforma la ecuación original en:
+
+\[
+\ln \left( \frac{\hat{Y}}{1 - \hat{Y}} \right) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i
+\]
+
+El modelo busca identificar la combinación lineal de variables que maximiza la verosimilitud del resultado observado, mediante ciclos iterativos.
+
+\subsection{Selección de Variables Independientes}
+
+Es fundamental justificar la inclusión de cada variable mediante teoría previa, investigación, observación clínica o análisis estadístico preliminar. También se deben considerar los efectos de variables de confusión, como el estatus socioeconómico, que pueden alterar la verdadera relación entre variables independientes y el resultado.
+
+\subsection{Supuestos Básicos de la Regresión Logística}
+
+\begin{itemize}
+  \item \textbf{Independencia de errores}: los resultados no deben estar correlacionados.
+  \item \textbf{Linealidad en el logit}: para variables continuas, debe haber relación lineal entre cada variable y su logit.
+  \item \textbf{Ausencia de multicolinealidad}: evitar incluir variables redundantes altamente correlacionadas (como peso e IMC).
+  \item \textbf{Ausencia de valores atípicos influyentes}: estos pueden afectar severamente los resultados. Se detectan analizando residuos y se pueden eliminar si su efecto es considerable.
+\end{itemize}
+
+En algunos casos también se consideran interacciones entre variables, evaluando sus efectos combinados en el modelo final.

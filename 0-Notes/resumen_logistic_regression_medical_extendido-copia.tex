@@ -1,0 +1,354 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\title{Resumen en Extenso del Art\'iculo: \\
+\textit{Logistic Regression: a brief primer: Jill C. Stoltzfus}}
+\author{Carlos}
+\date{}
+
+\newtheorem{Criterio}{Criterio}[section]
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+Logistic R
+
+
+\section{Resumen}
+
+La regresi\'on log\'istica es una forma eficiente y poderosa de analizar el efecto de un grupo de variables independientes sobre un resultado binario cuantificando la contribuci\'on \'unica de cada variable independiente, por otra parte la regresi\'on log\'istica identifica iterativamente la combinaci\'on lineal m\'as fuerte de variables con la mayor probabilidad de detectar el resultado observado.
+
+Es importante considerar en una regresi\'on log\'istica la \textit{selecci\'on de variables independientes} para esto uno debe guiarse por factores tales como teor\'ia existente, investigaciones emp\'iricas previas, consideraciones cl\'inicas y an\'alisis estad\'isticos univariados, reconociendo las posibles variables de confusi\'on que deben ser consideradas. 
+
+Los supuestos b\'asicos que deben cumplirse para la regresi\'on log\'istica incluyen
+\begin{itemize}
+\item independencia de errores, 
+\item linealidad en el \textit{logit} para variables continuas, 
+\item ausencia de multicolinealidad y 
+\item falta de valores at\'ipicos fuertemente influyentes. Adicionalmente, 
+\item existencia de un n\'umero adecuado de eventos por variable independiente para evitar un modelo sobreajustado, con un m\'inimo com\'unmente recomendado de “reglas pr\'acticas” que van de 10 a 20 eventos por covariable.
+\end{itemize}
+
+Respecto a las estrategias de construcci\'on de modelos, los tres tipos generales son: 
+\begin{itemize}
+\item directa/est\'andar, 
+\item secuencial/jer\'arquica y 
+\item por pasos/estad\'istica,
+\end{itemize}
+cada uno con un \'enfasis y prop\'osito diferente. Antes de llegar a conclusiones definitivas a partir de los resultados de cualquiera de estos m\'etodos, se debe cuantificar formalmente la validez interna del modelo (es decir, su replicabilidad dentro del mismo conjunto de datos) y su validez externa (es decir, su generalizabilidad m\'as all\'a de la muestra actual).
+
+El ajuste general del modelo de regresi\'on log\'istica a los datos de muestra se eval\'ua utilizando varias \textit{medidas de bondad de ajuste}, donde un mejor ajuste se caracteriza por una menor diferencia entre los valores observados y los valores predichos por el modelo. Tambi\'en se recomienda el uso de \textit{estad\'isticas de diagn\'ostico} para evaluar a\'un m\'as la adecuaci\'on del modelo. Finalmente, los resultados para las variables independientes suelen reportarse como \textit{razones de momios} (odds ratios, ORs) con \textit{intervalos de confianza} (IC) del 95\%.
+
+\section{Importancia de la regresi\'on en investigaci\'on}
+
+La \textbf{regresi\'on} es un m\'etodo valioso de investigaci\'on debido a su vers\'atil aplicaci\'on en diferentes contextos de estudio. Por ejemplo, se puede utilizar para examinar asociaciones entre un resultado y varias variables independientes (tambi\'en com\'unmente conocidas como covariables, predictores o variables explicativas)\cite{darlington1990}, o para determinar qu\'e tan bien puede predecirse un resultado a partir de un conjunto de variables independientes\cite{darlington1990,tabachnick2007}. Adicionalmente, uno puede estar interesado en controlar el efecto de variables independientes espec\'ificas, particularmente aquellas que act\'uan como variables de confusi\'on (es decir, cuya relaci\'on tanto con el resultado como con otra variable independiente oscurece la relaci\'on entre esa variable independiente y el resultado)\cite{darlington1990,hosmer2000}. Esta \'ultima aplicaci\'on es especialmente \'util en contextos donde no es posible asignar aleatoriamente sujetos a grupos de tratamiento, como sucede en investigaciones observacionales. Con asignaci\'on aleatoria, normalmente se puede ejercer un control adecuado sobre las variables de confusi\'on, ya que los grupos aleatorizados tienden a tener una distribuci\'on equitativa o balanceada de dichas variables\cite{campbell1963}.
+
+\section{Regresi\'on Log\'istica}
+
+Existen diferentes tipos de regresi\'on, dependiendo de los objetivos de investigaci\'on y del formato de las variables, siendo la regresi\'on lineal una de las m\'as utilizadas. La \textit{regresi\'on lineal} analiza resultados continuos (es decir, aquellos que pueden sumarse, restarse, multiplicarse o dividirse de manera significativa, como el peso) y asume que la relaci\'on entre el resultado y las variables independientes sigue una forma funcional determinada. Sin embargo, generalmente es m\'as deseable determinar la influencia de m\'ultiples factores al mismo tiempo, ya que de este modo se pueden observar las contribuciones \'unicas de cada variable despu\'es de controlar por los efectos de las dem\'as. En este caso, la regresi\'on lineal multivariada es la opci\'on adecuada.
+
+La ecuaci\'on b\'asica para la regresi\'on lineal con m\'ultiples variables independientes es:
+
+\begin{eqnarray}
+\hat{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i.
+\end{eqnarray}
+
+Los componentes de esta ecuaci\'on son los siguientes:
+\begin{itemize}
+  \item $\hat{Y}$ es el resultado continuo estimado.
+  \item $\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i$ es la ecuaci\'on de regresi\'on lineal para las variables independientes del modelo, donde:
+  \begin{itemize}
+    \item $\beta_0$ es la ordenada al origen o punto en el que la l\'inea de regresi\'on toca el eje vertical $Y$. Se considera un valor constante.
+    \item $\beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i$ es el valor de cada variable independiente ($X_i$) ponderado por su respectivo coeficiente beta ($\beta$). Los coeficientes beta determinan la pendiente de la l\'inea de regresi\'on, cuanto mayor sea el coeficiente beta, m\'as fuerte es la contribuci\'on de dicha variable al resultado.
+  \end{itemize}
+\end{itemize}
+
+Para una variable binaria, como la mortalidad, la regresi\'on log\'istica es el m\'etodo usualmente elegido, la regresi\'on log\'istica puede incluir una o m\'ultiples variables independientes, aunque examinar m\'ultiples variables es generalmente m\'as informativo, ya que permite revelar la contribuci\'on \'unica de cada variable ajustando por las dem\'as. La regresi\'on log\'istica tiene ecuaci\'on:
+
+\begin{eqnarray}
+\textrm{Probabilidad del resultado}(\hat{Y_i}) = \frac{e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}}{1 + e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}}.
+\end{eqnarray}
+
+
+\section{Transformaci\'on log\'istica y elecci\'on de variables independientes}
+
+Un aspecto importante de la regresi\'on log\'istica es que conserva muchas caracter\'isticas de la regresi\'on lineal en su an\'alisis de resultados binarios. Sin embargo, existen diferencias clave entre las dos ecuaciones:
+
+\begin{enumerate}
+  \item $\hat{Y}_i$ representa la probabilidad estimada de pertenecer a una de las dos categor\'ias binarias del resultado (categor\'ia $i$) en lugar de representar un resultado continuo estimado.
+  
+  \item $e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}$ representa la ecuaci\'on de regresi\'on lineal para las variables independientes expresadas en la escala \textit{logit}.
+\end{enumerate}
+
+La raz\'on de esta transformaci\'on \textit{logit} radica en los par\'ametros b\'asicos del modelo de regresi\'on log\'istica, un resultado binario expresado como probabilidad debe estar entre 0 y 1 \cite{darlington1990}. La escala logit resuelve este problema al transformar matem\'aticamente la ecuaci\'on de regresi\'on lineal original para producir el logit (o logaritmo natural) de las razones de momios (odds) de estar en una categor\'ia ($\hat{Y}$) frente a la otra categor\'ia ($1 - \hat{Y}$):
+
+\begin{eqnarray}
+\ln\left(\frac{\hat{Y}}{1 - \hat{Y}}\right) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i
+\end{eqnarray}
+
+En el contexto de estas ecuaciones, la regresi\'on log\'istica identifica, mediante ciclos iterativos, la combinaci\'on lineal m\'as fuerte de variables independientes que aumente la probabilidad de detectar el resultado observado —un proceso conocido como estimaci\'on de m\'axima verosimilitud \cite{tabachnick2007,hosmer2000}. Para asegurar que la regresi\'on log\'istica produzca un modelo preciso, se deben considerar factores cr\'iticos como la selecci\'on de variables independientes y la elecci\'on de la estrategia de construcci\'on del modelo.
+
+\subsection{Variables independientes}
+
+\begin{itemize}
+\item[1.] \textbf{Criterios de selecci\'on.} Seleccionar cuidadosamente las variables independientes es un paso esencial. Aunque la regresi\'on log\'istica es bastante flexible y permite distintos tipos de variables (continuas, como la edad; ordinales, como escalas de dolor anal\'ogico visual; y categ\'oricas, como la raza), siempre debe justificarse la selecci\'on de variables utilizando teor\'ia bien establecida, investigaciones previas, observaciones cl\'inicas, an\'alisis estad\'istico preliminar, o una combinaci\'on razonada de estas opciones.
+
+Por ejemplo, se podr\'ia comenzar con un gran n\'umero de variables independientes potenciales con base en estudios previos y experiencia cl\'inica en el departamento de urgencias, y luego analizar diferencias entre grupos mediante estad\'istica univariada con un nivel de error tipo I m\'as relajado (por ejemplo, $p \leq 0.25$) para determinar qu\'e variables deben incluirse en el modelo de regresi\'on log\'istica. Usar un valor de $p$ menos estricto en esta etapa protege contra la exclusi\'on de variables potencialmente importantes. Alternativamente, uno podr\'ia optar por incluir todas las variables independientes relevantes independientemente de sus resultados univariados, ya que puede haber variables cl\'inicamente importantes que merezcan inclusi\'on a pesar de su desempe\~no estad\'istico. Sin embargo, siempre debe tenerse en cuenta que incluir demasiadas variables independientes en el modelo puede conducir a un resultado matem\'aticamente inestable, con menor capacidad de generalizaci\'on m\'as all\'a de la muestra actual del estudio.\footnote{Referencias 2,3}
+
+Una parte clave del proceso de selecci\'on de variables es reconocer y considerar el papel de los posibles factores de confusi\'on. Como se describi\'o previamente, las variables de confusi\'on son aquellas cuya relaci\'on tanto con el resultado como con otra variable independiente oculta la verdadera asociaci\'on entre esa variable independiente y el resultado.\footnote{Referencias 1,3}
+
+Por ejemplo, el nivel socioecon\'omico (SES) podr\'ia confundir la relaci\'on entre la raza y las visitas anuales a emergencias, debido a su asociaci\'on con ambas variables (es decir, ciertos grupos raciales tienden a estar sobrerrepresentados en algunas categor\'ias de SES y los pacientes m\'as pobres pueden usar m\'as frecuentemente los servicios de urgencias). No obstante, como este tipo de asociaciones causales no siempre son evidentes, se recomienda evaluarlas formalmente durante el proceso de selecci\'on de variables, a fin de garantizar que se modelen adecuadamente. Los diagramas de an\'alisis de trayectorias pueden ser particularmente \'utiles en este sentido.\footnote{Referencia 1}
+
+Independientemente del m\'etodo para seleccionar las variables independientes, deben cumplirse ciertos supuestos b\'asicos al aplicar regresi\'on log\'istica. Un supuesto es la \textbf{independencia de los errores}, lo cual significa que todos los resultados del grupo de muestra deben ser independientes entre s\'i (por ejemplo, que no haya respuestas duplicadas). Si los datos incluyen mediciones repetidas u otros resultados correlacionados, los errores tambi\'en estar\'an correlacionados y el supuesto se violar\'a.\footnote{Referencia 2} Existen otros m\'etodos para analizar datos correlacionados mediante t\'ecnicas de regresi\'on log\'istica, pero van m\'as all\'a del alcance de este art\'iculo; para m\'as informaci\'on, los lectores pueden consultar a Stokes et al.,\footnote{Referencia 5} Newgard et al.,\footnote{Referencias 6,7} y Allison.\footnote{Referencia 8}
+
+Un segundo supuesto es la \textbf{linealidad en el logit} para las variables continuas independientes (por ejemplo, edad), lo que significa que debe existir una relaci\'on lineal entre estas variables y sus respectivos resultados transformados en logit. Hay diversas formas de verificar este supuesto, siendo una t\'ecnica com\'un la creaci\'on de un t\'ermino de interacci\'on entre cada variable continua independiente y su logaritmo natural. Si alguno de estos t\'erminos es estad\'isticamente significativo, el supuesto se considera violado.\footnote{Referencias 2,3}
+
+Las soluciones incluyen codificaci\'on dicot\'omica de la variable independiente,\footnote{Referencia 3} o su transformaci\'on estad\'istica a otra escala.\footnote{Referencias 2,3}
+
+Un tercer supuesto es la \textbf{ausencia de multicolinealidad}, o redundancia entre variables independientes (por ejemplo, peso e \'indice de masa corporal [IMC] est\'an correlacionados, por lo que no deben incluirse en el mismo modelo). Un modelo de regresi\'on log\'istica con variables independientes altamente correlacionadas usualmente genera errores est\'andar grandes para los coeficientes beta (o pendientes) estimados. La soluci\'on com\'un es eliminar una o m\'as variables redundantes.\footnote{Referencia 2}
+
+El supuesto final es la \textbf{ausencia de valores at\'ipicos altamente influyentes}, es decir, casos en los que el resultado predicho para un miembro de la muestra difiere considerablemente de su valor real...
+\paragraph{...resultado.} Si hay demasiados valores at\'ipicos, la precisi\'on general del modelo puede verse comprometida. La detecci\'on de valores at\'ipicos se realiza examinando los residuales (es decir, la diferencia entre los valores predichos y los resultados reales) junto con estad\'isticas diagn\'osticas y gr\'aficas.\footnote{Referencias 2,3} Luego, se puede comparar el ajuste general del modelo y los coeficientes beta estimados con y sin los casos at\'ipicos. Dependiendo de la magnitud del cambio, uno podr\'ia conservar los valores at\'ipicos cuyo efecto no sea dram\'atico\footnote{Referencia 3} o eliminar aquellos con una influencia particularmente fuerte sobre el modelo.\footnote{Referencias 2,3}
+
+\paragraph{Adem\'as de comprobar que se cumplan los supuestos anteriores,} se puede considerar incluir t\'erminos de interacci\'on que combinen dos o m\'as variables independientes. Por ejemplo, es posible que la interacci\'on entre la edad y la raza de los pacientes sea m\'as importante para explicar un resultado que cualquiera de estas variables por separado\footnote{Referencia 3} (por ejemplo, la relaci\'on entre la edad y la mortalidad relacionada con trauma var\'ia entre asi\'aticos, blancos e hispanos). Sin embargo, los t\'erminos de interacci\'on pueden complicar innecesariamente el modelo de regresi\'on log\'istica sin aportar mucho beneficio.\footnote{Referencias 2,3} Por ello, se debe pensar cuidadosamente antes de incluirlos, obteniendo orientaci\'on de diagn\'osticos estad\'isticos (por ejemplo, observando cu\'anto cambian los coeficientes beta estimados, o pendientes, de una variable independiente al a\~nadir otra al modelo), y evaluando si las interacciones tienen sentido cl\'inico.\footnote{Referencia 3}
+\end{itemize}
+
+\paragraph{2. N\'umero de variables a incluir.} Como parte del proceso de selecci\'on de qu\'e variables independientes incluir, tambi\'en se debe decidir cu\'antas. El reto es seleccionar el menor n\'umero posible de variables independientes que expliquen mejor el resultado sin descuidar las limitaciones del tama\~no de muestra.\footnote{Referencias 2,3} Por ejemplo, si se seleccionan 50 personas para el estudio y se incluyen 50 variables independientes en el an\'alisis de regresi\'on log\'istica, el resultado es un modelo sobreajustado (y por tanto inestable). En t\'erminos generales, un modelo sobreajustado tiene coeficientes beta estimados para las variables independientes mucho mayores de lo que deber\'ian ser, adem\'as de errores est\'andar m\'as altos de lo esperado.\footnote{Referencia 3} Este tipo de situaci\'on genera inestabilidad en el modelo porque la regresi\'on log\'istica requiere m\'as resultados que variables independientes para poder iterar soluciones diferentes en busca del mejor ajuste a trav\'es del m\'etodo de m\'axima verosimilitud.\footnote{Referencias 2,3}
+
+\paragraph{Entonces, ¿cu\'al es el n\'umero correcto de resultados para evitar un modelo sobreajustado?} Aunque no existe un est\'andar universalmente aceptado, hay algunas “reglas generales” derivadas en parte de estudios de simulaci\'on. Una de estas reglas sugiere que por cada variable independiente, debe haber al menos 10 resultados por cada categor\'ia binaria (por ejemplo, vivo/muerto), siendo el resultado menos frecuente el que determina el n\'umero m\'aximo de variables independientes.\footnote{Referencias 9,10} Por ejemplo, en un estudio de mortalidad por sepsis, si se asume que 30 pacientes murieron y 50 sobrevivieron, el modelo podr\'ia acomodar, como m\'aximo, tres variables independientes (ya que 30 es el resultado menos frecuente). Algunos estad\'isticos recomiendan una “regla general” a\'un m\'as estricta de 20 resultados por variable independiente, dado que una relaci\'on m\'as alta tiende a mejorar la validez del modelo.\footnote{Referencia 11} Sin embargo, el tema no est\'a completamente resuelto y algunos argumentan que menos de 10 resultados por variable pueden ser apropiados en ciertos contextos de investigaci\'on.\footnote{Referencia 3}
+
+
+
+\subsection*{Estrategias de Construcci\'on del Modelo}
+
+Adem\'as de la cuidadosa selecci\'on de las variables independientes, se debe elegir el tipo adecuado de modelo de regresi\'on log\'istica para el estudio. De hecho, seleccionar una estrategia de construcci\'on del modelo est\'a estrechamente relacionado con la elecci\'on de variables independientes, por lo que estos dos componentes deben considerarse simult\'aneamente al planear un an\'alisis de regresi\'on log\'istica.
+
+Existen tres enfoques generales para la construcci\'on del modelo que se aplican a las t\'ecnicas de regresi\'on en general, cada uno con un \'enfasis y prop\'osito diferente: directo (es decir, completo, est\'andar o simult\'aneo), secuencial (es decir, jer\'arquico) y paso a paso (es decir, estad\'istico). Estas estrategias de construcci\'on no son necesariamente intercambiables, ya que pueden producir diferentes medidas de ajuste del modelo y diferentes estimaciones puntuales para las variables independientes a partir de los mismos datos. Por lo tanto, identificar el modelo apropiado para los objetivos del estudio es extremadamente importante.
+
+El enfoque directo es una especie de valor por defecto, ya que introduce todas las variables independientes en el modelo al mismo tiempo y no hace suposiciones sobre el orden o la importancia relativa de dichas variables.\footnote{Referencias 1,2} Por ejemplo, al analizar la mortalidad a 30 d\'ias en pacientes s\'epticos admitidos por el departamento de emergencias (ED), si se identifican 10 variables independientes para incluir, entonces las 10 se introducen en el modelo simult\'aneamente y tienen la misma importancia al inicio del an\'alisis.
+
+El enfoque directo es m\'as adecuado si no existen hip\'otesis previas sobre cu\'ales variables tienen mayor relevancia que otras. De lo contrario, se puede considerar el uso de regresi\'on secuencial/jer\'arquica, en la cual las variables se a\~naden secuencialmente para evaluar si mejoran el modelo de acuerdo a un orden predeterminado de prioridad.\footnote{Referencias 1,2} Por ejemplo, se podr\'ia iniciar introduciendo la edad en el modelo, suponiendo que es el predictor m\'as fuerte de mortalidad a 30 d\'ias en pacientes admitidos por sepsis, seguido de edad m\'as comorbilidades, luego edad, comorbilidades y volumen de casos de sepsis en el ED, y as\'i sucesivamente. Aunque este enfoque es \'util para clarificar patrones causales entre variables independientes y resultados, puede volverse complejo conforme aumentan los patrones causales, dificultando as\'i la obtenci\'on de conclusiones definitivas sobre los datos en algunos casos.\footnote{Referencia 1}
+
+En contraste con los dos m\'etodos anteriores, la regresi\'on paso a paso identifica variables independientes que deben mantenerse o eliminarse del modelo con base en criterios estad\'isticos predefinidos que est\'an influenciados por las caracter\'isticas \'unicas de la muestra analizada.\footnote{Referencias 2,3} Existen distintos tipos de t\'ecnicas paso a paso, incluyendo selecci\'on hacia adelante (por ejemplo, edad, comorbilidades, volumen de casos de sepsis en el ED, y otras variables independientes son introducidas una por una en el modelo para mortalidad por sepsis a 30 d\'ias, hasta que no se identifiquen m\'as variables adicionales que contribuyan significativamente al resultado) y eliminaci\'on hacia atr\'as (por ejemplo, edad, comorbilidades, volumen de casos de sepsis en el ED, y otras variables se introducen todas simult\'aneamente en el modelo, y luego se eliminan una a una aquellas con contribuciones no significativas). con una contribuci\'on no significativa al resultado son eliminadas una por una hasta que s\'olo queden las variables estad\'isticamente significativas).\footnote{Referencias 1,3} Otra estrategia de construcci\'on del modelo que es conceptualmente similar a la regresi\'on por pasos se llama ``selecci\'on del mejor subconjunto'', en la que se comparan modelos separados con diferentes n\'umeros de variables independientes (por ejemplo, edad sola, edad m\'as comorbilidades, comorbilidades m\'as volumen de casos de sepsis en urgencias) para determinar el mejor ajuste seg\'un lineamientos preestablecidos.\footnote{Referencia 3}
+
+\subsection*{Una Nota de Precauci\'on}
+
+Aunque la regresi\'on por pasos se usa frecuentemente en la investigaci\'on cl\'inica, su uso es algo controvertido porque se basa en una selecci\'on automatizada de variables que tiende a aprovechar factores aleatorios en una muestra dada.\footnote{Referencia 2} Adem\'as, la regresi\'on por pasos puede producir modelos que no parecen completamente razonables desde una perspectiva biol\'ogica.\footnote{Referencia 3} Ante estas preocupaciones, algunos argumentan que la regresi\'on por pasos se reserva mejor para el tamizaje preliminar o \'unicamente para pruebas de hip\'otesis,\footnote{Referencia 2} como en casos de resultados novedosos y una comprensi\'on limitada de las contribuciones de las variables independientes.\footnote{Referencia 3} Sin embargo, otros se\~nalan que los m\'etodos por pasos no son en s\'i el problema (y de hecho pueden ser bastante efectivos en ciertos contextos); en cambio, el verdadero problema es una interpretaci\'on descuidada de los resultados sin valorar completamente los pros y contras de este enfoque. Por tanto, si uno elige crear un modelo por pasos, es importante validar posteriormente los resultados antes de sacar conclusiones. No obstante, debe destacarse que todos los tipos de modelos requieren validaci\'on formal antes de que se consideren definitivos para uso futuro, ya que se espera que los modelos funcionen mejor con la muestra original que con muestras subsiguientes.\footnote{Referencia 3}
+
+\subsection*{Validaci\'on Interna y Externa del Modelo}
+
+Al validar modelos de regresi\'on log\'istica, existen numerosos m\'etodos entre los cuales elegir, cada uno m\'as o menos apropiado seg\'un los par\'ametros del estudio como el tama\~no de muestra. Para establecer la validez interna (confirmaci\'on de resultados del modelo con el mismo conjunto de datos), los m\'etodos comunes incluyen: 1) el m\'etodo de retenci\'on, o divisi\'on de la muestra en dos subgrupos antes de la construcci\'on del modelo, con el grupo de ``entrenamiento'' usado para crear el modelo de regresi\'on log\'istica y el grupo de ``prueba'' usado para validarlo;\footnote{Referencias 12,13} 2) validaci\'on cruzada k-fold o divisi\'on de la muestra en $k$ subgrupos de igual tama\~no para prop\'ositos de entrenamiento y validaci\'on;\footnote{Referencia 13} 3) validaci\'on cruzada ``uno fuera'' (leave-one-out), una variante del m\'etodo k-fold donde el n\'umero de particiones es igual al n\'umero de sujetos en la muestra;\footnote{Referencia 13} y 4) diferentes formas de bootstrapping (es decir, obtener submuestras repetidas con reemplazo de toda la muestra).\footnote{Referencias 13,14}
+
+Adem\'as de validar internamente el modelo, uno deber\'ia intentar validarlo externamente en un nuevo entorno de estudio como una prueba adicional de su viabilidad estad\'istica y utilidad cl\'inica.\footnote{Referencias 12,15} Si los resultados de la validaci\'on interna o externa presentan alguna alerta (por ejemplo, el modelo tiene bajo rendimiento para cierto subgrupo de pacientes), se recomienda hacer ajustes al modelo seg\'un sea necesario, o definir expl\'icitamente cualquier restricci\'on para el uso futuro del modelo.\footnote{Referencia 15}
+
+\subsection*{Interpretaci\'on de los Resultados del Modelo}
+
+\textbf{1. Evaluaci\'on del Ajuste General del Modelo.} Una vez que se ha creado el modelo de regresi\'on log\'istica, se determina qu\'e tan bien se ajusta a los datos de la muestra en su totalidad. Dos de los m\'etodos m\'as comunes para evaluar el ajuste del modelo son la prueba de chi-cuadrado de Pearson y la desviaci\'on residual. Ambas miden la diferencia entre los resultados observados y los resultados predichos por el modelo, donde un mal ajuste del modelo se indica mediante valores de prueba elevados, lo que se\~nala una diferencia mayor. Sin embargo, la precisi\'on de estas medidas depende de contar con un n\'umero adecuado de observaciones para los diferentes patrones de variables independientes.\footnote{Referencias 3, 16, 17}
+
+Otra medida com\'unmente utilizada del ajuste del modelo es la prueba de bondad de ajuste de Hosmer-Lemeshow, que divide a los sujetos en grupos iguales (a menudo de 10) seg\'un su probabilidad estimada del resultado. El decil m\'as bajo est\'a compuesto por aquellos que tienen menor probabilidad de experimentar el resultado. Si el modelo tiene buen ajuste, los sujetos que experimentaron el resultado principal (por ejemplo, mortalidad por sepsis a los 30 d\'ias) caer\'an en su mayor\'ia en los deciles de mayor riesgo. Un modelo con mal ajuste resultar\'a en sujetos distribuidos de manera m\'as uniforme a lo largo de los deciles de riesgo para ambos resultados binarios.\footnote{Referencias 2, 3}
+
+Las ventajas de las pruebas de Hosmer-Lemeshow incluyen su aplicaci\'on sencilla y facilidad de interpretaci\'on.\footnote{Referencias 3, 16} Las limitaciones incluyen la dependencia de las pruebas sobre c\'omo se definen los puntos de corte de los grupos\footnote{Referencias 10, 11} y los algoritmos computacionales utilizados,\footnote{Referencia 17} as\'i como una menor capacidad para identificar modelos con mal ajuste en ciertas circunstancias.\footnote{Referencias 3, 16} Otras alternativas menos comunes para evaluar el ajuste del modelo son descritas por Hosmer et al.\footnote{Referencias 16, 17} y Kuss.\footnote{Referencia 17}
+
+Aunque los \'indices de ajuste del modelo son componentes esenciales de la regresi\'on log\'istica, tambi\'en se deben usar estad\'isticas de diagn\'ostico antes de sacar conclusiones sobre la adecuaci\'on del modelo final. Estas estad\'isticas ayudan a determinar si el modelo permanece intacto en todas las configuraciones posibles de las variables independientes.\footnote{Referencia 3} Aunque una visi\'on detallada de los m\'etodos de diagn\'ostico excede el alcance de este art\'iculo, se puede consultar a Hosmer y Lemeshow\footnote{Referencia 3} para obtener m\'as informaci\'on.
+
+Como forma de ampliar los resultados del ajuste del modelo y de las estad\'isticas diagn\'osticas, tambi\'en se puede evaluar la capacidad del modelo para discriminar entre grupos. Las formas comunes de hacer esto incluyen 1) tablas de clasificaci\'on, donde la pertenencia a un grupo dentro de una categor\'ia binaria del resultado se predice usando probabilidades estimadas y puntos de corte predefinidos,\footnote{Referencias 3, 21} y 2) el \'area bajo la curva caracter\'istica operativa del receptor (AUROC), donde un valor de 0.5 significa que el modelo no es mejor que el azar para discriminar entre los sujetos que tienen el resultado y los que no, y un valor de 1.0 indica que el modelo discrimina perfectamente entre sujetos. El AUROC se usa a menudo cuando se desean considerar diferentes puntos de corte para la clasificaci\'on y as\'i maximizar tanto la sensibilidad como la especificidad.\footnote{Referencias 3, 18}
+
+\textbf{2. Interpretaci\'on de los Resultados de Variables Individuales.} Dentro del contexto del modelo de regresi\'on log\'istica, las variables independientes usualmente se presentan como razones de momios (ORs, por sus siglas en ingl\'es).\footnote{Referencia 3} Las ORs revelan la fuerza de la contribuci\'on de la variable independiente al resultado y se definen como las probabilidades de que ocurra el resultado ($\hat{Y}$) frente a que no ocurra...
+
+\noindent
+$(1 - \hat{Y})$ para cada variable independiente. La relaci\'on entre la raz\'on de momios (OR) y el coeficiente beta estimado de la variable independiente se expresa como $\text{OR} = e^{\beta_i}$. Con base en esta f\'ormula, un cambio de una unidad en la variable independiente multiplica la probabilidad del resultado por la cantidad contenida en $e^{\beta_i}$.\footnote{Referencias 2,3}
+
+Para un modelo de regresi\'on log\'istica con solo una variable independiente, la OR se considera ``no ajustada'' porque no hay otras variables cuya influencia deba ser ajustada o restada. Para fines ilustrativos, supongamos que el resultado es mortalidad intrahospitalaria despu\'es de una lesi\'on traum\'atica, y que la \'unica variable independiente es la edad del paciente, clasificada en mayores o menores de 65 a\~nos, con la categor\'ia m\'as reciente como grupo de referencia (o el grupo con el que se comparan todas las dem\'as categor\'ias de variables independientes). Una OR de 1.5 significa que para los pacientes mayores, las probabilidades de morir son 1.5 veces mayores que para los pacientes m\'as j\'ovenes (grupo de referencia). Expresado de otro modo, hay un aumento del $(1.5 - 1.0) \times 100\% = 50\%$ en las probabilidades de morir en el hospital despu\'es de una lesi\'on traum\'atica para pacientes mayores frente a los m\'as j\'ovenes.
+
+En contraste, si el modelo de regresi\'on log\'istica incluye m\'ultiples variables independientes, las OR ahora son ``ajustadas'' porque representan la contribuci\'on \'unica de la variable independiente despu\'es de ajustar (o restar) los efectos de las otras variables en el modelo. Por ejemplo, si el escenario de mortalidad intrahospitalaria posterior a un trauma incluye edad m\'as sexo, IMC y comorbilidades, la OR ajustada para la edad representa su contribuci\'on \'unica a la mortalidad intrahospitalaria cuando las otras tres variables se mantienen constantes. Como resultado, las OR ajustadas suelen ser menores que sus contrapartes no ajustadas.
+
+Interpretar las OR tambi\'en depende de si la variable independiente es continua o categ\'orica. Para las variables continuas, primero se debe identificar una unidad de medida significativa que exprese mejor el grado de cambio en el resultado asociado con esa variable independiente.\footnote{Referencia 3} Usando la ilustraci\'on anterior de mortalidad intrahospitalaria con la edad mantenida en su escala continua original y seleccionando incrementos de 10 a\~nos como la unidad de cambio, uno interpretar\'ia los resultados de la siguiente manera: ``Por cada 10 a\~nos que envejece un paciente, las probabilidades de morir en el hospital despu\'es de una lesi\'on traum\'atica aumentan 1.5 veces, o un 50\%''.
+
+Finalmente, los intervalos de confianza (IC) al 95\% se informan rutinariamente junto con las OR como una medida de precisi\'on (es decir, si los hallazgos probablemente se mantendr\'an en la poblaci\'on no observada). Si el IC cruza 1.00, es posible que no haya una diferencia significativa en esa poblaci\'on. Por ejemplo, si la OR de 1.5 para la edad tiene un IC del 95\% de 0.85 a 2.3, no se puede afirmar de manera concluyente que la edad sea un contribuyente significativo a la mortalidad intrahospitalaria tras una lesi\'on traum\'atica.
+
+
+\subsection{Resumen}
+
+Las t\'ecnicas de regresi\'on son vers\'atiles en su aplicaci\'on a la investigaci\'on m\'edica porque pueden medir asociaciones, predecir resultados y controlar los efectos de variables de confusi\'on. Como una de estas t\'ecnicas, la regresi\'on log\'istica es una forma eficiente y poderosa de analizar el efecto de un grupo de variables independientes sobre un resultado binario al cuantificar la contribuci\'on \'unica de cada variable independiente. Utilizando componentes de la regresi\'on lineal reflejados en la escala logit, la regresi\'on log\'istica identifica de manera iterativa la combinaci\'on lineal m\'as fuerte de variables con la mayor probabilidad de detectar el resultado observado. 
+
+Consideraciones importantes al realizar regresi\'on log\'istica incluyen la selecci\'on de variables independientes, asegurarse de que se cumplan los supuestos relevantes y elegir una estrategia adecuada para la construcci\'on del modelo. Para la selecci\'on de variables independientes, se deben considerar factores como la teor\'ia aceptada, investigaciones emp\'iricas previas, consideraciones cl\'inicas y an\'alisis estad\'isticos univariantes, reconociendo las posibles variables de confusi\'on que deben ser tenidas en cuenta.
+
+Los supuestos b\'asicos que deben cumplirse para la regresi\'on log\'istica incluyen: independencia de los errores, linealidad en el logit para variables continuas, ausencia de multicolinealidad y ausencia de valores at\'ipicos altamente influyentes. Adem\'as, debe haber un n\'umero adecuado de eventos por variable independiente para evitar un modelo sobreajustado, con una regla general recomendada que oscila entre 10 y 20 eventos por covariable.
+
+Respecto a las estrategias de construcci\'on del modelo, existen tres tipos generales: directa/est\'andar, secuencial/jer\'arquica y por pasos/estad\'istica, cada una con un \'enfasis y prop\'osito diferente. Antes de llegar a conclusiones definitivas a partir de los resultados de cualquiera de estos m\'etodos, se debe cuantificar formalmente la validez interna (i.e., replicabilidad dentro del mismo conjunto de datos) y la validez externa (i.e., generalizaci\'on m\'as all\'a de la muestra actual).
+
+El ajuste general del modelo de regresi\'on log\'istica a los datos de muestra se eval\'ua utilizando diversas medidas de bondad de ajuste, siendo mejor el ajuste cuanto menor sea la diferencia entre los valores observados y los valores predichos por el modelo. Tambi\'en se recomienda el uso de estad\'isticas de diagn\'ostico para evaluar adecuadamente el modelo. Finalmente, los resultados para las variables independientes se reportan t\'ipicamente como razones de momios (odds ratios, OR) con intervalos de confianza del 95\% (ICs).
+
+\subsection{Tipos de regresi\'on y fundamentos de la regresi\'on log\'istica}
+
+Existen diferentes tipos de regresi\'on seg\'un los objetivos de la investigaci\'on y el formato de las variables, siendo la regresi\'on lineal una de las m\'as utilizadas. La regresi\'on lineal analiza resultados continuos (es decir, aquellos que pueden sumarse, restarse, multiplicarse y dividirse significativamente, como el peso) y asume que la relaci\'on entre el resultado y las variables independientes sigue una l\'inea recta (por ejemplo, a medida que aumentan las calor\'ias consumidas, aumenta el peso).
+
+Para evaluar el efecto de una sola variable independiente sobre un resultado continuo (por ejemplo, el efecto del consumo de calor\'ias sobre el aumento de peso), se realizar\'ia una regresi\'on lineal simple. Sin embargo, normalmente es m\'as deseable determinar la influencia de m\'ultiples factores al mismo tiempo (por ejemplo, calor\'ias consumidas, d\'ias de ejercicio por semana y edad en el aumento de peso), ya que esto permite ver las contribuciones \'unicas de cada variable despu\'es de controlar los efectos de las dem\'as. En este caso, la regresi\'on lineal multivariada es la opci\'on adecuada.
+
+La ecuaci\'on b\'asica para la regresi\'on lineal con m\'ultiples variables independientes es:
+\begin{equation}
+\hat{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i
+\end{equation}
+
+\begin{itemize}
+    \item $\beta_0$ es la ordenada al origen, o el punto en el que la l\'inea de regresi\'on toca el eje vertical Y. Se considera un valor constante.
+    \item $\beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i$ representa el valor de cada variable independiente ($X_i$) ponderado por su coeficiente beta ($\beta$). Estos coeficientes indican la pendiente de la l\'inea de regresi\'on o cu\'anto aumenta el resultado por cada unidad adicional en el valor de la variable independiente. Cuanto mayor es el coeficiente beta, mayor es la contribuci\'on de su variable independiente correspondiente al resultado.
+\end{itemize}
+
+A pesar de su uso com\'un, la regresi\'on lineal no es adecuada para ciertos tipos de resultados m\'edicos. Para eventos binarios, como la mortalidad, la regresi\'on log\'istica es el m\'etodo habitual de elecci\'on. Al igual que la regresi\'on lineal, la regresi\'on log\'istica puede incluir una o varias variables independientes, siendo generalmente m\'as informativa la evaluaci\'on de m\'ultiples variables porque permite ver las contribuciones \'unicas de cada una tras ajustar por las otras.
+
+La identificaci\'on de estas contribuciones en la regresi\'on log\'istica comienza con la siguiente ecuaci\'on:
+\begin{equation}
+\text{Probabilidad del resultado } (\hat{Y}_i) = \frac{e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}}{1 + e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}}
+\end{equation}
+
+Esta ecuaci\'on contiene configuraciones similares para las variables independientes ($X$) y sus coeficientes beta ($\beta$) que la regresi\'on lineal. No obstante, hay diferencias clave:
+\begin{enumerate}
+    \item En regresi\'on log\'istica, $\hat{Y}_i$ representa la probabilidad estimada de estar en una categor\'ia de resultado binario (por ejemplo, tener la enfermedad) frente a no estar en ella, en lugar de un resultado continuo estimado.
+    \item La expresi\'on $e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}$ representa la ecuaci\'on de regresi\'on lineal para las variables independientes expresadas en escala logit, y no en el formato lineal original.
+\end{enumerate}
+
+Esta transformaci\'on a escala logit es esencial en el modelo de regresi\'on log\'istica, ya que un resultado binario expresado como probabilidad debe estar entre 0 y 1. En cambio, las variables independientes podr\'ian asumir cualquier valor. Si no se rectifica esta discrepancia, los valores predichos del modelo podr\'ian caer fuera del rango de 0 a 1. La escala logit resuelve este problema al transformar matem\'aticamente la ecuaci\'on original de regresi\'on lineal para producir el logit o logaritmo natural de las probabilidades de estar en una categor\'ia (\( \hat{Y} \)) frente a la otra (\( 1 - \hat{Y} \)):
+
+\begin{equation}
+\ln\left(\frac{\hat{Y}}{1 - \hat{Y}}\right) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i
+\end{equation}
+
+En el contexto de estas ecuaciones, la regresi\'on log\'istica identifica, mediante ciclos iterativos, la combinaci\'on lineal m\'as fuerte de variables independientes que aumente la probabilidad de detectar el resultado observado—un proceso conocido como estimaci\'on por m\'axima verosimilitud.
+
+
+\section*{Introducci\'on}
+El art\'iculo revisa detalladamente el modelo de regresi\'on log\'istica (RL), una t\'ecnica multivariable esencial para analizar relaciones entre variables independientes y una variable dependiente categ\'orica, especialmente en investigaciones m\'edicas. A trav\'es del an\'alisis de 37 art\'iculos cient\'ificos publicados entre 2000 y 2018 y seis libros de texto especializados, los autores exploran conceptos clave de la RL, su aplicaci\'on, problemas frecuentes y propuestas para mejorar su uso.
+
+\section*{Antecedentes Hist\'oricos de la Regresi\'on Log\'istica}
+La regresi\'on log\'istica tiene sus ra\'ices en el siglo XIX, con los trabajos de Pierre François Verhulst, quien introdujo la \textit{curva log\'istica} para modelar el crecimiento poblacional. Sin embargo, fue en el siglo XX cuando su aplicaci\'on estad\'istica tom\'o forma. En 1944, Joseph Berkson introdujo el \textit{modelo logit} en el contexto de bioestad\'istica, proponi\'endolo como alternativa al modelo probit. La RL fue adoptada ampliamente en estudios biom\'edicos a partir de la d\'ecada de 1960, gracias a su capacidad para manejar variables dicot\'omicas y ofrecer interpretaciones claras a trav\'es del odds ratio. En d\'ecadas recientes, la regresi\'on log\'istica se ha convertido en una herramienta fundamental para el an\'alisis de datos en epidemiolog\'ia, medicina cl\'inica, y ciencias sociales.
+
+\section*{Fundamentos del Modelo de Regresi\'on Log\'istica}
+
+La RL es ideal para predecir la probabilidad de ocurrencia de un evento binario (s\'i/no) y se basa en la transformaci\'on log\'istica del \textit{odds ratio} (raz\'on de probabilidades). A diferencia de la regresi\'on lineal, no requiere que las variables independientes sigan una distribuci\'on normal ni que la relaci\'on con la dependiente sea lineal.
+
+\subsection*{La funci\'on log\'istica}
+La funci\'on log\'istica transforma la probabilidad de un evento en odds, y posteriormente en log-odds (\textit{logit}), acotando los valores entre 0 y 1. Esto asegura interpretaciones coherentes para eventos dicot\'omicos. El modelo toma la forma:
+
+\[
+\text{logit}(p) = \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1X_1 + \beta_2X_2 + \ldots + \beta_kX_k
+\]
+
+\subsection*{Selecci\'on de variables}
+Se discuten criterios para seleccionar variables dependientes (ej. enfermedad/salud) y predictoras (factores cl\'inicos), advirtiendo sobre el impacto negativo del sesgo de selecci\'on, multicolinealidad y tama\~no de muestra reducido. El art\'iculo destaca la importancia del conocimiento previo para seleccionar variables relevantes y evitar el sobreajuste.
+
+\section*{Evaluaci\'on del Modelo}
+
+\subsection*{Evaluaci\'on general}
+Se emplean dos pruebas principales:
+\begin{itemize}
+  \item \textbf{Raz\'on de verosimilitudes (likelihood ratio test)}: compara un modelo completo con uno nulo, evaluando si los predictores mejoran significativamente la predicci\'on.
+  \item \textbf{Prueba de Hosmer-Lemeshow}: mide el ajuste entre valores observados y esperados por deciles de riesgo. Un valor $p > 0.05$ indica buen ajuste.
+\end{itemize}
+
+\subsection*{Evaluaci\'on de predictores}
+La significancia individual de cada predictor se eval\'ua con el \textbf{estad\'istico Wald}, basado en la relaci\'on entre el coeficiente estimado y su error est\'andar. Tambi\'en se puede usar la raz\'on de verosimilitudes para cada predictor.
+
+\section*{Exactitud Predictiva y Discriminaci\'on}
+
+\begin{itemize}
+  \item \textbf{Tabla de clasificaci\'on}: compara predicciones contra observaciones reales, generando m\'etricas como sensibilidad, especificidad, precisi\'on y valor predictivo.
+  \item \textbf{Curva ROC (Receiver Operating Characteristic)}: representa la sensibilidad frente a 1 - especificidad. El \'area bajo la curva (AUC) cuantifica la capacidad discriminativa del modelo. Un AUC de 0.5 indica clasificaci\'on aleatoria, mientras que 1.0 representa clasificaci\'on perfecta.
+\end{itemize}
+
+\section*{Validaci\'on del Modelo}
+
+Se destaca la importancia de validar los modelos, ya sea de manera \textbf{interna} (con subconjuntos del mismo conjunto de datos) o \textbf{externa} (con nuevos datos). Se discuten m\'etodos como \textit{bootstrap}, \textit{jackknife} y validaci\'on cruzada.
+
+Tambi\'en se mencionan medidas como:
+\begin{itemize}
+  \item \textbf{$R^2$ de Cox \& Snell}
+  \item \textbf{$R^2$ de Nagelkerke}
+\end{itemize}
+Estas proporcionan informaci\'on sobre el poder explicativo del modelo, aunque no son equivalentes al $R^2$ cl\'asico de regresi\'on lineal.
+
+\section*{Aplicaci\'on Pr\'actica}
+
+Se presenta un estudio de caso usando RL para investigar factores que influyen en la decisi\'on de partos por ces\'area en mujeres embarazadas. Se evidenci\'o que:
+\begin{itemize}
+  \item El peso del beb\'e menor a 3.5 kg reduce la probabilidad de ces\'area.
+  \item Mujeres con m\'as de tres partos tienen menor probabilidad de requerir ces\'area.
+\end{itemize}
+
+El modelo mostr\'o buen ajuste (Hosmer-Lemeshow $p = 0.65$), alta capacidad explicativa ($R^2$ de Nagelkerke = 0.723) y precisi\'on predictiva del 82.9\%.
+
+\section*{Conclusiones}
+
+Los autores concluyen que, aunque la RL es una herramienta poderosa, su uso en la investigaci\'on m\'edica presenta deficiencias notables:
+\begin{itemize}
+  \item Tama\~nos de muestra insuficientes.
+  \item Falta de validaci\'on del modelo.
+  \item Reportes incompletos sobre el ajuste y la significancia de predictores.
+\end{itemize}
+
+Recomiendan mayor rigor metodol\'ogico y transparencia en los reportes, as\'i como comparar RL con m\'etodos m\'as recientes como redes neuronales o \'arboles de decisi\'on en futuras investigaciones.
+
+\begin{thebibliography}{99}
+
+\bibitem{darlington1990}
+Darlington RB. \textit{Regression and Linear Models}. Columbus, OH: McGraw-Hill Publishing Company, 1990.
+
+\bibitem{tabachnick2007}
+Tabachnick BG, Fidell LS. \textit{Using Multivariate Statistics}. 5th ed. Boston, MA: Pearson Education, Inc., 2007.
+
+\bibitem{hosmer2000}
+Hosmer DW, Lemeshow SL. \textit{Applied Logistic Regression}. 2nd ed. Hoboken, NJ: Wiley-Interscience, 2000.
+
+\bibitem{campbell1963}
+Campbell DT, Stanley JC. \textit{Experimental and Quasi-experimental Designs for Research}. Boston, MA: Houghton Mifflin Co., 1963.
+
+\bibitem{stokes2000}
+Stokes ME, Davis CS, Koch GG. \textit{Categorical Data Analysis Using the SAS System}. 2nd ed. Cary, NC: SAS Institute, Inc., 2000.
+
+\bibitem{newgard2004}
+Newgard CD, Hedges JR, Arthur M, Mullins RJ. Advanced statistics: the propensity score—a method for estimating treatment effect in observational research. \textit{Acad Emerg Med}. 2004; \textbf{11}:953–961.
+
+\bibitem{newgard2007}
+Newgard CD, Haukoos JS. Advanced statistics: missing data in clinical research—part 2: multiple imputation. \textit{Acad Emerg Med}. 2007; \textbf{14}:669–678.
+
+\bibitem{allison1999}
+Allison PD. \textit{Logistic Regression Using the SAS System: Theory and Application}. Cary, NC: SAS Institute, Inc., 1999.
+
+\bibitem{peduzzi1996}
+Peduzzi P, Concato J, Kemper E, Holford TR, Feinstein AR. A simulation study of the number of events per variable in logistic regression analysis. \textit{J Clin Epidemiol}. 1996; \textbf{49}:1373–1379.
+
+\bibitem{agresti2007}
+Agresti A. \textit{An Introduction to Categorical Data Analysis}. Hoboken, NJ: Wiley, 2007.
+
+\bibitem{feinstein1996}
+Feinstein AR. \textit{Multivariable Analysis: An Introduction}. New Haven, CT: Yale University Press, 1996.
+
+\bibitem{altman2000}
+Altman DG, Royston P. What Do We Mean by Validating a Prognostic Model? \textit{Stats Med}. 2000; \textbf{19}:453–473.
+
+\bibitem{kohavi1995}
+Kohavi R. A study of cross-validation and bootstrap for accuracy estimation and model selection. In: \textit{Proceedings of the 14th International Joint Conference on Artificial Intelligence (IJCAI)}. Montreal, Quebec, Canada, August 20–25, 1995. 1995:1137–1143.
+
+\bibitem{efron1993}
+Efron B, Tibshirani R. \textit{An Introduction to the Bootstrap}. New York: Chapman \& Hall, 1993.
+
+\bibitem{miller1991}
+Miller ME, Hiu SL, Tierney WM. Validation techniques for logistic regression models. \textit{Stat Med}. 1991; \textbf{10}:1213–1226.
+
+\bibitem{hosmer1997}
+Hosmer DW, Hosmer T, Le Cessie S, Lemeshow S. A comparison of goodness-of-fit tests for the logistic regression model. \textit{Stat Med}. 1997; \textbf{16}:965–980.
+
+\bibitem{kuss2002}
+Kuss O. Global goodness-of-fit tests in logistic regression with sparse data. \textit{Stat Med}. 2002; \textbf{21}:3789–3801.
+
+\bibitem{zou2007}
+Zou KH, O'Malley AJ, Mauri L. Receiver-operating characteristic analysis for evaluating diagnostic tests and predictive models. \textit{Circulation}. 2007; \textbf{115}:654–657.
+
+\end{thebibliography}
+
+\end{document}

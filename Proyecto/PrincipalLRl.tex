@@ -1,0 +1,71 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, graphicx, booktabs, caption}
+\usepackage{geometry}
+\usepackage{hyperref}
+\geometry{margin=1in}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{float}
+
+\title{Modelos de Regresión Aplicados a Datos Reales:\\Lineal, Logística y Logística Multivariada}
+\author{Carlos Ernesto}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Modelos de Regresión}
+\lhead{Carlos Ernesto}
+\rfoot{\thepage}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introducción}
+En este documento se exploran distintos modelos de regresión aplicados a datos reales en dos áreas clave: ciencias médicas y ciencias sociales. Se abordan modelos lineales, logísticos y logísticos multivariados utilizando herramientas estadísticas implementadas en el lenguaje de programación R.
+
+\section{Marco Teórico}
+\subsection{Regresión Lineal}
+Explicación de la regresión lineal simple, ecuación del modelo, supuestos y estimación por mínimos cuadrados.
+
+\subsection{Regresión Logística}
+Fundamentos de la regresión logística, odds, log-odds y la función logística. Aplicaciones cuando la variable dependiente es binaria.
+
+\subsection{Regresión Logística Multivariada}
+Extensión de la regresión logística incluyendo múltiples predictores. Evaluación de efectos individuales y conjuntos.
+
+\section{Metodología}
+\subsection{Fuentes de datos}
+Descripción de las bases utilizadas: cáncer, enfermedad renal, divorcio y redes sociales.
+
+\subsection{Tratamiento y limpieza de datos en R}
+Explicación del preprocesamiento realizado, valores faltantes, variables transformadas.
+
+\subsection{Ajuste de modelos y validación}
+Técnicas para seleccionar variables, ajuste de modelos y evaluación con métricas.
+
+\section{Resultados}
+\subsection{Caso 1: Cáncer de mama (Regresión Logística)}
+\subsection{Caso 2: Enfermedad renal crónica (Logística multivariada)}
+\subsection{Caso 3: Divorcio vs edad del hijo (Regresión logística)}
+\subsection{Caso 4: Redes sociales y estado civil (Modelado exploratorio)}
+
+\section{Discusión}
+Comparación entre modelos, interpretabilidad, utilidad práctica en cada área.
+
+\section{Conclusiones}
+Principales hallazgos, limitaciones del estudio y sugerencias para investigaciones futuras.
+
+\section*{Referencias}
+\bibliographystyle{apalike}
+\bibliography{bibliografia}
+
+\end{document}

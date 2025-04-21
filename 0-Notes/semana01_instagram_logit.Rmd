@@ -1,0 +1,97 @@
+---
+title: "Estudios de Ciencia de Datos - Semana 01"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    number_sections: true
+    theme: united
+---
+
+# Semana 01
+
+## Día Lunes
+
+### Tema 1: Comparación de proporciones y regresión logística
+
+#### Introducción
+
+Estudio del uso de Instagram entre mujeres y hombres con base en proporciones observadas y regresión logística. Este ejemplo se basa en datos simulados inspirados en el libro de estadística.
+
+#### Código en R
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r librerias}
+library(ggplot2)
+```
+
+```{r crear-datos}
+# Simular los datos
+set.seed(123)
+
+n_women <- 1000
+n_men <- 1000
+
+p_women <- 0.6108
+p_men <- 0.4398
+
+instagram_women <- rbinom(n_women, 1, p_women)
+instagram_men <- rbinom(n_men, 1, p_men)
+
+sexo <- c(rep("Mujer", n_women), rep("Hombre", n_men))
+instagram <- c(instagram_women, instagram_men)
+
+datos <- data.frame(
+  sexo = factor(sexo, levels = c("Hombre", "Mujer")),
+  instagram = instagram
+)
+
+head(datos)
+```
+
+```{r modelo-logit}
+# Ajustar modelo logístico
+modelo <- glm(instagram ~ sexo, data = datos, family = "binomial")
+summary(modelo)
+```
+
+```{r interpretar}
+# Interpretación con odds ratio
+exp(coef(modelo))
+exp(confint(modelo))
+```
+
+```{r grafico}
+# Visualización de proporciones
+ggplot(datos, aes(x = sexo, fill = factor(instagram))) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Proporción de Usuarios de Instagram por Sexo",
+    x = "Sexo",
+    y = "Proporción",
+    fill = "Usa Instagram"
+  ) +
+  theme_minimal()
+```
+
+#### Resultados esperados
+
+- Mujeres tienen mayor probabilidad (odds ratio > 1) de usar Instagram que los hombres.
+- El modelo es significativo si el p-valor del coeficiente asociado a "Mujer" es bajo.
+- Visualmente se puede observar esta diferencia en las barras apiladas.
+
+---
+
+### Tema 2: *(Reservado para otro artículo)*
+
+*(Aquí se puede agregar un nuevo bloque de análisis siguiendo el mismo formato.)*
+
+---
+
+### Tema 3: *(Reservado para otro artículo)*
+
+*(Aquí se puede agregar un nuevo bloque de análisis siguiendo el mismo formato.)*

@@ -1,0 +1,102 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts, graphicx, algorithm, algpseudocode, hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Resumen Matemático Ampliado: \\textit{Logistic Regression in Data Analysis: An Overview} (Maalouf, 2011)}
+\author{Carlos – Compilado con ayuda de ChatGPT}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Modelo de regresión logística}
+
+Para una variable binaria $y_i \in \{0,1\}$, el modelo de regresión logística predice la probabilidad:
+\[
+p_i = \frac{1}{1 + e^{-x_i \beta}}
+\]
+
+\subsection*{Función de verosimilitud}
+\[
+L(\beta) = \prod_{i=1}^n p_i^{y_i} (1 - p_i)^{1 - y_i}
+\]
+
+\subsection*{Log-verosimilitud}
+\[
+\ell(\beta) = \sum_{i=1}^n \left[ y_i \ln(p_i) + (1 - y_i) \ln(1 - p_i) \right]
+\]
+
+\section*{Derivadas}
+
+\textbf{Gradiente}:
+\[
+\nabla_\beta \ell(\beta) = X^\top (y - p)
+\]
+
+\textbf{Hessiano (segunda derivada)}:
+\[
+\nabla^2_\beta \ell(\beta) = - X^\top V X, \quad V = \text{diag}(p_i (1 - p_i))
+\]
+
+\section*{Regularización Ridge (L2)}
+Se añade un término penalizado:
+\[
+\ell_\lambda(\beta) = \ell(\beta) - \frac{\lambda}{2} \|\beta\|^2
+\]
+
+Gradiente regularizado:
+\[
+\nabla_\beta \ell_\lambda(\beta) = X^\top (y - p) - \lambda \beta
+\]
+
+Hessiano regularizado:
+\[
+\nabla^2_\beta \ell_\lambda(\beta) = - X^\top V X - \lambda I
+\]
+
+\section*{TR-IRLS (Trust Region IRLS)}
+Actualización generalizada del paso de Newton:
+\[
+\beta^{(k+1)} = \beta^{(k)} + s
+\]
+Donde $s$ es solución de:
+\[
+(X^\top V X + \lambda I) s = X^\top V z - \lambda \beta
+\]
+
+\section*{Eventos raros y correcciones}
+\subsection*{Ajuste del intercepto (King \& Zeng)}
+\[
+\tilde{\beta}_0 = \hat{\beta}_0 - \ln \left[ \left( \frac{1 - \tau}{\tau} \right) \left( \frac{\hat{y}}{1 - \hat{y}} \right) \right]
+\]
+
+\subsection*{Muestreo estratificado}
+Peso para observación $i$:
+\[
+w_i = \frac{Q_i}{H_i}
+\]
+Verosimilitud ponderada:
+\[
+\ell_w(\beta) = \sum_{i=1}^n w_i \ln \left( \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} \right)
+\]
+
+\section*{Corrección de Firth}
+Se basa en el ajuste de penalización de tipo Jeffreys:
+\[
+\ell^*(\beta) = \ell(\beta) + \frac{1}{2} \log |I(\beta)|
+\]
+
+\section*{Regla de decisión}
+\[
+\hat{y}_i =
+\begin{cases}
+1 & \text{si } p_i \geq c \\\\
+0 & \text{si } p_i < c
+\end{cases}
+\quad \text{(usualmente } c = 0.5)
+\]
+
+\end{document}

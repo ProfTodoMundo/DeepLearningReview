@@ -1,0 +1,440 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Análisis de Regresión Logística, Probit y Bootstrap},
+  pdfauthor={Carlos},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Análisis de Regresión Logística, Probit y Bootstrap}
+\author{Carlos}
+\date{2025-04-03}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\subsection{Carga de Datos}\label{carga-de-datos}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{auto\_time }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{52.90}\NormalTok{, }\FloatTok{4.10}\NormalTok{, }\FloatTok{4.10}\NormalTok{, }\FloatTok{56.20}\NormalTok{, }\FloatTok{51.80}\NormalTok{, }\FloatTok{0.20}\NormalTok{, }\FloatTok{27.60}\NormalTok{, }\FloatTok{89.90}\NormalTok{, }\FloatTok{41.50}\NormalTok{,}
+               \FloatTok{95.00}\NormalTok{, }\FloatTok{99.10}\NormalTok{, }\FloatTok{18.50}\NormalTok{, }\FloatTok{82.00}\NormalTok{, }\FloatTok{8.60}\NormalTok{, }\FloatTok{22.50}\NormalTok{, }\FloatTok{51.40}\NormalTok{, }\FloatTok{81.00}\NormalTok{, }\FloatTok{51.00}\NormalTok{,}
+               \FloatTok{62.20}\NormalTok{, }\FloatTok{95.10}\NormalTok{, }\FloatTok{41.60}\NormalTok{)}
+\NormalTok{bus\_time }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{4.4}\NormalTok{, }\FloatTok{28.5}\NormalTok{, }\FloatTok{86.9}\NormalTok{, }\FloatTok{31.6}\NormalTok{, }\FloatTok{20.2}\NormalTok{, }\FloatTok{91.2}\NormalTok{, }\FloatTok{79.7}\NormalTok{, }\FloatTok{2.2}\NormalTok{, }\FloatTok{24.5}\NormalTok{,}
+              \FloatTok{43.5}\NormalTok{, }\FloatTok{8.4}\NormalTok{, }\DecValTok{84}\NormalTok{, }\DecValTok{38}\NormalTok{, }\FloatTok{1.6}\NormalTok{, }\FloatTok{74.1}\NormalTok{, }\FloatTok{83.8}\NormalTok{, }\FloatTok{19.2}\NormalTok{, }\DecValTok{85}\NormalTok{, }\FloatTok{90.1}\NormalTok{, }\FloatTok{22.2}\NormalTok{, }\FloatTok{91.5}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+       \DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ auto\_time }\SpecialCharTok{{-}}\NormalTok{ bus\_time}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Modelo de Regresión
+Logística}\label{modelo-de-regresiuxf3n-loguxedstica}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelo }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x, }\AttributeTok{family =}\NormalTok{ binomial)}
+\FunctionTok{summary}\NormalTok{(modelo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = y ~ x, family = binomial)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)  
+## (Intercept) -0.23758    0.75048  -0.317   0.7516  
+## x           -0.05311    0.02064  -2.573   0.0101 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 29.065  on 20  degrees of freedom
+## Residual deviance: 12.332  on 19  degrees of freedom
+## AIC: 16.332
+## 
+## Number of Fisher Scoring iterations: 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(x, y, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \FunctionTok{ifelse}\NormalTok{(y }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
+     \AttributeTok{main =} \StringTok{"Logistic Regression Fit"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"x = Auto Time {-} Bus Time"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"P(car)"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{predict}\NormalTok{(modelo, }\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =} \FunctionTok{sort}\NormalTok{(x)), }\AttributeTok{type =} \StringTok{"response"}\NormalTok{),}
+      \AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{col =} \StringTok{"darkgreen"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"bottomright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Observado 1"}\NormalTok{, }\StringTok{"Observado 0"}\NormalTok{, }\StringTok{"Curva logística"}\NormalTok{),}
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{pch =} \FunctionTok{c}\NormalTok{(}\DecValTok{19}\NormalTok{, }\DecValTok{19}\NormalTok{, }\ConstantTok{NA}\NormalTok{), }\AttributeTok{lty =} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{regresion_logit_probit_con_apendices_limpios_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\subsection{Ajuste por Mínimos Cuadrados No Lineales
+(NLS)}\label{ajuste-por-muxednimos-cuadrados-no-lineales-nls}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{b0\_init }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(modelo)[}\DecValTok{1}\NormalTok{]}
+\NormalTok{b1\_init }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(modelo)[}\DecValTok{2}\NormalTok{]}
+\NormalTok{modelo\_nls }\OtherTok{\textless{}{-}} \FunctionTok{nls}\NormalTok{(}
+\NormalTok{  y }\SpecialCharTok{\textasciitilde{}} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(b0 }\SpecialCharTok{+}\NormalTok{ b1 }\SpecialCharTok{*}\NormalTok{ x))),}
+  \AttributeTok{start =} \FunctionTok{list}\NormalTok{(}\AttributeTok{b0 =}\NormalTok{ b0\_init , }\AttributeTok{b1 =}\NormalTok{ b1\_init)}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(modelo\_nls)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Formula: y ~ 1/(1 + exp(-(b0 + b1 * x)))
+## 
+## Parameters:
+##      Estimate Std. Error t value Pr(>|t|)
+## b0   -188.344 744010.283       0        1
+## b1     -7.197  27886.344       0        1
+## 
+## Residual standard error: 0.2294 on 19 degrees of freedom
+## 
+## Number of iterations to convergence: 16 
+## Achieved convergence tolerance: 4.887e-06
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(x, y, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \FunctionTok{ifelse}\NormalTok{(y }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
+     \AttributeTok{main =} \StringTok{"Comparación de Métodos de Ajuste"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"x = Auto Time {-} Bus Time"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"P(car)"}\NormalTok{)}
+\NormalTok{x\_sorted }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(x)}
+\FunctionTok{lines}\NormalTok{(x\_sorted, }\FunctionTok{predict}\NormalTok{(modelo, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)[}\FunctionTok{order}\NormalTok{(x)], }\AttributeTok{col =} \StringTok{"darkgreen"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+
+\NormalTok{b0\_nls }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(modelo\_nls)[}\StringTok{"b0"}\NormalTok{]}
+\NormalTok{b1\_nls }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(modelo\_nls)[}\StringTok{"b1"}\NormalTok{]}
+\NormalTok{p\_nls }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(b0\_nls }\SpecialCharTok{+}\NormalTok{ b1\_nls }\SpecialCharTok{*}\NormalTok{ x\_sorted)))}
+\FunctionTok{lines}\NormalTok{(x\_sorted, p\_nls, }\AttributeTok{col =} \StringTok{"purple"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+
+\FunctionTok{legend}\NormalTok{(}\StringTok{"bottomleft"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"GLM (Verosimilitud)"}\NormalTok{, }\StringTok{"NLS (Mínimos Cuadrados)"}\NormalTok{),}
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"purple"}\NormalTok{), }\AttributeTok{lty =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{cex =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{regresion_logit_probit_con_apendices_limpios_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\subsection{Modelo Probit}\label{modelo-probit}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelo\_probit }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x, }\AttributeTok{family =} \FunctionTok{binomial}\NormalTok{(}\AttributeTok{link =} \StringTok{"probit"}\NormalTok{))}
+\FunctionTok{summary}\NormalTok{(modelo\_probit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = y ~ x, family = binomial(link = "probit"))
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)   
+## (Intercept) -0.06443    0.40068  -0.161  0.87224   
+## x           -0.03000    0.01029  -2.915  0.00355 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 29.065  on 20  degrees of freedom
+## Residual deviance: 12.330  on 19  degrees of freedom
+## AIC: 16.33
+## 
+## Number of Fisher Scoring iterations: 7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(x, y, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \FunctionTok{ifelse}\NormalTok{(y }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
+     \AttributeTok{main =} \StringTok{"Ajuste de Regresión Probit"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"x = Auto Time {-} Bus Time"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"P(car)"}\NormalTok{)}
+
+\NormalTok{x\_seq }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FunctionTok{min}\NormalTok{(x), }\FunctionTok{max}\NormalTok{(x), }\AttributeTok{length.out =} \DecValTok{100}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(x\_seq, }\FunctionTok{predict}\NormalTok{(modelo\_probit, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x\_seq), }\AttributeTok{type =} \StringTok{"response"}\NormalTok{),}
+      \AttributeTok{col =} \StringTok{"orange"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+
+\FunctionTok{legend}\NormalTok{(}\StringTok{"bottomleft"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Observado 1"}\NormalTok{, }\StringTok{"Observado 0"}\NormalTok{, }\StringTok{"Curva Probit"}\NormalTok{),}
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"orange"}\NormalTok{), }\AttributeTok{pch =} \FunctionTok{c}\NormalTok{(}\DecValTok{19}\NormalTok{, }\DecValTok{19}\NormalTok{, }\ConstantTok{NA}\NormalTok{), }\AttributeTok{lty =} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{cex =} \FloatTok{0.8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{regresion_logit_probit_con_apendices_limpios_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\subsection{Comparación: Logit vs
+Probit}\label{comparaciuxf3n-logit-vs-probit}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelo\_logit  }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x, }\AttributeTok{family =} \FunctionTok{binomial}\NormalTok{(}\AttributeTok{link =} \StringTok{"logit"}\NormalTok{))}
+
+\FunctionTok{plot}\NormalTok{(x, y, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \FunctionTok{ifelse}\NormalTok{(y }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
+     \AttributeTok{main =} \StringTok{"Comparación: Logit vs Probit"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"x = Auto Time {-} Bus Time"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"P(car)"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+
+\FunctionTok{lines}\NormalTok{(x\_seq, }\FunctionTok{predict}\NormalTok{(modelo\_logit, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x\_seq), }\AttributeTok{type =} \StringTok{"response"}\NormalTok{),}
+      \AttributeTok{col =} \StringTok{"darkgreen"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(x\_seq, }\FunctionTok{predict}\NormalTok{(modelo\_probit, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x\_seq), }\AttributeTok{type =} \StringTok{"response"}\NormalTok{),}
+      \AttributeTok{col =} \StringTok{"orange"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+
+\FunctionTok{legend}\NormalTok{(}\StringTok{"bottomleft"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Observado 1"}\NormalTok{, }\StringTok{"Observado 0"}\NormalTok{, }\StringTok{"Logit"}\NormalTok{, }\StringTok{"Probit"}\NormalTok{),}
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{, }\StringTok{"orange"}\NormalTok{),}
+       \AttributeTok{pch =} \FunctionTok{c}\NormalTok{(}\DecValTok{19}\NormalTok{, }\DecValTok{19}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\ConstantTok{NA}\NormalTok{), }\AttributeTok{lty =} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{cex =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{regresion_logit_probit_con_apendices_limpios_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\subsection{Bootstrap + Modelos}\label{bootstrap-modelos}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datos }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(auto\_time, bus\_time, }\AttributeTok{x =}\NormalTok{ auto\_time }\SpecialCharTok{{-}}\NormalTok{ bus\_time, y)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{bootstrap\_sample }\OtherTok{\textless{}{-}}\NormalTok{ datos[}\FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(datos), }\AttributeTok{size =} \DecValTok{100}\NormalTok{, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{), ]}
+\NormalTok{x\_btsp }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap\_sample}\SpecialCharTok{$}\NormalTok{x}
+\NormalTok{y\_btsp }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap\_sample}\SpecialCharTok{$}\NormalTok{y}
+
+\NormalTok{modelo\_btstrap }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(y\_btsp }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x\_btsp, }\AttributeTok{family =}\NormalTok{ binomial)}
+\FunctionTok{summary}\NormalTok{(modelo\_btstrap)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = y_btsp ~ x_btsp, family = binomial)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) -0.52119    0.41264  -1.263    0.207    
+## x_btsp      -0.06812    0.01300  -5.240 1.61e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 138.589  on 99  degrees of freedom
+## Residual deviance:  45.803  on 98  degrees of freedom
+## AIC: 49.803
+## 
+## Number of Fisher Scoring iterations: 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(x\_btsp, y\_btsp, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{col =} \FunctionTok{ifelse}\NormalTok{(y\_btsp }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
+     \AttributeTok{main =} \StringTok{"Logistic Regression Fit (Bootstrap)"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"x = Auto Time {-} Bus Time"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"P(car)"}\NormalTok{)}
+
+\NormalTok{x\_seq\_btsp }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FunctionTok{min}\NormalTok{(x\_btsp), }\FunctionTok{max}\NormalTok{(x\_btsp), }\AttributeTok{length.out =} \DecValTok{100}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(x\_seq\_btsp, }\FunctionTok{predict}\NormalTok{(modelo\_btstrap, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x\_btsp =}\NormalTok{ x\_seq\_btsp), }\AttributeTok{type =} \StringTok{"response"}\NormalTok{),}
+      \AttributeTok{col =} \StringTok{"darkgreen"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+
+\FunctionTok{legend}\NormalTok{(}\StringTok{"bottomleft"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Observado 1"}\NormalTok{, }\StringTok{"Observado 0"}\NormalTok{, }\StringTok{"Curva logística"}\NormalTok{),}
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{pch =} \FunctionTok{c}\NormalTok{(}\DecValTok{19}\NormalTok{, }\DecValTok{19}\NormalTok{, }\ConstantTok{NA}\NormalTok{), }\AttributeTok{lty =} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{cex =} \FloatTok{0.8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{regresion_logit_probit_con_apendices_limpios_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\subsection{Conclusión General}\label{conclusiuxf3n-general}
+
+Ambos modelos, logit y probit, son útiles para clasificación binaria. El
+modelo logit tiene una curva más empinada en el centro, mientras que el
+probit es más suave en los extremos. La técnica de bootstrap refuerza la
+validez de los estimadores obtenidos.
+
+\section{Apéndices: Documentos TeX
+relevantes}\label{apuxe9ndices-documentos-tex-relevantes}
+
+\subsection{Derivadas Regresion}\label{derivadas-regresion}
+
+
+\subsection{Maalouf Logistic Regression
+Deducciones}\label{maalouf-logistic-regression-deducciones}
+
+
+\subsection{Maalouf Logistic Regression
+Full}\label{maalouf-logistic-regression-full}
+
+
+\subsection{Resumen Ai Ml Con Referencias
+Compila}\label{resumen-ai-ml-con-referencias-compila}
+
+
+\subsection{Resumen Ai Ml Con Referencias
+Final}\label{resumen-ai-ml-con-referencias-final}
+
+
+\subsection{Resumen Ai Ml Con Referencias
+Tikz}\label{resumen-ai-ml-con-referencias-tikz}
+
+
+\subsection{Resumen Ai Ml Con
+Referencias}\label{resumen-ai-ml-con-referencias}
+
+\subsection{Resumen Logistic Regression
+Completo}\label{resumen-logistic-regression-completo}
+
+
+\subsection{Resumen Logistic Regression
+Formal}\label{resumen-logistic-regression-formal}
+
+
+\section{Apéndices: Documentos TeX (versiones
+limpias)}\label{apuxe9ndices-documentos-tex-versiones-limpias}
+
+\subsection{Derivadas Regresion}\label{derivadas-regresion-1}
+
+
+
+\subsection{Maalouf Logistic Regression
+Deducciones}\label{maalouf-logistic-regression-deducciones-1}
+
+
+
+\subsection{Maalouf Logistic Regression
+Full}\label{maalouf-logistic-regression-full-1}
+
+
+
+\subsection{Resumen Ai Ml Con Referencias
+Compila}\label{resumen-ai-ml-con-referencias-compila-1}
+
+
+
+\subsection{Resumen Ai Ml Con Referencias
+Final}\label{resumen-ai-ml-con-referencias-final-1}
+
+
+
+\subsection{Resumen Ai Ml Con Referencias
+Tikz}\label{resumen-ai-ml-con-referencias-tikz-1}
+
+
+
+\subsection{Resumen Ai Ml Con
+Referencias}\label{resumen-ai-ml-con-referencias-1}
+
+
+
+\subsection{Resumen Logistic Regression
+Completo}\label{resumen-logistic-regression-completo-1}
+
+
+
+\subsection{Resumen Logistic Regression
+Formal}\label{resumen-logistic-regression-formal-1}
+
+
+
+\end{document}

@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+
+\title{Integraci\'on de Aprendizaje Autom\'atico en Sistemas de Colas con Encuestas: \\ Un Enfoque desde las Matem\'aticas Aplicadas}
+\author{Carlos [Tu Apellido]}
+\date{Abril 2025}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\textbf{Resumen Extendido:} 
+La presente propuesta doctoral se centra en el desarrollo de una teor\'ia unificada que integre modelos estoc\'asticos de sistemas de colas, particularmente aquellos del tipo polling systems, con algoritmos de aprendizaje autom\'atico (Machine Learning, ML). El objetivo central es formular, analizar y validar modelos matem\'aticos que permitan optimizar pol\'iticas de servicio en entornos din\'amicos, utilizando t\'ecnicas de ML como el Aprendizaje por Refuerzo. Esta integraci\'on pretende superar las limitaciones de los modelos cl\'asicos, adapt\'andose en tiempo real a cambios en el entorno y mejorando el rendimiento en medidas como el tiempo de espera y el throughput. El proyecto contempla tanto una base te\'orica rigurosa, sustentada en cadenas de Markov y procesos semi-Markov, como una implementaci\'on computacional basada en simulaciones. Se espera que los resultados contribuyan al campo de las matem\'aticas aplicadas y a \textit{data-driven systems} en \'areas como telecomunicaciones, manufactura y log\'istica.
+\end{abstract}
+
+\section*{1. Introducci\'on}
+La teor\'ia de colas y los sistemas de encuestas (\textit{polling systems}) han sido pilares en el an\'alisis de sistemas estoc\'asticos con aplicaciones en redes de telecomunicaciones, manufactura, log\'istica, entre otros. Sin embargo, estos modelos tradicionales muchas veces descansan sobre supuestos estacionarios o determin\'isticos que los hacen poco adaptables a ambientes reales, altamente din\'amicos.
+
+Por otro lado, el Aprendizaje Autom\'atico (\textit{Machine Learning, ML}) ha demostrado ser eficaz para aprender patrones y tomar decisiones bajo incertidumbre en tiempo real. Esta investigaci\'on propone una integraci\'on formal entre la teor\'ia de colas ---en particular los \textit{polling systems}--- y t\'ecnicas modernas de ML, incluyendo el Aprendizaje por Refuerzo, con el objetivo de desarrollar una teor\'ia unificada que permita modelar, analizar y optimizar estos sistemas.
+
+\section*{2. Justificaci\'on}
+Existe una brecha significativa en la literatura sobre c\'omo utilizar ML para optimizar el comportamiento de sistemas de colas multi-servidor o multi-cliente. Si bien se han explorado algunos enfoques emp\'iricos, no hay una teor\'ia unificada que combine la estructura matem\'atica rigurosa de los modelos de colas con la flexibilidad adaptativa del aprendizaje autom\'atico. Esta propuesta se ubica en el cruce entre matem\'aticas aplicadas, ciencia de datos y optimizaci\'on, con potencial para generar contribuciones significativas tanto te\'oricas como aplicadas.
+
+\section*{3. Objetivos}
+\subsection*{Objetivo General}
+Desarrollar modelos matem\'aticos y computacionales que integren Aprendizaje Autom\'atico en sistemas de colas con encuestas, y analizar rigurosamente su desempe\~no.
+
+\subsection*{Objetivos Espec\'ificos}
+\begin{itemize}
+  \item Formular modelos estoc\'asticos que integren decisiones aprendidas mediante ML en sistemas de tipo \textit{polling}.
+  \item Analizar la estabilidad, convergencia y comportamiento asint\'otico de los modelos propuestos.
+  \item Comparar el rendimiento de las pol\'iticas aprendidas frente a las cl\'asicas como \textit{round-robin}, \textit{gated}, y \textit{exhaustive}.
+  \item Validar los resultados mediante simulaci\'on num\'erica y experimentos computacionales.
+\end{itemize}
+
+\section*{4. Hip\'otesis}
+\begin{itemize}
+  \item \textbf{H1:} Es posible construir un modelo matem\'atico h\'ibrido entre teor\'ia de colas y aprendizaje autom\'atico que preserve la estabilidad del sistema bajo ciertas condiciones.
+  \item \textbf{H2:} Las pol\'iticas de servicio aprendidas mediante ML superan en eficiencia (tiempo de espera, \textit{throughput}) a las pol\'iticas est\'aticas tradicionales en entornos din\'amicos.
+\end{itemize}
+
+\section*{5. Metodolog\'ia}
+\begin{enumerate}
+  \item Revisi\'on bibliogr\'afica detallada sobre teor\'ia de colas, \textit{polling systems}, y Aprendizaje por Refuerzo.
+  \item Construcci\'on de modelos estoc\'asticos basados en cadenas de Markov, procesos semi-Markov o redes de colas.
+  \item Implementaci\'on de algoritmos de aprendizaje (supervisado/no supervisado/refuerzo) para aprendizaje de pol\'iticas.
+  \item Simulaci\'on computacional usando Python/R y librer\'ias como \texttt{simpy}, \texttt{tensorflow}, \texttt{keras}.
+  \item An\'alisis matem\'atico de estabilidad, condiciones de ergodicidad y convergencia.
+\end{enumerate}
+
+\section*{6. Resultados Esperados}
+\begin{itemize}
+  \item Desarrollo de una teor\'ia unificada que articule aprendizaje y sistemas estoc\'asticos de colas.
+  \item Art\'iculos publicables en revistas de matem\'aticas aplicadas, ciencia de datos y teor\'ia de colas.
+  \item Herramientas de simulaci\'on de utilidad para ingenier\'ia, log\'istica o telecomunicaciones.
+\end{itemize}
+
+\section*{7. Cronograma Tentativo}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Fase} & \textbf{Duraci\'on} \\
+\hline
+Revisi\'on bibliogr\'afica & Mes 1 - Mes 3 \\
+Modelado matem\'atico inicial & Mes 4 - Mes 6 \\
+Desarrollo de algoritmos ML & Mes 7 - Mes 9 \\
+Simulaciones y experimentaci\'on & Mes 10 - Mes 12 \\
+An\'alisis te\'orico y validaci\'on & Mes 13 - Mes 15 \\
+Redacci\'on de art\'iculos y tesis & Mes 16 - Mes 18 \\
+\hline
+\end{tabular}
+
+\section*{8. Antecedentes Te\'oricos}
+\begin{itemize}
+  \item \textbf{Teor\'ia de Colas:} Modelos M/M/1, G/G/1, redes de colas de Jackson.
+  \item \textbf{Polling Systems:} Pol\'iticas de servicio c\'iclicas, prioridades, colas con interrupciones.
+  \item \textbf{Machine Learning:} Aprendizaje supervisado, no supervisado y por refuerzo.
+  \item \textbf{Integraci\'on ML + Colas:} Modelos h\'ibridos recientes en redes y data centers.
+\end{itemize}
+
+\section*{9. Bibliograf\'ia Inicial}
+\begin{itemize}
+  \item Kleinrock, L. \textit{Queueing Systems, Volume 1: Theory}. Wiley-Interscience.
+  \item Sutton, R. S., \& Barto, A. G. \textit{Reinforcement Learning: An Introduction}.
+  \item Chen, H. \& Yao, D. D. \textit{Fundamentals of Queueing Networks: Performance, Asymptotics, and Optimization}.
+  \item Zhou, Z. et al. (2020). "Queueing Theory Meets Deep Learning".
+  \item Art\'iculos recientes en IEEE, Springer y MDPI sobre ML y sistemas de colas.
+\end{itemize}
+
+\end{document}

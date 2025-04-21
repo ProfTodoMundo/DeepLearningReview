@@ -1,0 +1,130 @@
+---
+title: "Análisis de Regresión Logística, Probit y Bootstrap"
+author: "Carlos"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Carga de Datos
+
+```{r}
+auto_time <- c(52.90, 4.10, 4.10, 56.20, 51.80, 0.20, 27.60, 89.90, 41.50,
+               95.00, 99.10, 18.50, 82.00, 8.60, 22.50, 51.40, 81.00, 51.00,
+               62.20, 95.10, 41.60)
+bus_time <- c(4.4, 28.5, 86.9, 31.6, 20.2, 91.2, 79.7, 2.2, 24.5,
+              43.5, 8.4, 84, 38, 1.6, 74.1, 83.8, 19.2, 85, 90.1, 22.2, 91.5)
+y <- c(0, 0, 1, 0, 0, 1, 1, 0, 0,
+       0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1)
+x <- auto_time - bus_time
+```
+
+## Modelo de Regresión Logística
+
+```{r}
+modelo <- glm(y ~ x, family = binomial)
+summary(modelo)
+
+plot(x, y, pch = 19, col = ifelse(y == 1, "blue", "red"),
+     main = "Logistic Regression Fit", xlab = "x = Auto Time - Bus Time", ylab = "P(car)")
+curve(predict(modelo, data.frame(x = sort(x)), type = "response"),
+      add = TRUE, col = "darkgreen", lwd = 2)
+legend("bottomright", legend = c("Observado 1", "Observado 0", "Curva logística"),
+       col = c("blue", "red", "darkgreen"), pch = c(19, 19, NA), lty = c(NA, NA, 1))
+```
+
+## Ajuste por Mínimos Cuadrados No Lineales (NLS)
+
+```{r}
+b0_init <- coef(modelo)[1]
+b1_init <- coef(modelo)[2]
+modelo_nls <- nls(
+  y ~ 1 / (1 + exp(-(b0 + b1 * x))),
+  start = list(b0 = b0_init , b1 = b1_init)
+)
+summary(modelo_nls)
+
+plot(x, y, pch = 19, col = ifelse(y == 1, "blue", "red"),
+     main = "Comparación de Métodos de Ajuste", xlab = "x = Auto Time - Bus Time", ylab = "P(car)")
+x_sorted <- sort(x)
+lines(x_sorted, predict(modelo, type = "response")[order(x)], col = "darkgreen", lwd = 2)
+
+b0_nls <- coef(modelo_nls)["b0"]
+b1_nls <- coef(modelo_nls)["b1"]
+p_nls <- 1 / (1 + exp(-(b0_nls + b1_nls * x_sorted)))
+lines(x_sorted, p_nls, col = "purple", lwd = 2, lty = 2)
+
+legend("bottomleft", legend = c("GLM (Verosimilitud)", "NLS (Mínimos Cuadrados)"),
+       col = c("darkgreen", "purple"), lty = c(1, 2), lwd = 2, cex = 0.5)
+```
+
+## Modelo Probit
+
+```{r}
+modelo_probit <- glm(y ~ x, family = binomial(link = "probit"))
+summary(modelo_probit)
+
+plot(x, y, pch = 19, col = ifelse(y == 1, "blue", "red"),
+     main = "Ajuste de Regresión Probit", xlab = "x = Auto Time - Bus Time", ylab = "P(car)")
+
+x_seq <- seq(min(x), max(x), length.out = 100)
+lines(x_seq, predict(modelo_probit, newdata = data.frame(x = x_seq), type = "response"),
+      col = "orange", lwd = 2)
+
+legend("bottomleft", legend = c("Observado 1", "Observado 0", "Curva Probit"),
+       col = c("blue", "red", "orange"), pch = c(19, 19, NA), lty = c(NA, NA, 1), lwd = 2, cex = 0.8)
+```
+
+## Comparación: Logit vs Probit
+
+```{r}
+modelo_logit  <- glm(y ~ x, family = binomial(link = "logit"))
+
+plot(x, y, pch = 19, col = ifelse(y == 1, "blue", "red"),
+     main = "Comparación: Logit vs Probit", xlab = "x = Auto Time - Bus Time", ylab = "P(car)", ylim = c(0, 1))
+
+lines(x_seq, predict(modelo_logit, newdata = data.frame(x = x_seq), type = "response"),
+      col = "darkgreen", lwd = 2)
+lines(x_seq, predict(modelo_probit, newdata = data.frame(x = x_seq), type = "response"),
+      col = "orange", lwd = 2, lty = 2)
+
+legend("bottomleft", legend = c("Observado 1", "Observado 0", "Logit", "Probit"),
+       col = c("blue", "red", "darkgreen", "orange"),
+       pch = c(19, 19, NA, NA), lty = c(NA, NA, 1, 2), lwd = 2, cex = 0.5)
+```
+
+## Bootstrap + Modelos
+
+```{r}
+datos <- data.frame(auto_time, bus_time, x = auto_time - bus_time, y)
+set.seed(123)
+bootstrap_sample <- datos[sample(1:nrow(datos), size = 100, replace = TRUE), ]
+x_btsp <- bootstrap_sample$x
+y_btsp <- bootstrap_sample$y
+
+modelo_btstrap <- glm(y_btsp ~ x_btsp, family = binomial)
+summary(modelo_btstrap)
+
+plot(x_btsp, y_btsp, pch = 19, col = ifelse(y_btsp == 1, "blue", "red"),
+     main = "Logistic Regression Fit (Bootstrap)", xlab = "x = Auto Time - Bus Time", ylab = "P(car)")
+
+x_seq_btsp <- seq(min(x_btsp), max(x_btsp), length.out = 100)
+lines(x_seq_btsp, predict(modelo_btstrap, newdata = data.frame(x_btsp = x_seq_btsp), type = "response"),
+      col = "darkgreen", lwd = 2)
+
+legend("bottomleft", legend = c("Observado 1", "Observado 0", "Curva logística"),
+       col = c("blue", "red", "darkgreen"), pch = c(19, 19, NA), lty = c(NA, NA, 1), lwd = 2, cex = 0.8)
+```
+
+## Conclusión General
+
+Ambos modelos, logit y probit, son útiles para clasificación binaria. El modelo logit tiene una curva más empinada en el centro, mientras que el probit es más suave en los extremos. La técnica de bootstrap refuerza la validez de los estimadores obtenidos.
+

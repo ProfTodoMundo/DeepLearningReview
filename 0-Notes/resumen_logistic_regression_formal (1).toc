@@ -1,0 +1,9 @@
+\contentsline {chapter}{\numberline {1}Introducci\'on}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Modelo de regresi\'on log\'istica}{4}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Derivadas: Gradiente y Hessiano}{5}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Regularizaci\'on Ridge (L2)}{6}{chapter.4}%
+\contentsline {chapter}{\numberline {5}TR-IRLS (Trust Region IRLS)}{7}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Eventos raros y correcciones}{8}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Correcci\'on de Firth}{9}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Regla de decisi\'on}{10}{chapter.8}%
+\contentsline {chapter}{Referencias}{11}{chapter*.2}%

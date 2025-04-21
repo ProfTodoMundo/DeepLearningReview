@@ -1,0 +1,107 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{lmodern}
+\usepackage{bm}
+\title{Desarrollo de la Regresión Lineal \\ (Hojas 02 y 03)}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{1. Desarrollo de la derivada del costo respecto a $\theta_0$}
+
+Recordamos que la función de costo es:
+
+\[
+J(\theta_0, \theta_1) = \frac{1}{2N} \sum_{i=1}^N \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2
+\]
+
+Donde:
+
+\[
+h_\theta(x^{(i)}) = \theta_0 + \theta_1 x^{(i)}
+\]
+
+Sustituimos $h_\theta$:
+
+\[
+J(\theta_0, \theta_1) = \frac{1}{2N} \sum_{i=1}^N \left( \theta_0 + \theta_1 x^{(i)} - y^{(i)} \right)^2
+\]
+
+Derivamos respecto a $\theta_0$:
+
+\[
+\frac{\partial J}{\partial \theta_0} = \frac{1}{2N} \sum_{i=1}^N 2 \left( \theta_0 + \theta_1 x^{(i)} - y^{(i)} \right) \cdot 1
+\]
+
+\[
+\frac{\partial J}{\partial \theta_0} = \frac{1}{N} \sum_{i=1}^N \left( \theta_0 + \theta_1 x^{(i)} - y^{(i)} \right)
+\]
+
+\section*{2. Derivada del costo respecto a $\theta_1$}
+
+\[
+\frac{\partial J}{\partial \theta_1} = \frac{1}{2N} \sum_{i=1}^N 2 \left( \theta_0 + \theta_1 x^{(i)} - y^{(i)} \right) \cdot x^{(i)}
+\]
+
+\[
+\frac{\partial J}{\partial \theta_1} = \frac{1}{N} \sum_{i=1}^N \left( \theta_0 + \theta_1 x^{(i)} - y^{(i)} \right) x^{(i)}
+\]
+
+\section*{3. Vector Gradiente y Descenso por Gradiente}
+
+\begin{align*}
+\theta_0 &:= \theta_0 - \alpha \cdot \frac{\partial J}{\partial \theta_0} \\
+\theta_1 &:= \theta_1 - \alpha \cdot \frac{\partial J}{\partial \theta_1}
+\end{align*}
+
+donde $\alpha$ es la tasa de aprendizaje.
+
+\section*{4. Forma Vectorial}
+
+Si se define:
+
+\[
+\textbf{X} = \begin{bmatrix}
+1 & x^{(1)} \\
+1 & x^{(2)} \\
+\vdots & \vdots \\
+1 & x^{(N)}
+\end{bmatrix}, \quad 
+\bm{y} = \begin{bmatrix}
+y^{(1)} \\
+y^{(2)} \\
+\vdots \\
+y^{(N)}
+\end{bmatrix}, \quad
+\bm{\theta} = \begin{bmatrix}
+\theta_0 \\
+\theta_1
+\end{bmatrix}
+\]
+
+Entonces el vector de predicciones es:
+
+\[
+\bm{h}_\theta = \bm{X} \bm{\theta}
+\]
+
+Y la función de costo es:
+
+\[
+J(\bm{\theta}) = \frac{1}{2N} \left\| \bm{X} \bm{\theta} - \bm{y} \right\|^2
+\]
+
+El gradiente vectorial es:
+
+\[
+\nabla_\theta J = \frac{1}{N} \bm{X}^\top (\bm{X} \bm{\theta} - \bm{y})
+\]
+
+\end{document}

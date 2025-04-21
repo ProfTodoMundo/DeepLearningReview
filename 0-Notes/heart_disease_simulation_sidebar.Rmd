@@ -1,0 +1,100 @@
+
+---
+title: "Simulación de Datos de Enfermedad Cardíaca"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    theme: cerulean
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introducción
+
+Este documento simula un conjunto de datos inspirado en la base de datos de enfermedad cardíaca. Se incluyen variables comunes como edad, sexo, colesterol, presión sanguínea, frecuencia cardíaca máxima, y un resultado binario indicando la presencia o ausencia de enfermedad cardíaca (AHD).
+
+# Simulación de Datos
+
+```{r}
+set.seed(123)
+
+n <- 500
+
+age <- round(rnorm(n, mean = 54, sd = 9))
+# Edad del paciente (en años). Promedio de 54 con una desviación estándar de 9.
+
+sex <- rbinom(n, 1, 0.7)
+# Sexo del paciente: 0 = mujer, 1 = hombre. Se asume 70% de hombres.
+
+restbp <- round(rnorm(n, mean = 130, sd = 15))
+# Presión arterial en reposo (en mm Hg). Promedio de 130 mm Hg.
+
+chol <- round(rnorm(n, mean = 245, sd = 50))
+# Nivel de colesterol sérico (en mg/dl). Promedio de 245.
+
+fbs <- rbinom(n, 1, 0.15)
+# Glucemia en ayunas: 1 = >120 mg/dl, 0 = <=120 mg/dl. Se asume ~15% de pacientes con glucosa alta.
+
+restecg <- sample(0:2, n, replace = TRUE, prob = c(0.5, 0.4, 0.1))
+# Resultados del electrocardiograma en reposo:
+# 0 = normal, 1 = con anormalidad de la onda ST-T, 2 = hipertrofia ventricular izquierda probable.
+
+maxhr <- round(rnorm(n, mean = 150, sd = 22))
+# Frecuencia cardíaca máxima alcanzada durante el ejercicio.
+
+exang <- rbinom(n, 1, 0.3)
+# Angina inducida por ejercicio: 1 = sí, 0 = no. Se simula en 30% de los casos.
+
+oldpeak <- round(runif(n, min = 0.0, max = 6.2), 1)
+# Depresión del segmento ST inducida por el ejercicio en relación al reposo.
+
+slope <- sample(1:3, n, replace = TRUE, prob = c(0.45, 0.4, 0.15))
+# Pendiente del segmento ST durante el ejercicio:
+# 1 = ascendente, 2 = plana, 3 = descendente.
+
+ca <- sample(0:4, n, replace = TRUE, prob = c(0.6, 0.2, 0.1, 0.07, 0.03))
+# Número de vasos principales coloreados por fluoroscopía (de 0 a 4).
+
+# Variables categóricas
+chest_pain <- sample(c("typical", "asymptomatic", "nonanginal", "nontypical"),
+                     n, replace = TRUE, prob = c(0.25, 0.35, 0.25, 0.15))
+# Resultado del test de talio:
+# "normal" = flujo sanguíneo normal, "fixed" = defecto fijo, "reversable" = defecto reversible.
+thal <- sample(c("normal", "fixed", "reversable"),
+               n, replace = TRUE, prob = c(0.6, 0.2, 0.2))
+
+# Probabilidad de enfermedad cardíaca
+logit <- -3 + 0.04 * age + 0.5 * sex + 0.03 * chol + 0.6 * fbs - 0.02 * maxhr + 0.3 * exang + 0.5 * oldpeak
+prob_ahd <- 1 / (1 + exp(-logit))
+ahd <- ifelse(runif(n) < prob_ahd, "Yes", "No")
+
+heart_data <- data.frame(age, sex, chest_pain, restbp, chol, fbs, restecg,
+                         maxhr, exang, oldpeak, slope, ca, thal, ahd)
+
+head(heart_data)
+```
+
+# Visualización de Frecuencias
+
+```{r}
+table(heart_data$ahd)
+```
+
+# Gráfico de Frecuencia Cardiaca vs Colesterol
+
+```{r}
+plot(heart_data$chol, heart_data$maxhr,
+     col = ifelse(heart_data$ahd == "Yes", "red", "blue"),
+     pch = 19,
+     xlab = "Colesterol", ylab = "MaxHR",
+     main = "Frecuencia Cardiaca Máxima vs Colesterol")
+legend("topright", legend = c("No AHD", "AHD"), col = c("blue", "red"), pch = 19)
+```
+
+# Conclusión
+
+Este conjunto de datos sintético es útil para pruebas de modelos de regresión logística, clasificación, y visualizaciones en medicina predictiva.

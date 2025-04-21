@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  25 MAR 2025 16:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  9 APR 2025 10:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -299,24 +299,17 @@ Chapter 2.
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-
-
-Package rerunfilecheck Warning: File `LibroIA.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `LibroIA.out':
-(rerunfilecheck)             Before: 8F965DB5FD81706432AF9976B35E5821;5751
-(rerunfilecheck)             After:  C77E354A6E0523ECA66EA6DBE407CF70;14782.
+Package rerunfilecheck Info: File `LibroIA.out' has not changed.
+(rerunfilecheck)             Checksum: C77E354A6E0523ECA66EA6DBE407CF70;14782.
  ) 
 Here is how much of TeX's memory you used:
- 8615 strings out of 474116
- 133976 string characters out of 5743681
+ 8614 strings out of 474116
+ 133961 string characters out of 5743681
  1943187 words of memory out of 5000000
- 30745 multiletter control sequences out of 15000+600000
+ 30744 multiletter control sequences out of 15000+600000
  564392 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,7n,79p,408b,663s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,7n,79p,431b,663s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
@@ -333,7 +326,7 @@ e/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive
 2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/20
 24/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/202
 4/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on LibroIA.pdf (62 pages, 251010 bytes).
+Output written on LibroIA.pdf (62 pages, 251715 bytes).
 PDF statistics:
  786 PDF objects out of 1000 (max. 8388607)
  683 compressed objects within 7 object streams

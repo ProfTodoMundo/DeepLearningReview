@@ -1,0 +1,123 @@
+
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+
+\title{Derivaci\'on paso a paso de los coeficientes en Regresi\'on Lineal}
+\author{Carlos}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Objetivo}
+Dado un conjunto de datos $(x_i, y_i)$ para $i = 1, \dots, n$, queremos encontrar los coeficientes $\beta_0$ y $\beta_1$ que minimicen el error cuadr\'atico:
+\[
+\sum_{i=1}^{n} (y_i - (\beta_0 + \beta_1 x_i))^2
+\]
+
+Es m\'as sencillo resolver este problema usando la forma \emph{centralizada}:
+\[
+y_i = \beta_0^* + \beta_1(x_i - \bar{x}) + \varepsilon_i
+\]
+donde:
+\[
+\beta_0 = \beta_0^* - \beta_1 \bar{x}
+\]
+
+\section*{Paso 1: Derivada parcial respecto a \( \beta_0^* \)}
+Queremos minimizar:
+\[
+L(\beta_0^*, \beta_1) = \sum_{i=1}^{n} [y_i - (\beta_0^* + \beta_1(x_i - \bar{x}))]^2
+\]
+
+Calculamos la derivada parcial:
+\begin{align*}
+\frac{\partial L}{\partial \beta_0^*} &= \sum_{i=1}^{n} 2[y_i - (\beta_0^* + \beta_1(x_i - \bar{x}))](-1) \\
+&= -2 \sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})]
+\end{align*}
+
+Igualamos a cero:
+\[
+\sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})] = 0
+\]
+
+Distribuimos:
+\[
+n \beta_0^* + \beta_1 \sum_{i=1}^{n}(x_i - \bar{x}) = \sum_{i=1}^{n} y_i
+\]
+Pero:
+\[
+\sum_{i=1}^{n}(x_i - \bar{x}) = 0
+\]
+Entonces:
+\[
+n \beta_0^* = \sum_{i=1}^{n} y_i \Rightarrow \beta_0^* = \bar{y}
+\]
+
+\section*{Paso 2: Derivada parcial respecto a \( \beta_1 \)}
+Nuevamente:
+\[
+L(\beta_0^*, \beta_1) = \sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})]^2
+\]
+
+Derivamos con respecto a $\beta_1$:
+\begin{align*}
+\frac{\partial L}{\partial \beta_1} &= \sum_{i=1}^{n} 2[y_i - \beta_0^* - \beta_1(x_i - \bar{x})](-1)(x_i - \bar{x}) \\
+&= -2 \sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})](x_i - \bar{x})
+\end{align*}
+
+Igualamos a cero:
+\[
+\sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})](x_i - \bar{x}) = 0
+\]
+Sustituimos $\beta_0^* = \bar{y}$:
+\[
+\sum_{i=1}^{n} [y_i - \bar{y} - \beta_1(x_i - \bar{x})](x_i - \bar{x}) = 0
+\]
+
+Distribuimos:
+\[
+\sum_{i=1}^{n} (y_i - \bar{y})(x_i - \bar{x}) - \beta_1 \sum_{i=1}^{n} (x_i - \bar{x})^2 = 0
+\]
+
+Despejamos $\beta_1$:
+\[
+\beta_1 = \frac{\sum_{i=1}^{n} (y_i - \bar{y})(x_i - \bar{x})}{\sum_{i=1}^{n} (x_i - \bar{x})^2} = \frac{S_{xy}}{S_{xx}}
+\]
+
+\section*{Paso 3: Recuperar \( \beta_0 \)}
+\[
+\beta_0 = \beta_0^* - \beta_1 \bar{x} = \bar{y} - \beta_1 \bar{x}
+\]
+
+\section*{Aplicaciones de la Regresi\'on Lineal}
+\begin{itemize}
+  \item Evaluaci\'on de software basado en vectores de c\'odigo (Hyun-il Lim).
+  \item Clasificaci\'on de atributos con peso en MLR para mejorar eficiencia y consumo (Xingang Wang).
+  \item An\'alisis de sensibilidad en portafolios usando an\'alisis factorial (Zhihao Peng).
+  \item Clasificador CWKLR basado en pesos para categor\'ias de objetos (Qingxiang Feng).
+  \item Predicci\'on de temperatura en interruptores de alto voltaje (Xuan Fang).
+  \item Modelado de fantas\'ias humanas para simulaci\'on de antenas (Tadahiko Maeda).
+  \item C\'odigos de video basados en MLR para codificaci\'on intra (Zhaobin Zhang).
+  \item An\'alisis de resonancia magn\'etica funcional mediante regresi\'on simb\'olica (Ernest C. Jackson).
+  \item Predicci\'on del dominio psicomotor de estudiantes con datos educativos (R. Harimurti).
+  \item Comparaci\'on de m\'etodos de regularizaci\'on (Lasso, Ridge, Elastic Net) para mejorar predicci\'on en diferentes esquemas de muestreo.
+  \item Predicci\'on del consumo de partes aeron\'auticas usando MLR (Yanming Wang).
+  \item Evaluaci\'on de manipulaci\'on \'osea en medicina china (Dejian Wei).
+  \item Predicci\'on de lluvias con modelos MLR (Shekhar).
+  \item Estimaci\'on de ventas y comparaci\'on con modelos de aprendizaje profundo (Gopakrishnan T.).
+  \item Predicci\'on del tiempo de cultivo del arroz (Liuminto).
+  \item Procesamiento de datos de materiales con regresi\'on (Dehua Wang).
+  \item Modelado de comportamiento de movimiento usando regresi\'on polin\'omica (Timur Babakeev).
+  \item Predicci\'on de posici\'on con campo sonoro (Francios Giordini).
+  \item Estimaci\'on de vida \'util de materiales usando regresi\'on con LIBS (Joon-Kyong Hoon).
+  \item Modelado del mercado de electricidad con polinomios y MLR (Ahmed Al-Imam).
+  \item Mejora de la eficiencia computacional en simulaciones grandes reduciendo variables y errores.
+  \item Actualizaci\'on de modelos de calidad para im\'agenes m\'edicas (H. Roopa).
+  \item Predicci\'on de rendimiento de cultivos agr\'icolas con MLR y modelos de bosques aleatorios (Suvdha Jambekar).
+  \item Predicci\'on de clases con clasificaci\'on basada en semejanza (Shen-Chuan Tai).
+\end{itemize}
+
+\end{document}

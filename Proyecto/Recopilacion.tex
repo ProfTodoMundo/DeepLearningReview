@@ -1,0 +1,1094 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Resumen Extenso del Art\'iculo: \emph{Machine Learning and Deep Learning: A Review of Methods and Applications}}
+\author{Carlos}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section*{Introducci\'on}
+El art\'iculo presenta una revisi\'on exhaustiva sobre los avances, aplicaciones y desaf\'ios del aprendizaje autom\'atico (\emph{Machine Learning, ML}) y el aprendizaje profundo (\emph{Deep Learning, DL}). Ambos representan pilares fundamentales en la inteligencia artificial moderna, permitiendo avances significativos en reconocimiento de im\'agenes, procesamiento de lenguaje natural, medicina, entre otros. Se hace \'enfasis en sus diferencias t\'ecnicas, sus metodolog\'ias y su impacto en la sociedad.
+
+\section*{Fundamentos}
+\begin{itemize}
+    \item \textbf{Machine Learning (ML):} Es una t\'ecnica de an\'alisis de datos que automatiza la construcci\'on de modelos anal\'iticos. Utiliza m\'etodos estad\'isticos para que las m\'aquinas aprendan de los datos sin programaci\'on expl\'icita.
+    \item \textbf{Deep Learning (DL):} Subconjunto de ML que emplea redes neuronales profundas inspiradas en el cerebro humano. Permite trabajar con datos no estructurados y resolver problemas complejos como reconocimiento de voz e im\'agenes.
+\end{itemize}
+
+\section*{Metodolog\'ia de Investigaci\'on}
+Se realiz\'o una revisi\'on bibliogr\'afica sistem\'atica de art\'iculos cient\'ificos, libros y entrevistas a expertos en el \'area. La metodolog\'ia incluy\'o:
+\begin{itemize}
+    \item Revisi\'on de literatura en bases de datos acad\'emicas.
+    \item An\'alisis de datos, identificando patrones y relaciones.
+    \item Experimentaci\'on para evaluar modelos y algoritmos.
+\end{itemize}
+
+\section*{Resultados Principales}
+\begin{itemize}
+    \item ML es eficaz con datos estructurados (por ejemplo, an\'alisis financiero), mientras que DL se destaca con datos no estructurados (como texto, audio o im\'agenes).
+    \item Las aplicaciones incluyen reconocimiento de patrones, diagn\'ostico m\'edico, sistemas de recomendaci\'on, veh\'iculos aut\'onomos, etc.
+    \item GANs (Generative Adversarial Networks) y RL (Reinforcement Learning) son dos \'areas de DL altamente innovadoras.
+    \item Existe una preocupaci\'on creciente por la explicabilidad, privacidad y equidad en los modelos.
+    \item Las redes neuronales como CNNs (vis\'on por computadora) y RNNs (procesamiento secuencial) han mostrado avances notables.
+\end{itemize}
+
+\section*{Aplicaciones Destacadas}
+\begin{itemize}
+    \item \textbf{Salud:} An\'alisis de im\'agenes m\'edicas, diagn\'ostico automatizado, predicci\'on de enfermedades.
+    \item \textbf{Finanzas:} Detecci\'on de fraudes, evaluaci\'on de riesgos, predicci\'on de mercados.
+    \item \textbf{Educaci\'on:} Sistemas personalizados de aprendizaje, predicci\'on de desempe\~no.
+    \item \textbf{Industria:} Manufactura inteligente, mantenimiento predictivo.
+    \item \textbf{Transporte:} Veh\'iculos aut\'onomos, optimizaci\'on de rutas.
+\end{itemize}
+
+\section*{Desaf\'ios y Consideraciones \'Eticas}
+\begin{itemize}
+    \item \textbf{Privacidad:} Riesgo de mal uso de datos sensibles.
+    \item \textbf{Transparencia:} Necesidad de desarrollar modelos explicables (XAI).
+    \item \textbf{Sesgo:} Problemas derivados de datos desequilibrados.
+    \item \textbf{Impacto laboral:} Automatizaci\'on de empleos y necesidad de reentrenamiento.
+\end{itemize}
+
+\section*{Conclusi\'on}
+El aprendizaje autom\'atico y profundo est\'an redefiniendo el panorama tecnol\'ogico global. A pesar de sus enormes beneficios, tambi\'en presentan retos t\'ecnicos y \'eticos que deben abordarse. La inversi\'on en investigaci\'on, educaci\'on y marcos regulatorios ser\'a clave para garantizar un desarrollo justo, transparente y responsable.
+
+\section*{Resumen general}
+El artículo de Maher Maalouf (2011) es una revisión detallada de la regresión logística (RL) como técnica central para problemas de clasificación binaria. Se abordan tanto los fundamentos teóricos del modelo como estrategias computacionales y estadísticas para mejorar su rendimiento, en especial en contextos con desbalance de clases o datos de alta dimensión.
+
+\section*{Modelo base de regresión logística}
+La RL modela la probabilidad de un evento binario $y_i \in \{0,1\}$ en función de un vector de predictores $x_i$ mediante:
+\begin{equation}
+    p_i = \frac{1}{1 + e^{-x_i \beta}}
+\end{equation}
+
+La verosimilitud del modelo es:
+\begin{equation}
+    L(\beta) = \prod_{i=1}^n p_i^{y_i}(1 - p_i)^{1 - y_i}
+\end{equation}
+
+Y su log-verosimilitud:
+\begin{equation}
+    \ell(\beta) = \sum_{i=1}^{n} \left[ y_i \ln(p_i) + (1 - y_i) \ln(1 - p_i) \right]
+\end{equation}
+
+\section*{Derivadas: Gradiente y Hessiano}
+\begin{itemize}
+    \item Gradiente:
+    \begin{equation}
+        \nabla_{\beta} \ell(\beta) = X^T (\mathbf{y} - \mathbf{p})
+    \end{equation}
+    \item Hessiano:
+    \begin{equation}
+        \nabla^2_{\beta} \ell(\beta) = - X^T V X, \quad \text{donde } V = \text{diag}(p_i(1 - p_i))
+    \end{equation}
+\end{itemize}
+
+\section*{Regularización}
+Para evitar el sobreajuste, se añade un término de penalización L2 (ridge):
+\begin{equation}
+    \ell_{\lambda}(\beta) = \ell(\beta) - \frac{\lambda}{2} \|\beta\|^2
+\end{equation}
+
+\begin{itemize}
+    \item Gradiente regularizado:
+    \begin{equation}
+        \nabla_{\beta} \ell_{\lambda}(\beta) = X^T (\mathbf{y} - \mathbf{p}) - \lambda \beta
+    \end{equation}
+    \item Hessiano regularizado:
+    \begin{equation}
+        \nabla^2_{\beta} \ell_{\lambda}(\beta) = - X^T V X - \lambda I
+    \end{equation}
+\end{itemize}
+
+\section*{Algoritmo IRLS (Iteratively Reweighted Least Squares)}
+Una técnica común para estimar los parámetros del modelo es IRLS, que utiliza pesos $v_i = p_i(1 - p_i)$ y variables ajustadas $z_i$:
+
+\begin{equation}
+    z_i = x_i \hat{\beta} + \frac{y_i - p_i}{v_i}
+\end{equation}
+
+En cada iteración, se resuelve:
+\begin{equation}
+    (X^T V X + \lambda I) \hat{\beta}^{(c+1)} = X^T V z^{(c)}
+\end{equation}
+
+Este método es eficiente para bases de datos de tamaño moderado.
+
+\section*{Algoritmo CG (Conjugate Gradient)}
+En problemas a gran escala, se recomienda el método del gradiente conjugado:
+
+\begin{itemize}
+    \item Se inicializa el residuo $r^{(0)} = b - A\beta^{(0)}$.
+    \item Se actualizan las direcciones de búsqueda y pasos óptimos iterativamente.
+    \item Permite resolver sistemas lineales sin invertir matrices.
+\end{itemize}
+
+Es especialmente útil cuando $X^T V X$ es grande o disperso.
+
+\section*{Correcciones para eventos raros}
+\begin{itemize}
+    \item \textbf{Ajuste del intercepto:} basado en la tasa real de eventos:
+    \begin{equation}
+        \tilde{\beta}_0 = \hat{\beta}_0 - \ln \left( \frac{1 - \tau}{\tau} \cdot \frac{y}{1 - y} \right)
+    \end{equation}
+    \item \textbf{Ponderación:} modifica la verosimilitud con pesos:
+    \begin{equation}
+        \ell(\beta|y,X) = \sum_{i=1}^n w_i \ln \left( \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} \right)
+    \end{equation}
+\end{itemize}
+
+\section*{Conclusiones clave}
+\begin{itemize}
+    \item La regresión logística es robusta y se adapta bien a diferentes contextos de datos.
+    \item Las técnicas de regularización y los métodos numéricos como IRLS y CG la hacen escalable.
+    \item Las correcciones para eventos raros mejoran la inferencia en muestras sesgadas.
+    \item Es una herramienta base para modelos más complejos como regresión multinomial o clasificación ordinal.
+\end{itemize}
+
+\section*{Resumen}
+Este art\'iculo presenta una revisi\'on exhaustiva de las aplicaciones del aprendizaje autom\'atico (Machine Learning, ML) dentro del campo de la inteligencia artificial (IA). Se examinan los principales tipos de aprendizaje: supervisado, no supervisado, por refuerzo y sistemas de recomendaci\'on, destacando sus aplicaciones pr\'acticas y proponiendo ideas futuras como el "doctor virtual" y la "m\'aquina del tiempo informativa".
+
+\section{Introducci\'on}
+Un agente inteligente en IA interact\'ua con el entorno mediante sensores y actuadores. Su inteligencia depende de la pol\'itica de control que traduce entradas en acciones. ML permite alcanzar inteligencia humana simulada sin programaci\'on expl\'icita. Aplicaciones incluyen b\'usqueda web, reconocimiento de fotos, y filtros de spam. Se destaca su uso en rob\'otica aut\'onoma, biolog\'ia computacional y Big Data.
+
+\section{Aprendizaje Autom\'atico}
+Se definen conceptos clave del aprendizaje autom\'atico:
+\begin{itemize}
+  \item Arthur Samuel lo define como la capacidad de una computadora para aprender sin ser programada.
+  \item Tom Mitchell propone una definici\'on formal basada en experiencia (E), tarea (T) y medida de rendimiento (P). Si el desempe\~no en $T$, medido a trav¬'es de $P$, mejora con la experiencia  $E$, entonces el programa es llamando un programa de Machine Learning.
+\end{itemize}
+Se destaca el ejemplo del programa de damas de Samuel, que mejora jugando contra s\'i mismo.
+
+\section{Tipos de Algoritmos de Aprendizaje}
+\subsection{Aprendizaje Supervisado}
+Entrenamiento con datos etiquetados, comparando salida esperada con salida computada. Ejemplo: estimaci\'on del precio de viviendas.
+
+\subsection{Aprendizaje No Supervisado}
+Unsupervised learning is termed as learned by its own by discovering and adopting, based on the input pattern. In this  learning the data are divided into different clusters and hence the learning is called a clustering algorithm Descubre patrones ocultos sin datos etiquetados. Agrupa datos en cl\'usteres, como en Google News.
+
+\subsection{Aprendizaje por Refuerzo}
+Aprende mediante recompensas por buenas acciones y penalizaciones por errores, sin ejemplos expl\'icitos. Se otorga una recompensa por una salida correcta y una penalización por una salida incorrecta. El aprendizaje por refuerzo se diferencia del aprendizaje supervisado en que nunca se presentan pares de entrada/salida correctos, ni se corrigen explícitamente las acciones subóptimas
+
+\subsection{Sistemas de Recomendaci\'on}
+Personalizan contenido para usuarios mediante recomendaciones basadas en contenido o colaborativas. Usado en sitios de comercio electr\'onico. There are mainly two approaches: content based recommendation and collaborative recommendation, which help the user for obtaining and mining data, making intelligent and novel recommendations, ethics. 
+
+\section{Aplicaciones del Aprendizaje Autom\'atico}
+\subsection{Aprendizaje No Supervisado}
+\begin{itemize}
+  \item \textbf{Clasificaci\'on de ADN:} Agrupamiento de individuos por genes usando microarrays.
+  \item \textbf{Cl\'usteres de computadores:} Organiza centros de datos eficientemente.
+  \item \textbf{Redes sociales:} Detecta amistades, grupos, y patrones de comunicaci\'on.
+  \item \textbf{Segmentaci\'on de mercado:} Descubre segmentos autom\'aticamente a partir de datos de clientes.
+  \item \textbf{Datos astron\'omicos:} Analiza formaci\'on de galaxias y detecta anomal\'ias (objetos o patrones extra\~nos).
+  \item \textbf{Problema del c\'octel:} Separa fuentes de audio combinadas usando algoritmos no supervisados.
+  \item \textbf{Registros m\'edicos y biolog\'ia computacional:} Mejora diagn\'ostico, comprensi\'on gen\'omica y clasificaci\'on de c\'ancer.
+  \item \textbf{Detecci\'on de actividad de voz (SAD):} Identifica momentos de habla versus silencio.
+  \item \textbf{Verificaci\'on de hablantes:} Usa an\'alisis ac\'ustico para autenticaci\'on.
+\end{itemize}
+
+\subsection{Aprendizaje Supervisado}
+\begin{itemize}
+  \item \textbf{Correo electr\'onico:} Respuestas autom\'aticas, organizaci\'on de carpetas, resumen de hilos, y filtro de spam.
+  \item \textbf{Reconocimiento de escritura:} Identifica direcciones en sobres.
+  \item \textbf{Reconocimiento facial y de voz:} Aplicado en seguridad y redes sociales.
+  \item \textbf{Recuperaci\'on de informaci\'on:} B\'usqueda eficiente y personalizada.
+  \item \textbf{Sistemas operativos:} Predicen apps frecuentes para carga r\'apida.
+  \item \textbf{Detecci\'on de intrusos y an\'omalias:} Usa secuencias de acciones para detectar comportamientos anormales.
+  \item \textbf{Clasificaci\'on de textos:} Asigna documentos a categor\'ias tem\'aticas.
+  \item \textbf{Optimizaci\'on de centros de datos:} Usa redes neuronales para eficiencia energ\'etica.
+  \item \textbf{Radio cognitiva:} Mejora procesamiento de se\~nales mediante reducci\'on de dimensionalidad y SVM.
+  \item \textbf{Finanzas computacionales:} Predice movimientos del mercado burs\'atil.
+  \item \textbf{Interfaces cerebro-m\'aquina (BCI):} Permite controlar dispositivos con actividad cerebral.
+  \item \textbf{Producci\'on musical:} Clasifica g\'eneros, transcribe, detecta ritmo e instrumentos.
+\end{itemize}
+
+\subsection{Sistemas de Recomendaci\'on}
+\begin{itemize}
+  \item \textbf{Aprendizaje m\'ovil:} Ofrece contenido educativo personalizado.
+  \item \textbf{Publicidad computacional:} Asocia usuarios con anuncios en contexto.
+  \item \textbf{An\'alisis de sentimientos:} Clasifica opiniones como positivas o negativas.
+  \item \textbf{Miner\'ia de bases de datos:} Extrae patrones de grandes vol\'umenes de datos.
+  \item \textbf{Programas auto-personalizables:} Aprenden preferencias del usuario y adaptan interfaces.
+\end{itemize}
+
+\subsection{Aprendizaje por Refuerzo}
+\begin{itemize}
+  \item \textbf{Predicci\'on de tr\'afico:} Sistemas que estiman condiciones futuras de tr\'afico.
+  \item \textbf{Juegos de computadora:} IA que mejora experiencia de juego.
+  \item \textbf{Maquinaria aut\'onoma:} Aprenden tareas como volar helic\'opteros.
+  \item \textbf{An\'alisis burs\'atil:} Usa SVM y refuerzo para tomar decisiones financieras.
+  \item \textbf{Ambientes de aprendizaje ubicuo:} Simulaciones realistas para evaluar habilidades cl\'inicas.
+\end{itemize}
+
+\section{Impresiones y Perspectivas}
+Se observa que la capacidad de an\'alisis de datos masivos ha impulsado el desarrollo de agentes aut\'onomos. Se destaca el papel del aprendizaje continuo y la necesidad de conjuntos de datos actualizados. Entre las propuestas futuras se incluyen la m\'aquina del tiempo informativa y el doctor virtual.
+
+\section{Conclusi\'on}
+El aprendizaje autom\'atico ha demostrado ser esencial para la automatizaci\'on inteligente, con aplicaciones en m\'ultiples disciplinas. Aunque hay limitaciones en la calidad y disponibilidad de los datos, el campo sigue creciendo. Se destaca la necesidad de mejorar continuamente los algoritmos y entrenarlos con datos diversos y actualizados.
+
+\end{document}
+
+\section*{Referencias}
+\begin{enumerate}
+  \item Tzanis, G., et al. (2006). Modern Applications of Machine Learning. SEERC Doctoral Student Conference.
+  \item Horvitz, E. (2006). Machine learning, reasoning, and intelligence in daily life: Directions and challenges.
+  \item Mitchell, T. M. (2006). The discipline of machine learning. Carnegie Mellon University.
+  \item Ball, G. R., & Srihari, S. N. (2009). Semi-supervised learning for handwriting recognition. ICDAR.
+  \item Valenti, R., et al. (2008). Machine learning techniques for face analysis.
+  \item Al-Hmouz, A. (2012). An adaptive framework for mobile learners.
+  \item Al-Hmouz, A., Shen, J., & Yan, J. (2009). A machine learning framework for adaptive mobile learning.
+  \item Graepel, T. (2008). Playing Machines: ML Applications in Games. ICML Tutorial.
+  \item Broder, A., & Josifovski, V. (2010). Introduction to computational advertising.
+  \item Cunningham, S. J., Littin, J., & Witten, I. H. (1997). Applications in information retrieval.
+  \item Kaur, H., Singh, G., & Minhas, J. (2013). ML based Anomaly Detection Techniques. arXiv.
+  \item Wiese, B., & Omlin, C. (2009). Credit card fraud detection using LSTM.
+  \item Kumar, V., & Sangwan, O. P. (2012). Signature Based IDS Using SNORT.
+  \item Shen, S., Jiang, H., & Zhang, T. (2012). Stock market forecasting using ML.
+  \item Pang, B., Lee, L., & Vaithyanathan, S. (2002). Sentiment classification.
+  \item Liao, S., et al. (2009). Prefetch optimization for data centers.
+  \item Haider, P., Chiarandini, L., & Brefeld, U. (2012). Clustering for market segmentation.
+  \item Haykin, S., & Chen, Z. (2005). The cocktail party problem.
+  \item Clarke, B., Fokoue, E., & Zhang, H. H. (2009). Principles for data mining and ML.
+  \item Kononenko, I. (2001). ML for medical diagnosis.
+  \item Caragea, C., & Honavar, V. (2009). ML in Computational Biology.
+  \item Cho, S.-B., & Won, H.-H. (2003). DNA microarray for cancer classification.
+  \item Wagstaff, K. (2012). ML that matters. arXiv.
+  \item Shoeb, A. H., & Guttag, J. V. (2010). ML for epileptic seizure detection. ICML.
+  \item Gao, J., & Jamidar, R. (2014). ML for Data Center Optimization. Google.
+  \item Haider, P., Brefeld, U., & Scheffer, T. (2007). Supervised clustering for email batches.
+  \item Sebastiani, F. (2002). ML in automated text categorization. ACM Survey.
+  \item Bratko, A., et al. (2006). Spam filtering using compression models.
+  \item Xiong, L., et al. (2010). Anomaly detection in astronomy.
+  \item Guyon, I., & Elisseeff, A. (2003). Feature selection in ML.
+  \item Hou, S., et al. (2011). SVM and Dimensionality Reduction in Cognitive Radio. arXiv.
+  \item Hwang, K.-B., et al. (2002). Gene expression for cancer diagnosis.
+  \item Silvestrin, L. ML in Biology. Università di Padova.
+  \item Magoulas, G. D., & Prentza, A. (2001). ML in medical applications.
+  \item Bruegge, B., et al. Classification of software artifacts using ML.
+  \item Shhab, A., Guo, G., & Neagu, D. (2005). ML in Data Mining.
+  \item Boyarshinov, V. ML in computational finance.
+  \item Shen, X., et al. (2003). Multilabel ML and semantic scene classification.
+  \item Zararsiz, G., Elmali, F., & Ozturk, A. (2012). Bagging SVM for leukemia classification.
+  \item Tsagkaris, K., et al. (2008). Neural learning for cognitive radio.
+  \item Hosey, N., et al. (2009). Q-learning for cognitive radios.
+  \item Pawar, P. ML in financial markets.
+  \item Tarca, A. L., et al. (2007). ML applications in biology.
+  \item Clément, S. A ML View of Quantitative Finance. Telecom Paris Tech.
+  \item Wang, Y., et al. (2005). Gene selection from microarray data.
+  \item Lanzi, P. L. Intro to ML, Data Mining & Knowledge Discovery.
+  \item Sajda, P. (2006). ML for disease detection and diagnosis.
+  \item Øland, A. (2011). ML and its Applications to Music.
+  \item Makeig, S., et al. (2012). Signal Processing for Brain-Computer Interfaces.
+  \item Sadjadi, S. O., & Hansen, J. H. L. (2013). Unsupervised SAD using perceptual flux.
+  \item Malik, H. (2013). Acoustic Environment Identification for Audio Forensics.
+  \item Acoustic Factor Analysis for Speaker Verification (2013).
+  \item Weal, M. J., et al. (2012). Semantic Annotation in Learning Environments.
+  \item Horvitz, E. J., et al. (2012). Traffic forecasting using ML. arXiv.
+  \item Coursera. Recommender Systems course. https://www.coursera.org/learn/recommender-systems
+\end{enumerate}
+
+\section*{Resumen}
+Este art\'iculo presenta una revisi\'on exhaustiva de las aplicaciones del aprendizaje autom\'atico (Machine Learning, ML) dentro del campo de la inteligencia artificial (IA). Se examinan los principales tipos de aprendizaje: supervisado, no supervisado, por refuerzo y sistemas de recomendaci\'on, destacando sus aplicaciones pr\'acticas y proponiendo ideas futuras como el "doctor virtual" y la "m\'aquina del tiempo informativa".
+
+\section{Introducci\'on}
+Un agente inteligente en IA interact\'ua con el entorno mediante sensores y actuadores. Su inteligencia depende de la pol\'itica de control que traduce entradas en acciones. ML permite alcanzar inteligencia humana simulada sin programaci\'on expl\'icita. Aplicaciones incluyen b\'usqueda web, reconocimiento de fotos, y filtros de spam. Se destaca su uso en rob\'otica aut\'onoma, biolog\'ia computacional y Big Data.
+
+\section{Aprendizaje Autom\'atico}
+Se definen conceptos clave del aprendizaje autom\'atico:
+\begin{itemize}
+  \item Arthur Samuel lo define como la capacidad de una computadora para aprender sin ser programada.
+  \item Tom Mitchell propone una definici\'on formal basada en experiencia (E), tarea (T) y medida de rendimiento (P). Si el desempe\~no en $T$, medido a trav¬'es de $P$, mejora con la experiencia  $E$, entonces el programa es llamando un programa de Machine Learning.
+\end{itemize}
+Se destaca el ejemplo del programa de damas de Samuel, que mejora jugando contra s\'i mismo.
+
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm and 2cm,
+    every node/.style={font=\small},
+    box/.style={draw, rounded corners, minimum width=2.8cm, minimum height=1cm, align=center}
+]
+
+\node[box] (main) {Types of Machine Learning};
+
+\node[box, below left=of main] (sup) {Supervised\\Learning};
+\node[box, below=of main] (unsup) {Un-supervised\\Learning};
+\node[box, below right=of main] (rein) {Reinforcement\\Learning};
+\node[box, right=1.5cm of rein] (rec) {Recommender\\System};
+
+\draw (main.south) -- (sup.north);
+\draw (main.south) -- (unsup.north);
+\draw (main.south) -- (rein.north);
+\draw (main.south) -- (rec.north);
+
+\end{tikzpicture}
+\caption{Types of Machine Learning}
+\end{figure}
+
+
+\section{Tipos de Algoritmos de Aprendizaje}
+\subsection{Aprendizaje Supervisado}
+Entrenamiento con datos etiquetados, comparando salida esperada con salida computada. Ejemplo: estimaci\'on del precio de viviendas.
+
+\subsection{Aprendizaje No Supervisado}
+Unsupervised learning is termed as learned by its own by discovering and adopting, based on the input pattern. In this  learning the data are divided into different clusters and hence the learning is called a clustering algorithm Descubre patrones ocultos sin datos etiquetados. Agrupa datos en cl\'usteres, como en Google News.
+
+\subsection{Aprendizaje por Refuerzo}
+Aprende mediante recompensas por buenas acciones y penalizaciones por errores, sin ejemplos expl\'icitos. Se otorga una recompensa por una salida correcta y una penalización por una salida incorrecta. El aprendizaje por refuerzo se diferencia del aprendizaje supervisado en que nunca se presentan pares de entrada/salida correctos, ni se corrigen explícitamente las acciones subóptimas
+
+\subsection{Sistemas de Recomendaci\'on}
+Personalizan contenido para usuarios mediante recomendaciones basadas en contenido o colaborativas. Usado en sitios de comercio electr\'onico. There are mainly two approaches: content based recommendation and collaborative recommendation, which help the user for obtaining and mining data, making intelligent and novel recommendations, ethics. 
+
+\section{Aplicaciones del Aprendizaje Autom\'atico}
+\subsection{Aprendizaje No Supervisado}
+\begin{itemize}
+  \item \textbf{Clasificaci\'on de ADN:} Agrupamiento de individuos por genes usando microarrays.
+  \item \textbf{Cl\'usteres de computadores:} Organiza centros de datos eficientemente.
+  \item \textbf{Redes sociales:} Detecta amistades, grupos, y patrones de comunicaci\'on.
+  \item \textbf{Segmentaci\'on de mercado:} Descubre segmentos autom\'aticamente a partir de datos de clientes.
+  \item \textbf{Datos astron\'omicos:} Analiza formaci\'on de galaxias y detecta anomal\'ias (objetos o patrones extra\~nos).
+  \item \textbf{Problema del c\'octel:} Separa fuentes de audio combinadas usando algoritmos no supervisados.
+  \item \textbf{Registros m\'edicos y biolog\'ia computacional:} Mejora diagn\'ostico, comprensi\'on gen\'omica y clasificaci\'on de c\'ancer.
+  \item \textbf{Detecci\'on de actividad de voz (SAD):} Identifica momentos de habla versus silencio.
+  \item \textbf{Verificaci\'on de hablantes:} Usa an\'alisis ac\'ustico para autenticaci\'on.
+\end{itemize}
+
+\subsection{Aprendizaje Supervisado}
+\begin{itemize}
+  \item \textbf{Correo electr\'onico:} Respuestas autom\'aticas, organizaci\'on de carpetas, resumen de hilos, y filtro de spam.
+  \item \textbf{Reconocimiento de escritura:} Identifica direcciones en sobres.
+  \item \textbf{Reconocimiento facial y de voz:} Aplicado en seguridad y redes sociales.
+  \item \textbf{Recuperaci\'on de informaci\'on:} B\'usqueda eficiente y personalizada.
+  \item \textbf{Sistemas operativos:} Predicen apps frecuentes para carga r\'apida.
+  \item \textbf{Detecci\'on de intrusos y an\'omalias:} Usa secuencias de acciones para detectar comportamientos anormales.
+  \item \textbf{Clasificaci\'on de textos:} Asigna documentos a categor\'ias tem\'aticas.
+  \item \textbf{Optimizaci\'on de centros de datos:} Usa redes neuronales para eficiencia energ\'etica.
+  \item \textbf{Radio cognitiva:} Mejora procesamiento de se\~nales mediante reducci\'on de dimensionalidad y SVM.
+  \item \textbf{Finanzas computacionales:} Predice movimientos del mercado burs\'atil.
+  \item \textbf{Interfaces cerebro-m\'aquina (BCI):} Permite controlar dispositivos con actividad cerebral.
+  \item \textbf{Producci\'on musical:} Clasifica g\'eneros, transcribe, detecta ritmo e instrumentos.
+\end{itemize}
+
+\subsection{Sistemas de Recomendaci\'on}
+\begin{itemize}
+  \item \textbf{Aprendizaje m\'ovil:} Ofrece contenido educativo personalizado.
+  \item \textbf{Publicidad computacional:} Asocia usuarios con anuncios en contexto.
+  \item \textbf{An\'alisis de sentimientos:} Clasifica opiniones como positivas o negativas.
+  \item \textbf{Miner\'ia de bases de datos:} Extrae patrones de grandes vol\'umenes de datos.
+  \item \textbf{Programas auto-personalizables:} Aprenden preferencias del usuario y adaptan interfaces.
+\end{itemize}
+
+\subsection{Aprendizaje por Refuerzo}
+\begin{itemize}
+  \item \textbf{Predicci\'on de tr\'afico:} Sistemas que estiman condiciones futuras de tr\'afico.
+  \item \textbf{Juegos de computadora:} IA que mejora experiencia de juego.
+  \item \textbf{Maquinaria aut\'onoma:} Aprenden tareas como volar helic\'opteros.
+  \item \textbf{An\'alisis burs\'atil:} Usa SVM y refuerzo para tomar decisiones financieras.
+  \item \textbf{Ambientes de aprendizaje ubicuo:} Simulaciones realistas para evaluar habilidades cl\'inicas.
+\end{itemize}
+
+\section{Impresiones y Perspectivas}
+Se observa que la capacidad de an\'alisis de datos masivos ha impulsado el desarrollo de agentes aut\'onomos. Se destaca el papel del aprendizaje continuo y la necesidad de conjuntos de datos actualizados. Entre las propuestas futuras se incluyen la m\'aquina del tiempo informativa y el doctor virtual.
+
+\section{Conclusi\'on}
+El aprendizaje autom\'atico ha demostrado ser esencial para la automatizaci\'on inteligente, con aplicaciones en m\'ultiples disciplinas. Aunque hay limitaciones en la calidad y disponibilidad de los datos, el campo sigue creciendo. Se destaca la necesidad de mejorar continuamente los algoritmos y entrenarlos con datos diversos y actualizados.
+
+\end{document}
+
+\section*{Referencias}
+\begin{enumerate}
+  \item Tzanis, G., et al. (2006). Modern Applications of Machine Learning. SEERC Doctoral Student Conference.
+  \item Horvitz, E. (2006). Machine learning, reasoning, and intelligence in daily life: Directions and challenges.
+  \item Mitchell, T. M. (2006). The discipline of machine learning. Carnegie Mellon University.
+  \item Ball, G. R., & Srihari, S. N. (2009). Semi-supervised learning for handwriting recognition. ICDAR.
+  \item Valenti, R., et al. (2008). Machine learning techniques for face analysis.
+  \item Al-Hmouz, A. (2012). An adaptive framework for mobile learners.
+  \item Al-Hmouz, A., Shen, J., & Yan, J. (2009). A machine learning framework for adaptive mobile learning.
+  \item Graepel, T. (2008). Playing Machines: ML Applications in Games. ICML Tutorial.
+  \item Broder, A., & Josifovski, V. (2010). Introduction to computational advertising.
+  \item Cunningham, S. J., Littin, J., & Witten, I. H. (1997). Applications in information retrieval.
+  \item Kaur, H., Singh, G., & Minhas, J. (2013). ML based Anomaly Detection Techniques. arXiv.
+  \item Wiese, B., & Omlin, C. (2009). Credit card fraud detection using LSTM.
+  \item Kumar, V., & Sangwan, O. P. (2012). Signature Based IDS Using SNORT.
+  \item Shen, S., Jiang, H., & Zhang, T. (2012). Stock market forecasting using ML.
+  \item Pang, B., Lee, L., & Vaithyanathan, S. (2002). Sentiment classification.
+  \item Liao, S., et al. (2009). Prefetch optimization for data centers.
+  \item Haider, P., Chiarandini, L., & Brefeld, U. (2012). Clustering for market segmentation.
+  \item Haykin, S., & Chen, Z. (2005). The cocktail party problem.
+  \item Clarke, B., Fokoue, E., & Zhang, H. H. (2009). Principles for data mining and ML.
+  \item Kononenko, I. (2001). ML for medical diagnosis.
+  \item Caragea, C., & Honavar, V. (2009). ML in Computational Biology.
+  \item Cho, S.-B., & Won, H.-H. (2003). DNA microarray for cancer classification.
+  \item Wagstaff, K. (2012). ML that matters. arXiv.
+  \item Shoeb, A. H., & Guttag, J. V. (2010). ML for epileptic seizure detection. ICML.
+  \item Gao, J., & Jamidar, R. (2014). ML for Data Center Optimization. Google.
+  \item Haider, P., Brefeld, U., & Scheffer, T. (2007). Supervised clustering for email batches.
+  \item Sebastiani, F. (2002). ML in automated text categorization. ACM Survey.
+  \item Bratko, A., et al. (2006). Spam filtering using compression models.
+  \item Xiong, L., et al. (2010). Anomaly detection in astronomy.
+  \item Guyon, I., & Elisseeff, A. (2003). Feature selection in ML.
+  \item Hou, S., et al. (2011). SVM and Dimensionality Reduction in Cognitive Radio. arXiv.
+  \item Hwang, K.-B., et al. (2002). Gene expression for cancer diagnosis.
+  \item Silvestrin, L. ML in Biology. Università di Padova.
+  \item Magoulas, G. D., & Prentza, A. (2001). ML in medical applications.
+  \item Bruegge, B., et al. Classification of software artifacts using ML.
+  \item Shhab, A., Guo, G., & Neagu, D. (2005). ML in Data Mining.
+  \item Boyarshinov, V. ML in computational finance.
+  \item Shen, X., et al. (2003). Multilabel ML and semantic scene classification.
+  \item Zararsiz, G., Elmali, F., & Ozturk, A. (2012). Bagging SVM for leukemia classification.
+  \item Tsagkaris, K., et al. (2008). Neural learning for cognitive radio.
+  \item Hosey, N., et al. (2009). Q-learning for cognitive radios.
+  \item Pawar, P. ML in financial markets.
+  \item Tarca, A. L., et al. (2007). ML applications in biology.
+  \item Clément, S. A ML View of Quantitative Finance. Telecom Paris Tech.
+  \item Wang, Y., et al. (2005). Gene selection from microarray data.
+  \item Lanzi, P. L. Intro to ML, Data Mining & Knowledge Discovery.
+  \item Sajda, P. (2006). ML for disease detection and diagnosis.
+  \item Øland, A. (2011). ML and its Applications to Music.
+  \item Makeig, S., et al. (2012). Signal Processing for Brain-Computer Interfaces.
+  \item Sadjadi, S. O., & Hansen, J. H. L. (2013). Unsupervised SAD using perceptual flux.
+  \item Malik, H. (2013). Acoustic Environment Identification for Audio Forensics.
+  \item Acoustic Factor Analysis for Speaker Verification (2013).
+  \item Weal, M. J., et al. (2012). Semantic Annotation in Learning Environments.
+  \item Horvitz, E. J., et al. (2012). Traffic forecasting using ML. arXiv.
+  \item Coursera. Recommender Systems course. https://www.coursera.org/learn/recommender-systems
+\end{enumerate}
+
+
+
+\section*{Modelo de regresión logística}
+
+Para una variable binaria $y_i \in \{0,1\}$, el modelo de regresión logística predice la probabilidad:
+\[
+p_i = \frac{1}{1 + e^{-x_i \beta}}
+\]
+
+\subsection*{Función de verosimilitud}
+\[
+L(\beta) = \prod_{i=1}^n p_i^{y_i} (1 - p_i)^{1 - y_i}
+\]
+
+\subsection*{Log-verosimilitud}
+\[
+\ell(\beta) = \sum_{i=1}^n \left[ y_i \ln(p_i) + (1 - y_i) \ln(1 - p_i) \right]
+\]
+
+\section*{Derivadas}
+
+\textbf{Gradiente}:
+\[
+\nabla_\beta \ell(\beta) = X^\top (y - p)
+\]
+
+\textbf{Hessiano (segunda derivada)}:
+\[
+\nabla^2_\beta \ell(\beta) = - X^\top V X, \quad V = \text{diag}(p_i (1 - p_i))
+\]
+
+\section*{Regularización Ridge (L2)}
+Se añade un término penalizado:
+\[
+\ell_\lambda(\beta) = \ell(\beta) - \frac{\lambda}{2} \|\beta\|^2
+\]
+
+Gradiente regularizado:
+\[
+\nabla_\beta \ell_\lambda(\beta) = X^\top (y - p) - \lambda \beta
+\]
+
+Hessiano regularizado:
+\[
+\nabla^2_\beta \ell_\lambda(\beta) = - X^\top V X - \lambda I
+\]
+
+\section*{TR-IRLS (Trust Region IRLS)}
+Actualización generalizada del paso de Newton:
+\[
+\beta^{(k+1)} = \beta^{(k)} + s
+\]
+Donde $s$ es solución de:
+\[
+(X^\top V X + \lambda I) s = X^\top V z - \lambda \beta
+\]
+
+\section*{Eventos raros y correcciones}
+\subsection*{Ajuste del intercepto (King \& Zeng)}
+\[
+\tilde{\beta}_0 = \hat{\beta}_0 - \ln \left[ \left( \frac{1 - \tau}{\tau} \right) \left( \frac{\hat{y}}{1 - \hat{y}} \right) \right]
+\]
+
+\subsection*{Muestreo estratificado}
+Peso para observación $i$:
+\[
+w_i = \frac{Q_i}{H_i}
+\]
+Verosimilitud ponderada:
+\[
+\ell_w(\beta) = \sum_{i=1}^n w_i \ln \left( \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} \right)
+\]
+
+\section*{Corrección de Firth}
+Se basa en el ajuste de penalización de tipo Jeffreys:
+\[
+\ell^*(\beta) = \ell(\beta) + \frac{1}{2} \log |I(\beta)|
+\]
+
+\section*{Regla de decisión}
+\[
+\hat{y}_i =
+\begin{cases}
+1 & \text{si } p_i \geq c \\\\
+0 & \text{si } p_i < c
+\end{cases}
+\quad \text{(usualmente } c = 0.5)
+\]
+
+
+\section*{Modelo de regresión logística}
+
+Para una variable binaria $y_i \in \{0,1\}$, el modelo de regresión logística predice la probabilidad:
+\[
+    p_i = \frac{1}{1 + e^{-x_i \beta}}
+\]
+
+\subsection*{Función de verosimilitud}
+\[
+    L(\beta) = \prod_{i=1}^n p_i^{y_i} (1 - p_i)^{1 - y_i}
+\]
+
+\subsection*{Log-verosimilitud}
+\[
+    \ell(\beta) = \sum_{i=1}^n \left[ y_i \ln(p_i) + (1 - y_i) \ln(1 - p_i) \right]
+\]
+
+Usando que $p_i = \frac{1}{1 + e^{-x_i \beta}}$, entonces:
+\[
+    \ell(\beta) = \sum_{i=1}^n \left[ y_i x_i \beta - \ln(1 + e^{x_i \beta}) \right]
+\]
+
+\section*{Derivadas: Gradiente y Hessiano}
+
+\subsection*{Gradiente}
+Partimos de:
+\[
+    \ell(\beta) = \sum_{i=1}^n \left[ y_i x_i \beta - \ln(1 + e^{x_i \beta}) \right]
+\]
+
+Derivando con respecto a $\beta_j$:
+\[
+    \frac{\partial \ell(\beta)}{\partial \beta_j} = \sum_{i=1}^n \left[ y_i x_{ij} - \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} x_{ij} \right] = \sum_{i=1}^n x_{ij}(y_i - p_i)
+\]
+
+Forma vectorial del gradiente:
+\[
+    \nabla_\beta \ell(\beta) = X^\top (\mathbf{y} - \mathbf{p})
+\]
+
+\subsection*{Hessiano}
+La derivada del gradiente es:
+\[
+    \frac{\partial^2 \ell(\beta)}{\partial \beta_j \partial \beta_k} = - \sum_{i=1}^n x_{ij} x_{ik} p_i (1 - p_i)
+\]
+
+Forma matricial:
+\[
+    \nabla^2_\beta \ell(\beta) = - X^\top V X, \quad \text{donde } V = \text{diag}(p_i (1 - p_i))
+\]
+
+\section*{Regularización Ridge (L2)}
+
+Penalización L2 añadida a la log-verosimilitud:
+\[
+    \ell_\lambda(\beta) = \ell(\beta) - \frac{\lambda}{2} \|\beta\|^2
+\]
+
+Gradiente regularizado:
+\[
+    \nabla_\beta \ell_\lambda(\beta) = X^\top (\mathbf{y} - \mathbf{p}) - \lambda \beta
+\]
+
+Hessiano regularizado:
+\[
+    \nabla^2_\beta \ell_\lambda(\beta) = - X^\top V X - \lambda I
+\]
+
+\section*{TR-IRLS (Trust Region IRLS)}
+Actualización de Newton truncado:
+\[
+    \beta^{(k+1)} = \beta^{(k)} + s
+\]
+Donde $s$ resuelve:
+\[
+    (X^\top V X + \lambda I) s = X^\top V z - \lambda \beta
+\]
+
+\section*{Eventos raros y correcciones}
+
+\subsection*{Ajuste del intercepto (King \& Zeng)}
+\[
+    \tilde{\beta}_0 = \hat{\beta}_0 - \ln \left[ \left( \frac{1 - \tau}{\tau} \right) \left( \frac{\hat{y}}{1 - \hat{y}} \right) \right]
+\]
+
+\subsection*{Muestreo estratificado y ponderación}
+Peso para observación $i$:
+\[
+    w_i = \frac{Q_i}{H_i}
+\]
+
+Verosimilitud ponderada:
+\[
+    \ell_w(\beta) = \sum_{i=1}^n w_i \ln \left( \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} \right)
+\]
+
+\section*{Corrección de Firth}
+
+Log-verosimilitud penalizada (ajuste de Jeffreys):
+\[
+    \ell^*(\beta) = \ell(\beta) + \frac{1}{2} \log |I(\beta)|
+\]
+
+\section*{Regla de decisión}
+
+\[
+    \hat{y}_i =
+    \begin{cases}
+        1 & \text{si } p_i \geq c \\
+        0 & \text{si } p_i < c
+    \end{cases}, \quad \text{con } c = 0.5
+\]
+
+
+
+\section*{Objetivo}
+Dado un conjunto de datos $(x_i, y_i)$ para $i = 1, \dots, n$, queremos encontrar los coeficientes $\beta_0$ y $\beta_1$ que minimicen el error cuadr\'atico:
+\[
+\sum_{i=1}^{n} (y_i - (\beta_0 + \beta_1 x_i))^2
+\]
+
+Es m\'as sencillo resolver este problema usando la forma \emph{centralizada}:
+\[
+y_i = \beta_0^* + \beta_1(x_i - \bar{x}) + \varepsilon_i
+\]
+donde:
+\[
+\beta_0 = \beta_0^* - \beta_1 \bar{x}
+\]
+
+\section*{Paso 1: Derivada parcial respecto a \( \beta_0^* \)}
+Queremos minimizar:
+\[
+L(\beta_0^*, \beta_1) = \sum_{i=1}^{n} [y_i - (\beta_0^* + \beta_1(x_i - \bar{x}))]^2
+\]
+
+Calculamos la derivada parcial:
+\begin{align*}
+\frac{\partial L}{\partial \beta_0^*} &= \sum_{i=1}^{n} 2[y_i - (\beta_0^* + \beta_1(x_i - \bar{x}))](-1) \\
+&= -2 \sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})]
+\end{align*}
+
+Igualamos a cero:
+\[
+\sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})] = 0
+\]
+
+Distribuimos:
+\[
+n \beta_0^* + \beta_1 \sum_{i=1}^{n}(x_i - \bar{x}) = \sum_{i=1}^{n} y_i
+\]
+Pero:
+\[
+\sum_{i=1}^{n}(x_i - \bar{x}) = 0
+\]
+Entonces:
+\[
+n \beta_0^* = \sum_{i=1}^{n} y_i \Rightarrow \beta_0^* = \bar{y}
+\]
+
+\section*{Paso 2: Derivada parcial respecto a \( \beta_1 \)}
+Nuevamente:
+\[
+L(\beta_0^*, \beta_1) = \sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})]^2
+\]
+
+Derivamos con respecto a $\beta_1$:
+\begin{align*}
+\frac{\partial L}{\partial \beta_1} &= \sum_{i=1}^{n} 2[y_i - \beta_0^* - \beta_1(x_i - \bar{x})](-1)(x_i - \bar{x}) \\
+&= -2 \sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})](x_i - \bar{x})
+\end{align*}
+
+Igualamos a cero:
+\[
+\sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})](x_i - \bar{x}) = 0
+\]
+Sustituimos $\beta_0^* = \bar{y}$:
+\[
+\sum_{i=1}^{n} [y_i - \bar{y} - \beta_1(x_i - \bar{x})](x_i - \bar{x}) = 0
+\]
+
+Distribuimos:
+\[
+\sum_{i=1}^{n} (y_i - \bar{y})(x_i - \bar{x}) - \beta_1 \sum_{i=1}^{n} (x_i - \bar{x})^2 = 0
+\]
+
+Despejamos $\beta_1$:
+\[
+\beta_1 = \frac{\sum_{i=1}^{n} (y_i - \bar{y})(x_i - \bar{x})}{\sum_{i=1}^{n} (x_i - \bar{x})^2} = \frac{S_{xy}}{S_{xx}}
+\]
+
+\section*{Paso 3: Recuperar \( \beta_0 \)}
+\[
+\beta_0 = \beta_0^* - \beta_1 \bar{x} = \bar{y} - \beta_1 \bar{x}
+\]
+
+\section*{Aplicaciones de la Regresi\'on Lineal}
+\begin{itemize}
+  \item Evaluaci\'on de software basado en vectores de c\'odigo (Hyun-il Lim).
+  \item Clasificaci\'on de atributos con peso en MLR para mejorar eficiencia y consumo (Xingang Wang).
+  \item An\'alisis de sensibilidad en portafolios usando an\'alisis factorial (Zhihao Peng).
+  \item Clasificador CWKLR basado en pesos para categor\'ias de objetos (Qingxiang Feng).
+  \item Predicci\'on de temperatura en interruptores de alto voltaje (Xuan Fang).
+  \item Modelado de fantas\'ias humanas para simulaci\'on de antenas (Tadahiko Maeda).
+  \item C\'odigos de video basados en MLR para codificaci\'on intra (Zhaobin Zhang).
+  \item An\'alisis de resonancia magn\'etica funcional mediante regresi\'on simb\'olica (Ernest C. Jackson).
+  \item Predicci\'on del dominio psicomotor de estudiantes con datos educativos (R. Harimurti).
+  \item Comparaci\'on de m\'etodos de regularizaci\'on (Lasso, Ridge, Elastic Net) para mejorar predicci\'on en diferentes esquemas de muestreo.
+  \item Predicci\'on del consumo de partes aeron\'auticas usando MLR (Yanming Wang).
+  \item Evaluaci\'on de manipulaci\'on \'osea en medicina china (Dejian Wei).
+  \item Predicci\'on de lluvias con modelos MLR (Shekhar).
+  \item Estimaci\'on de ventas y comparaci\'on con modelos de aprendizaje profundo (Gopakrishnan T.).
+  \item Predicci\'on del tiempo de cultivo del arroz (Liuminto).
+  \item Procesamiento de datos de materiales con regresi\'on (Dehua Wang).
+  \item Modelado de comportamiento de movimiento usando regresi\'on polin\'omica (Timur Babakeev).
+  \item Predicci\'on de posici\'on con campo sonoro (Francios Giordini).
+  \item Estimaci\'on de vida \'util de materiales usando regresi\'on con LIBS (Joon-Kyong Hoon).
+  \item Modelado del mercado de electricidad con polinomios y MLR (Ahmed Al-Imam).
+  \item Mejora de la eficiencia computacional en simulaciones grandes reduciendo variables y errores.
+  \item Actualizaci\'on de modelos de calidad para im\'agenes m\'edicas (H. Roopa).
+  \item Predicci\'on de rendimiento de cultivos agr\'icolas con MLR y modelos de bosques aleatorios (Suvdha Jambekar).
+  \item Predicci\'on de clases con clasificaci\'on basada en semejanza (Shen-Chuan Tai).
+\end{itemize}
+
+\section*{Resumen}
+Este art\'iculo presenta una revisi\'on exhaustiva de las aplicaciones del aprendizaje autom\'atico (Machine Learning, ML) dentro del campo de la inteligencia artificial (IA). Se examinan los principales tipos de aprendizaje: supervisado, no supervisado, por refuerzo y sistemas de recomendaci\'on, destacando sus aplicaciones pr\'acticas y proponiendo ideas futuras como el "doctor virtual" y la "m\'aquina del tiempo informativa".
+
+\section{Introducci\'on}
+Un agente inteligente en IA interact\'ua con el entorno mediante sensores y actuadores. Su inteligencia depende de la pol\'itica de control que traduce entradas en acciones. ML permite alcanzar inteligencia humana simulada sin programaci\'on expl\'icita. Aplicaciones incluyen b\'usqueda web, reconocimiento de fotos, y filtros de spam. Se destaca su uso en rob\'otica aut\'onoma, biolog\'ia computacional y Big Data.
+
+\section{Aprendizaje Autom\'atico}
+Se definen conceptos clave del aprendizaje autom\'atico:
+\begin{itemize}
+  \item Arthur Samuel lo define como la capacidad de una computadora para aprender sin ser programada.
+  \item Tom Mitchell propone una definici\'on formal basada en experiencia (E), tarea (T) y medida de rendimiento (P). Si el desempe\~no en $T$, medido a trav¬'es de $P$, mejora con la experiencia  $E$, entonces el programa es llamando un programa de Machine Learning.
+\end{itemize}
+Se destaca el ejemplo del programa de damas de Samuel, que mejora jugando contra s\'i mismo.
+
+\section{Tipos de Algoritmos de Aprendizaje}
+\subsection{Aprendizaje Supervisado}
+Entrenamiento con datos etiquetados, comparando salida esperada con salida computada. Ejemplo: estimaci\'on del precio de viviendas.
+
+\subsection{Aprendizaje No Supervisado}
+Unsupervised learning is termed as learned by its own by discovering and adopting, based on the input pattern. In this  learning the data are divided into different clusters and hence the learning is called a clustering algorithm Descubre patrones ocultos sin datos etiquetados. Agrupa datos en cl\'usteres, como en Google News.
+
+\subsection{Aprendizaje por Refuerzo}
+Aprende mediante recompensas por buenas acciones y penalizaciones por errores, sin ejemplos expl\'icitos. Se otorga una recompensa por una salida correcta y una penalización por una salida incorrecta. El aprendizaje por refuerzo se diferencia del aprendizaje supervisado en que nunca se presentan pares de entrada/salida correctos, ni se corrigen explícitamente las acciones subóptimas
+
+\subsection{Sistemas de Recomendaci\'on}
+Personalizan contenido para usuarios mediante recomendaciones basadas en contenido o colaborativas. Usado en sitios de comercio electr\'onico. There are mainly two approaches: content based recommendation and collaborative recommendation, which help the user for obtaining and mining data, making intelligent and novel recommendations, ethics. 
+
+\section{Aplicaciones del Aprendizaje Autom\'atico}
+\subsection{Aprendizaje No Supervisado}
+\begin{itemize}
+  \item \textbf{Clasificaci\'on de ADN:} Agrupamiento de individuos por genes usando microarrays.
+  \item \textbf{Cl\'usteres de computadores:} Organiza centros de datos eficientemente.
+  \item \textbf{Redes sociales:} Detecta amistades, grupos, y patrones de comunicaci\'on.
+  \item \textbf{Segmentaci\'on de mercado:} Descubre segmentos autom\'aticamente a partir de datos de clientes.
+  \item \textbf{Datos astron\'omicos:} Analiza formaci\'on de galaxias y detecta anomal\'ias (objetos o patrones extra\~nos).
+  \item \textbf{Problema del c\'octel:} Separa fuentes de audio combinadas usando algoritmos no supervisados.
+  \item \textbf{Registros m\'edicos y biolog\'ia computacional:} Mejora diagn\'ostico, comprensi\'on gen\'omica y clasificaci\'on de c\'ancer.
+  \item \textbf{Detecci\'on de actividad de voz (SAD):} Identifica momentos de habla versus silencio.
+  \item \textbf{Verificaci\'on de hablantes:} Usa an\'alisis ac\'ustico para autenticaci\'on.
+\end{itemize}
+
+\subsection{Aprendizaje Supervisado}
+\begin{itemize}
+  \item \textbf{Correo electr\'onico:} Respuestas autom\'aticas, organizaci\'on de carpetas, resumen de hilos, y filtro de spam.
+  \item \textbf{Reconocimiento de escritura:} Identifica direcciones en sobres.
+  \item \textbf{Reconocimiento facial y de voz:} Aplicado en seguridad y redes sociales.
+  \item \textbf{Recuperaci\'on de informaci\'on:} B\'usqueda eficiente y personalizada.
+  \item \textbf{Sistemas operativos:} Predicen apps frecuentes para carga r\'apida.
+  \item \textbf{Detecci\'on de intrusos y an\'omalias:} Usa secuencias de acciones para detectar comportamientos anormales.
+  \item \textbf{Clasificaci\'on de textos:} Asigna documentos a categor\'ias tem\'aticas.
+  \item \textbf{Optimizaci\'on de centros de datos:} Usa redes neuronales para eficiencia energ\'etica.
+  \item \textbf{Radio cognitiva:} Mejora procesamiento de se\~nales mediante reducci\'on de dimensionalidad y SVM.
+  \item \textbf{Finanzas computacionales:} Predice movimientos del mercado burs\'atil.
+  \item \textbf{Interfaces cerebro-m\'aquina (BCI):} Permite controlar dispositivos con actividad cerebral.
+  \item \textbf{Producci\'on musical:} Clasifica g\'eneros, transcribe, detecta ritmo e instrumentos.
+\end{itemize}
+
+\subsection{Sistemas de Recomendaci\'on}
+\begin{itemize}
+  \item \textbf{Aprendizaje m\'ovil:} Ofrece contenido educativo personalizado.
+  \item \textbf{Publicidad computacional:} Asocia usuarios con anuncios en contexto.
+  \item \textbf{An\'alisis de sentimientos:} Clasifica opiniones como positivas o negativas.
+  \item \textbf{Miner\'ia de bases de datos:} Extrae patrones de grandes vol\'umenes de datos.
+  \item \textbf{Programas auto-personalizables:} Aprenden preferencias del usuario y adaptan interfaces.
+\end{itemize}
+
+\subsection{Aprendizaje por Refuerzo}
+\begin{itemize}
+  \item \textbf{Predicci\'on de tr\'afico:} Sistemas que estiman condiciones futuras de tr\'afico.
+  \item \textbf{Juegos de computadora:} IA que mejora experiencia de juego.
+  \item \textbf{Maquinaria aut\'onoma:} Aprenden tareas como volar helic\'opteros.
+  \item \textbf{An\'alisis burs\'atil:} Usa SVM y refuerzo para tomar decisiones financieras.
+  \item \textbf{Ambientes de aprendizaje ubicuo:} Simulaciones realistas para evaluar habilidades cl\'inicas.
+\end{itemize}
+
+\section{Impresiones y Perspectivas}
+Se observa que la capacidad de an\'alisis de datos masivos ha impulsado el desarrollo de agentes aut\'onomos. Se destaca el papel del aprendizaje continuo y la necesidad de conjuntos de datos actualizados. Entre las propuestas futuras se incluyen la m\'aquina del tiempo informativa y el doctor virtual.
+
+\section{Conclusi\'on}
+El aprendizaje autom\'atico ha demostrado ser esencial para la automatizaci\'on inteligente, con aplicaciones en m\'ultiples disciplinas. Aunque hay limitaciones en la calidad y disponibilidad de los datos, el campo sigue creciendo. Se destaca la necesidad de mejorar continuamente los algoritmos y entrenarlos con datos diversos y actualizados.
+
+\end{document}
+
+\section*{Referencias}
+\begin{enumerate}
+  \item Tzanis, G., et al. (2006). Modern Applications of Machine Learning. SEERC Doctoral Student Conference.
+  \item Horvitz, E. (2006). Machine learning, reasoning, and intelligence in daily life: Directions and challenges.
+  \item Mitchell, T. M. (2006). The discipline of machine learning. Carnegie Mellon University.
+  \item Ball, G. R., & Srihari, S. N. (2009). Semi-supervised learning for handwriting recognition. ICDAR.
+  \item Valenti, R., et al. (2008). Machine learning techniques for face analysis.
+  \item Al-Hmouz, A. (2012). An adaptive framework for mobile learners.
+  \item Al-Hmouz, A., Shen, J., & Yan, J. (2009). A machine learning framework for adaptive mobile learning.
+  \item Graepel, T. (2008). Playing Machines: ML Applications in Games. ICML Tutorial.
+  \item Broder, A., & Josifovski, V. (2010). Introduction to computational advertising.
+  \item Cunningham, S. J., Littin, J., & Witten, I. H. (1997). Applications in information retrieval.
+  \item Kaur, H., Singh, G., & Minhas, J. (2013). ML based Anomaly Detection Techniques. arXiv.
+  \item Wiese, B., & Omlin, C. (2009). Credit card fraud detection using LSTM.
+  \item Kumar, V., & Sangwan, O. P. (2012). Signature Based IDS Using SNORT.
+  \item Shen, S., Jiang, H., & Zhang, T. (2012). Stock market forecasting using ML.
+  \item Pang, B., Lee, L., & Vaithyanathan, S. (2002). Sentiment classification.
+  \item Liao, S., et al. (2009). Prefetch optimization for data centers.
+  \item Haider, P., Chiarandini, L., & Brefeld, U. (2012). Clustering for market segmentation.
+  \item Haykin, S., & Chen, Z. (2005). The cocktail party problem.
+  \item Clarke, B., Fokoue, E., & Zhang, H. H. (2009). Principles for data mining and ML.
+  \item Kononenko, I. (2001). ML for medical diagnosis.
+  \item Caragea, C., & Honavar, V. (2009). ML in Computational Biology.
+  \item Cho, S.-B., & Won, H.-H. (2003). DNA microarray for cancer classification.
+  \item Wagstaff, K. (2012). ML that matters. arXiv.
+  \item Shoeb, A. H., & Guttag, J. V. (2010). ML for epileptic seizure detection. ICML.
+  \item Gao, J., & Jamidar, R. (2014). ML for Data Center Optimization. Google.
+  \item Haider, P., Brefeld, U., & Scheffer, T. (2007). Supervised clustering for email batches.
+  \item Sebastiani, F. (2002). ML in automated text categorization. ACM Survey.
+  \item Bratko, A., et al. (2006). Spam filtering using compression models.
+  \item Xiong, L., et al. (2010). Anomaly detection in astronomy.
+  \item Guyon, I., & Elisseeff, A. (2003). Feature selection in ML.
+  \item Hou, S., et al. (2011). SVM and Dimensionality Reduction in Cognitive Radio. arXiv.
+  \item Hwang, K.-B., et al. (2002). Gene expression for cancer diagnosis.
+  \item Silvestrin, L. ML in Biology. Università di Padova.
+  \item Magoulas, G. D., & Prentza, A. (2001). ML in medical applications.
+  \item Bruegge, B., et al. Classification of software artifacts using ML.
+  \item Shhab, A., Guo, G., & Neagu, D. (2005). ML in Data Mining.
+  \item Boyarshinov, V. ML in computational finance.
+  \item Shen, X., et al. (2003). Multilabel ML and semantic scene classification.
+  \item Zararsiz, G., Elmali, F., & Ozturk, A. (2012). Bagging SVM for leukemia classification.
+  \item Tsagkaris, K., et al. (2008). Neural learning for cognitive radio.
+  \item Hosey, N., et al. (2009). Q-learning for cognitive radios.
+  \item Pawar, P. ML in financial markets.
+  \item Tarca, A. L., et al. (2007). ML applications in biology.
+  \item Clément, S. A ML View of Quantitative Finance. Telecom Paris Tech.
+  \item Wang, Y., et al. (2005). Gene selection from microarray data.
+  \item Lanzi, P. L. Intro to ML, Data Mining & Knowledge Discovery.
+  \item Sajda, P. (2006). ML for disease detection and diagnosis.
+  \item Øland, A. (2011). ML and its Applications to Music.
+  \item Makeig, S., et al. (2012). Signal Processing for Brain-Computer Interfaces.
+  \item Sadjadi, S. O., & Hansen, J. H. L. (2013). Unsupervised SAD using perceptual flux.
+  \item Malik, H. (2013). Acoustic Environment Identification for Audio Forensics.
+  \item Acoustic Factor Analysis for Speaker Verification (2013).
+  \item Weal, M. J., et al. (2012). Semantic Annotation in Learning Environments.
+  \item Horvitz, E. J., et al. (2012). Traffic forecasting using ML. arXiv.
+  \item Coursera. Recommender Systems course. https://www.coursera.org/learn/recommender-systems
+\end{enumerate}
+
+
+\section*{Resumen}
+Este art\'iculo presenta una revisi\'on exhaustiva de las aplicaciones del aprendizaje autom\'atico (Machine Learning, ML) dentro del campo de la inteligencia artificial (IA). Se examinan los principales tipos de aprendizaje: supervisado, no supervisado, por refuerzo y sistemas de recomendaci\'on, destacando sus aplicaciones pr\'acticas y proponiendo ideas futuras como el "doctor virtual" y la "m\'aquina del tiempo informativa".
+
+\section{Introducci\'on}
+Un agente inteligente en IA interact\'ua con el entorno mediante sensores y actuadores. Su inteligencia depende de la pol\'itica de control que traduce entradas en acciones. ML permite alcanzar inteligencia humana simulada sin programaci\'on expl\'icita. Aplicaciones incluyen b\'usqueda web, reconocimiento de fotos, y filtros de spam. Se destaca su uso en rob\'otica aut\'onoma, biolog\'ia computacional y Big Data.
+
+\section{Aprendizaje Autom\'atico}
+Se definen conceptos clave del aprendizaje autom\'atico:
+\begin{itemize}
+  \item Arthur Samuel lo define como la capacidad de una computadora para aprender sin ser programada.
+  \item Tom Mitchell propone una definici\'on formal basada en experiencia (E), tarea (T) y medida de rendimiento (P). Si el desempe\~no en $T$, medido a trav¬'es de $P$, mejora con la experiencia  $E$, entonces el programa es llamando un programa de Machine Learning.
+\end{itemize}
+Se destaca el ejemplo del programa de damas de Samuel, que mejora jugando contra s\'i mismo.
+
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm and 2cm,
+    every node/.style={font=\small},
+    box/.style={draw, rounded corners, minimum width=2.8cm, minimum height=1cm, align=center}
+]
+
+\node[box] (main) {Types of Machine Learning};
+
+\node[box, below left=of main] (sup) {Supervised\\Learning};
+\node[box, below=of main] (unsup) {Un-supervised\\Learning};
+\node[box, below right=of main] (rein) {Reinforcement\\Learning};
+\node[box, right=1.5cm of rein] (rec) {Recommender\\System};
+
+\draw (main.south) -- (sup.north);
+\draw (main.south) -- (unsup.north);
+\draw (main.south) -- (rein.north);
+\draw (main.south) -- (rec.north);
+
+\end{tikzpicture}
+\caption{Types of Machine Learning}
+\end{figure}
+
+
+\section{Tipos de Algoritmos de Aprendizaje}
+\subsection{Aprendizaje Supervisado}
+Entrenamiento con datos etiquetados, comparando salida esperada con salida computada. Ejemplo: estimaci\'on del precio de viviendas.
+
+\subsection{Aprendizaje No Supervisado}
+Unsupervised learning is termed as learned by its own by discovering and adopting, based on the input pattern. In this  learning the data are divided into different clusters and hence the learning is called a clustering algorithm Descubre patrones ocultos sin datos etiquetados. Agrupa datos en cl\'usteres, como en Google News.
+
+\subsection{Aprendizaje por Refuerzo}
+Aprende mediante recompensas por buenas acciones y penalizaciones por errores, sin ejemplos expl\'icitos. Se otorga una recompensa por una salida correcta y una penalización por una salida incorrecta. El aprendizaje por refuerzo se diferencia del aprendizaje supervisado en que nunca se presentan pares de entrada/salida correctos, ni se corrigen explícitamente las acciones subóptimas
+
+\subsection{Sistemas de Recomendaci\'on}
+Personalizan contenido para usuarios mediante recomendaciones basadas en contenido o colaborativas. Usado en sitios de comercio electr\'onico. There are mainly two approaches: content based recommendation and collaborative recommendation, which help the user for obtaining and mining data, making intelligent and novel recommendations, ethics. 
+
+\section{Aplicaciones del Aprendizaje Autom\'atico}
+\subsection{Aprendizaje No Supervisado}
+\begin{itemize}
+  \item \textbf{Clasificaci\'on de ADN:} Agrupamiento de individuos por genes usando microarrays.
+  \item \textbf{Cl\'usteres de computadores:} Organiza centros de datos eficientemente.
+  \item \textbf{Redes sociales:} Detecta amistades, grupos, y patrones de comunicaci\'on.
+  \item \textbf{Segmentaci\'on de mercado:} Descubre segmentos autom\'aticamente a partir de datos de clientes.
+  \item \textbf{Datos astron\'omicos:} Analiza formaci\'on de galaxias y detecta anomal\'ias (objetos o patrones extra\~nos).
+  \item \textbf{Problema del c\'octel:} Separa fuentes de audio combinadas usando algoritmos no supervisados.
+  \item \textbf{Registros m\'edicos y biolog\'ia computacional:} Mejora diagn\'ostico, comprensi\'on gen\'omica y clasificaci\'on de c\'ancer.
+  \item \textbf{Detecci\'on de actividad de voz (SAD):} Identifica momentos de habla versus silencio.
+  \item \textbf{Verificaci\'on de hablantes:} Usa an\'alisis ac\'ustico para autenticaci\'on.
+\end{itemize}
+
+\subsection{Aprendizaje Supervisado}
+\begin{itemize}
+  \item \textbf{Correo electr\'onico:} Respuestas autom\'aticas, organizaci\'on de carpetas, resumen de hilos, y filtro de spam.
+  \item \textbf{Reconocimiento de escritura:} Identifica direcciones en sobres.
+  \item \textbf{Reconocimiento facial y de voz:} Aplicado en seguridad y redes sociales.
+  \item \textbf{Recuperaci\'on de informaci\'on:} B\'usqueda eficiente y personalizada.
+  \item \textbf{Sistemas operativos:} Predicen apps frecuentes para carga r\'apida.
+  \item \textbf{Detecci\'on de intrusos y an\'omalias:} Usa secuencias de acciones para detectar comportamientos anormales.
+  \item \textbf{Clasificaci\'on de textos:} Asigna documentos a categor\'ias tem\'aticas.
+  \item \textbf{Optimizaci\'on de centros de datos:} Usa redes neuronales para eficiencia energ\'etica.
+  \item \textbf{Radio cognitiva:} Mejora procesamiento de se\~nales mediante reducci\'on de dimensionalidad y SVM.
+  \item \textbf{Finanzas computacionales:} Predice movimientos del mercado burs\'atil.
+  \item \textbf{Interfaces cerebro-m\'aquina (BCI):} Permite controlar dispositivos con actividad cerebral.
+  \item \textbf{Producci\'on musical:} Clasifica g\'eneros, transcribe, detecta ritmo e instrumentos.
+\end{itemize}
+
+\subsection{Sistemas de Recomendaci\'on}
+\begin{itemize}
+  \item \textbf{Aprendizaje m\'ovil:} Ofrece contenido educativo personalizado.
+  \item \textbf{Publicidad computacional:} Asocia usuarios con anuncios en contexto.
+  \item \textbf{An\'alisis de sentimientos:} Clasifica opiniones como positivas o negativas.
+  \item \textbf{Miner\'ia de bases de datos:} Extrae patrones de grandes vol\'umenes de datos.
+  \item \textbf{Programas auto-personalizables:} Aprenden preferencias del usuario y adaptan interfaces.
+\end{itemize}
+
+\subsection{Aprendizaje por Refuerzo}
+\begin{itemize}
+  \item \textbf{Predicci\'on de tr\'afico:} Sistemas que estiman condiciones futuras de tr\'afico.
+  \item \textbf{Juegos de computadora:} IA que mejora experiencia de juego.
+  \item \textbf{Maquinaria aut\'onoma:} Aprenden tareas como volar helic\'opteros.
+  \item \textbf{An\'alisis burs\'atil:} Usa SVM y refuerzo para tomar decisiones financieras.
+  \item \textbf{Ambientes de aprendizaje ubicuo:} Simulaciones realistas para evaluar habilidades cl\'inicas.
+\end{itemize}
+
+\section{Impresiones y Perspectivas}
+Se observa que la capacidad de an\'alisis de datos masivos ha impulsado el desarrollo de agentes aut\'onomos. Se destaca el papel del aprendizaje continuo y la necesidad de conjuntos de datos actualizados. Entre las propuestas futuras se incluyen la m\'aquina del tiempo informativa y el doctor virtual.
+
+\section{Conclusi\'on}
+El aprendizaje autom\'atico ha demostrado ser esencial para la automatizaci\'on inteligente, con aplicaciones en m\'ultiples disciplinas. Aunque hay limitaciones en la calidad y disponibilidad de los datos, el campo sigue creciendo. Se destaca la necesidad de mejorar continuamente los algoritmos y entrenarlos con datos diversos y actualizados.
+
+\end{document}
+
+\section*{Referencias}
+\begin{enumerate}
+  \item Tzanis, G., et al. (2006). Modern Applications of Machine Learning. SEERC Doctoral Student Conference.
+  \item Horvitz, E. (2006). Machine learning, reasoning, and intelligence in daily life: Directions and challenges.
+  \item Mitchell, T. M. (2006). The discipline of machine learning. Carnegie Mellon University.
+  \item Ball, G. R., & Srihari, S. N. (2009). Semi-supervised learning for handwriting recognition. ICDAR.
+  \item Valenti, R., et al. (2008). Machine learning techniques for face analysis.
+  \item Al-Hmouz, A. (2012). An adaptive framework for mobile learners.
+  \item Al-Hmouz, A., Shen, J., & Yan, J. (2009). A machine learning framework for adaptive mobile learning.
+  \item Graepel, T. (2008). Playing Machines: ML Applications in Games. ICML Tutorial.
+  \item Broder, A., & Josifovski, V. (2010). Introduction to computational advertising.
+  \item Cunningham, S. J., Littin, J., & Witten, I. H. (1997). Applications in information retrieval.
+  \item Kaur, H., Singh, G., & Minhas, J. (2013). ML based Anomaly Detection Techniques. arXiv.
+  \item Wiese, B., & Omlin, C. (2009). Credit card fraud detection using LSTM.
+  \item Kumar, V., & Sangwan, O. P. (2012). Signature Based IDS Using SNORT.
+  \item Shen, S., Jiang, H., & Zhang, T. (2012). Stock market forecasting using ML.
+  \item Pang, B., Lee, L., & Vaithyanathan, S. (2002). Sentiment classification.
+  \item Liao, S., et al. (2009). Prefetch optimization for data centers.
+  \item Haider, P., Chiarandini, L., & Brefeld, U. (2012). Clustering for market segmentation.
+  \item Haykin, S., & Chen, Z. (2005). The cocktail party problem.
+  \item Clarke, B., Fokoue, E., & Zhang, H. H. (2009). Principles for data mining and ML.
+  \item Kononenko, I. (2001). ML for medical diagnosis.
+  \item Caragea, C., & Honavar, V. (2009). ML in Computational Biology.
+  \item Cho, S.-B., & Won, H.-H. (2003). DNA microarray for cancer classification.
+  \item Wagstaff, K. (2012). ML that matters. arXiv.
+  \item Shoeb, A. H., & Guttag, J. V. (2010). ML for epileptic seizure detection. ICML.
+  \item Gao, J., & Jamidar, R. (2014). ML for Data Center Optimization. Google.
+  \item Haider, P., Brefeld, U., & Scheffer, T. (2007). Supervised clustering for email batches.
+  \item Sebastiani, F. (2002). ML in automated text categorization. ACM Survey.
+  \item Bratko, A., et al. (2006). Spam filtering using compression models.
+  \item Xiong, L., et al. (2010). Anomaly detection in astronomy.
+  \item Guyon, I., & Elisseeff, A. (2003). Feature selection in ML.
+  \item Hou, S., et al. (2011). SVM and Dimensionality Reduction in Cognitive Radio. arXiv.
+  \item Hwang, K.-B., et al. (2002). Gene expression for cancer diagnosis.
+  \item Silvestrin, L. ML in Biology. Università di Padova.
+  \item Magoulas, G. D., & Prentza, A. (2001). ML in medical applications.
+  \item Bruegge, B., et al. Classification of software artifacts using ML.
+  \item Shhab, A., Guo, G., & Neagu, D. (2005). ML in Data Mining.
+  \item Boyarshinov, V. ML in computational finance.
+  \item Shen, X., et al. (2003). Multilabel ML and semantic scene classification.
+  \item Zararsiz, G., Elmali, F., & Ozturk, A. (2012). Bagging SVM for leukemia classification.
+  \item Tsagkaris, K., et al. (2008). Neural learning for cognitive radio.
+  \item Hosey, N., et al. (2009). Q-learning for cognitive radios.
+  \item Pawar, P. ML in financial markets.
+  \item Tarca, A. L., et al. (2007). ML applications in biology.
+  \item Clément, S. A ML View of Quantitative Finance. Telecom Paris Tech.
+  \item Wang, Y., et al. (2005). Gene selection from microarray data.
+  \item Lanzi, P. L. Intro to ML, Data Mining & Knowledge Discovery.
+  \item Sajda, P. (2006). ML for disease detection and diagnosis.
+  \item Øland, A. (2011). ML and its Applications to Music.
+  \item Makeig, S., et al. (2012). Signal Processing for Brain-Computer Interfaces.
+  \item Sadjadi, S. O., & Hansen, J. H. L. (2013). Unsupervised SAD using perceptual flux.
+  \item Malik, H. (2013). Acoustic Environment Identification for Audio Forensics.
+  \item Acoustic Factor Analysis for Speaker Verification (2013).
+  \item Weal, M. J., et al. (2012). Semantic Annotation in Learning Environments.
+  \item Horvitz, E. J., et al. (2012). Traffic forecasting using ML. arXiv.
+  \item Coursera. Recommender Systems course. https://www.coursera.org/learn/recommender-systems
+\end{enumerate}
+
+\end{document}

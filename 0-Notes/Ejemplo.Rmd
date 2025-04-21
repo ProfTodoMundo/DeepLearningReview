@@ -1,0 +1,185 @@
+---
+title: "Análisis con Datos Reales del UCI Heart Disease Dataset"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+set.seed(123)
+```  
+
+# Carga de Paquetes
+
+```{r cargar-paquetes}
+
+library(mlbench)
+library(dplyr)
+library(ggplot2)
+library(minpack.lm)
+```
+
+# Carga y Limpieza de Datos
+
+```{r cargar-datos}
+data("Heart", package = "mlbench")
+
+heart <- as.data.frame(Heart)
+
+heart_clean <- heart %>%
+  select(age = Age, sex = Sex, chest_pain = ChestPain, 
+         rest_bp = RestBP, chol = Chol, fbs = Fbs, restecg = RestECG, 
+         max_hr = MaxHR, exang = ExAng, oldpeak = Oldpeak, 
+         slope = Slope, ca = Ca, thal = Thal, AHD = AHD) %>%
+  filter(complete.cases(.))
+
+# Conversión de variables
+heart_clean$sex <- as.numeric(heart_clean$sex == "Male")
+heart_clean$fbs <- as.numeric(heart_clean$fbs == "Yes")
+heart_clean$exang <- as.numeric(heart_clean$exang == "Yes")
+heart_clean$AHD <- as.numeric(heart_clean$AHD == "Yes")
+heart_clean$thal <- factor(heart_clean$thal)
+```
+
+# Exploración Rápida
+
+```{r exploracion}
+glimpse(heart_clean)
+summary(heart_clean)
+```
+
+# Ajuste del Modelo Logístico con Datos Reales
+
+```{r modelo-logit-real}
+modelo_real <- glm(AHD ~ age + sex + chol + rest_bp + max_hr + fbs + exang + ca + slope + thal, 
+                   data = heart_clean, family = binomial)
+summary(modelo_real)
+```
+
+# Extraer Coeficientes para Simulación Futura
+
+```{r coeficientes}
+coefs <- coef(modelo_real)
+round(coefs, 3)
+```
+
+# Visualización de Probabilidades Estimadas por Edad
+
+```{r grafico-probabilidades}
+x_grid <- seq(min(heart_clean$age), max(heart_clean$age), length.out = 100)
+
+pred_data <- data.frame(
+  age = x_grid,
+  sex = 1,
+  chol = mean(heart_clean$chol),
+  rest_bp = mean(heart_clean$rest_bp),
+  max_hr = mean(heart_clean$max_hr),
+  fbs = 0,
+  exang = 0,
+  ca = 1,
+  slope = 2,
+  thal = factor("reversable", levels = levels(heart_clean$thal))
+)
+
+p_real <- predict(modelo_real, newdata = pred_data, type = "response")
+
+plot(x_grid, p_real, type = "l", lwd = 2, col = "blue",
+     xlab = "Edad", ylab = "Probabilidad de AHD",
+     main = "Probabilidad Estimada de Enfermedad Cardiaca vs Edad")
+```
+
+# Conclusión
+
+Este modelo basado en datos reales nos permite tener coeficientes confiables y patrones observados que pueden ser reutilizados en simulaciones más verosímiles. Puedes utilizar estos valores de coeficientes en tu `logit_p` para simular nuevos datasets.
+
+# Análisis con el dataset PimaIndiansDiabetes2
+
+```{r cargar-pima}
+data("PimaIndiansDiabetes2", package = "mlbench")
+pima <- na.omit(PimaIndiansDiabetes2)
+pima$diabetes <- as.numeric(pima$diabetes == "pos")
+```
+
+## Ajuste de modelos
+
+```{r modelos-pima}
+modelo_logit_pima <- glm(diabetes ~ ., data = pima, family = binomial(link = "logit"))
+modelo_probit_pima <- glm(diabetes ~ ., data = pima, family = binomial(link = "probit"))
+summary(modelo_logit_pima)
+summary(modelo_probit_pima)
+```
+
+## Comparación gráfica (Edad vs Probabilidad)
+
+```{r grafico-pima}
+x_grid_pima <- seq(min(pima$age), max(pima$age), length.out = 100)
+pred_data_pima <- data.frame(
+  pregnant = median(pima$pregnant), glucose = median(pima$glucose),
+  pressure = median(pima$pressure), triceps = median(pima$triceps),
+  insulin = median(pima$insulin), mass = median(pima$mass),
+  pedigree = median(pima$pedigree), age = x_grid_pima
+)
+
+p_logit_pima <- predict(modelo_logit_pima, newdata = pred_data_pima, type = "response")
+p_probit_pima <- predict(modelo_probit_pima, newdata = pred_data_pima, type = "response")
+
+plot(x_grid_pima, p_logit_pima, type = "l", col = "blue", lwd = 2, ylim = c(0,1),
+     ylab = "Probabilidad estimada", xlab = "Edad", main = "Logit vs Probit (PIMA)")
+lines(x_grid_pima, p_probit_pima, col = "red", lwd = 2, lty = 2)
+legend("bottomright", legend = c("Logit", "Probit"), col = c("blue", "red"), lty = c(1, 2), lwd = 2)
+```
+
+## NLS con PIMA
+
+```{r nls-pima}
+library(minpack.lm)
+pima$diab <- as.numeric(pima$diabetes)
+modelo_nls_pima <- nlsLM(diab ~ 1 / (1 + exp(-(b0 + b1 * age))),
+                          data = pima, start = list(b0 = -5, b1 = 0.1))
+summary(modelo_nls_pima)
+```
+
+## Comparación gráfica
+
+```{r comparar-tres-pima}
+p_nls_pima <- predict(modelo_nls_pima, newdata = pred_data_pima)
+
+plot(x_grid_pima, p_logit_pima, type = "l", col = "blue", lwd = 2, ylim = c(0,1),
+     ylab = "Probabilidad estimada", xlab = "Edad", main = "Comparación Logit - Probit - NLS")
+lines(x_grid_pima, p_probit_pima, col = "red", lwd = 2, lty = 2)
+lines(x_grid_pima, p_nls_pima, col = "purple", lwd = 2, lty = 3)
+legend("bottomright", legend = c("Logit", "Probit", "NLS"), col = c("blue", "red", "purple"), lty = c(1,2,3), lwd = 2)
+```
+
+## Bootstrap con PIMA
+
+```{r bootstrap-pima}
+set.seed(2025)
+boot_pima <- pima[sample(1:nrow(pima), size = 1500, replace = TRUE), ]
+modelo_logit_bt <- glm(diabetes ~ ., data = boot_pima, family = binomial(link = "logit"))
+modelo_probit_bt <- glm(diabetes ~ ., data = boot_pima, family = binomial(link = "probit"))
+modelo_nls_bt <- nlsLM(as.numeric(diabetes) ~ 1 / (1 + exp(-(b0 + b1 * age))),
+                       data = boot_pima, start = list(b0 = -5, b1 = 0.1))
+
+x_bt <- seq(min(boot_pima$age), max(boot_pima$age), length.out = 100)
+bt_pred <- data.frame(
+  pregnant = median(boot_pima$pregnant), glucose = median(boot_pima$glucose),
+  pressure = median(boot_pima$pressure), triceps = median(boot_pima$triceps),
+  insulin = median(boot_pima$insulin), mass = median(boot_pima$mass),
+  pedigree = median(boot_pima$pedigree), age = x_bt
+)
+
+p_logit_bt <- predict(modelo_logit_bt, newdata = bt_pred, type = "response")
+p_probit_bt <- predict(modelo_probit_bt, newdata = bt_pred, type = "response")
+p_nls_bt <- predict(modelo_nls_bt, newdata = bt_pred)
+
+plot(x_bt, p_logit_bt, type = "l", col = "blue", lwd = 2, ylim = c(0,1),
+     ylab = "Probabilidad estimada", xlab = "Edad", main = "Bootstrap (n=1500): Logit vs Probit vs NLS")
+lines(x_bt, p_probit_bt, col = "red", lwd = 2, lty = 2)
+lines(x_bt, p_nls_bt, col = "purple", lwd = 2, lty = 3)
+legend("bottomright", legend = c("Logit BT", "Probit BT", "NLS BT"), col = c("blue", "red", "purple"), lty = c(1,2,3), lwd = 2)
+```

@@ -1,0 +1,186 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{fancyhdr}
+\usepackage{color}
+
+\geometry{a4paper, margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Notas de Regresión Lineal y Logística}
+\lhead{Carlos}
+\rfoot{\thepage}
+
+\title{Notas sobre Regresión Lineal y Logística}
+\author{Carlos}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Regresión Logística: Log-verosimilitud y derivadas}
+
+La log-verosimilitud para la regresión logística está dada por:
+
+\[
+\ell(\bm{\theta}) = \sum_{i=1}^N y^{(i)} \log \sigma(\bm{\theta}^T \bm{x}^{(i)}) + (1 - y^{(i)}) \log(1 - \sigma(\bm{\theta}^T \bm{x}^{(i)}))
+\]
+
+Antes de calcular la derivada, recordamos:
+
+\[
+\sigma(z) = \frac{1}{1 + e^{-z}} \quad \text{y} \quad \frac{d}{dz} \sigma(z) = \sigma(z)(1 - \sigma(z))
+\]
+
+La derivada de la log-verosimilitud con respecto a $\theta_j$ es:
+
+\[
+\frac{\partial \ell(\bm{\theta})}{\partial \theta_j} = \sum_{i=1}^N \left[y^{(i)} - \sigma(\bm{\theta}^T \bm{x}^{(i)}) \right] x_j^{(i)}
+\]
+
+\section{Derivación recursiva del gradiente}
+
+Esta fórmula se utiliza para construir el vector gradiente necesario en algoritmos como descenso del gradiente:
+
+\[
+\nabla_{\bm{\theta}} \ell(\bm{\theta}) = \sum_{i=1}^N \left[y^{(i)} - \sigma(\bm{\theta}^T \bm{x}^{(i)})\right] \bm{x}^{(i)}
+\]
+
+\section{Regresión Lineal}
+
+\subsection{Historia}
+
+Sir Francis Galton sugirió el concepto de regresión lineal en 1894.
+
+\subsection{Modelo de Regresión Lineal}
+
+Regresión lineal simple:
+
+\[
+y = \beta_0 + \beta_1 x + \xi
+\]
+
+Regresión lineal multivariada:
+
+\[
+y = \sum_{i=1}^{d} \beta_i x_i, \quad x_0 = 1
+\]
+
+En forma matricial:
+
+\[
+\bm{\beta} = (\bm{X}^T \bm{X})^{-1} \bm{X}^T \bm{y}
+\]
+
+\subsection{Regresión Polinomial}
+
+El modelo polinomial tiene la forma:
+
+\[
+y = \beta_0 + \beta_1 x + \beta_2 x^2 + \dots + \beta_n x^n + \xi
+\]
+
+Usamos mínimos cuadrados para estimar los coeficientes minimizando:
+
+\[
+\arg\min_{\beta_0, \beta_1} \sum_i \left[y_i - (\beta_0 + \beta_1 x_i)\right]^2
+\]
+
+\section{Estimaciones con modelo lineal centrado}
+
+Si usamos:
+
+\[
+y_i = \beta_0^* + \beta_1 (x_i - \bar{x}) + \varepsilon_i
+\]
+
+entonces se obtiene:
+
+\[
+\beta_0 = \bar{y}, \quad \beta_1 = \frac{S_{xy}}{S_{xx}}
+\]
+
+\section{Evaluación del modelo lineal}
+
+\subsection{F-test}
+
+\[
+F = \frac{\sum (\hat{y}_i - \bar{y})^2 / (m-1)}{\sum (y_i - \hat{y}_i)^2 / (n - m)} \sim F_{(m-1, n-m)}
+\]
+
+\subsection{t-test}
+
+\[
+t_j = \frac{\hat{\beta}_j}{\sqrt{C_{jj} \frac{\sum (y_i - \hat{y}_i)^2}{n - m}}}
+\]
+
+\section{Fundamentos de la Regresión Logística}
+
+Sea $\bm{X} \in \mathbb{R}^{n \times d}$, $y$ vector binario:
+
+\[
+P(y_i = 1) = p_i, \quad \mathbb{E}[y_i] = p_i = \bm{x}_i^T \bm{\beta}, \quad \mathrm{Var}(y_i) = p_i(1 - p_i)
+\]
+
+\section{Función logística y función logit}
+
+\[
+p_i = \frac{e^{\bm{x}_i^T \bm{\beta}}}{1 + e^{\bm{x}_i^T \bm{\beta}}}
+\quad
+\text{y}
+\quad
+\eta_i = \log\left( \frac{p_i}{1 - p_i} \right) = \bm{x}_i^T \bm{\beta}
+\]
+
+\section{Log-verosimilitud y derivadas}
+
+\[
+\ell(\bm{\beta}) = \sum \left[ y_i \log(p_i) + (1 - y_i)\log(1 - p_i) \right]
+\]
+
+\[
+\nabla_{\bm{\beta}} \ell(\bm{\beta}) = \bm{X}^T(\bm{y} - \bm{p})
+\]
+
+\[
+\nabla^2_{\bm{\beta}} \ell(\bm{\beta}) = - \bm{X}^T \bm{V} \bm{X}, \quad \text{donde } \bm{V} = \text{diag}(p_i(1 - p_i))
+\]
+
+\section{Regularización}
+
+\[
+\ell(\bm{\beta}) - \frac{\lambda}{2} \|\bm{\beta}\|^2
+\]
+
+\section{Desviación}
+
+\[
+DEV(\hat{\bm{\beta}}) = -2 \ln L(\hat{\bm{\beta}})
+\]
+
+\section{Newton-Raphson}
+
+\[
+\bm{\beta}^{(c+1)} = \left( \bm{X}^T \bm{V} \bm{X} + \lambda \bm{I} \right)^{-1} \bm{X}^T \bm{V} \bm{Z}^{(c)}
+\]
+
+\section{WLS y función cuadrática}
+
+La estimación WLS consiste en minimizar:
+
+\[
+\frac{1}{2} \bm{\beta}^T \left( \bm{X}^T \bm{V} \bm{X} + \lambda \bm{I} \right) \bm{\beta} - \bm{\beta}^T (\bm{X}^T \bm{V} \bm{Z}^{(c)})
+\]
+
+\end{document}

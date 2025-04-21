@@ -1,0 +1,16 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{2}{section.1}%
+\contentsline {section}{\numberline {2}Marco Teórico}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Regresión Lineal}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Regresión Logística}{2}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Metodología}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Fuentes de datos}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Tratamiento y limpieza de datos en R}{3}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Ajuste de modelos y validación}{3}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Resultados}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Caso 1: Cáncer de mama (Regresión Logística)}{3}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Caso 2: Enfermedad renal crónica (Logística multivariada)}{3}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Caso 3: Divorcio vs edad del hijo (Regresión logística)}{3}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Caso 4: Redes sociales y estado civil (Modelado exploratorio)}{3}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Discusión}{3}{section.5}%
+\contentsline {section}{\numberline {6}Conclusiones}{4}{section.6}%

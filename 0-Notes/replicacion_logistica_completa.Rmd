@@ -1,0 +1,138 @@
+
+---
+title: "Replicación de Ejemplo Numérico: Regresión Logística"
+author: "Carlos"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introducción
+
+Este documento replica el ejemplo presentado en las notas de Tore Schweder (2003), basadas en el capítulo 18 del texto de Hill et al., usando regresión logística binaria para modelar la probabilidad de que un individuo elija automóvil en función del tiempo relativo de viaje.
+
+## Modelo de Regresión Logística
+
+La probabilidad de elegir automóvil se modela como:
+
+\[
+p_i = \frac{1}{1 + e^{-x_i \beta}}
+\]
+
+La función de verosimilitud es:
+
+\[
+L(\beta) = \prod_{i=1}^n p_i^{y_i} (1 - p_i)^{1 - y_i}
+\]
+
+La log-verosimilitud correspondiente es:
+
+\[
+\ell(\beta) = \sum_{i=1}^n \left[ y_i \log(p_i) + (1 - y_i) \log(1 - p_i) \right]
+\]
+
+## Datos
+
+```{r data}
+auto_time <- c(52.90, 4.10, 4.10, 56.20, 51.80, 0.20, 27.60, 89.90, 41.50,
+               95.00, 99.10, 18.50, 82.00, 8.60, 22.50, 51.40, 81.00, 51.00,
+               62.20, 95.10, 41.60)
+
+bus_time <- c(4.4, 28.5, 86.9, 31.6, 20.2, 91.2, 79.7, 2.2, 24.5,
+              43.5, 8.4, 84, 38, 1.6, 74.1, 83.8, 19.2, 85, 90.1, 22.2, 91.5)
+
+y <- c(0, 0, 1, 0, 0, 1, 1, 0, 0,
+       0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1)
+
+x <- auto_time - bus_time
+```
+
+## Ajuste por Máxima Verosimilitud (GLM)
+
+```{r modelo-glm}
+modelo <- glm(y ~ x, family = binomial)
+summary(modelo)
+```
+
+## Ajuste por Mínimos Cuadrados (NLS)
+
+```{r modelo-nls}
+modelo_nls <- nls(
+  y ~ 1 / (1 + exp(-(b0 + b1 * x))),
+  start = list(b0 = 0, b1 = 0.05)
+)
+summary(modelo_nls)
+```
+
+## Comparación de Coeficientes
+
+```{r comparar-coef}
+coef(modelo)
+coef(modelo_nls)
+```
+
+## Visualización de ambas curvas
+
+```{r grafico-comparativo}
+plot(x, y, pch = 19, col = ifelse(y == 1, "blue", "red"),
+     main = "Comparación de Métodos de Ajuste",
+     xlab = "x = Auto Time - Bus Time", ylab = "P(car)")
+
+x_sorted <- sort(x)
+
+# GLM curve
+lines(x_sorted,
+      predict(modelo, data.frame(x = x_sorted), type = "response"),
+      col = "darkgreen", lwd = 2)
+
+# NLS curve (manual)
+b0_nls <- coef(modelo_nls)["b0"]
+b1_nls <- coef(modelo_nls)["b1"]
+p_nls <- 1 / (1 + exp(-(b0_nls + b1_nls * x_sorted)))
+lines(x_sorted, p_nls, col = "purple", lwd = 2, lty = 2)
+
+legend("bottomright",
+       legend = c("GLM (Verosimilitud)", "NLS (Mínimos Cuadrados)"),
+       col = c("darkgreen", "purple"), lty = c(1, 2), lwd = 2)
+```
+
+## Interpretación del Gráfico
+
+El gráfico muestra:
+
+- Los puntos **azules y rojos** son las observaciones reales:
+  - Azul: elección del automóvil (`y = 1`)
+  - Rojo: elección distinta (`y = 0`)
+
+- La **línea verde** representa el ajuste del modelo `glm` (verosimilitud)
+
+- La **línea morada discontinua** representa el ajuste por `nls` (mínimos cuadrados)
+
+Ambas curvas deberían parecerse, aunque pueden variar ligeramente según el método.
+
+## Bootstrap: muestra simulada de tamaño N = 100
+
+```{r bootstrap}
+set.seed(42)
+datos <- data.frame(auto_time, bus_time, x, y)
+bootstrap_sample <- datos[sample(1:nrow(datos), size = 100, replace = TRUE), ]
+head(bootstrap_sample)
+```
+
+### Ajuste del modelo GLM en la muestra bootstrap
+
+```{r glm-bootstrap}
+modelo_boot <- glm(y ~ x, data = bootstrap_sample, family = binomial)
+summary(modelo_boot)
+```
+
+### Comparación de coeficientes con el modelo original
+
+```{r comparar-bootstrap}
+coef(modelo)
+coef(modelo_boot)
+```
+

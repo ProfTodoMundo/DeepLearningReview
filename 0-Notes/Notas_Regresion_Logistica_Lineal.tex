@@ -1,0 +1,134 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{bm}
+\usepackage{lscape}
+
+\geometry{margin=1in}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
+
+\title{Notas sobre Regresión Lineal y Logística \\ \large Derivaciones, Comentarios y Optimización}
+\author{Carlos Leonardo}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Notas de Regresión}
+\lhead{Carlos Leonardo}
+\rfoot{\thepage}
+
+\begin{document}
+
+\maketitle
+
+\section*{Agradecimientos}
+Estas notas fueron escritas a partir del estudio autodidacta y reflexión matemática sobre los modelos de regresión lineal y logística. Se agradece el aporte teórico de textos clásicos como \textit{The Elements of Statistical Learning} de Hastie, Tibshirani y Friedman, así como artículos de Komurek (2004), Hasmer y Temeeshou (2000).
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introducción}
+Se exploran los fundamentos teóricos y computacionales de la regresión lineal (simple y multivariada), regresión polinomial y regresión logística. Se incluyen derivaciones completas del gradiente, matriz Hessiana, verosimilitud y funciones de pérdida, además de métodos de optimización como Newton-Raphson.
+
+\section{Regresión Lineal}
+\subsection{Modelo Simple y Multivariado}
+Dado un conjunto de observaciones $y_i$ y predictores $x_i$:
+
+\[
+Y = \beta_0 + \beta_1 x + \varepsilon
+\]
+
+Para el caso multivariado:
+
+\[
+y = X\beta + \varepsilon
+\quad \text{donde} \quad 
+X = \begin{bmatrix}
+1 & x_{11} & \dots & x_{1d} \\
+1 & x_{21} & \dots & x_{2d} \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & x_{n1} & \dots & x_{nd}
+\end{bmatrix}
+\]
+
+\[
+\hat{\beta} = (X^\top X)^{-1} X^\top y
+\]
+
+\subsection{Modelo Lineal Centrado}
+Utilizando la transformación $x_i - \bar{x}$ se obtiene que $\beta_0 = \bar{y} - \beta_1 \bar{x}$ y
+
+\[
+\beta_1 = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}
+\]
+
+\section{Regresión Logística}
+\subsection{Fundamentos}
+El modelo se basa en una variable binaria $y_i \in \{0,1\}$ con probabilidad $\pi_i = P(y_i = 1|x_i)$:
+
+\[
+\pi_i = \frac{1}{1 + e^{-x_i^\top \beta}} \quad \text{o bien} \quad \log\left(\frac{\pi_i}{1 - \pi_i}\right) = x_i^\top \beta
+\]
+
+\subsection{Función de Log-Verosimilitud}
+\[
+\ell(\beta) = \sum_{i=1}^{n} y_i \log(\pi_i) + (1 - y_i) \log(1 - \pi_i)
+\]
+
+\subsection{Gradiente}
+\[
+\nabla_\beta \ell(\beta) = \sum_{i=1}^n x_i (y_i - \pi_i) = X^\top (y - \pi)
+\]
+
+\subsection{Hessiano}
+\[
+\nabla^2_\beta \ell(\beta) = -X^\top V X \quad \text{con} \quad V = \text{diag}(\pi_i (1 - \pi_i))
+\]
+
+\section{Newton-Raphson para Regresión Logística}
+Actualización iterativa:
+
+\[
+\beta^{(c+1)} = \beta^{(c)} + (X^\top V X)^{-1} X^\top (y - \pi)
+\]
+
+\section{Regularización}
+La log-verosimilitud regularizada es:
+
+\[
+\ell_\lambda(\beta) = \sum_{i=1}^n \left[y_i x_i^\top \beta - \log(1 + e^{x_i^\top \beta})\right] - \frac{\lambda}{2} \|\beta\|^2
+\]
+
+\section{Función de Pérdida y Desviación}
+Se define la desviación como:
+
+\[
+\text{DEV}(\beta) = -2 \ell(\beta)
+\]
+
+\section{Referencias}
+\begin{itemize}
+    \item Hastie, T., Tibshirani, R., Friedman, J. (2009). \textit{The Elements of Statistical Learning}.
+    \item Komurek, J. (2004). \textit{Efficient Logistic Regression Methods}.
+    \item Hasmer, Temeeshou (2000).
+    \item Malouf (2002), Minka (2003).
+\end{itemize}
+
+\end{document}

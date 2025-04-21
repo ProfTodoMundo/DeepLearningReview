@@ -1,0 +1,138 @@
+---
+title: "Estudios de Ciencia de Datos - Semana 01"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    number_sections: true
+    theme: united
+---
+
+# Semana 01
+
+## Día Lunes
+
+### Tema 1: Comparación de proporciones y regresión logística
+
+#### Introducción
+
+Estudio del uso de Instagram entre mujeres y hombres con base en proporciones observadas y regresión logística. Este ejemplo se basa en datos simulados inspirados en el libro de estadística.
+
+#### Código en R
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r librerias}
+library(ggplot2)
+```
+
+```{r crear-datos}
+# Simular los datos
+set.seed(123)
+
+n_women <- 1000
+n_men <- 1000
+
+p_women <- 0.6108
+p_men <- 0.4398
+
+instagram_women <- rbinom(n_women, 1, p_women)
+instagram_men <- rbinom(n_men, 1, p_men)
+
+sexo <- c(rep("Mujer", n_women), rep("Hombre", n_men))
+instagram <- c(instagram_women, instagram_men)
+
+datos <- data.frame(
+  sexo = factor(sexo, levels = c("Hombre", "Mujer")),
+  instagram = instagram
+)
+
+head(datos)
+```
+
+```{r modelo-logit}
+# Ajustar modelo logístico
+modelo <- glm(instagram ~ sexo, data = datos, family = "binomial")
+summary(modelo)
+```
+
+```{r interpretar}
+# Interpretación con odds ratio
+exp(coef(modelo))
+exp(confint(modelo))
+```
+
+```{r grafico}
+# Visualización de proporciones
+ggplot(datos, aes(x = sexo, fill = factor(instagram))) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Proporción de Usuarios de Instagram por Sexo",
+    x = "Sexo",
+    y = "Proporción",
+    fill = "Usa Instagram"
+  ) +
+  theme_minimal()
+```
+
+#### Resultados esperados
+
+- Mujeres tienen mayor probabilidad (odds ratio > 1) de usar Instagram que los hombres.
+- El modelo es significativo si el p-valor del coeficiente asociado a "Mujer" es bajo.
+- Visualmente se puede observar esta diferencia en las barras apiladas.
+
+---
+
+
+#### Interpretación de la significancia del modelo {.unnumbered}
+
+Podemos determinar si el modelo es significativo analizando los resultados del resumen de la regresión logística:
+
+```r
+summary(modelo)
+```
+
+**Extracto del resultado:**
+
+```
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -0.27370    0.06384  -4.287 1.81e-05 ***
+sexoMujer    0.72521    0.09101   7.969 1.61e-15 ***
+```
+
+**Interpretación:**
+
+- El valor de `Pr(>|z|)` para el coeficiente `sexoMujer` es **1.61e-15**, lo cual es **mucho menor a 0.05**.
+- Esto indica que el predictor `sexo` **es altamente significativo** para predecir el uso de Instagram.
+- El símbolo `***` confirma que el efecto es significativo al nivel del 0.1%.
+
+**¿Qué significa esto?**
+
+> Las diferencias entre hombres y mujeres en el uso de Instagram **no son atribuibles al azar**. El modelo encuentra evidencia fuerte para concluir que el sexo tiene un efecto sobre la probabilidad de usar Instagram.
+
+**Prueba formal con anova:**
+
+También podemos realizar una prueba de razón de verosimilitudes:
+
+```r
+anova(modelo, test = "Chisq")
+```
+
+Esto nos permitirá verificar si el modelo con `sexo` mejora significativamente respecto al modelo nulo (sin predictores).
+
+
+
+### Tema 2: *(Reservado para otro artículo)*
+
+*(Aquí se puede agregar un nuevo bloque de análisis siguiendo el mismo formato.)*
+
+---
+
+### Tema 3: *(Reservado para otro artículo)*
+
+*(Aquí se puede agregar un nuevo bloque de análisis siguiendo el mismo formato.)*

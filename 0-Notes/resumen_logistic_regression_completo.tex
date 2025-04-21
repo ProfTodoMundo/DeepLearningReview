@@ -1,0 +1,108 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, graphicx, algorithm, algpseudocode, hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Resumen Acad\'emico: \textit{Logistic Regression in Data Analysis: An Overview} (Maalouf, 2011)}
+\author{Resumen generado por Carlos con ayuda de ChatGPT}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Resumen general}
+El artículo de Maher Maalouf (2011) es una revisión detallada de la regresión logística (RL) como técnica central para problemas de clasificación binaria. Se abordan tanto los fundamentos teóricos del modelo como estrategias computacionales y estadísticas para mejorar su rendimiento, en especial en contextos con desbalance de clases o datos de alta dimensión.
+
+\section*{Modelo base de regresión logística}
+La RL modela la probabilidad de un evento binario $y_i \in \{0,1\}$ en función de un vector de predictores $x_i$ mediante:
+\begin{equation}
+    p_i = \frac{1}{1 + e^{-x_i \beta}}
+\end{equation}
+
+La verosimilitud del modelo es:
+\begin{equation}
+    L(\beta) = \prod_{i=1}^n p_i^{y_i}(1 - p_i)^{1 - y_i}
+\end{equation}
+
+Y su log-verosimilitud:
+\begin{equation}
+    \ell(\beta) = \sum_{i=1}^{n} \left[ y_i \ln(p_i) + (1 - y_i) \ln(1 - p_i) \right]
+\end{equation}
+
+\section*{Derivadas: Gradiente y Hessiano}
+\begin{itemize}
+    \item Gradiente:
+    \begin{equation}
+        \nabla_{\beta} \ell(\beta) = X^T (\mathbf{y} - \mathbf{p})
+    \end{equation}
+    \item Hessiano:
+    \begin{equation}
+        \nabla^2_{\beta} \ell(\beta) = - X^T V X, \quad \text{donde } V = \text{diag}(p_i(1 - p_i))
+    \end{equation}
+\end{itemize}
+
+\section*{Regularización}
+Para evitar el sobreajuste, se añade un término de penalización L2 (ridge):
+\begin{equation}
+    \ell_{\lambda}(\beta) = \ell(\beta) - \frac{\lambda}{2} \|\beta\|^2
+\end{equation}
+
+\begin{itemize}
+    \item Gradiente regularizado:
+    \begin{equation}
+        \nabla_{\beta} \ell_{\lambda}(\beta) = X^T (\mathbf{y} - \mathbf{p}) - \lambda \beta
+    \end{equation}
+    \item Hessiano regularizado:
+    \begin{equation}
+        \nabla^2_{\beta} \ell_{\lambda}(\beta) = - X^T V X - \lambda I
+    \end{equation}
+\end{itemize}
+
+\section*{Algoritmo IRLS (Iteratively Reweighted Least Squares)}
+Una técnica común para estimar los parámetros del modelo es IRLS, que utiliza pesos $v_i = p_i(1 - p_i)$ y variables ajustadas $z_i$:
+
+\begin{equation}
+    z_i = x_i \hat{\beta} + \frac{y_i - p_i}{v_i}
+\end{equation}
+
+En cada iteración, se resuelve:
+\begin{equation}
+    (X^T V X + \lambda I) \hat{\beta}^{(c+1)} = X^T V z^{(c)}
+\end{equation}
+
+Este método es eficiente para bases de datos de tamaño moderado.
+
+\section*{Algoritmo CG (Conjugate Gradient)}
+En problemas a gran escala, se recomienda el método del gradiente conjugado:
+
+\begin{itemize}
+    \item Se inicializa el residuo $r^{(0)} = b - A\beta^{(0)}$.
+    \item Se actualizan las direcciones de búsqueda y pasos óptimos iterativamente.
+    \item Permite resolver sistemas lineales sin invertir matrices.
+\end{itemize}
+
+Es especialmente útil cuando $X^T V X$ es grande o disperso.
+
+\section*{Correcciones para eventos raros}
+\begin{itemize}
+    \item \textbf{Ajuste del intercepto:} basado en la tasa real de eventos:
+    \begin{equation}
+        \tilde{\beta}_0 = \hat{\beta}_0 - \ln \left( \frac{1 - \tau}{\tau} \cdot \frac{y}{1 - y} \right)
+    \end{equation}
+    \item \textbf{Ponderación:} modifica la verosimilitud con pesos:
+    \begin{equation}
+        \ell(\beta|y,X) = \sum_{i=1}^n w_i \ln \left( \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} \right)
+    \end{equation}
+\end{itemize}
+
+\section*{Conclusiones clave}
+\begin{itemize}
+    \item La regresión logística es robusta y se adapta bien a diferentes contextos de datos.
+    \item Las técnicas de regularización y los métodos numéricos como IRLS y CG la hacen escalable.
+    \item Las correcciones para eventos raros mejoran la inferencia en muestras sesgadas.
+    \item Es una herramienta base para modelos más complejos como regresión multinomial o clasificación ordinal.
+\end{itemize}
+
+\end{document}

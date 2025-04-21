@@ -1,0 +1,78 @@
+
+# Análisis de regresión logística con datos simulados
+
+# -----------------------------
+# 1. Simulación de datos
+# -----------------------------
+set.seed(777)
+n <- 1300
+
+age <- round(runif(n, 20, 80))
+tumor_size <- round(rnorm(n, 2.5, 1), 1)
+marker_A <- round(rnorm(n, 1.0, 0.3), 1)
+marker_B <- round(rnorm(n, 1.2, 0.4), 1)
+
+log_odds <- -3.126 + 0.032 * age + 0.732 * tumor_size + 1.348 * marker_A + 0.898 * marker_B
+prob <- 1 / (1 + exp(-log_odds))
+cancer_type <- rbinom(n, 1, prob)
+
+df <- data.frame(
+  Age = age,
+  TumorSize = tumor_size,
+  MarkerA = marker_A,
+  MarkerB = marker_B,
+  CancerType = cancer_type
+)
+
+# -----------------------------
+# 2. Modelo de regresión logística
+# -----------------------------
+modelo <- glm(CancerType ~ Age + TumorSize + MarkerA + MarkerB, data = df, family = binomial)
+summary(modelo)
+
+if (!require(broom)) install.packages("broom")
+library(broom)
+
+resultados <- tidy(modelo) %>%
+  mutate(
+    OR = exp(estimate),
+    conf.low = exp(estimate - 1.96 * std.error),
+    conf.high = exp(estimate + 1.96 * std.error)
+  )
+print(resultados)
+
+# -----------------------------
+# 3. Curva ROC y AUC
+# -----------------------------
+if (!require(pROC)) install.packages("pROC")
+library(pROC)
+
+probabilidades <- predict(modelo, type = "response")
+roc_obj <- roc(df$CancerType, probabilidades)
+
+plot(roc_obj, col = "blue", lwd = 2, main = "Curva ROC")
+abline(a = 0, b = 1, lty = 2, col = "gray")
+auc(roc_obj)
+
+# -----------------------------
+# 4. Validación del modelo (70/30)
+# -----------------------------
+if (!require(caret)) install.packages("caret")
+library(caret)
+
+set.seed(123)
+trainIndex <- createDataPartition(df$CancerType, p = 0.7, list = FALSE)
+train_data <- df[trainIndex, ]
+test_data  <- df[-trainIndex, ]
+
+modelo_train <- glm(CancerType ~ Age + TumorSize + MarkerA + MarkerB, 
+                    data = train_data, family = binomial)
+
+pred_test <- predict(modelo_train, newdata = test_data, type = "response")
+pred_clase <- ifelse(pred_test > 0.5, 1, 0)
+
+conf_matrix <- table(Predicted = pred_clase, Actual = test_data$CancerType)
+print(conf_matrix)
+
+accuracy <- sum(diag(conf_matrix)) / sum(conf_matrix)
+cat("Precisión en test set:", round(accuracy * 100, 2), "%\n")

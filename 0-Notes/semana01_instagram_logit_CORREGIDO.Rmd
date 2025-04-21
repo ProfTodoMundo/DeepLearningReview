@@ -1,0 +1,326 @@
+---
+title: "Estudios de Ciencia de Datos - Semana 01"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    number_sections: true
+    theme: united
+---
+
+# Semana 01
+
+## Día Viernes 04 de abril
+
+### Tema 1: Uso de instagram
+
+**Introducción**
+
+Estudio del uso de Instagram entre mujeres y hombres con base en proporciones observadas y regresión logística. Este ejemplo se basa en datos simulados inspirados en el libro de estadística.
+
+**Código en R**
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r librerias}
+library(ggplot2)
+```
+
+```{r crear-datos}
+# Simular los datos
+set.seed(123)
+
+n_women <- 1000
+n_men <- 1000
+
+p_women <- 0.6108
+p_men <- 0.4398
+
+instagram_women <- rbinom(n_women, 1, p_women)
+instagram_men <- rbinom(n_men, 1, p_men)
+
+sexo <- c(rep("Mujer", n_women), rep("Hombre", n_men))
+instagram <- c(instagram_women, instagram_men)
+
+datos <- data.frame(
+  sexo = factor(sexo, levels = c("Hombre", "Mujer")),
+  instagram = instagram
+)
+
+head(datos)
+
+odds_women <- p_women/(1-p_women); print(odds_women)
+odds_men <- p_men/(1-p_men); print(odds_men)
+#odds_women ≈ 1.567
+# Por cada mujer que no usa Instagram, aproximadamente 1.57 mujeres sí lo usan.
+
+#odds_men ≈ 0.784
+# Por cada hombre que no usa Instagram, aproximadamente 0.78 hombres sí lo usan (es decir, hay más hombres que no lo usan que los que sí).
+```
+
+```{r modelo-logit}
+# Ajustar modelo logístico
+modelo <- glm(instagram ~ sexo, data = datos, family = "binomial")
+summary(modelo)
+```
+
+```{r interpretar}
+# Interpretación con odds ratio
+exp(coef(modelo))
+exp(confint(modelo))
+```
+
+```{r grafico}
+# Visualización de proporciones
+ggplot(datos, aes(x = sexo, fill = factor(instagram))) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Proporción de Usuarios de Instagram por Sexo",
+    x = "Sexo",
+    y = "Proporción",
+    fill = "Usa Instagram"
+  ) +
+  theme_minimal()
+```
+
+**Resultados esperados**
+
+- El valor de `Pr(>|z|)` para el coeficiente `sexoMujer` es **1.61e-15**, lo cual es **mucho menor a 0.05**.
+
+- Esto indica que el predictor `sexo` **es altamente significativo** para predecir el uso de Instagram.
+
+- El símbolo `***` confirma que el efecto es significativo al nivel del 0.1%.
+
+Intervalo de confianza para los coeficientes logísticos {.unnumbered}
+
+Para los modelos de regresión logística, podemos construir un **intervalo de confianza de nivel \( C \)** para la pendiente \( eta_1 \) utilizando la fórmula:
+
+\[
+b_1 \pm z^* \cdot SE_{b_1}
+\]
+
+donde:
+
+- \( b_1 \) es la estimación puntual de la pendiente,
+
+- \( SE_{b_1} \) es el error estándar de la pendiente,
+
+- \( z^* \) es el valor crítico de la distribución normal estándar correspondiente al nivel de confianza deseado (por ejemplo, 1.96 para el 95%).
+
+Este intervalo proporciona un rango dentro del cual es probable que se encuentre el verdadero valor de \( eta_1 \), con un nivel de confianza del \( C\% \).
+
+
+
+**Cálculo e interpretación del Odds Ratio y su intervalo de confianza**
+
+El **odds ratio** es la razón de las odds para un valor de la variable explicativa igual a \( x + 1 \), respecto al valor cuando es igual a \( x \).
+
+Un **intervalo de confianza de nivel C para el odds ratio** \( e^{\beta_1} \) se obtiene transformando el intervalo de confianza del coeficiente de la pendiente \( \beta_1 \):
+
+\[
+\left( e^{\beta_1 - z^* \cdot SE_{\beta_1}},\ e^{\beta_1 + z^* \cdot SE_{\beta_1}} \right)
+\]
+
+Donde:
+- \( z^* \) es el valor crítico de la distribución normal estándar para el nivel de confianza deseado.
+- \( SE_{\beta_1} \) es el error estándar del coeficiente.
+
+
+Para probar la hipótesis nula \( H_0: \beta_1 = 0 \), se calcula el **estadístico de prueba**:
+
+\[
+z = \frac{\beta_1}{SE_{\beta_1}}
+\]
+
+El valor \( P \) para esta prueba se obtiene evaluando qué tan extremo es este valor de \( z \) bajo una distribución normal estándar (cuando \( H_0 \) es verdadera).
+
+
+
+**Estadístico de Wald y relación con la distribución Chi-cuadrado**
+
+A diferencia de otros errores estándar, el cálculo de los errores estándar en regresión logística requiere software estadístico especializado.
+
+El estadístico de prueba \( z \) que se usa en regresión logística también se conoce como **estadístico de Wald**. Algunos programas estadísticos reportan el valor de prueba como el cuadrado de este estadístico:
+
+\[
+X^2 = z^2
+\]
+
+Este estadístico se llama **estadístico chi-cuadrado**. Cuando la hipótesis nula es verdadera, \( X^2 \) tiene una distribución \( \chi^2 \) con 1 grado de libertad. El valor \( P \) se calcula como:
+
+\[
+P(\chi^2 \geq X^2)
+\]
+
+Dado que el cuadrado de una variable normal estándar sigue una distribución \( \chi^2 \) con 1 grado de libertad, el estadístico \( z \) y el estadístico \( \chi^2 \) dan los **mismos resultados para inferencia estadística**.
+
+
+---
+
+### Tema 2: *Efectos Insecticida*
+
+Simulamos 150 observaciones de concentraciones logarítmicas del insecticida para evaluar su efecto sobre la mortalidad de áfidos, utilizando un modelo logístico ajustado a datos reales. Esto permite verificar cómo se comporta el modelo con nuevos datos generados de forma artificial.
+
+
+```{r librerias-simulacion, message=FALSE}
+library(ggplot2)
+```
+
+```{r simulacion-modelo-logistico}
+# Datos originales
+original <- data.frame(
+  concentration = c(0.96, 1.33, 1.63, 2.04, 2.32),
+  insects_total = c(50, 48, 46, 49, 50),
+  insects_killed = c(6, 16, 24, 42, 44)
+)
+original$insects_alive <- original$insects_total - original$insects_killed
+
+# Modelo base
+modelo_base <- glm(cbind(insects_killed, insects_alive) ~ concentration, 
+                   family = binomial, data = original)
+summary(modelo_base)
+
+# Simulación de 150 concentraciones
+set.seed(42)
+sim_conc <- sort(runif(150, min = 0.9, max = 2.4))
+predicted_logit <- predict(modelo_base, newdata = data.frame(concentration = sim_conc))
+predicted_prob <- exp(predicted_logit) / (1 + exp(predicted_logit))
+
+# Generación de datos simulados
+sim_data <- data.frame(
+  concentration = sim_conc,
+  insects_total = 50,
+  prob_killed = predicted_prob
+)
+sim_data$insects_killed <- rbinom(150, size = sim_data$insects_total, prob = sim_data$prob_killed)
+sim_data$insects_alive <- sim_data$insects_total - sim_data$insects_killed
+
+# Modelo sobre datos simulados
+modelo_sim <- glm(cbind(insects_killed, insects_alive) ~ concentration,
+                  family = binomial, data = sim_data)
+summary(modelo_sim)
+# Predicción
+sim_data$predicted_prob <- predict(modelo_sim, type = "response")
+```
+
+**Visualización**
+
+```{r grafica-simulacion}
+ggplot(sim_data, aes(x = concentration)) +
+  geom_point(aes(y = insects_killed / insects_total), alpha = 0.5) +
+  geom_line(aes(y = predicted_prob), color = "blue", linewidth = 1.2) +
+  labs(title = "Simulación: Efecto del Insecticida en Áfidos (150 valores)",
+       x = "Concentración (log)",
+       y = "Proporción de insectos muertos") +
+  theme_minimal()
+```
+
+
+**Figura 1: Log-odds vs concentración (datos originales)**
+
+```{r logit-grafica-original}
+library(dplyr)
+
+# Preparar datos originales
+original <- data.frame(
+  concentration = c(0.96, 1.33, 1.63, 2.04, 2.32),
+  insects_total = c(50, 48, 46, 49, 50),
+  insects_killed = c(6, 16, 24, 42, 44)
+)
+original <- original %>%
+  mutate(prop_killed = insects_killed / insects_total,
+         logit_killed = log(prop_killed / (1 - prop_killed)))
+
+# Ajuste lineal sobre logits
+modelo_lineal <- lm(logit_killed ~ concentration, data = original)
+summary(modelo_lineal)
+# Graficar
+ggplot(original, aes(x = concentration, y = logit_killed)) +
+  geom_point(size = 3, color = "blue") +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(title = "Log-odds de proporción de muertos vs concentración (original)",
+       x = "Log concentration",
+       y = "Log odds of percent killed") +
+  theme_minimal() +
+  theme(panel.background = element_rect(fill = "lightgray", color = NA))
+```
+
+**Figura 2: Ajuste logístico (% muertos vs concentración, datos originales)**
+
+```{r logit-ajuste-original}
+# Ajuste logístico
+modelo_logit <- glm(cbind(insects_killed, insects_total - insects_killed) ~ concentration,
+                    family = binomial, data = original)
+
+original$predicted_prob <- predict(modelo_logit, type = "response")
+
+ggplot(original, aes(x = concentration)) +
+  geom_point(aes(y = prop_killed * 100), size = 3, color = "blue") +
+  geom_line(aes(y = predicted_prob * 100), color = "red", size = 1) +
+  labs(title = "Porcentaje muerto vs concentración (modelo logístico)",
+       x = "Log concentration",
+       y = "Percent killed") +
+  theme_minimal() +
+  theme(panel.background = element_rect(fill = "#e5f5e0", color = NA))
+```
+
+**Figura 3: Log-odds vs concentración (datos simulados)**
+
+```{r logit-grafica-simulados}
+# Preparar datos simulados
+sim_data$prop_killed <- sim_data$insects_killed / sim_data$insects_total
+sim_data$logit_killed <- log(sim_data$prop_killed / (1 - sim_data$prop_killed))
+
+ggplot(sim_data, aes(x = concentration, y = logit_killed)) +
+  geom_point(size = 2, color = "blue", alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(title = "Log-odds de proporción de muertos vs concentración (simulados)",
+       x = "Log concentration",
+       y = "Log odds of percent killed") +
+  theme_minimal() +
+  theme(panel.background = element_rect(fill = "#e5f5e0", color = NA))
+```
+
+**Figura 4: Ajuste logístico (simulados)**
+
+```{r logit-ajuste-simulados}
+ggplot(sim_data, aes(x = concentration)) +
+  geom_point(aes(y = prop_killed * 100), size = 1.5, color = "blue", alpha = 0.5) +
+  geom_line(aes(y = predicted_prob * 100), color = "red", size = 1) +
+  labs(title = "Porcentaje muerto vs concentración (simulados)",
+       x = "Log concentration",
+       y = "Percent killed") +
+  theme_minimal() +
+  theme(panel.background = element_rect(fill = "#e5f5e0", color = NA))
+```
+
+
+### Tema 3: *Bondad de Ajuste*
+
+```{r logit-ajuste-divorcio}
+# Paso 1: Crear los datos
+divorcio <- data.frame(
+  edad_hijo = c("1-4", "5-8", "9-12", "13-17", "17-20"),
+  edad_media = c(2.5, 6.5, 10.5, 15, 18.5),
+  prob_divorcio = c(0.17, 0.27, 0.62, 0.90, 0.96)
+)
+
+# Paso 2: Gráfica
+library(ggplot2)
+
+ggplot(divorcio, aes(x = edad_hijo, y = prob_divorcio, group = 1)) +
+  geom_point(size = 3, color = "blue") +
+  geom_line(color = "black") +
+  scale_y_continuous(limits = c(0, 1.2)) +
+  labs(
+    title = "Probability of Divorce by Child Age",
+    x = "Child Age Group",
+    y = "P(Divorce)"
+  ) +
+  theme_minimal()
+
+```

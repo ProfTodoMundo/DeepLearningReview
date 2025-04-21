@@ -1,0 +1,1230 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{graphicx,graphics}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{float} 
+\usepackage{subfig}
+\usepackage[figuresright]{rotating}
+\usepackage{enumerate}
+\usepackage{anysize} 
+\usepackage{url}
+\usepackage{imakeidx}
+
+
+
+\title{Resumen en Extenso del Art\'iculo: \\
+\textit{Logistic Regression: a brief primer: Jill C. Stoltzfus}}
+\author{Carlos}
+\date{}
+
+\newtheorem{Criterio}{Criterio}%[section]
+\newtheorem{Sup}{Supuesto}%[section]
+\newtheorem{Note}{Nota}%[section]
+\newtheorem{Ejem}{Ejemplo}%[section]
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section*{Resumen}
+
+Las técnicas de regresión son versátiles en su aplicación a la investigación médica, ya que permiten medir asociaciones, predecir resultados y controlar efectos de variables de confusión. Como una de estas técnicas, la regresión logística representa una forma eficiente y poderosa de analizar el efecto de un grupo de variables independientes sobre un resultado binario, cuantificando la contribución única de cada variable. Usando componentes de la regresión lineal reflejados en la escala logit, la regresió...
+
+Consideraciones importantes al aplicar regresión logística incluyen: la selección adecuada de variables independientes, el cumplimiento de los supuestos necesarios, y la elección de una estrategia adecuada de construcción del modelo. La selección de variables debe guiarse por teorías aceptadas, investigaciones empíricas previas, consideraciones clínicas y análisis estadísticos univariados, incluyendo el reconocimiento de posibles variables de confusión.
+
+Entre los supuestos básicos que deben cumplirse se encuentran: independencia de errores, linealidad en la escala logit para variables continuas, ausencia de multicolinealidad y falta de valores atípicos con fuerte influencia. Además, debe asegurarse un número adecuado de eventos por variable para evitar el sobreajuste, recomendándose comúnmente entre 10 y 20 eventos por covariable.
+
+En cuanto a las estrategias de modelado, existen tres tipos generales: directa/estándar, secuencial/jerárquica y por pasos/estadística, cada una con distinto énfasis y propósito. Antes de extraer conclusiones definitivas, se recomienda cuantificar formalmente la validez interna del modelo (es decir, su replicabilidad en el mismo conjunto de datos) y su validez externa (generalización a otros conjuntos de datos).
+
+El ajuste general del modelo al conjunto de datos se evalúa mediante diversas medidas de bondad de ajuste, siendo preferible un menor error entre los valores observados y los predichos. También se recomienda el uso de estadísticas diagnósticas para valorar la adecuación del modelo. Finalmente, los resultados para las variables independientes se reportan típicamente como razones de momios (odds ratios, ORs) con intervalos de confianza al 95\%.
+
+La regresi\'on log\'istica es una forma eficiente y poderosa de analizar el efecto de un grupo de variables independientes sobre un resultado binario cuantificando la contribuci\'on \'unica de cada variable independiente, por otra parte la regresi\'on log\'istica identifica iterativamente la combinaci\'on lineal m\'as fuerte de variables con la mayor probabilidad de detectar el resultado observado. La regresi\'on log\'istica tiene sus ra\'ices en el siglo XIX, con los trabajos de Pierre François Verhulst, quien introdujo la \textit{curva log\'istica} para modelar el crecimiento poblacional. Sin embargo, fue en el siglo XX cuando su aplicaci\'on estad\'istica tom\'o forma. En 1944, Joseph Berkson introdujo el \textit{modelo logit} en el contexto de bioestad\'istica, proponi\'endolo como alternativa al modelo probit. La Regresi\'on Log\'istica fue adoptada ampliamente en estudios biom\'edicos a partir de la d\'ecada de 1960, gracias a su capacidad para manejar variables dicot\'omicas y ofrecer interpretaciones claras a trav\'es del odds ratio. En d\'ecadas recientes, la regresi\'on log\'istica se ha convertido en una herramienta fundamental para el an\'alisis de datos en epidemiolog\'ia, medicina cl\'inica, y ciencias sociales.
+
+
+La regresi\'on log\'istica es ideal para predecir la probabilidad de ocurrencia de un evento binario (s\'i/no) y se basa en la transformaci\'on log\'istica del \textit{odds ratio} (raz\'on de probabilidades). A diferencia de la regresi\'on lineal, no requiere que las variables independientes sigan una distribuci\'on normal ni que la relaci\'on con la dependiente sea lineal.
+
+Es importante considerar en una regresi\'on log\'istica la \textit{selecci\'on de variables independientes} para esto uno debe guiarse por factores tales como teor\'ia existente, investigaciones emp\'iricas previas, consideraciones cl\'inicas y an\'alisis estad\'isticos univariados, reconociendo las posibles variables de confusi\'on que deben ser consideradas. 
+
+Los supuestos b\'asicos que deben cumplirse para la regresi\'on log\'istica incluyen
+\begin{itemize}
+\item independencia de errores, 
+\item linealidad en el \textit{logit} para variables continuas, 
+\item ausencia de multicolinealidad y 
+\item falta de valores at\'ipicos fuertemente influyentes. Adicionalmente, 
+\item existencia de un n\'umero adecuado de eventos por variable independiente para evitar un modelo sobreajustado, con un m\'inimo com\'unmente recomendado de “reglas pr\'acticas” que van de 10 a 20 eventos por covariable.
+\end{itemize}
+
+Respecto a las estrategias de construcci\'on de modelos, los tres tipos generales son: 
+\begin{itemize}
+\item directa/est\'andar, 
+\item secuencial/jer\'arquica y 
+\item por pasos/estad\'istica,
+\end{itemize}
+cada uno con un \'enfasis y prop\'osito diferente. Antes de llegar a conclusiones definitivas a partir de los resultados de cualquiera de estos m\'etodos, se debe cuantificar formalmente la validez interna del modelo (es decir, su replicabilidad dentro del mismo conjunto de datos) y su validez externa (es decir, su generalizabilidad m\'as all\'a de la muestra actual).
+
+El ajuste general del modelo de regresi\'on log\'istica a los datos de muestra se eval\'ua utilizando varias \textit{medidas de bondad de ajuste}, donde un mejor ajuste se caracteriza por una menor diferencia entre los valores observados y los valores predichos por el modelo. Tambi\'en se recomienda el uso de \textit{estad\'isticas de diagn\'ostico} para evaluar a\'un m\'as la adecuaci\'on del modelo. Finalmente, los resultados para las variables independientes suelen reportarse como \textit{razones de momios} (odds ratios, ORs) con \textit{intervalos de confianza} (IC) del 95\%.
+
+\section{Importancia de la regresi\'on en investigaci\'on}
+
+La \textbf{regresi\'on} es un m\'etodo valioso de investigaci\'on debido a su vers\'atil aplicaci\'on en diferentes contextos de estudio. Por ejemplo, se puede utilizar para examinar asociaciones entre un resultado y varias variables independientes (tambi\'en com\'unmente conocidas como covariables, predictores o variables explicativas)\cite{darlington1990}, o para determinar qu\'e tan bien puede predecirse un resultado a partir de un conjunto de variables independientes\cite{darlington1990,tabachnick2007}. Adicionalmente, uno puede estar interesado en controlar el efecto de variables independientes espec\'ificas, particularmente aquellas que act\'uan como variables de confusi\'on (es decir, cuya relaci\'on tanto con el resultado como con otra variable independiente oscurece la relaci\'on entre esa variable independiente y el resultado)\cite{darlington1990,hosmer2000}. Esta \'ultima aplicaci\'on es especialmente \'util en contextos donde no es posible asignar aleatoriamente sujetos a grupos de tratamiento, como sucede en investigaciones observacionales. Con asignaci\'on aleatoria, normalmente se puede ejercer un control adecuado sobre las variables de confusi\'on, ya que los grupos aleatorizados tienden a tener una distribuci\'on equitativa o balanceada de dichas variables\cite{campbell1963}.
+
+\section{Regresi\'on Log\'istica}
+
+Existen diferentes tipos de regresi\'on, dependiendo de los objetivos de investigaci\'on y del formato de las variables, siendo la regresi\'on lineal una de las m\'as utilizadas. La \textit{regresi\'on lineal} analiza resultados continuos (es decir, aquellos que pueden sumarse, restarse, multiplicarse o dividirse de manera significativa, como el peso) y asume que la relaci\'on entre el resultado y las variables independientes sigue una forma funcional determinada. Sin embargo, generalmente es m\'as deseable determinar la influencia de m\'ultiples factores al mismo tiempo, ya que de este modo se pueden observar las contribuciones \'unicas de cada variable despu\'es de controlar por los efectos de las dem\'as. En este caso, la regresi\'on lineal multivariada es la opci\'on adecuada.
+
+La ecuaci\'on b\'asica para la regresi\'on lineal con m\'ultiples variables independientes es:
+
+\begin{eqnarray}
+\hat{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i.
+\end{eqnarray}
+
+Los componentes de esta ecuaci\'on son los siguientes:
+\begin{itemize}
+  \item $\hat{Y}$ es el resultado continuo estimado.
+  \item $\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i$ es la ecuaci\'on de regresi\'on lineal para las variables independientes del modelo, donde:
+  \begin{itemize}
+    \item $\beta_0$ es la ordenada al origen o punto en el que la l\'inea de regresi\'on toca el eje vertical $Y$. Se considera un valor constante.
+    \item $\beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i$ es el valor de cada variable independiente ($X_i$) ponderado por su respectivo coeficiente beta ($\beta$). Los coeficientes beta determinan la pendiente de la l\'inea de regresi\'on, cuanto mayor sea el coeficiente beta, m\'as fuerte es la contribuci\'on de dicha variable al resultado.
+  \end{itemize}
+\end{itemize}
+
+Para una variable binaria, como la mortalidad, la regresi\'on log\'istica es el m\'etodo usualmente elegido, la regresi\'on log\'istica puede incluir una o m\'ultiples variables independientes, aunque examinar m\'ultiples variables es generalmente m\'as informativo, ya que permite revelar la contribuci\'on \'unica de cada variable ajustando por las dem\'as. La regresi\'on log\'istica tiene ecuaci\'on:
+
+\begin{eqnarray}
+\textrm{Probabilidad del resultado}(\hat{Y_i}) = \frac{e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}}{1 + e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}}.
+\end{eqnarray}
+
+
+\section{Transformaci\'on log\'istica y elecci\'on de variables independientes}
+
+Un aspecto importante de la regresi\'on log\'istica es que conserva muchas caracter\'isticas de la regresi\'on lineal en su an\'alisis de resultados binarios. Sin embargo, existen diferencias clave entre las dos ecuaciones:
+
+\begin{enumerate}
+  \item $\hat{Y}_i$ representa la probabilidad estimada de pertenecer a una de las dos categor\'ias binarias del resultado (categor\'ia $i$) en lugar de representar un resultado continuo estimado.
+  
+  \item $e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}$ representa la ecuaci\'on de regresi\'on lineal para las variables independientes expresadas en la escala \textit{logit}.
+\end{enumerate}
+
+La raz\'on de esta transformaci\'on \textit{logit} radica en los par\'ametros b\'asicos del modelo de regresi\'on log\'istica, un resultado binario expresado como probabilidad debe estar entre 0 y 1 \cite{darlington1990}. La escala logit resuelve este problema al transformar matem\'aticamente la ecuaci\'on de regresi\'on lineal original para producir el logit (o logaritmo natural) de las razones de momios (odds) de estar en una categor\'ia ($\hat{Y}$) frente a la otra categor\'ia ($1 - \hat{Y}$):
+
+\begin{eqnarray}
+logit(\hat{Y})=\ln\left(\frac{\hat{Y}}{1 - \hat{Y}}\right) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i
+\end{eqnarray}
+
+En el contexto de estas ecuaciones, la regresi\'on log\'istica identifica, mediante ciclos iterativos, la combinaci\'on lineal m\'as fuerte de variables independientes que aumente la probabilidad de detectar el resultado observado —un proceso conocido como estimaci\'on de m\'axima verosimilitud \cite{tabachnick2007,hosmer2000}. Para asegurar que la regresi\'on log\'istica produzca un modelo preciso, se deben considerar factores cr\'iticos como la selecci\'on de variables independientes y la elecci\'on de la estrategia de construcci\'on del modelo.
+
+\subsection{Variables independientes}
+
+\begin{Criterio}
+\textbf{[Criterio de selecci\'on]} Es muy importante seleccionar correctamente las variables independientes. Aunque la regresi\'on log\'istica es bastante flexible y permite distintos tipos de variables (continuas, ordinales y categ\'oricas), siempre debe justificarse la selecci\'on de variables utilizando: teor\'ia bien establecida, investigaciones previas, observaciones cl\'inicas, an\'alisis estad\'istico preliminar, o una combinaci\'on razonada de estas opciones.
+
+Alternativamente, uno podr\'ia optar por incluir todas las variables independientes relevantes independientemente de sus resultados univariados, ya que puede haber variables cl\'inicamente importantes que merezcan inclusi\'on a pesar de su desempe\~no estad\'istico; sin embargo,  incluir demasiadas variables independientes en el modelo puede conducir a un resultado matem\'aticamente inestable, con menor capacidad de generalizaci\'on m\'as all\'a de la muestra actual del estudio \cite{tabachnick2007,hosmer2000}.
+
+Una parte clave del proceso de selecci\'on de variables es reconocer y considerar el papel de los posibles factores de confusi\'on. Como se describi\'o previamente, las variables de confusi\'on son aquellas cuya relaci\'on tanto con el resultado como con otra variable independiente oculta la verdadera asociaci\'on entre esa variable independiente y el resultado \cite{darlington1990,hosmer2000}.
+
+Independientemente del m\'etodo para seleccionar las variables independientes, deben cumplirse ciertos supuestos b\'asicos al aplicar regresi\'on log\'istica. 
+
+\begin{Sup}
+\textbf{[Independencia de los errores]} Todos los resultados del grupo de muestra deben ser independientes entre s\'i; si los datos incluyen mediciones repetidas u otros resultados correlacionados, los errores tambi\'en estar\'an correlacionados y el supuesto se violar\'a.\cite{tabachnick2007} Existen otros m\'etodos para analizar datos correlacionados mediante t\'ecnicas de regresi\'on log\'istica, consultar a Stokes et al.,\cite{stokes2000} Newgard et al.,\cite{newgard2004, newgard2007} y Allison.\cite{allison1999}.
+\end{Sup}
+
+\begin{Sup} \textbf{[Linealidad en el logit]} para las variables continuas independientes, debe existir una relaci\'on lineal entre estas variables y sus respectivos resultados transformados en logit. Esto se puede realizar a trav\'es de la creaci\'on de un t\'ermino de interacci\'on entre cada variable continua independiente y su logaritmo natural. Si alguno de estos t\'erminos es estad\'isticamente significativo, se considera que el supuesto no se cumple \cite{tabachnick2007,hosmer2000}. Las soluciones incluyen codificaci\'on dicot\'omica de la variable independiente,\cite{hosmer2000} o su transformaci\'on estad\'istica a otra escala \cite{tabachnick2007,hosmer2000}.
+\end{Sup}
+
+\begin{Sup} \textbf{[Ausencia de multicolinealidad]}, o redundancia entre variables independientes,  un modelo de regresi\'on log\'istica con variables independientes altamente correlacionadas usualmente genera errores est\'andar grandes para los coeficientes beta (o pendientes) estimados. La soluci\'on com\'un es eliminar una o m\'as variables redundantes.\cite{tabachnick2007}
+\end{Sup}
+
+\begin{Sup} \textbf{[Ausencia de valores at\'ipicos altamente influyentes]}, es decir, casos en los que el resultado predicho para un miembro de la muestra difiere considerablemente de su valor real, si hay demasiados valores at\'ipicos, la precisi\'on general del modelo puede verse comprometida. La detecci\'on de valores at\'ipicos se realiza examinando los residuales (diferencia entre los valores predichos y los resultados reales) junto con estad\'isticas diagn\'osticas y gr\'aficas \cite{tabachnick2007,hosmer2000}; luego, se puede comparar el ajuste general del modelo y los coeficientes beta estimados con y sin los casos at\'ipicos, dependiendo de la magnitud del cambio, uno podr\'ia conservar los valores at\'ipicos cuyo efecto no sea dram\'atico\cite{hosmer2000} o eliminar aquellos con una influencia particularmente fuerte sobre el modelo \cite{tabachnick2007,hosmer2000}.
+\end{Sup}
+\end{Criterio}
+
+\begin{Criterio} \textbf{[N\'umero de variables a incluir]} Como parte del proceso de selecci\'on de qu\'e variables independientes incluir, tambi\'en se debe decidir cu\'antas. El reto es seleccionar el menor n\'umero posible de variables independientes que expliquen mejor el resultado sin descuidar las limitaciones del tama\~no de muestra \cite{tabachnick2007,hosmer2000}. En t\'erminos generales, un modelo sobreajustado tiene coeficientes beta estimados para las variables independientes mucho mayores de lo que deber\'ian ser, adem\'as de errores est\'andar m\'as altos de lo esperado \cite{hosmer2000}. Este tipo de situaci\'on genera inestabilidad en el modelo porque la regresi\'on log\'istica requiere m\'as resultados que variables independientes para poder iterar soluciones diferentes en busca del mejor ajuste a trav\'es del m\'etodo de m\'axima verosimilitud \cite{tabachnick2007,hosmer2000}.
+
+Aunque no existe un est\'andar universalmente aceptado, hay algunas \textit{reglas generales} derivadas en parte de estudios de simulaci\'on. Una de estas reglas sugiere que por cada variable independiente, debe haber al menos 10 resultados por cada categor\'ia binaria, siendo el resultado menos frecuente el que determina el n\'umero m\'aximo de variables independientes \cite{peduzzi1996, agresti2007}. Algunos estad\'isticos recomiendan una \textit{regla general} a\'un m\'as estricta de 20 resultados por variable independiente, dado que una relaci\'on m\'as alta tiende a mejorar la validez del modelo\cite{feinstein1996}. 
+\end{Criterio}
+
+
+\subsection{Estrategias de Construcci\'on del Modelo}
+
+Adem\'as de la cuidadosa selecci\'on de las variables independientes, se debe elegir el tipo adecuado de modelo de regresi\'on log\'istica para el estudio. De hecho, seleccionar una estrategia de construcci\'on del modelo est\'a estrechamente relacionado con la elecci\'on de variables independientes, por lo que estos dos componentes deben considerarse simult\'aneamente al planear un an\'alisis de regresi\'on log\'istica.
+
+Existen tres enfoques generales para la construcci\'on del modelo que se aplican a las t\'ecnicas de regresi\'on en general, cada uno con un \'enfasis y prop\'osito diferente: 
+\begin{itemize}
+\item \textbf{Directo} (es decir, completo, est\'andar o simult\'aneo): Este enfoque es una especie de valor por defecto, ya que introduce todas las variables independientes en el modelo al mismo tiempo y no hace suposiciones sobre el orden o la importancia relativa de dichas variables \cite{darlington1990,tabachnick2007}. El enfoque directo es m\'as adecuado si no existen hip\'otesis previas sobre cu\'ales variables tienen mayor relevancia que otras. 
+
+\item \textbf{Secuencial} (es decir, jer\'arquico):  las variables se a\~naden secuencialmente para evaluar si mejoran el modelo de acuerdo a un orden predeterminado de prioridad \cite{darlington1990,tabachnick2007}. Aunque este enfoque es \'util para clarificar patrones causales entre variables independientes y resultados, puede volverse complejo conforme aumentan los patrones causales, dificultando as\'i la obtenci\'on de conclusiones definitivas sobre los datos en algunos casos \cite{darlington1990}.
+
+\item \textbf{Paso a paso} (es decir, estad\'istico): En contraste con los dos m\'etodos anteriores, la regresi\'on paso a paso identifica variables independientes que deben mantenerse o eliminarse del modelo con base en criterios estad\'isticos predefinidos que est\'an influenciados por las caracter\'isticas \'unicas de la muestra analizada \cite{tabachnick2007,hosmer2000}. Existen distintos tipos de t\'ecnicas paso a paso, incluyendo selecci\'on hacia adelante y eliminaci\'on hacia atr\'as con una contribuci\'on no significativa al resultado son eliminadas una por una hasta que s\'olo queden las variables estad\'isticamente significativas.\cite{darlington1990, hosmer2000} Otra estrategia de construcci\'on del modelo que es conceptualmente similar a la regresi\'on por pasos se llama \textit{selecci\'on del mejor subconjunto'}, en la que se comparan modelos separados con diferentes n\'umeros de variables independientes para determinar el mejor ajuste \cite{hosmer2000}
+\end{itemize}
+
+Estas estrategias de construcci\'on no son necesariamente intercambiables, ya que pueden producir diferentes medidas de ajuste del modelo y diferentes estimaciones puntuales para las variables independientes a partir de los mismos datos. Por lo tanto, identificar el modelo apropiado para los objetivos del estudio es extremadamente importante.
+
+\begin{Note}
+Aunque la regresi\'on por pasos se usa frecuentemente en la investigaci\'on cl\'inica, su uso es algo controvertido porque se basa en una selecci\'on automatizada de variables que tiende a aprovechar factores aleatorios en una muestra dada.  Adem\'as, la regresi\'on por pasos puede producir modelos que no parecen completamente razonables desde una perspectiva biol\'ogica. Ante estas preocupaciones, algunos argumentan que la regresi\'on por pasos se reserva mejor para el tamizaje preliminar o \'unicamente para pruebas de hip\'otesis, como en casos de resultados novedosos y una comprensi\'on limitada de las contribuciones de las variables independientes. Sin embargo, otros se\~nalan que los m\'etodos por pasos no son en s\'i el problema (y de hecho pueden ser bastante efectivos en ciertos contextos); en cambio, el verdadero problema es una interpretaci\'on descuidada de los resultados sin valorar completamente los pros y contras de este enfoque. Por tanto, si uno elige crear un modelo por pasos, es importante validar posteriormente los resultados antes de sacar conclusiones. No obstante, debe destacarse que todos los tipos de modelos requieren validaci\'on formal antes de que se consideren definitivos para uso futuro, ya que se espera que los modelos funcionen mejor con la muestra original que con muestras subsiguientes.\cite{darlington1990, tabachnick2007, hosmer2000}
+\end{Note}
+
+\subsection{Validaci\'on Interna y Externa del Modelo}
+
+Al validar modelos de regresi\'on log\'istica, existen numerosos m\'etodos entre los cuales elegir, cada uno m\'as o menos apropiado seg\'un los par\'ametros del estudio como el tama\~no de muestra. Para establecer la validez interna (confirmaci\'on de resultados del modelo con el mismo conjunto de datos), los m\'etodos comunes incluyen: 
+
+\begin{itemize}
+\item \textbf{m\'etodo de retenci\'on, o divisi\'on de la muestra en dos subgrupos} antes de la construcci\'on del modelo, con el grupo de \textit{entrenamiento} usado para crear el modelo de regresi\'on log\'istica y el grupo de \textit{prueba} usado para validarlo; \cite{altman2000, kohavi1995} 
+
+\item \textbf{validaci\'on cruzada k-fold o divisi\'on de la muestra en $k$ subgrupos de igual tama\~no} para prop\'ositos de entrenamiento y validaci\'on;\cite{kohavi1995} 
+
+\item \textbf{validaci\'on cruzada \textit{uno fuera} (leave-one-out)}, una variante del m\'etodo k-fold donde el n\'umero de particiones es igual al n\'umero de sujetos en la muestra;\cite{kohavi1995} y 
+
+\item \textbf{bootstrapping} es decir, obtener submuestras repetidas con reemplazo de toda la muestra \cite{kohavi1995,efron1993}.
+\end{itemize}
+
+Adem\'as de validar internamente el modelo, uno deber\'ia intentar validarlo externamente en un nuevo entorno de estudio como una prueba adicional de su viabilidad estad\'istica y utilidad cl\'inica \cite{altman2000,miller1991}. Si los resultados de la validaci\'on interna o externa presentan alguna alerta se recomienda hacer ajustes al modelo seg\'un sea necesario, o definir expl\'icitamente cualquier restricci\'on para el uso futuro del modelo.\cite{miller1991}
+
+\subsection{Interpretaci\'on de los Resultados del Modelo}
+
+\begin{itemize}
+\item \textbf{Evaluaci\'on del Ajuste General del Modelo.} Una vez que se ha creado el modelo de regresi\'on log\'istica, se determina qu\'e tan bien se ajusta a los datos de la muestra en su totalidad. Dos de los m\'etodos m\'as comunes para evaluar el ajuste del modelo son la prueba de chi-cuadrado de Pearson y la desviaci\'on residual. Ambas miden la diferencia entre los resultados observados y los resultados predichos por el modelo, donde un mal ajuste del modelo se indica mediante valores de prueba elevados, lo que se\~nala una diferencia mayor \cite{hosmer2000, hosmer1997, kuss2002}.
+
+Otra medida com\'unmente utilizada del ajuste del modelo es la prueba de bondad de ajuste de \textit{Hosmer-Lemeshow}, que divide a los sujetos en grupos iguales (a menudo de 10) seg\'un su probabilidad estimada del resultado. El decil m\'as bajo est\'a compuesto por aquellos que tienen menor probabilidad de experimentar el resultado. Si el modelo tiene buen ajuste, los sujetos que experimentaron el resultado principal caer\'an en su mayor\'ia en los deciles de mayor riesgo. Un modelo con mal ajuste resultar\'a en sujetos distribuidos de manera m\'as uniforme a lo largo de los deciles de riesgo para ambos resultados binarios \cite{tabachnick2007, hosmer2000}.
+
+Las ventajas de las pruebas de Hosmer-Lemeshow incluyen su aplicaci\'on sencilla y facilidad de interpretaci\'on, las limitaciones incluyen la dependencia de las pruebas sobre c\'omo se definen los puntos de corte de los grupos y los algoritmos computacionales utilizados, as\'i como una menor capacidad para identificar modelos con mal ajuste en ciertas circunstancias.  Otras alternativas menos comunes para evaluar el ajuste del modelo son descritas por Hosmer et al \cite{hosmer1997} y Kuss \cite{kuss2002}.
+
+Otra opci\'on para ampliar los resultados del ajuste del modelo y de las estad\'isticas diagn\'osticas, es evaluando la capacidad del modelo para discriminar entre grupos. Las formas comunes de hacer esto incluyen 
+
+\begin{enumerate}
+\item  Tablas de clasificaci\'on, donde la pertenencia a un grupo dentro de una categor\'ia binaria del resultado se predice usando probabilidades estimadas y puntos de corte predefinidos, y 
+\item  \'Area bajo la curva caracter\'istica operativa del receptor (AUROC), donde un valor de 0.5 significa que el modelo no es mejor que el azar para discriminar entre los sujetos que tienen el resultado y los que no, y un valor de 1.0 indica que el modelo discrimina perfectamente entre sujetos. \textit{El AUROC se usa a menudo cuando se desean considerar diferentes puntos de corte para la clasificaci\'on y as\'i maximizar tanto la sensibilidad como la especificidad} \cite{zou2007}.
+\end{enumerate}
+
+\item \textbf{Interpretaci\'on de los Resultados de Variables Individuales.}  Las variables independientes usualmente se presentan como razones de momios (ORs, por sus siglas en ingl\'es), que revelan la fuerza de la contribuci\'on de la variable independiente al resultado y se definen como las probabilidades de que ocurra el resultado ($\hat{Y}$) frente a que no ocurra, $(1 - \hat{Y})$, para cada variable independiente. La relaci\'on entre la raz\'on de momios (OR) y el coeficiente beta estimado de la variable independiente se expresa como $\text{OR} = e^{\beta_i}$. Con base en esta f\'ormula, un cambio de una unidad en la variable independiente multiplica la probabilidad del resultado por la cantidad contenida en $e^{\beta_i}$.
+
+Para un modelo de regresi\'on log\'istica con solo una variable independiente, la OR se considera ``no ajustada'' porque no hay otras variables cuya influencia deba ser ajustada o restada. En contraste, si el modelo de regresi\'on log\'istica incluye m\'ultiples variables independientes, las OR ahora son \textit{ajustadas} porque representan la contribuci\'on \'unica de la variable independiente despu\'es de ajustar (o restar) los efectos de las otras variables en el modelo, en conclusi\'on las OR ajustadas suelen ser menores que sus contrapartes no ajustadas. Interpretar las OR tambi\'en depende de si la variable independiente es continua o categ\'orica. Para las variables continuas, primero se debe identificar una unidad de medida significativa que exprese mejor el grado de cambio en el resultado asociado con esa variable independiente. Finalmente, los intervalos de confianza (IC) al 95\% se informan rutinariamente junto con las OR como una medida de precisi\'on (es decir, si los hallazgos probablemente se mantendr\'an en la poblaci\'on no observada). Si el IC cruza 1.00, es posible que no haya una diferencia significativa en esa poblaci\'on. 
+\end{itemize}
+
+
+\section{Fundamentos del Modelo de Regresi\'on Log\'istica}
+
+\begin{itemize}
+
+\item La funci\'on log\'istica transforma la probabilidad de un evento en \textbf{odds}, y posteriormente en \textbf{log-odds} (\textit{logit}), acotando los valores entre 0 y 1. Esto asegura interpretaciones coherentes para eventos dicot\'omicos. El modelo toma la forma:
+
+\[
+\text{logit}(p) = \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1X_1 + \beta_2X_2 + \ldots + \beta_kX_k
+\]
+
+\item \textbf{Evaluaci\'on general}
+Se emplean dos pruebas principales:
+\begin{itemize}
+  \item \textbf{Raz\'on de verosimilitudes (likelihood ratio test)}: compara un modelo completo con uno nulo, evaluando si los predictores mejoran significativamente la predicci\'on.
+  \item \textbf{Prueba de Hosmer-Lemeshow}: mide el ajuste entre valores observados y esperados por deciles de riesgo. Un valor $p > 0.05$ indica buen ajuste.
+\end{itemize}
+
+\item \textbf{Evaluaci\'on de predictores}
+La significancia individual de cada predictor se eval\'ua con el \textbf{estad\'istico Wald}, basado en la relaci\'on entre el coeficiente estimado y su error est\'andar. Tambi\'en se puede usar la raz\'on de verosimilitudes para cada predictor.
+
+\item \textbf{Exactitud Predictiva y Discriminaci\'on}
+
+\begin{itemize}
+  \item \textbf{Tabla de clasificaci\'on}: compara predicciones contra observaciones reales, generando m\'etricas como sensibilidad, especificidad, precisi\'on y valor predictivo.
+  \item \textbf{Curva ROC (Receiver Operating Characteristic)}: representa la sensibilidad frente a 1 - especificidad. El \'area bajo la curva (AUC) cuantifica la capacidad discriminativa del modelo. Un AUC de 0.5 indica clasificaci\'on aleatoria, mientras que 1.0 representa clasificaci\'on perfecta.
+\end{itemize}
+
+\item \textbf{Validaci\'on del Modelo}
+
+Se destaca la importancia de validar los modelos, ya sea de manera \textbf{interna} (con subconjuntos del mismo conjunto de datos) o \textbf{externa} (con nuevos datos). Se discuten m\'etodos como \textit{bootstrap}, \textit{jackknife} y validaci\'on cruzada.
+
+Tambi\'en se mencionan medidas como:
+\begin{itemize}
+  \item \textbf{$R^2$ de Cox \& Snell}
+  \item \textbf{$R^2$ de Nagelkerke}
+\end{itemize}
+Estas proporcionan informaci\'on sobre el poder explicativo del modelo, aunque no son equivalentes al $R^2$ cl\'asico de regresi\'on lineal.
+\end{itemize}
+
+
+
+Para una variable binaria $y_i \in \{0,1\}$, el modelo de regresión logística predice la probabilidad:
+\[
+p_i = \frac{1}{1 + e^{-x_i \beta}}
+\]
+
+\subsection*{Función de verosimilitud}
+\[
+L(\beta) = \prod_{i=1}^n p_i^{y_i} (1 - p_i)^{1 - y_i}
+\]
+
+\subsection*{Log-verosimilitud}
+\[
+\ell(\beta) = \sum_{i=1}^n \left[ y_i \ln(p_i) + (1 - y_i) \ln(1 - p_i) \right]
+\]
+
+\section*{Derivadas}
+
+\textbf{Gradiente}:
+\[
+\nabla_\beta \ell(\beta) = X^\top (y - p)
+\]
+
+\textbf{Hessiano (segunda derivada)}:
+\[
+\nabla^2_\beta \ell(\beta) = - X^\top V X, \quad V = \text{diag}(p_i (1 - p_i))
+\]
+
+\section*{Regularización Ridge (L2)}
+Se añade un término penalizado:
+\[
+\ell_\lambda(\beta) = \ell(\beta) - \frac{\lambda}{2} \|\beta\|^2
+\]
+
+Gradiente regularizado:
+\[
+\nabla_\beta \ell_\lambda(\beta) = X^\top (y - p) - \lambda \beta
+\]
+
+Hessiano regularizado:
+\[
+\nabla^2_\beta \ell_\lambda(\beta) = - X^\top V X - \lambda I
+\]
+
+\section*{TR-IRLS (Trust Region IRLS)}
+Actualización generalizada del paso de Newton:
+\[
+\beta^{(k+1)} = \beta^{(k)} + s
+\]
+Donde $s$ es solución de:
+\[
+(X^\top V X + \lambda I) s = X^\top V z - \lambda \beta
+\]
+
+\section*{Eventos raros y correcciones}
+\subsection*{Ajuste del intercepto (King \& Zeng)}
+\[
+\tilde{\beta}_0 = \hat{\beta}_0 - \ln \left[ \left( \frac{1 - \tau}{\tau} \right) \left( \frac{\hat{y}}{1 - \hat{y}} \right) \right]
+\]
+
+\subsection*{Muestreo estratificado}
+Peso para observación $i$:
+\[
+w_i = \frac{Q_i}{H_i}
+\]
+Verosimilitud ponderada:
+\[
+\ell_w(\beta) = \sum_{i=1}^n w_i \ln \left( \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} \right)
+\]
+
+\section*{Corrección de Firth}
+Se basa en el ajuste de penalización de tipo Jeffreys:
+\[
+\ell^*(\beta) = \ell(\beta) + \frac{1}{2} \log |I(\beta)|
+\]
+
+\section*{Regla de decisión}
+\[
+\hat{y}_i =
+\begin{cases}
+1 & \text{si } p_i \geq c \\\\
+0 & \text{si } p_i < c
+\end{cases}
+\quad \text{(usualmente } c = 0.5)
+\]
+
+
+
+
+\begin{Note}
+\begin{itemize}
+
+\item En problemas de clasificación con etiquetas binarias o etiquetas con una cantidad finita de opciones, la evaluación usualmente se realiza por medio de la matriz de confusión: el número de verdaderos/falsos positivos y negativos.
+
+\begin{center}
+\begin{tabular}{|c|c|c|}\hline
+& Positivo & Negativo\\\hline
+Predecido Positivo& TP & FP\\\hline
+Predicido Negativo& FN & TN\\\hline
+\end{tabular}
+\end{center}
+
+\item Para problemas de regresión con etiquetas de valores continuos usualmente se calcula la raíz del error cuadrático medio
+
+\begin{equation}
+RMSE=\sqrt{\frac{1}{N}\sum_{i=1}^{N}\left(y_{i}-\hat{y}\right)^2}
+\end{equation}
+
+
+\begin{equation}
+R^2=1-\frac{\sum_{i=1}^{N}\left(y_{i}-\hat{y}\right)^2}{\sum_{i=1}^{N}\left(y_{i}-\overline{y}\right)^2}
+\end{equation}
+
+\end{itemize}
+
+En cualquiera de los dos casos la evaluación final se lleva a cabo en el conjunto de prueba, el cuál es esencial dado que el último objetivo es obtener el predictor más general en los datos no utilizados para entrenar el algoritmo.
+\end{Note}
+
+
+\begin{Note}
+Las siguientes métricas se utilizan para medir el rendimiento de un modelo en función de su capacidad para predecir correctamente las clases de un conjunto de datos. 
+
+\begin{itemize}
+
+\item \textbf{Recall (Recall o Sensibilidad):} Conocido como sensibilidad o tasa positiva real, mide la capacidad de un modelo para identificar correctamente todos los ejemplos positivos en un conjunto de datos. Se calcula como el número de verdaderos positivos dividido por la suma de verdaderos positivos y falsos negativos:
+
+\begin{equation}
+Recall = \frac{Verdaderos\ Positivos}{Verdaderos\ Positivos + Falsos\ Negativos}
+\end{equation}
+
+Un recall alto significa que el modelo es bueno para detectar los casos positivos, minimizando los falsos negativos. Es importante en situaciones donde los falsos negativos son costosos o críticos.
+
+
+\item Precision (Precisión): La precisión mide la capacidad de un modelo para predecir correctamente los casos positivos entre todas las predicciones positivas que realiza. Se calcula como el número de verdaderos positivos dividido por la suma de verdaderos positivos y falsos positivos:
+
+\begin{equation}
+Precision = \frac{Verdaderos\ Positivos}{Verdaderos\ Positivos + Falsos\ Positivos}
+\end{equation}
+
+Una alta precisión significa que el modelo tiene una baja tasa de falsos positivos, es decir, que cuando predice una clase como positiva, es probable que sea correcta. La precisión es importante en situaciones en las que los falsos positivos son costosos o no deseados.
+
+\item Specificity (Especificidad): La especificidad mide la capacidad de un modelo para predecir correctamente los casos negativos entre todas las predicciones negativas que realiza. También se conoce como tasa negativa real. Se calcula como el número de verdaderos negativos dividido por la suma de verdaderos negativos y falsos positivos:
+
+\begin{equation}
+Specificity=\frac{Verdaderos\ Negativos}{Verdaderos\ Negativos+Falsos\ Positivos}\end{equation}
+Una alta especificidad indica que el modelo es bueno para identificar correctamente los casos negativos, minimizando los falsos positivos. Esto es importante en situaciones en las que los falsos positivos son costosos o problem\'aticos.
+\end{itemize}
+Estas métricas proporcionan una forma más completa de evaluar el rendimiento de un modelo de clasificación que simplemente mirar la precisión general. 
+\end{Note}
+
+
+En la ingeniería de proteínas, las similitudes en secuencias en ambos subconjuntos de datos deben ser tenidas en cuenta. Si alguna familia de proteínas está sobre representada en el conjunto de prueba, el predictor resultante puede resultar sesgado hacia la identificación de patrones válidos solamente para esta familia. Si algunas secuencias en el conjunto de prueba son muy cercanas al conjunto de entrenamiento, la evaluación final de desempeño dara resultados sobre optimistas. 
+
+En el paso 2 de entrenamiento, es posible ajustar el predictor o seleccionar de entre varios predictores, usualmente por medio de validación $k-fold$. En este caso los datos de entrenamiento se subdividen en $K$ subconjuntos y el flujo de trabajo se repite $K$ veces, con cada uno de ellos utilizaods para la evaluación de los $K-1$ subconjuntos utilizados para entrenar. El reto principal en el paso 2 para cualquiern entrenamiento tipo ML supervisado es evitar el subajuste de los datos (sesgo alto) y el sobre ajuste (varianza grande). 
+
+La \textbf{subestimación} ocurre cuando un predictor falla en encontrar patrones incluso en los datos de entrenamiento (cuando un modelo lineal simple se utiliza para explicar dependencia dependencias no lineales en los datos). El \textbf{sobreajuste} ocurre cuando el desempeño de un predictor disminuye notablemente en los datos de prueba en comparación con los datos de prueba, debido al aprendizaje de demasiado detalle y ruido, en lugar de identificar patrones generales. Tanto el subajuste como el sobreajuste pueden ser debido a la insuficiente calidad de los datos: ruido excesivo, características faltantes o irrelevantes, sesgo en los datos, o datos dispersos. También pueden ocurrir como consecuencia de una pobre aplicación del algoritmo: excesiva o insuficiente flexibilidad en la selección de los parámetros, protocolo de entrenamiento inapropiado, o contaminación de los datos de entrenamiento con el conjunto de datos de prueba.
+
+
+Dado un conjunto de datos $(x_i, y_i)$ para $i = 1, \dots, n$, queremos encontrar los coeficientes $\beta_0$ y $\beta_1$ que minimicen el error cuadr\'atico:
+\[
+\sum_{i=1}^{n} (y_i - (\beta_0 + \beta_1 x_i))^2
+\]
+
+Es m\'as sencillo resolver este problema usando la forma \emph{centralizada}:
+\[
+y_i = \beta_0^* + \beta_1(x_i - \bar{x}) + \varepsilon_i
+\]
+donde:
+\[
+\beta_0 = \beta_0^* - \beta_1 \bar{x}
+\]
+
+\section*{Paso 1: Derivada parcial respecto a \( \beta_0^* \)}
+Queremos minimizar:
+\[
+L(\beta_0^*, \beta_1) = \sum_{i=1}^{n} [y_i - (\beta_0^* + \beta_1(x_i - \bar{x}))]^2
+\]
+
+Calculamos la derivada parcial:
+\begin{align*}
+\frac{\partial L}{\partial \beta_0^*} &= \sum_{i=1}^{n} 2[y_i - (\beta_0^* + \beta_1(x_i - \bar{x}))](-1) \\
+&= -2 \sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})]
+\end{align*}
+
+Igualamos a cero:
+\[
+\sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})] = 0
+\]
+
+Distribuimos:
+\[
+n \beta_0^* + \beta_1 \sum_{i=1}^{n}(x_i - \bar{x}) = \sum_{i=1}^{n} y_i
+\]
+Pero:
+\[
+\sum_{i=1}^{n}(x_i - \bar{x}) = 0
+\]
+Entonces:
+\[
+n \beta_0^* = \sum_{i=1}^{n} y_i \Rightarrow \beta_0^* = \bar{y}
+\]
+
+\section*{Paso 2: Derivada parcial respecto a \( \beta_1 \)}
+Nuevamente:
+\[
+L(\beta_0^*, \beta_1) = \sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})]^2
+\]
+
+Derivamos con respecto a $\beta_1$:
+\begin{align*}
+\frac{\partial L}{\partial \beta_1} &= \sum_{i=1}^{n} 2[y_i - \beta_0^* - \beta_1(x_i - \bar{x})](-1)(x_i - \bar{x}) \\
+&= -2 \sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})](x_i - \bar{x})
+\end{align*}
+
+Igualamos a cero:
+\[
+\sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})](x_i - \bar{x}) = 0
+\]
+Sustituimos $\beta_0^* = \bar{y}$:
+\[
+\sum_{i=1}^{n} [y_i - \bar{y} - \beta_1(x_i - \bar{x})](x_i - \bar{x}) = 0
+\]
+
+Distribuimos:
+\[
+\sum_{i=1}^{n} (y_i - \bar{y})(x_i - \bar{x}) - \beta_1 \sum_{i=1}^{n} (x_i - \bar{x})^2 = 0
+\]
+
+Despejamos $\beta_1$:
+\[
+\beta_1 = \frac{\sum_{i=1}^{n} (y_i - \bar{y})(x_i - \bar{x})}{\sum_{i=1}^{n} (x_i - \bar{x})^2} = \frac{S_{xy}}{S_{xx}}
+\]
+
+\section*{Paso 3: Recuperar \( \beta_0 \)}
+\[
+\beta_0 = \beta_0^* - \beta_1 \bar{x} = \bar{y} - \beta_1 \bar{x}
+\]
+
+
+Para una variable binaria $y_i \in \{0,1\}$, el modelo de regresión logística predice la probabilidad:
+\[
+    p_i = \frac{1}{1 + e^{-x_i \beta}}
+\]
+
+\subsection*{Función de verosimilitud}
+\[
+    L(\beta) = \prod_{i=1}^n p_i^{y_i} (1 - p_i)^{1 - y_i}
+\]
+
+\subsection*{Log-verosimilitud}
+\[
+    \ell(\beta) = \sum_{i=1}^n \left[ y_i \ln(p_i) + (1 - y_i) \ln(1 - p_i) \right]
+\]
+
+Usando que $p_i = \frac{1}{1 + e^{-x_i \beta}}$, entonces:
+\[
+    \ell(\beta) = \sum_{i=1}^n \left[ y_i x_i \beta - \ln(1 + e^{x_i \beta}) \right]
+\]
+
+\section*{Derivadas: Gradiente y Hessiano}
+
+\subsection*{Gradiente}
+Partimos de:
+\[
+    \ell(\beta) = \sum_{i=1}^n \left[ y_i x_i \beta - \ln(1 + e^{x_i \beta}) \right]
+\]
+
+Derivando con respecto a $\beta_j$:
+\[
+    \frac{\partial \ell(\beta)}{\partial \beta_j} = \sum_{i=1}^n \left[ y_i x_{ij} - \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} x_{ij} \right] = \sum_{i=1}^n x_{ij}(y_i - p_i)
+\]
+
+Forma vectorial del gradiente:
+\[
+    \nabla_\beta \ell(\beta) = X^\top (\mathbf{y} - \mathbf{p})
+\]
+
+\subsection*{Hessiano}
+La derivada del gradiente es:
+\[
+    \frac{\partial^2 \ell(\beta)}{\partial \beta_j \partial \beta_k} = - \sum_{i=1}^n x_{ij} x_{ik} p_i (1 - p_i)
+\]
+
+Forma matricial:
+\[
+    \nabla^2_\beta \ell(\beta) = - X^\top V X, \quad \text{donde } V = \text{diag}(p_i (1 - p_i))
+\]
+
+\section*{Regularización Ridge (L2)}
+
+Penalización L2 añadida a la log-verosimilitud:
+\[
+    \ell_\lambda(\beta) = \ell(\beta) - \frac{\lambda}{2} \|\beta\|^2
+\]
+
+Gradiente regularizado:
+\[
+    \nabla_\beta \ell_\lambda(\beta) = X^\top (\mathbf{y} - \mathbf{p}) - \lambda \beta
+\]
+
+Hessiano regularizado:
+\[
+    \nabla^2_\beta \ell_\lambda(\beta) = - X^\top V X - \lambda I
+\]
+
+\section*{TR-IRLS (Trust Region IRLS)}
+Actualización de Newton truncado:
+\[
+    \beta^{(k+1)} = \beta^{(k)} + s
+\]
+Donde $s$ resuelve:
+\[
+    (X^\top V X + \lambda I) s = X^\top V z - \lambda \beta
+\]
+
+\section*{Eventos raros y correcciones}
+
+\subsection*{Ajuste del intercepto (King \& Zeng)}
+\[
+    \tilde{\beta}_0 = \hat{\beta}_0 - \ln \left[ \left( \frac{1 - \tau}{\tau} \right) \left( \frac{\hat{y}}{1 - \hat{y}} \right) \right]
+\]
+
+\subsection*{Muestreo estratificado y ponderación}
+Peso para observación $i$:
+\[
+    w_i = \frac{Q_i}{H_i}
+\]
+
+Verosimilitud ponderada:
+\[
+    \ell_w(\beta) = \sum_{i=1}^n w_i \ln \left( \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} \right)
+\]
+
+\section*{Corrección de Firth}
+
+Log-verosimilitud penalizada (ajuste de Jeffreys):
+\[
+    \ell^*(\beta) = \ell(\beta) + \frac{1}{2} \log |I(\beta)|
+\]
+
+\section*{Regla de decisión}
+
+\[
+    \hat{y}_i =
+    \begin{cases}
+        1 & \text{si } p_i \geq c \\
+        0 & \text{si } p_i < c
+    \end{cases}, \quad \text{con } c = 0.5
+\]
+
+\section*{Modelo base de regresión logística}
+La RL modela la probabilidad de un evento binario $y_i \in \{0,1\}$ en función de un vector de predictores $x_i$ mediante:
+\begin{equation}
+    p_i = \frac{1}{1 + e^{-x_i \beta}}
+\end{equation}
+
+La verosimilitud del modelo es:
+\begin{equation}
+    L(\beta) = \prod_{i=1}^n p_i^{y_i}(1 - p_i)^{1 - y_i}
+\end{equation}
+
+Y su log-verosimilitud:
+\begin{equation}
+    \ell(\beta) = \sum_{i=1}^{n} \left[ y_i \ln(p_i) + (1 - y_i) \ln(1 - p_i) \right]
+\end{equation}
+
+\section*{Derivadas: Gradiente y Hessiano}
+\begin{itemize}
+    \item Gradiente:
+    \begin{equation}
+        \nabla_{\beta} \ell(\beta) = X^T (\mathbf{y} - \mathbf{p})
+    \end{equation}
+    \item Hessiano:
+    \begin{equation}
+        \nabla^2_{\beta} \ell(\beta) = - X^T V X, \quad \text{donde } V = \text{diag}(p_i(1 - p_i))
+    \end{equation}
+\end{itemize}
+
+\section*{Regularización}
+Para evitar el sobreajuste, se añade un término de penalización L2 (ridge):
+\begin{equation}
+    \ell_{\lambda}(\beta) = \ell(\beta) - \frac{\lambda}{2} \|\beta\|^2
+\end{equation}
+
+\begin{itemize}
+    \item Gradiente regularizado:
+    \begin{equation}
+        \nabla_{\beta} \ell_{\lambda}(\beta) = X^T (\mathbf{y} - \mathbf{p}) - \lambda \beta
+    \end{equation}
+    \item Hessiano regularizado:
+    \begin{equation}
+        \nabla^2_{\beta} \ell_{\lambda}(\beta) = - X^T V X - \lambda I
+    \end{equation}
+\end{itemize}
+
+\section*{Algoritmo IRLS (Iteratively Reweighted Least Squares)}
+Una técnica común para estimar los parámetros del modelo es IRLS, que utiliza pesos $v_i = p_i(1 - p_i)$ y variables ajustadas $z_i$:
+
+\begin{equation}
+    z_i = x_i \hat{\beta} + \frac{y_i - p_i}{v_i}
+\end{equation}
+
+En cada iteración, se resuelve:
+\begin{equation}
+    (X^T V X + \lambda I) \hat{\beta}^{(c+1)} = X^T V z^{(c)}
+\end{equation}
+
+Este método es eficiente para bases de datos de tamaño moderado.
+
+\section*{Algoritmo CG (Conjugate Gradient)}
+En problemas a gran escala, se recomienda el método del gradiente conjugado:
+
+\begin{itemize}
+    \item Se inicializa el residuo $r^{(0)} = b - A\beta^{(0)}$.
+    \item Se actualizan las direcciones de búsqueda y pasos óptimos iterativamente.
+    \item Permite resolver sistemas lineales sin invertir matrices.
+\end{itemize}
+
+Es especialmente útil cuando $X^T V X$ es grande o disperso.
+
+\section*{Correcciones para eventos raros}
+\begin{itemize}
+    \item \textbf{Ajuste del intercepto:} basado en la tasa real de eventos:
+    \begin{equation}
+        \tilde{\beta}_0 = \hat{\beta}_0 - \ln \left( \frac{1 - \tau}{\tau} \cdot \frac{y}{1 - y} \right)
+    \end{equation}
+    \item \textbf{Ponderación:} modifica la verosimilitud con pesos:
+    \begin{equation}
+        \ell(\beta|y,X) = \sum_{i=1}^n w_i \ln \left( \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} \right)
+    \end{equation}
+\end{itemize}
+
+\section*{Conclusiones clave}
+\begin{itemize}
+    \item La regresión logística es robusta y se adapta bien a diferentes contextos de datos.
+    \item Las técnicas de regularización y los métodos numéricos como IRLS y CG la hacen escalable.
+    \item Las correcciones para eventos raros mejoran la inferencia en muestras sesgadas.
+    \item Es una herramienta base para modelos más complejos como regresión multinomial o clasificación ordinal.
+\end{itemize}
+
+\newpage
+
+
+\section{Desarrollo Matem\'atico}
+El modelo lineal univariado se expresa como:
+
+\begin{eqnarray}
+h_\theta(x) = \theta_0 + \theta_1 x
+\end{eqnarray}
+
+Función de Costo (SSE - Error Cuadrático medio) está definida por:
+
+\begin{eqnarray}
+J(\theta_0, \theta_1) = \frac{1}{2N} \sum_{i=1}^{N} \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2
+\end{eqnarray}
+
+Objetivo de Optimización: Nuestro objetivo es encontrar los valores óptimos de $\theta_0$ y $\theta_1$ que minimicen la función de costo
+
+\begin{eqnarray}
+\min_{\theta_0, \theta_1} J(\theta_0, \theta_1)
+\end{eqnarray}
+
+Gradiente de la función de costo respecto a $\theta_0$
+
+\begin{eqnarray}
+\frac{\partial J(\theta_0, \theta_1)}{\partial \theta_0} = \frac{1}{N} \sum_{i=1}^{N} \left( h_\theta(x^{(i)}) - y^{(i)} \right)
+\end{eqnarray}
+
+Gradiente de la función de costo respecto a $\theta_1$
+
+\begin{eqnarray}
+\frac{\partial J(\theta_0, \theta_1)}{\partial \theta_1} = \frac{1}{N} \sum_{i=1}^{N} x^{(i)} \left( h_\theta(x^{(i)}) - y^{(i)} \right)
+\end{eqnarray}
+
+Optimización del Gradiente: Para minimizar $J(\theta_0, \theta_1)$, se pueden utilizar métodos iterativos como el descenso por gradiente
+
+\begin{eqnarray}
+\theta_j := \theta_j - \alpha \cdot \frac{\partial J(\theta)}{\partial \theta_j}, \quad j = 0, 1
+\end{eqnarray}
+
+donde $\alpha$ es la tasa de aprendizaje.
+
+Soluci\'on
+\begin{eqnarray}
+\theta_{0}= \frac{1}{N} \left\{\sum_{i=1}^{N} y^{(i)}-\theta_{1} \sum_{i=1}^{N}  x^{(i)}\right\}
+\end{eqnarray}
+
+\begin{eqnarray}
+\theta_{1}= \frac{N\sum_{i=1}^{N} y^{(i)}x^{(i)} -\sum_{i=1}^{N} y^{(i)}\sum_{i=1}^{N} x^{(i)}}{N\sum_{i=1}^{N} (x^{(i)})^{2}-(\sum_{i=1}^{N} x^{(i)})^{2}}
+\end{eqnarray}
+
+Para el caso multivariado ser\'ia
+
+\begin{eqnarray}
+h_{\theta}\left(x\right)=\sum_{i=1}^{d}\theta_{i}x_{i}+\theta_{0}=\sum_{i=0}^{d}\theta_{i}x_{i}\textrm{, }x_{0}=1
+\end{eqnarray}
+es decir,
+
+\begin{eqnarray}
+h_{\theta}(x) &= \theta^{T} X\textrm{, } X = \begin{pmatrix} x_0 \\ x_1 \\ \vdots \\ x_d \end{pmatrix}
+\end{eqnarray}
+
+\begin{eqnarray}
+J(\theta) &= J(\theta_0, \theta_1, \ldots, \theta_d) = \frac{1}{2N} \sum_{i=1}^{N} \left( \theta^{T} x^{(i)} - y^{(i)} \right)^2.
+\end{eqnarray}
+
+
+\begin{eqnarray}
+h_{\mathbf{\theta}}(\mathbf{X}) = \mathbf{\theta}^{T} \mathbf{X} = \mathbf{X}^{T} \mathbf{\theta}
+\end{eqnarray}
+
+\begin{eqnarray}
+\hat{\textbf{y}} &= \mathbf{X} \mathbf{\theta} \quad \Leftrightarrow \quad 
+\begin{bmatrix}
+\hat{y}^{(1)} \\
+\hat{y}^{(2)} \\
+\vdots \\
+\hat{y}^{(N)}
+\end{bmatrix} =
+\begin{bmatrix}
+h_{\theta}\mathbf{x}^{(1)} \\
+h_{\theta}\mathbf{x}^{(2)} \\
+\vdots \\
+h_{\theta}\mathbf{x}^{(N)}
+\end{bmatrix}= 
+\begin{bmatrix}
+x_0^{(1)} & x_1^{(1)} & \cdots & x_d^{(1)} \\
+x_0^{(2)} & x_1^{(2)} & \cdots & x_d^{(2)} \\
+\vdots & \vdots & \ddots & \vdots \\
+x_0^{(N)} & x_1^{(N)} & \cdots & x_d^{(N)} \\
+\end{bmatrix}
+\begin{bmatrix}
+\theta_0 \\
+\theta_1 \\
+\vdots \\
+\theta_d
+\end{bmatrix}
+\end{eqnarray}
+
+donde $\mathbf{X} \in \mathbb{R}^{N \times (d+1)}$, $\hat{\mathbf{y}} \in \mathbb{R}^{N \times 1}$ y $\mathbf{\theta} \in \mathbb{R}^{(d+1) \times 1}$. Entonces
+
+\begin{eqnarray*}
+J(\mathbf{\theta}) &=& \frac{1}{2N} \sum_{i=1}^{N} \left( \mathbf{\theta}^{T} \mathbf{x}^{(i)} - y^{(i)} \right)^2 = \frac{1}{2N} \sum_{i=1}^{N} \left( \hat{y}^{(i)} - y^{(i)} \right)^2\\
+&=& \frac{1}{2N} | \hat{\mathbf{y}} - \mathbf{y} |_2^2 = \frac{1}{2N} (\hat{\mathbf{y}} - \mathbf{y})^{T} (\hat{\mathbf{y}} - \mathbf{y})=\frac{1}{2N}\left(\mathbf{X}\mathbf{\theta}-y\right)^{\top}\left(\mathbf{X}\mathbf{\theta}-y\right)\\
+&=&\frac{1}{2N}\left\{\mathbf{\theta}^{\top}\left(\mathbf{X}^{\top}\mathbf{X}\right)\mathbf{\theta}-\mathbf{\theta}^{\top}\mathbf{X}^{\top}y-y^{\top}\mathbf{X}\mathbf{\theta}+y^{\top}y\right\}\\
+&=&\frac{1}{2N}\left\{\mathbf{\theta}^{\top}\left(\mathbf{X}^{\top}\mathbf{X}\right)\mathbf{\theta}-\left(\mathbf{X}^{\top}y\right)^{\top}\mathbf{\theta}-\left(\mathbf{X}^{\top}y\right)^{\top}\mathbf{\theta}+y^{\top}y\right\}\\
+&=&\frac{1}{2N}\left\{\mathbf{\theta}^{\top}\left(\mathbf{X}^{\top}\mathbf{X}\right)\mathbf{\theta}-2\left(\mathbf{X}^{\top}y\right)^{\top}\mathbf{\theta}+y^{\top}y\right\}
+\end{eqnarray*}
+
+por lo tanto
+\begin{eqnarray*}
+J(\mathbf{\theta}) = \frac{1}{2N} (\mathbf{X} \mathbf{\theta} - \mathbf{y})^{\top} (\mathbf{X} \mathbf{\theta} - \mathbf{y}).
+\end{eqnarray*}
+
+%Expandiendo el producto y agrupando términos
+
+%\begin{eqnarray}
+%= \frac{1}{2N} \left[ \mathbf{\theta}^{\top} \mathbf{X}^{\top} \mathbf{X} \mathbf{\theta} - \mathbf{\theta}^{\top} \mathbf{X}^{\top} \mathbf{y} - \mathbf{y}^{\top} \mathbf{X} \mathbf{\theta} + \mathbf{y}^{\top} \mathbf{y} \right]=\frac{1}{2N} \left[\mathbf{\theta}^{\top} \mathbf{X}^{\top} \mathbf{X} \mathbf{\theta}- 2 \mathbf{\theta}^{\top} \mathbf{X}^{\top} \mathbf{y}+ \mathbf{y}^{\top} \mathbf{y}\right],
+%\end{eqnarray}
+
+Recordemos que $\mathbf{\theta}^{\top} \mathbf{X}^{\top} \mathbf{y} = (\mathbf{X}^{\top} \mathbf{y})^{\top} \mathbf{\theta}$, $(\mathbf{X}^{\top} \mathbf{y})^{\top} = \mathbf{y}^{\top} \mathbf{X}$ y $(\mathbf{a}^{\top} \mathbf{b}) = (\mathbf{b}^{\top} \mathbf{a})$, por lo tanto podemos reescribir:
+
+\begin{eqnarray}
+J(\mathbf{\theta}) = \frac{1}{2N}\left( \mathbf{\theta}^{\top}\left(\mathbf{X}^{\top}\mathbf{X}\right)\mathbf{\theta}- 2\left(\mathbf{X}^{\top}y\right)^{\top}\mathbf{\theta}+ \mathbf{y}^{\top}\mathbf{y}\right).
+\end{eqnarray}
+
+Calculando el gradiente e igualando a cero:
+
+\begin{eqnarray}
+\nabla_{\boldsymbol{\theta}} J(\boldsymbol{\theta})&=& -\frac{1}{2N} \left\{ \boldsymbol{\theta}^{\top} (X^{\top}X)\boldsymbol{\theta} - 2(X^{\top} \mathbf{y})^{\top} \boldsymbol{\theta} + \mathbf{y}^{\top} \mathbf{y} \right\}\\
+&=& \frac{1}{2N} \left\{ 2 X^{\top} X \boldsymbol{\theta} - 2 X^{\top} \mathbf{y} \right\}
+\nabla_{\boldsymbol{\theta}}\\
+ J(\boldsymbol{\theta})&=& 0 \Leftrightarrow X^{\top} X \boldsymbol{\theta} = X^{\top} \mathbf{y} \Leftrightarrow \boldsymbol{\theta}= (X^{\top} X)^{-1} X^{\top} \mathbf{y}
+\end{eqnarray}
+Alternativamente (gradiente descendente)
+
+\begin{eqnarray}
+\frac{\partial J(\boldsymbol{\theta})}{\partial \theta_j} = \frac{1}{N} \sum_{i=1}^{N} \left( h_{\theta}(x^{(i)}) - y^{(i)} \right) x_j^{(i)}
+\end{eqnarray}
+
+\begin{Note}
+\begin{itemize}
+\item Resolver por gradiente descentiente, y calcular $ (X^{\top} X)^{-1}$ puede ser dif\'icil.
+\item $(X^{\top} X)^{\top}=X^{\top}(X^{\top})^{\top}=X^{\top} X$.
+\end{itemize}
+\end{Note}
+
+\begin{Ejem}
+Ahora calculemos la log-verosimilitud considerando que cada variable se distribuye Bernoulli: $p\left(x|\theta\right)=\theta~{x}\left(1-\theta\right)^{1-x}$ para $x=0,1$.
+Sea  $x_1, x_2, \dots, x_n, \quad \theta = \frac{1}{n} \sum_{i=1}^{n} x_i$, entonces $\theta=\sum_{i=1}^{n}\frac{x_{i}}{n}$ es el valor m\'as probable para estimar $\theta$. La función de verosimilitud conjunta
+\begin{eqnarray}
+\Psi(x_1, x_2, \dots, x_n; \theta) = \prod_{i=1}^{n} f(x_i; \theta)= \theta^{\sum_{i=1}^{n} x_i} (1 - \theta)^{n - \sum_{i=1}^{n} x_i},
+\end{eqnarray}
+
+entonces la funci\'on de  Log-verosimilitud est\'a dada por:
+\begin{eqnarray}
+\log L(\theta) = \sum_{i=1}^{n} x_i \log \theta + (n - \sum_{i=1}^{n} x_i) \log (1 - \theta),
+\end{eqnarray}
+
+calculando la derivada de la log-verosimilitud
+\begin{eqnarray}
+\frac{\partial \log L(\theta)}{\partial \theta} &=& \frac{\sum_{i=1}^{n} x_i}{\theta} - \frac{n - \sum_{i=1}^{n}x_i}{1 - \theta}\\
+&=& \frac{(1 - \theta) \sum_{i=1}^{n} x_i - (n - \sum_{i=1}^{n} x_i) \theta}{\theta (1 - \theta)} = \frac{\sum_{i=1}^{n} x_i - n \theta}{\theta (1 - \theta)},
+\end{eqnarray}
+igualando a cero y resolviendo
+\begin{eqnarray}
+\frac{\sum_{i=1}^{n}x_i - n \theta}{\theta (1 - \theta)}=0\Leftrightarrow \theta =\frac{\sum_{i=1}^{n} x_{i}}{n}.
+\end{eqnarray}
+\end{Ejem}
+
+\begin{Ejem}
+Supongamos que se tienen $\mathcal{D}=\left\{u^{(1)},u^{(2)},\ldots,u^{(N)}\right\}$ observaciones, supongamos adem\'as que se tienen datos generados con distrubuci\'on $U\sim\left(U;\theta\right)$. Calculemos la funci\'on de verosimlitud.
+
+\begin{eqnarray}
+\mathcal{L}\left(\theta\right)=\prod_{i=1}^{N}p\left(u^{(i)};\theta\right)
+\end{eqnarray}
+donde
+\begin{eqnarray}
+\theta_{ML}=\operatorname*{arg\,max}_{\theta}\mathcal{L}\left(\theta\right)=\operatorname*{arg\,max}_{\theta}\sum_{i=1}^{N}\log p\left(u^{(i)};\theta\right)
+\end{eqnarray}
+donde tanto $log(f(x))$ y $\operatorname*{arg\,max}_{\theta}$ son funciones mon\'otonas crecientes. supongamos que se tiene un ruido gaussiano com media $0$ y varianza $\sigma^{2}$, entonces
+
+\begin{eqnarray}
+y^{(i)}=h_{\theta}\left(x^{(i)}\right)+\epsilon^{(i)}=\theta^{\top}\mathbf{X}^{(i)}+\epsilon^{(i)},
+\end{eqnarray}
+por lo tanto
+\begin{eqnarray}
+y^{(i)}\sim N\left(\theta^{\top}\mathbf{X}^{(i)},\sigma^{2}\right), 
+\end{eqnarray}
+entonces
+\begin{eqnarray}
+p\left(y|\mathbf{X},\theta,\sigma^{2}\right)&=&\prod_{i=1}^{N}p\left(y|\mathbf{x}^{(i)},\theta,\sigma^{2}\right)=\prod_{i=1}^{N}\left(2\pi\sigma^{2}\right)e^{-\frac{1}{2\sigma^{2}}\left(y^{(i)}-\theta^{\top}\mathbf{x}^{(i)}\right)^{2}}\\
+&=&\left(2\pi\sigma^{2}\right)^{-\frac{N}{2}}e^{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{2}\left(y^{(i)}-\theta^{\top}\mathbf{x}^{(i)}\right)^{2}}\\
+&=&\left(2\pi\sigma^{2}\right)^{-\frac{N}{2}}e^{-\frac{1}{2\sigma^{2}}\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)}
+\end{eqnarray}
+entonces la verosimilitud es
+
+\begin{eqnarray}
+p\left(y|\mathbf{X},\theta,\sigma^{2}\right)=\left(2\pi\sigma^{2}\right)^{-\frac{N}{2}}e^{-\frac{1}{2\sigma^{2}}\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)}
+\end{eqnarray}
+
+y la log-verosimilitud es
+\begin{eqnarray}
+\mathcal{L}\left(\theta,\sigma^{2}\right)=-\frac{N}{2}\log\left(2\pi\sigma^{2}\right)\left[-\frac{1}{2\sigma^{2}}\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)\right].
+\end{eqnarray}
+Maximizar la log-verosimilitud con respecto a$\theta$ es equivalente a maximizar $-\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)$ que a su vez es equivalente a minimizar $\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)$.
+
+\end{Ejem}
+
+\section{Tema nuevo}
+
+Se define la función sigmoide
+\begin{eqnarray}
+\sigma(u) = \frac{1}{1 + e^{-u}} \quad \Rightarrow \text{logistic regression classifier}
+\end{eqnarray}
+donde la regla de decisión para $y$
+\begin{eqnarray}
+y = \sigma(h_{\boldsymbol{\theta}}(x)) = \sigma(\boldsymbol{\theta}^{\top} x)
+\end{eqnarray}
+
+\text{Matemáticamente, la probabilidad de que un ejemplo pertenezca a la clase 1 es:}
+\begin{eqnarray}
+p\left(y^{(i)} = 1 \mid x^{(i)}; \boldsymbol{\theta} \right) &=& \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\\
+p\left(y^{(i)} = 0 \mid x^{(i)}; \boldsymbol{\theta} \right) &=& 1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})
+\end{eqnarray}
+
+la probabilidad conjunta en función de $y^{(i)}$
+\begin{eqnarray}
+p\left(y^{(i)} \mid x^{(i)}; \boldsymbol{\theta} \right) = 
+\sigma(\boldsymbol{\theta}^{\top} x^{(i)})^{y^{(i)}} \cdot \left[1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right]^{1 - y^{(i)}}
+\end{eqnarray}
+mientras que la probabilidad conjunta de todas las etiquetas
+\begin{eqnarray}
+\prod_{i=1}^{N} \sigma(\boldsymbol{\theta}^{\top} x^{(i)})^{y^{(i)}} \left(1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right)^{(1 - y^{(i)})}
+\end{eqnarray}
+La log-verosimilitud para regresión logística está dada por:
+\begin{eqnarray}
+\ell(\boldsymbol{\theta}) = \sum_{i=1}^{N} y^{(i)} \log \left( \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right) + 
+(1 - y^{(i)}) \log \left( 1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right)
+\end{eqnarray}
+% Derivando con respecto a theta (tachado en la imagen)
+% \frac{\partial \ell(\boldsymbol{\theta})}{\partial \theta_j} = 
+% \sum_{i=1}^{N} \left[ \frac{y^{(i)}}{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})} - \frac{1 - y^{(i)}}{1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})} \right] \cdot \frac{\partial \sigma(\boldsymbol{\theta}^{\top} x^{(i)})}{\partial \theta_j} \cdot x_j^{(i)}
+
+% Derivada de la sigmoide
+Antes de calcular la derivada, recordemos:
+\begin{eqnarray}
+\sigma(z) = \frac{1}{1 + e^{-z}}
+\end{eqnarray}
+con derivada
+\begin{eqnarray}
+\frac{d}{dz} \sigma(z) = \frac{d}{dz} \left(1 + e^{-z} \right)^{-1} = 
+-(1 + e^{-z})^{-2} \cdot (-e^{-z}) =
+\frac{e^{-z}}{(1 + e^{-z})^2}
+\end{eqnarray}
+además:
+\begin{eqnarray}
+\sigma(z) &=& \frac{1}{1 + e^{-z}} \Rightarrow 1 - \sigma(z) = \frac{e^{-z}}{1 + e^{-z}}\\
+&\Rightarrow& \sigma(z)(1 - \sigma(z)) = \frac{e^{-z}}{(1 + e^{-z})^2}\\
+&\therefore& \frac{d}{dz} \sigma(z) = \sigma(z)(1 - \sigma(z))
+\end{eqnarray}
+Derivando la log-verosimilitud respecto a $theta_{j}$ la función $\ell(\boldsymbol{\theta})$:
+\begin{eqnarray}
+\frac{\partial \ell(\boldsymbol{\theta})}{\partial \theta_j} &=& 
+\sum_{i=1}^{N} \left[ y^{(i)} \log \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) +
+(1 - y^{(i)}) \log (1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})) \right]\\
+&=& \sum_{i=1}^{N} \left[ \frac{y^{(i)}}{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})} 
+- \frac{1 - y^{(i)}}{1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})} \right]
+\cdot \frac{d}{d\theta_j} \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\\
+&=& \sum_{i=1}^{N} \left[ \frac{y^{(i)}}{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})} 
+- \frac{1 - y^{(i)}}{1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})} \right]
+\cdot  \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\sigma(1-\boldsymbol{\theta}^{\top} x^{(i)})x_{j}^{(i)}\\
+&=& \sum_{i=1}^{N} \left[ \frac{y^{(i)}- \sigma(\boldsymbol{\theta}^{\top}x^{(i)})}
+{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})(1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}))} \right]
+\cdot  \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\sigma(1-\boldsymbol{\theta}^{\top} x^{(i)})x_{j}^{(i)}\\
+&=&\sum_{i=1}^{N}\left[y^{(i)}-\sigma(\boldsymbol{\theta}^{\top} x^{(i)})\right]x_{j}^{(i)} 
+\end{eqnarray}
+la cual es la funci\'on recursiva para calcular el gradiente.
+
+
+
+\begin{thebibliography}{99}
+
+\bibitem{darlington1990}%1
+Darlington RB. \textit{Regression and Linear Models}. Columbus, OH: McGraw-Hill Publishing Company, 1990.
+
+\bibitem{tabachnick2007}%2
+Tabachnick BG, Fidell LS. \textit{Using Multivariate Statistics}. 5th ed. Boston, MA: Pearson Education, Inc., 2007.
+
+\bibitem{hosmer2000}%3
+Hosmer DW, Lemeshow SL. \textit{Applied Logistic Regression}. 2nd ed. Hoboken, NJ: Wiley-Interscience, 2000.
+
+\bibitem{campbell1963}%4
+Campbell DT, Stanley JC. \textit{Experimental and Quasi-experimental Designs for Research}. Boston, MA: Houghton Mifflin Co., 1963.
+
+\bibitem{stokes2000}%5
+Stokes ME, Davis CS, Koch GG. \textit{Categorical Data Analysis Using the SAS System}. 2nd ed. Cary, NC: SAS Institute, Inc., 2000.
+
+\bibitem{newgard2004}%6
+Newgard CD, Hedges JR, Arthur M, Mullins RJ. Advanced statistics: the propensity score—a method for estimating treatment effect in observational research. \textit{Acad Emerg Med}. 2004; \textbf{11}:953–961.
+
+\bibitem{newgard2007}%7
+Newgard CD, Haukoos JS. Advanced statistics: missing data in clinical research—part 2: multiple imputation. \textit{Acad Emerg Med}. 2007; \textbf{14}:669–678.
+
+\bibitem{allison1999}%8
+Allison PD. \textit{Logistic Regression Using the SAS System: Theory and Application}. Cary, NC: SAS Institute, Inc., 1999.
+
+\bibitem{peduzzi1996}%9
+Peduzzi P, Concato J, Kemper E, Holford TR, Feinstein AR. A simulation study of the number of events per variable in logistic regression analysis. \textit{J Clin Epidemiol}. 1996; \textbf{49}:1373–1379.
+
+\bibitem{agresti2007}%10
+Agresti A. \textit{An Introduction to Categorical Data Analysis}. Hoboken, NJ: Wiley, 2007.
+
+\bibitem{feinstein1996}%11
+Feinstein AR. \textit{Multivariable Analysis: An Introduction}. New Haven, CT: Yale University Press, 1996.
+
+\bibitem{altman2000}%12
+Altman DG, Royston P. What Do We Mean by Validating a Prognostic Model? \textit{Stats Med}. 2000; \textbf{19}:453–473.
+
+\bibitem{kohavi1995}%13
+Kohavi R. A study of cross-validation and bootstrap for accuracy estimation and model selection. In: \textit{Proceedings of the 14th International Joint Conference on Artificial Intelligence (IJCAI)}. Montreal, Quebec, Canada, August 20–25, 1995. 1995:1137–1143.
+
+\bibitem{efron1993}%14
+Efron B, Tibshirani R. \textit{An Introduction to the Bootstrap}. New York: Chapman \& Hall, 1993.
+
+\bibitem{miller1991}%15
+Miller ME, Hiu SL, Tierney WM. Validation techniques for logistic regression models. \textit{Stat Med}. 1991; \textbf{10}:1213–1226.
+
+\bibitem{hosmer1997}%16
+Hosmer DW, Hosmer T, Le Cessie S, Lemeshow S. A comparison of goodness-of-fit tests for the logistic regression model. \textit{Stat Med}. 1997; \textbf{16}:965–980.
+
+\bibitem{kuss2002}%17
+Kuss O. Global goodness-of-fit tests in logistic regression with sparse data. \textit{Stat Med}. 2002; \textbf{21}:3789–3801.
+
+\bibitem{zou2007}%18
+Zou KH, O'Malley AJ, Mauri L. Receiver-operating characteristic analysis for evaluating diagnostic tests and predictive models. \textit{Circulation}. 2007; \textbf{115}:654–657.
+\bibitem{Mazurenko}Mazurenko, S., Prokop, Z., and Damborsky, J. (2019). Machine learning in enzyme engineering. ACS Catalysis, 10(2), 1210-1223. 
+
+\bibitem{15} Yang, Y.; Niroula, A.; Shen, B.; Vihinen, M. PON-Sol: Prediction of Effects of Amino Acid Substitutions on Protein Solubility. Bioinformatics 2016, 32, 2032!2034.
+
+\bibitem{16} Folkman, L.; Stantic, B.; Sattar, A.; Zhou, Y. EASE-MM: Sequence-Based Prediction of Mutation-Induced Stability Changes with Feature-Based Multiple Models. J. Mol. Biol. 2016, 428, 1394! 1405.
+
+\bibitem{17} Teng, S.; Srivastava, A. K.; Wang, L. Sequence Feature-Based Prediction of Protein Stability Changes upon Amino Acid Substitutions. BMC Genomics 2010, 11, S5.
+
+\bibitem{18} Huang, L.; Gromiha, M. M.; Ho, S. iPTREE-STAB: Interpretable Decision Tree Based Method for Predicting Protein Stability Changes Upon Mutations. Bioinformatics 2007, 23, 1292! 1293.
+
+
+\bibitem{19} Koskinen, P.; Toronen, P.; Nokso-Koivisto, J.; Holm, L. PANNZER: High-Throughput Functional Annotation of Uncharac- terized Proteins in an Error-Prone Environment. Bioinformatics 2015, 31, 1544!1552.
+
+\bibitem{20} De Ferrari, L.; Mitchell, J. B. From Sequence to Enzyme Mechanism Using Multi-Label Machine Learning. BMC Bioinf. 2014, 15, 150.
+
+\bibitem{21} Falda, M.; Toppo, S.; Pescarolo, A.; Lavezzo, E.; Di Camillo, B.; Facchinetti, A.; Cilia, E.; Velasco, R.; Fontana, P. Argot2: A Large Scale Function Prediction Tool Relying on Semantic Similarity of Weighted Gene Ontology Terms. BMC Bioinf. 2012, 13, S14.
+
+\bibitem{22} Cozzetto, D.; Buchan, D. W.; Bryson, K.; Jones, D. T. Protein Function Prediction by Massive Integration of Evolutionary Analyses and Multiple Data Sources. BMC Bioinf. 2013, 14, S1.
+
+\bibitem{47} Kulski, J. Next Generation Sequencing: Advances, Applications and Challenges; InTechOpen: London, 2016.
+
+\bibitem{48} Straiton, J.; Free, T.; Sawyer, A.; Martin, J. From Sanger Sequencing to Genome Databases and Beyond. BioTechniques 2019, 66, 60-63.
+
+\bibitem{50} Ardui, S.; Ameur, A.; Vermeesch, J. R.; Hestand, M. S. Single Molecule Real-Time (SMRT) Sequencing Comes of Age: Applications and Utilities for Medical Diagnostics. Nucleic Acids Res. 2018, 46, 2159-2168.
+
+\bibitem{51}Kono, N., and Arakawa, K. (2019). Nanopore sequencing: Review of potential applications in functional genomics. Development, growth and differentiation, 61(5), 316-326.
+
+\bibitem{52} Bunzel, H. A., Garrabou, X., Pott, M., and Hilvert, D. (2018). Speeding up enzyme discovery and engineering with ultrahigh-throughput methods. Current opinion in structural biology, 48, 149-156.
+
+\bibitem{55} Wrenbeck, E. E., Faber, M. S., and Whitehead, T. A. (2017). Deep sequencing methods for protein engineering and design. Current opinion in structural biology, 45, 36-44.
+
+\bibitem{56} Fowler, D. M., and Fields, S. (2014). Deep mutational scanning: a new style of protein science. Nature methods, 11(8), 801-807.
+
+\bibitem{57} Gupta, K., and Varadarajan, R. (2018). Insights into protein structure, stability and function from saturation mutagenesis. Current opinion in structural biology, 50, 117-125.
+
+\bibitem{28} UniProt Consortium. UniProt: A Worldwide Hub of Protein Knowledge. Nucleic Acids Res. 2018, 47, D506-D515.
+
+\bibitem{60} Evans, R.; Jumper, J.; Kirkpatrick, J.; Sifre, L.; Green, T.; Qin, C.; Zidek, A.; Nelson, A.; Bridgland, A.; Penedones, H.; Petersen, S.; Simonyan, K.; Jones, D. T.; Silver, D.; Kavukcuoglu, K.; Hassabis, D.; Senior, A. W. De Novo Structure Prediction with Deeplearning Based Scoring. In Thirteenth Critical Assessment of Techniques for Protein Structure Prediction Abstracts; 2018; pp 11-12.
+
+\bibitem{61} Kinch, L. N.; Shi, S.; Cheng, H.; Cong, Q.; Pei, J.; Mariani, V.; Schwede, T.; Grishin, N. V. CASP9 Target Classification. Proteins: Struct., Funct., Genet. 2011, 79, 21-36.
+
+\bibitem{62} Shehu, A.; Barbará, D.; Molloy, K. A Survey of ComputationalMethods for Protein Function Prediction. In Big Data Analytics in Genomics; Wong, K. C., Ed.; Springer: Cham, 2016; pp 225-298.
+
+\bibitem{63} Zhang, C.; Freddolino, P. L.; Zhang, Y. COFACTOR: Improved Protein Function Prediction by Combining Structure, Sequence and Protein-Protein Interaction Information. Nucleic Acids Res. 2017, 45, W291-W299.
+
+\bibitem{64} Kumar, N.; Skolnick, J. EFICAz2. 5: Application of a High-Precision Enzyme Function Predictor to 396 Proteomes. Bioinformatics 2012, 28, 2687-2688.
+
+\bibitem{65} Li, Y.; Wang, S.; Umarov, R.; Xie, B.; Fan, M.; Li, L.; Gao, X. DEEPre: Sequence-Based Enzyme EC Number Prediction by Deep Learning. Bioinformatics 2018, 34, 760-769.
+
+\bibitem{66} Yang, M.; Fehl, C.; Lees, K. V.; Lim, E. K.; Offen, W. A.; Davies, G. J.; Bowles, D. J.; Davidson, M. G.; Roberts, S. J.; Davis, B. G. Functional and Informatics Analysis Enables Glycosyltransferase Activity Prediction. Nat. Chem. Biol. 2018, 14, 1109-1117.
+
+\bibitem{67} Niwa, T.; Ying, B. W.; Saito, K.; Jin, W.; Takada, S.; Ueda, T.; Taguchi, H. Bimodal Protein Solubility Distribution Revealed by an Aggregation Analysis of the Entire Ensemble of Escherichia Coli Proteins. Proc. Natl. Acad. Sci. U. S. A. 2009, 106, 4201-4206.
+
+\bibitem{68} Klesmith, J. R.; Bacik, J. P.; Wrenbeck, E. E.; Michalczyk, R.; Whitehead, T. A. Trade-Offs Between Enzyme Fitness and Solubility Illuminated by Deep Mutational Scanning. Proc. Natl. Acad. Sci. U. S. A. 2017, 114, 2265-2270.
+
+\bibitem{69} Ruiz-Blanco, Y. B.; Paz, W.; Green, J.; Marrero-Ponce, Y. ProtDCal: A Program to Compute General-Purpose-Numerical Descriptors for Sequences and 3D-Structures of Proteins. BMC Bioinf. 2015, 16, 162.
+
+\bibitem{35} Han, X.; Wang, X.; Zhou, K. Develop Machine Learning-Based Regression Predictive Models for Engineering Protein Solubility. Bioinformatics 2019, 35, 4640-4646.
+
+\bibitem{5} Musil, M.; Konegger, H.; Hon, J.; Bednar, D.; Damborsky, J. Computational Design of Stable and Soluble Biocatalysts. ACS Catal. 2019, 9, 1033-1054.
+
+\bibitem{70} Li, G.; Dong, Y.; Reetz, M. T. Can Machine Learning Revolutionize Directed Evolution of Selective Enzymes? Adv. Synth. Catal. 2019, 361, 2377-2386. 
+
+\bibitem{71} Wu, Z.; Kan, S. B. J.; Lewis, R. D.; Wittmann, B. J.; Arnold, F. H. Machine Learning-Assisted Directed Protein Evolution with Combinatorial Libraries. Proc. Natl. Acad. Sci. U. S. A. 2019, 116, 8852-8858.
+
+\bibitem{85} Wolpert, D. H.; Macready, W. G. No Free Lunch Theorems for Optimization. IEEE Trans. Evol. Comput. 1997, 1, 67-82.
+
+\bibitem{86} Wolpert, D. H. The Lack of a Priori Distinctions between Learning Algorithms. Neural Comput. 1996, 8, 1341-1390.
+
+\bibitem{87} Walsh, I.; Pollastri, G.; Tosatto, S. C. Correct Machine Learning on Protein Sequences: A Peer-Reviewing Perspective. Briefings Bioinf. 2016, 17, 831-840.
+
+\bibitem{88} Rao, R.; Bhattacharya, N.; Thomas, N.; Duan, Y.; Chen, X.; Canny, J.; Abbeel, P.; Song, Y. S. Evaluating Protein Transfer Learning with TAPE. arXiv preprint arXiv:1906.08230, 2019.
+
+
+\bibitem{89} Romero, P. A.; Krause, A.; Arnold, F. H. Navigating the Protein Fitness Landscape with Gaussian Processes. Proc. Natl. Acad. Sci. U. S. A. 2013, 110, E193-E201
+
+\bibitem{14} Eraslan, G.; Avsec, Z; Gagneur, J.; Theis, F. J. Deep Learning: New Computational Modelling Techniques for Genomics. Nat. Rev. Genet. 2019, 20, 389-403.
+
+\bibitem{90} Repecka, D.; Jauniskis, V.; Karpus, L.; Rembeza, E.; Zrimec, J.; Poviloniene, S.; Rokaitis, I.; Laurynenas, A.; Abuajwa, W.; Savolainen, O.; Meskys, R.; Engqvist, M. K. M.; Zelezniak, A. Expanding Functional Protein Sequence Space Using Generative Adversarial Networks. bioRxiv 2019, DOI: 10.1101/789719.
+
+\bibitem{91} Riesselman, A. J.; Ingraham, J. B.; Marks, D. S. Deep Generative Models of Genetic Variation Capture the Effects of Mutations. Nat. Methods 2018, 15, 816-822.
+
+\bibitem{92} Thornton, C.; Hutter, F.; Hoos, H. H.; Leyton-Brown, K. Auto- WEKA: Combined Selection and Hyperparameter Optimization of Classiffication Algorithms. In Proceedings of the 19th ACM SIGKDD international conference on Knowledge discovery and data mining; 2013; pp 847-855.
+
+\bibitem{93} Polikar, R. Ensemble based systems in decision making. IEEE Circuits and systems magazine 2006, 6, 21-45.
+
+\bibitem{94} Gammerman, A.; Vovk, V. Hedging Predictions in Machine Learning. Comput. J. 2007, 50, 151-163.
+
+\bibitem{95} Samek, W.; Wiegand, T.; Müller, K. Explainable Artificial Intelligence: Understanding, Visualizing and Interpreting Deep Learning Models. ITU Journal: ICT Discoveries 2017, 39-48. 
+
+\bibitem{96} Shrikumar, A.; Greenside, P.; Kundaje, A. Learning Important Features through Propagating Activation differences. In Proceedings of the 34th International Conference on Machine Learning; 2017; Vol. 70, pp 3145-3153.
+
+\bibitem{97} Simonyan, K.; Vedaldi, A.; Zisserman, A. Deep Inside Convolutional Networks: Visualising Image Classiffication Models and Saliency Maps. arXiv preprint arXiv:1312.6034 2013.
+
+\bibitem{98} Brookes, D. H.; Park, H.; Listgarten, J. Conditioning by Adaptive Sampling for Robust Design. In Proceedings of the 36th International Conference on Machine Learning; 2019; Vol. 97, pp 773-782.
+
+\bibitem{99} Ribeiro, M. T.; Singh, S.; Guestrin, C. “Why Should I Trust You?” Explaining the Predictions of Any Classiffier. In Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining; 2016; pp 1135-1144.
+
+\bibitem{100} Szegedy, C.; Zaremba, W.; Sutskever, I.; Bruna, J.; Erhan, D.; Goodfellow, I.; Fergus, R. Intriguing Properties of Neural Networks. arXiv preprint arXiv:1312.6199 201
+
+\bibitem{101} Yu, M. K.; Ma, J.; Fisher, J.; Kreisberg, J. F.; Raphael, B. J.; Ideker, T. Visible Machine Learning for Biomedicine. Cell 2018, 173, 1562-1565.
+
+% Lista de referencias del segundo articulo
+
+\bibitem{2.2} Copley, S. D. Shining a light on enzyme promiscuity. Curr. Opin. Struct. Biol. 47, 167–175 (2017).
+
+\bibitem{2.4} Nobeli, I., Favia, A. D. and Thornton, J. M. Protein promiscuity and its implications for biotechnology. Nat. Biotechnol. 27, 157–167 (2009)
+
+\bibitem{2.5} Adrio, J. L. and Demain, A. L. Microbial enzymes: tools for biotechnological processes. Biomolecules 4, 117–139 (2014).
+
+\bibitem{2.6} Wang, S. et al. Engineering a synthetic pathway for gentisate in pseudomonas chlororaphis p3. Front. Bioeng. Biotechnol. 8, 1588 (2021).
+
+\bibitem{2.7} Wu, M.-C., Law, B., Wilkinson, B. and micklefied, J. Bioengineering natural product biosynthetic pathways for therapeutic applications. Curr. Opin. Biotechnol. 23, 931–940 (2012)
+
+
+\bibitem{2.9} Rembeza, E., Boverio, A., Fraaije, M. W. and Engqvist, M. K. Discovery of two novel oxidases using a high-throughput activity screen. ChemBioChem 23, e202100510 (2022).
+
+\bibitem{2.10} Longwell, C. K., Labanieh, L. and Cochran, J. R. High-throughput screening technologies for enzyme engineering. Curr. Opin. Biotechnol. 48, 196–202 (2017).
+
+\bibitem{2.11} Black, G. W. et al. A high-throughput screening method for determining the substrate scope of nitrilases. Chem. Commun. 51, 2660–2662 (2015).
+
+\bibitem{2.13} Pertusi, D. A. et al. Predicting novel substrates for enzymes with minimal experimental effort with active learning. Metab. Eng. 44,171-181 (2017).
+
+\bibitem{2.14} Mou, Z. et al. Machine learning-based prediction of enzyme substrate scope: Application to bacterial nitrilases. Proteins Struct. Funct. Bioinf. 89, 336-347 (2021).
+
+\bibitem{2.15} Yang, M. et al. Functional and informatics analysis enables glycosyltransferase activity prediction. Nat. Chem. Biol. 14, 1109–1117 (2018).
+
+\bibitem{2.16} Rottig, M., Rausch, C. and Kohlbacher, O. Combining structure and sequence information allows automated prediction of substrate specificities within enzyme families. PLoS Comput. Biol. 6, e1000636 (2010).
+
+\bibitem{2.17} Chevrette, M. G., Aicheler, F., Kohlbacher, O., Currie, C. R. and Medema, M. H. Sandpuma: ensemble predictions of nonribosomal peptide chemistry reveal biosynthetic diversity across actinobacteria. Bioinformatics 33, 3202-3210 (2017).
+
+\bibitem{2.18} Goldman, S., Das, R., Yang, K. K. and Coley, C. W. Machine learning modeling of family wide enzyme-substrate specificity screens. PLoS Comput. Biol. 18, e1009853 (2022).
+
+\bibitem{2.19} Visani, G. M., Hughes, M. C. and Hassoun, S. Enzyme promiscuity prediction using hierarchy-informed multi-label classiffication Bioinformatics 37, 2017-2024 (2021).
+
+\bibitem{2.20} Ryu, J. Y., Kim, H. U. and Lee, S. Y. Deep learning enables high-quality and high-throughput prediction of enzyme commission numbers. PNAS 116, 13996-14001 (2019).
+
+\bibitem{2.21} Li, Y. et al. DEEPre: sequence-based enzyme EC number prediction by deep learning. Bioinformatics 34, 760-769 (2017).
+
+\bibitem{2.22} Sanderson, T., Bileschi, M. L., Belanger, D. and Colwell, L. J. Proteinfer, deep neural networks for protein functional inference. eLife 12, e80942 (2023).
+
+\bibitem{2.23} Bileschi, M. L. et al. Using deep learning to annotate the protein universe. Nat. Biotechnol.https://doi.org/10.1038/s41587-021-01179-w (2022).
+
+\bibitem{2.24} Rembeza, E. and Engqvist, M. K. Experimental and computational investigation of enzyme functional annotations uncovers misannotation in the ec 1.1. 3.15 enzyme class. PLoS Comput. Biol. 17, e1009446 (2021).
+
+\bibitem{2.25} Ozturk, H., Ozgur, A. and Ozkirimli, E. Deepdta: deep drugtarget binding affinity prediction. Bioinformatics 34, i821-i829 (2018).
+
+\bibitem{2.26} Feng, Q., Dueva, E., Cherkasov, A. and Ester, M. Padme: A deep learning-based framework for drug-target interaction prediction. Preprint at https://doi.org/10.48550/arXiv.1807.09741 (2018).
+
+\bibitem{2.27} Karimi, M., Wu, D., Wang, Z. and Shen, Y. Deep affinity: interpretable deep learning of compound–protein affinity through UNIFIED recurrent and convolutional neural networks. Bioinformatics 35, 3329-3338 (2019).
+
+\bibitem{2.28} Kroll, A., Engqvist, M. K., Heckmann, D. and Lercher, M. J. Deep learning allows genome-scale prediction of michaelis constants from structural features. PLoS Biol. 19, e3001402 (2021).
+
+\bibitem{2.29} Li, F. et al. Deep learning-based k cat prediction enables improved enzyme-constrained model reconstruction. Nat. Catal. 5, 662-672 (2022).
+
+\bibitem{2.30} Weininger, D. SMILES, a chemical language and information system. 1. introduction to methodology and encoding rules. J. Chem. Inf. Comput. Sci. 28, 31-36 (1988).
+
+\bibitem{2.31} Rogers, D. and Hahn, M. Extended-connectivity fingerprints. J. Chem. Inf. Model. 50, 742-754 (2010).
+
+\bibitem{2.32} Zhou, J. et al. Graph neural networks: A review of methods and applications. AI Open 1, 57-81 (2020).
+
+\bibitem{2.33} Yang, K. et al. Analyzing learned molecular representations for property prediction. J. Chem. Inf. Model. 59, 3370-3388 (2019).
+
+
+\bibitem{2.34} Rives, A. et al. Biological structure and function emerge from scaling unsupervised learning to 250 million protein sequences. PNAS 118, e2016239118 (2021).
+
+\bibitem{2.35} Alley, E. C., Khimulya, G., Biswas, S., AlQuraishi, M. and Church, G. M. Unified rational protein engineering with sequence-based deep representation learning. Nat. Methods. 16, 1315-1322 (2019).
+
+\bibitem{2.36} Xu, Y. et al. Deep dive into machine learning models for protein engineering. J. Chem. Inf. Model. 60, 2773–2790 (2020).
+
+\bibitem{2.42} Bekker, J. and Davis, J. Learning from positive and unlabeled data: A survey. Mach. Learn. 109, 719-760 (2020)
+
+
+\bibitem{2.38} Kearnes, S., McCloskey, K., Berndl, M., Pande, V. and  Riley, P. Mole- cular graph convolutions: moving beyond !ngerprints. J. Comput. -Aided Mol. Des. 30, 595–608 (2016).
+
+\bibitem{2.39} Duvenaud, D. K. et al. Convolutional networks on graphs for learning molecular fingerprints. In Advances in Neural Information Processing Systems, 2224-2232 (2015).
+
+\bibitem{2.40} Zhou, J. et al. Graph neural networks: A review of methods and applications. AI Open 1, 57–81 (2020).
+
+\bibitem{2.45} Hu, W. et al. Strategies for pre-training graph neural networks. Preprint at https://doi.org/10.48550/arXiv.1905.12265 (2019). 
+
+
+
+\bibitem{2.46} Capela, F., Nouchi, V., Van Deursen, R., Tetko, I. V. and  Godin, G. Multitask learning on graph neural networks applied to molecular property predictions. Preprint at https://doi.org/10.48550/arXiv. 1910.13124 (2019).
+
+\bibitem{2.47}  Vaswani, A. et al. Attention is all you need. In Advances in neural information processing systems, 5998–6008 (2017).
+
+\bibitem{2,48} Suzek, B. E. et al. Uniref clusters: a comprehensive and scalable alternative for improving sequence similarity searches. Bioinfor- matics 31, 926–932 (2015).
+\bibitem{2.49} Elnaggar, A. et al. Prottrans: Towards cracking the language of lifes code through self-supervised deep learning and high performance computing. IEEE Trans. Pattern Anal. Mach. Intell. PP https://doi. org/10.1109/TPAMI.2021.3095381 (2021).
+
+
+\bibitem{Wittman} Wittmann, B. J., Johnston, K. E., Wu, Z., and  Arnold, F. H. (2021). Advances in machine learning for directed evolution. Current opinion in structural biology, 69, 11-18.
+\end{thebibliography}
+
+
+
+\end{document}

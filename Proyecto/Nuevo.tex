@@ -1,0 +1,73 @@
+\section{Traducción del artículo sobre regresión logística}
+
+\subsection{Resumen}
+
+Las técnicas de regresión son versátiles en su aplicación a la investigación médica porque pueden medir asociaciones, predecir resultados y controlar los efectos de variables de confusión. Como una de estas técnicas, la regresión logística es una forma eficiente y poderosa de analizar el efecto de un grupo de variables independientes sobre un resultado binario al cuantificar la contribución única de cada variable independiente. Utilizando componentes de la regresión lineal reflejados en la escala logit, la regresión logística identifica de manera iterativa la combinación lineal más fuerte de variables con la mayor probabilidad de detectar el resultado observado. 
+
+Consideraciones importantes al realizar regresión logística incluyen la selección de variables independientes, asegurarse de que se cumplan los supuestos relevantes y elegir una estrategia adecuada para la construcción del modelo. Para la selección de variables independientes, se deben considerar factores como la teoría aceptada, investigaciones empíricas previas, consideraciones clínicas y análisis estadísticos univariantes, reconociendo las posibles variables de confusión que deben ser tenidas en cuenta.
+
+Los supuestos básicos que deben cumplirse para la regresión logística incluyen: independencia de los errores, linealidad en el logit para variables continuas, ausencia de multicolinealidad y ausencia de valores atípicos altamente influyentes. Además, debe haber un número adecuado de eventos por variable independiente para evitar un modelo sobreajustado, con una regla general recomendada que oscila entre 10 y 20 eventos por covariable.
+
+Respecto a las estrategias de construcción del modelo, existen tres tipos generales: directa/estándar, secuencial/jerárquica y por pasos/estadística, cada una con un énfasis y propósito diferente. Antes de llegar a conclusiones definitivas a partir de los resultados de cualquiera de estos métodos, se debe cuantificar formalmente la validez interna (i.e., replicabilidad dentro del mismo conjunto de datos) y la validez externa (i.e., generalización más allá de la muestra actual).
+
+El ajuste general del modelo de regresión logística a los datos de muestra se evalúa utilizando diversas medidas de bondad de ajuste, siendo mejor el ajuste cuanto menor sea la diferencia entre los valores observados y los valores predichos por el modelo. También se recomienda el uso de estadísticas de diagnóstico para evaluar adecuadamente el modelo. Finalmente, los resultados para las variables independientes se reportan típicamente como razones de momios (odds ratios, OR) con intervalos de confianza del 95\% (ICs).
+
+\subsection{Tipos de regresión y fundamentos de la regresión logística}
+
+Existen diferentes tipos de regresión según los objetivos de la investigación y el formato de las variables, siendo la regresión lineal una de las más utilizadas. La regresión lineal analiza resultados continuos (es decir, aquellos que pueden sumarse, restarse, multiplicarse y dividirse significativamente, como el peso) y asume que la relación entre el resultado y las variables independientes sigue una línea recta (por ejemplo, a medida que aumentan las calorías consumidas, aumenta el peso).
+
+Para evaluar el efecto de una sola variable independiente sobre un resultado continuo (por ejemplo, el efecto del consumo de calorías sobre el aumento de peso), se realizaría una regresión lineal simple. Sin embargo, normalmente es más deseable determinar la influencia de múltiples factores al mismo tiempo (por ejemplo, calorías consumidas, días de ejercicio por semana y edad en el aumento de peso), ya que esto permite ver las contribuciones únicas de cada variable después de controlar los efectos de las demás. En este caso, la regresión lineal multivariada es la opción adecuada.
+
+La ecuación básica para la regresión lineal con múltiples variables independientes es:
+\begin{equation}
+\hat{Y} = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i
+\end{equation}
+
+\begin{itemize}
+    \item $\beta_0$ es la ordenada al origen, o el punto en el que la línea de regresión toca el eje vertical Y. Se considera un valor constante.
+    \item $\beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i$ representa el valor de cada variable independiente ($X_i$) ponderado por su coeficiente beta ($\beta$). Estos coeficientes indican la pendiente de la línea de regresión o cuánto aumenta el resultado por cada unidad adicional en el valor de la variable independiente. Cuanto mayor es el coeficiente beta, mayor es la contribución de su variable independiente correspondiente al resultado.
+\end{itemize}
+
+A pesar de su uso común, la regresión lineal no es adecuada para ciertos tipos de resultados médicos. Para eventos binarios, como la mortalidad, la regresión logística es el método habitual de elección. Al igual que la regresión lineal, la regresión logística puede incluir una o varias variables independientes, siendo generalmente más informativa la evaluación de múltiples variables porque permite ver las contribuciones únicas de cada una tras ajustar por las otras.
+
+La identificación de estas contribuciones en la regresión logística comienza con la siguiente ecuación:
+\begin{equation}
+\text{Probabilidad del resultado } (\hat{Y}_i) = \frac{e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}}{1 + e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}}
+\end{equation}
+
+Esta ecuación contiene configuraciones similares para las variables independientes ($X$) y sus coeficientes beta ($\beta$) que la regresión lineal. No obstante, hay diferencias clave:
+\begin{enumerate}
+    \item En regresión logística, $\hat{Y}_i$ representa la probabilidad estimada de estar en una categoría de resultado binario (por ejemplo, tener la enfermedad) frente a no estar en ella, en lugar de un resultado continuo estimado.
+    \item La expresión $e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i}$ representa la ecuación de regresión lineal para las variables independientes expresadas en escala logit, y no en el formato lineal original.
+\end{enumerate}
+
+Esta transformación a escala logit es esencial en el modelo de regresión logística, ya que un resultado binario expresado como probabilidad debe estar entre 0 y 1. En cambio, las variables independientes podrían asumir cualquier valor. Si no se rectifica esta discrepancia, los valores predichos del modelo podrían caer fuera del rango de 0 a 1. La escala logit resuelve este problema al transformar matemáticamente la ecuación original de regresión lineal para producir el logit o logaritmo natural de las probabilidades de estar en una categoría (\( \hat{Y} \)) frente a la otra (\( 1 - \hat{Y} \)):
+
+\begin{equation}
+\ln\left(\frac{\hat{Y}}{1 - \hat{Y}}\right) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_i X_i
+\end{equation}
+
+En el contexto de estas ecuaciones, la regresión logística identifica, mediante ciclos iterativos, la combinación lineal más fuerte de variables independientes que aumente la probabilidad de detectar el resultado observado—un proceso conocido como estimación por máxima verosimilitud.
+
+\subsection{Referencias del artículo traducido}
+
+\begin{enumerate}
+  \item Darlington RB. \textit{Regression and Linear Models}. Columbus, OH: McGraw-Hill Publishing Company, 1990.
+  \item Tabachnick BG, Fidell LS. \textit{Using Multivariate Statistics}. 5th ed. Boston, MA: Pearson Education, Inc., 2007.
+  \item Hosmer DW, Lemeshow SL. \textit{Applied Logistic Regression}. 2nd ed. Hoboken, NJ: Wiley-Interscience, 2000.
+  \item Campbell DT, Stanley JC. \textit{Experimental and Quasi-experimental Designs for Research}. Boston, MA: Houghton Mifflin Co., 1963.
+  \item Stokes ME, Davis CS, Koch GG. \textit{Categorical Data Analysis Using the SAS System} (2nd ed). Cary, NC: SAS Institute, Inc., 2000.
+  \item Newgard CD, Hedges JR, Arthur M, Mullins RJ. Advanced statistics: the propensity score--a method for estimating treatment effect in observational research. \textit{Acad Emerg Med.} 2004;11:953–61.
+  \item Newgard CD, Haukoos JS. Advanced statistics: missing data in clinical research--part 2: multiple imputation. \textit{Acad Emerg Med.} 2007;14:669–78.
+  \item Allison PD. \textit{Logistic Regression Using the SAS System: Theory and Application}. Cary, NC: SAS Institute, Inc., 1999.
+  \item Peduzzi P, Concato J, Kemper E, Holford TR, Feinstein AR. A simulation study of the number of events per variable in logistic regression analysis. \textit{J Clin Epidemiol.} 1996;49:1373–9.
+  \item Agresti A. \textit{An Introduction to Categorical Data Analysis}. Hoboken, NJ: Wiley, 2007.
+  \item Feinstein AR. \textit{Multivariable Analysis: An Introduction}. New Haven, CT: Yale University Press, 1996.
+  \item Altman DG, Royston P. What do we mean by validating a prognostic model? \textit{Stats Med.} 2000;19:453–73.
+  \item Kohavi R. A study of cross-validation and bootstrap for accuracy estimation and model selection. In: Proceedings of the 14th International Joint Conference on Artificial Intelligence (IJCAI). Montreal, Quebec, Canada, August 20–25, 1995. 1995:1137–43.
+  \item Efron B, Tibshirani R. \textit{An Introduction to the Bootstrap}. New York: Chapman & Hall, 1993.
+  \item Miller ME, Hiu SL, Tierney WM. Validation techniques for logistic regression models. \textit{Stat Med.} 1991;10:1213–26.
+  \item Hosmer DW, Hosmer T, Le Cessie S, Lemeshow S. A comparison of goodness-of-fit tests for the logistic regression model. \textit{Stat Med.} 1997;16:965–80.
+  \item Kuss O. Global goodness-of-fit tests in logistic regression with sparse data. \textit{Stat Med.} 2002;21:3789–801.
+  \item Zou KH, O'Malley AJ, Mauri L. Receiver-operating characteristic analysis for evaluating diagnostic tests and predictive models. \textit{Circulation} 2007;115:654–7.
+\end{enumerate}

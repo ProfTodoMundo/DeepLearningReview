@@ -1102,32 +1102,24 @@ Por otra parte la derivada respecto a $\beta_1$
 2 \sum \left[ y_i - \left( \beta_0^* + \beta_1 (x_i - \bar{x}) \right) \right](x_i - \bar{x}) (-1) = 0
 \end{eqnarray*}
 de aqu\'i
+
 \begin{eqnarray*}
-\sum \left[ y_i - \left( \beta_0^* + \beta_1 (x_i - \bar{x}) \right) \right](x_i - \bar{x}) &=&0\\
-\sum y_i (x_i - \bar{x}) - \beta_0^* \sum (x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 &=& 0
+\sum \left[ y_i - \left( \beta_0^* + \beta_1 (x_i - \bar{x}) \right) \right](x_i - \bar{x})=\sum y_i (x_i - \bar{x}) - \beta_0^* \sum (x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = 0.
 \end{eqnarray*}
 
-Recordar que \( \beta_0^* = \bar{y} \), entonces:
+Recordar que $\beta_0^* = \bar{y}$, entonces:
 
-\[
-\sum y_i (x_i - \bar{x}) - \bar{y} \sum (x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = 0
-\]
-
-\[
-\Leftrightarrow \sum (y_i - \bar{y})(x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = 0
-\]
-
-\[
+\begin{eqnarray*}
+\sum y_i (x_i - \bar{x}) - \bar{y} \sum (x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = 0\\
+\Leftrightarrow \sum (y_i - \bar{y})(x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = 0\\
 \Rightarrow \beta_1 = \frac{\sum (y_i - \bar{y})(x_i - \bar{x})}{\sum (x_i - \bar{x})^2} = \frac{S_{xy}}{S_{xx}}
-\]
+\end{eqnarray*}
 
-\[
-\boxed{ \beta_1 = \frac{S_{xy}}{S_{xx}} } \quad \boxed{ \beta_0 = \bar{y} - \beta_1 \bar{x} }
-\]
+por lo tanto
+\begin{eqnarray*}
+\boxed{ \beta_1 = \frac{S_{xy}}{S_{xx}}, } \quad \textrm{ y }\boxed{ \beta_0 = \bar{y} - \beta_1 \bar{x}.}
+\end{eqnarray*}
 
-\[
-\beta_0 = \beta_0^* - \beta_1 \bar{x} = \bar{y} - \beta_1 \bar{x}
-\]
 
 \subsection{Hoja 18}
 \section*{Linear Regression Model Test}

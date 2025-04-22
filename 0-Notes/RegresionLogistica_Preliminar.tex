@@ -1121,63 +1121,42 @@ por lo tanto
 \end{eqnarray*}
 
 
-\subsection{Hoja 18}
-\section*{Linear Regression Model Test}
+\begin{Note}
 
-\subsection*{F-Test}
+La prueba \textbf{F} es más estable que otras pruebas.
 
-El \textbf{F-Test} es más estable que otras pruebas.
-
-\[
+\begin{eqnarray}
 F = \frac{\sum (\hat{y}_i - \bar{y}_i)^2 / (m - 1)}{\sum (y_i - \hat{y}_i)^2 / (n - m)} \sim F(m - 1, n - m)
-\]
+\end{eqnarray}
 
-Si \( F > F_\alpha(m - 1, n - m) \), entonces una relación lineal significativa entre \( y \) y \( x_1, x_2, \dots, x_m \) es razonable desde la perspectiva de la prueba de hipótesis con prioridad \( \alpha \). \textit{Regression equation is important.}
+Donde si $F > F_\alpha(m - 1, n - m)$, entonces una relación lineal significativa entre $y$ y $x_1, x_2, \dots, x_m$ es razonable desde la perspectiva de la prueba de hipótesis con prioridad $ \alpha$.
 
-\subsection*{t-Test}
-
-\[
-t_j = \frac{\beta_j}{\sqrt{c_{jj}} \sqrt{ \frac{\sum (y_i - \hat{y}_i)^2}{n - m} }}
-\]
-
+mientras que la prueba $t$ est\'a dada por
+\begin{eqnarray}
+t_j = \frac{\beta_j}{\sqrt{c_{jj}} \sqrt{ \frac{\sum (y_i - \hat{y}_i)^2}{n - m} }},
+\end{eqnarray}
 donde \( c_{jj} \) es la componente \( j \)-ésima de la matriz inversa \( (X^\top X)^{-1} \).
+\end{Note}
 
-\subsection{Hoja 19}
-\section*{Logistic Regression in Data Analysis: An Overview}
+\begin{Ejem}\textbf{Caso Bernoulli}
 
-Sea \( X \in \mathbb{R}^{n \times d} \), donde:
-\begin{itemize}
-  \item \( n \): número de instancias
-  \item \( d \): número de características
-\end{itemize}
-
-\noindent y un vector binario de resultados. Para todo \( x_i \in \mathbb{R}^d \), la salida es \( y_i \in \{0,1\} \)
+Sea $X \in \mathbb{R}^{n \times d}$, donde $n$ es el  número de instancias; $d$ el  número de características; $y$ un vector binario de resultados. Para todo $x_i \in \mathbb{R}^d$, la salida es $y_i \in \{0,1\}$. El objetivo es clasificar la instancia $x_i$ como positiva o negativa.
 
 \medskip
 
-\textbf{Objetivo:} clasificar la instancia \( x_i \) como positiva o negativa.
+Una instancia se puede pensar como un intento Bernoulli con esperanza $\mathbb{E}[y_i | x_i]$ o probabilidad $\rho_i$. Se propone el modelo
+\begin{eqnarray*}
+y = X \beta + \varepsilon, \quad \text{donde }\varepsilon \text{es el vector error}.
+\end{eqnarray*}
 
-\medskip
-
-Una instancia se puede pensar como un intento Bernoulli con esperanza \( \mathbb{E}[y_i \mid x_i] \) o probabilidad \( \rho_i \).
-
-\medskip
-
-\textbf{Modelo:}
-\[
-y = X \beta + \varepsilon, \quad \varepsilon \text{ es el vector error}
-\]
-
-
-\subsection{Hoja 20}
-\[
+\begin{eqnarray*}
 y = 
 \begin{pmatrix}
 y_1 \\
 y_2 \\
 \vdots \\
 y_n
-\end{pmatrix}
+\end{pmatrix},
 \quad
 X = 
 \begin{bmatrix}
@@ -1185,7 +1164,7 @@ X =
 1 & x_{21} & x_{22} & \cdots & x_{2d} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 1 & x_{n1} & x_{n2} & \cdots & x_{nd}
-\end{bmatrix}
+\end{bmatrix},
 \quad
 \varepsilon = 
 \begin{pmatrix}
@@ -1193,10 +1172,12 @@ X =
 \varepsilon_2 \\
 \vdots \\
 \varepsilon_n
-\end{pmatrix}
-\]
+\end{pmatrix},
+\end{eqnarray*}
 
-\[
+y
+
+\begin{eqnarray*}
 \beta = 
 \begin{pmatrix}
 \beta_0 \\
@@ -1204,78 +1185,58 @@ X =
 \vdots \\
 \beta_d
 \end{pmatrix}
-\quad \text{(vector de parámetros)}
-\]
+\quad \text{es el vector de parámetros.}
+\end{eqnarray*}
 
-\noindent Supongamos que la intersección está incluida en el vector \( \beta \), es decir, \( X_i = [1, x_i^\top] \) y:
+Supongamos que la intersección está incluida en el vector $\beta$, es decir, $X_i = [1, x_i^\top]$ y
+$\beta = [\beta_0, \boldsymbol{\beta}^\top]$.  Como $y$ es una variable aleatoria Bernoulli con probabilidad $\rho_i$, se tiene:
 
-\[
-\beta = [\beta_0, \boldsymbol{\beta}^\top]
-\]
-
-\noindent Como \( y \) es una variable aleatoria Bernoulli con probabilidad \( \rho_i \), se tiene:
-
-\[
+\begin{eqnarray*}
 P(y_i) = 
 \begin{cases}
-\rho_i & \text{si } y_i = 1 \\
-1 - \rho_i & \text{si } y_i = 0
+\rho_i, & \text{si } y_i = 1, \\
+1 - \rho_i, & \text{si } y_i = 0.
 \end{cases}
-\Rightarrow
-\]
+\end{eqnarray*}
+Entonces
+\begin{eqnarray*}
+\mathbb{E}[y_i] &=& 1 \cdot \rho_i + 0 \cdot (1 - \rho_i) = \rho_i = X_i^\top \beta,\\
+\mathbb{V}[y_i] &=& \rho_i (1 - \rho_i).
+\end{eqnarray*}
 
-\[
-\mathbb{E}[y_i] = 1 \cdot \rho_i + 0 \cdot (1 - \rho_i) = \rho_i = X_i^\top \beta
-\]
-
-\[
-\mathbb{V}[y_i] = \rho_i (1 - \rho_i)
-\Rightarrow
-\]
-
-\[
-y_i = X_i^\top \beta + \varepsilon_i \quad \text{donde} \quad
+Por lo tanto se tiene
+\begin{eqnarray*}
+y_i = X_i^\top \beta + \varepsilon_i, \quad \text{donde} \quad
 \varepsilon_i =
 \begin{cases}
-1 - \rho_i & \text{si } y_i = 1 \\
-- \rho_i & \text{si } y_i = 0
+1 - \rho_i, & \text{si } y_i = 1, \\
+ \rho_i, & \text{si } y_i = 0.
 \end{cases}
-\]
+\end{eqnarray*}
 
-\subsection{Hoja 21}
+\end{Ejem}
+con $\varepsilon_i \sim \text{Binomial}$, con esperanza:
 
-
-\[
-\varepsilon_i \sim \text{Binomial}
-\]
-
-con esperanza:
-
-\[
-\mathbb{E}[\varepsilon_i] = (1 - \rho_i)(\rho_i + (1 - \rho_i))(1 - \rho_i) = 0
-\]
+\begin{eqnarray*}
+\mathbb{E}[\varepsilon_i] = (1 - \rho_i)(\rho_i + (1 - \rho_i))(1 - \rho_i) = 0;
+\end{eqnarray*}
 
 y varianza:
 
-\[
+\begin{eqnarray*}
 \mathbb{V}[\varepsilon_i] = \mathbb{E}[\varepsilon_i^2] - (\mathbb{E}[\varepsilon_i])^2
-\]
-
-\[
 = (1 - \rho_i)^2 \rho_i + (-\rho_i)^2 (1 - \rho_i) \neq 0
-\]
+= \rho_i (1 - \rho_i).
+\end{eqnarray*}
 
-\[
-= \rho_i (1 - \rho_i)
-\]
-
+\begin{Note}
 Este error no se distribuye normalmente, por lo tanto, la aproximación por mínimos cuadrados no se puede aplicar. Además, dado que \( y_i \in \{0, 1\} \), el modelo reglinal puede arrojar valores mayores que 1 y menores que 0. Por tanto, es mejor el modelo logístico.
+\end{Note}
 
-\medskip
-
-\[
+Se sabe que 
+\begin{eqnarray*}
 \mathbb{E}[Y_i = 1 \mid x_i, \beta] = \rho_i = \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} = \frac{1}{1 + e^{-x_i^\top \beta}}
-\]
+\end{eqnarray*}
 
 
 \subsection{Hoja 22}

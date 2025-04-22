@@ -1,24 +1,20 @@
-\contentsline {section}{\numberline {1}Importancia de la regresi\'on en investigaci\'on}{3}{section.1}
-\contentsline {section}{\numberline {2}Regresi\'on Log\'istica}{4}{section.2}
-\contentsline {section}{\numberline {3}Transformaci\'on log\'istica y elecci\'on de variables independientes}{5}{section.3}
-\contentsline {subsection}{\numberline {3.1}Variables independientes}{5}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Estrategias de Construcci\'on del Modelo}{7}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Validaci\'on Interna y Externa del Modelo}{8}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Interpretaci\'on de los Resultados del Modelo}{8}{subsection.3.4}
-\contentsline {section}{\numberline {4}Fundamentos del Modelo de Regresi\'on Log\'istica}{10}{section.4}
-\contentsline {section}{\numberline {5}Desarrollo Matem\'atico}{21}{section.5}
-\contentsline {section}{\numberline {6}Tema nuevo}{25}{section.6}
-\contentsline {section}{\numberline {7}Apendice}{26}{section.7}
-\contentsline {subsection}{\numberline {7.1}Hoja 18}{28}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}Hoja 19}{29}{subsection.7.2}
-\contentsline {subsection}{\numberline {7.3}Hoja 20}{29}{subsection.7.3}
-\contentsline {subsection}{\numberline {7.4}Hoja 21}{30}{subsection.7.4}
-\contentsline {subsection}{\numberline {7.5}Hoja 22}{30}{subsection.7.5}
-\contentsline {subsection}{\numberline {7.6}Hoja 23}{31}{subsection.7.6}
-\contentsline {subsection}{\numberline {7.7}Hoja 24}{31}{subsection.7.7}
-\contentsline {subsection}{\numberline {7.8}Hoja 25}{32}{subsection.7.8}
-\contentsline {subsection}{\numberline {7.9}Hoja 26}{32}{subsection.7.9}
-\contentsline {subsection}{\numberline {7.10}Hoja 27}{32}{subsection.7.10}
-\contentsline {subsection}{\numberline {7.11}Hoja 28}{33}{subsection.7.11}
-\contentsline {subsection}{\numberline {7.12}Hoja 29}{33}{subsection.7.12}
-\contentsline {subsection}{\numberline {7.13}Hoja 30}{34}{subsection.7.13}
+\contentsline {section}{\numberline {1}Importancia de la regresi\'on en investigaci\'on}{3}{section.1}%
+\contentsline {section}{\numberline {2}Regresi\'on Log\'istica}{4}{section.2}%
+\contentsline {section}{\numberline {3}Transformaci\'on log\'istica y elecci\'on de variables independientes}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Variables independientes}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Estrategias de Construcci\'on del Modelo}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Validaci\'on Interna y Externa del Modelo}{8}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Interpretaci\'on de los Resultados del Modelo}{8}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Fundamentos del Modelo de Regresi\'on Log\'istica}{10}{section.4}%
+\contentsline {section}{\numberline {5}Desarrollo Matem\'atico}{21}{section.5}%
+\contentsline {section}{\numberline {6}Tema nuevo}{25}{section.6}%
+\contentsline {section}{\numberline {7}Apendice}{26}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Hoja 22}{30}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Hoja 23}{30}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Hoja 24}{31}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Hoja 25}{31}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Hoja 26}{31}{subsection.7.5}%
+\contentsline {subsection}{\numberline {7.6}Hoja 27}{32}{subsection.7.6}%
+\contentsline {subsection}{\numberline {7.7}Hoja 28}{32}{subsection.7.7}%
+\contentsline {subsection}{\numberline {7.8}Hoja 29}{33}{subsection.7.8}%
+\contentsline {subsection}{\numberline {7.9}Hoja 30}{33}{subsection.7.9}%

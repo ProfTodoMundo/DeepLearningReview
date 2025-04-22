@@ -1238,278 +1238,206 @@ Se sabe que
 \mathbb{E}[Y_i = 1 \mid x_i, \beta] = \rho_i = \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} = \frac{1}{1 + e^{-x_i^\top \beta}}
 \end{eqnarray*}
 
+si se define
+\begin{eqnarray*}
+\eta_i = g(\rho_i) &=& \ln \left( \frac{\rho_i}{1 - \rho_i} \right) = x_i^\top \beta\\
+\textrm{entonces }\eta &=& X 
+\end{eqnarray*}
 
-\subsection{Hoja 22}
+\begin{Note}
+La función \textit{logit} implícitamente coloca un hiperplano que separa:
+\end{Note}
 
-\[
-\eta_i = g(\rho_i) = \ln \left( \frac{\rho_i}{1 - \rho_i} \right) = x_i^\top \beta
-\]
+\begin{eqnarray*}
+\beta^\top x > 0 \quad \Longleftrightarrow \quad \text{instancia positiva},\\
+\beta^\top x < 0 \quad \Longleftrightarrow \quad \text{instancia negativa}.
+\end{eqnarray*}
 
-\[
-\eta = X \beta \quad \text{(Canonical link function)}
-\]
+\noindent Ahora definamos la \textbf{Función de verosimilitud:}
 
-\begin{itemize}
-    \item La función logit implícitamente coloca un hiperplano que separa:
-\end{itemize}
-
-\[
-\beta^\top x > 0 \quad \Longleftrightarrow \quad \text{instancia positiva}
-\]
-
-\[
-\beta^\top x < 0 \quad \Longleftrightarrow \quad \text{instancia negativa}
-\]
-
-\subsection*{Función de verosimilitud}
-
-\[
-\mathcal{L}(\beta) = \prod_{i=1}^{n} \rho_i^{y_i} (1 - \rho_i)^{1 - y_i}
+\begin{eqnarray*}
+\mathcal{L}(\beta) =\prod_{i=1}^{n} \rho_i^{y_i} (1 - \rho_i)^{1 - y_i}
 = \prod_{i=1}^{n} \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)^{y_i}
-\left( \frac{1}{1 + e^{x_i^\top \beta}} \right)^{1 - y_i}
-\]
+\left( \frac{1}{1 + e^{x_i^\top \beta}} \right)^{1 - y_i}\\
+\end{eqnarray*}
+aplicando el logaritmo
+\begin{eqnarray*}
+\ln \mathcal{L}(\beta) =\sum_{i=1}^{n} \left[y_i \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) + (1 - y_i) \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)\right]
+\end{eqnarray*}
 
-\[
-\ln \mathcal{L}(\beta) =
-\sum_{i=1}^{n} \left[
-y_i \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)
-+ (1 - y_i) \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
-\right]
-\]
-\subsection{Hoja 23}
-Se requiere el gradiente y la matriz Hessiana.
+Calculemos  el gradiente y la matriz Hessiana:
 
-\medskip
-
-\[
+\begin{eqnarray*}
 \frac{\partial}{\partial \beta_j} \ln \mathcal{L}(\beta)
 = \sum \left[ y_i \left( \frac{x_{ij}}{1 + e^{x_i^\top \beta}} \right)
-+ (1 - y_i) \left( \frac{-x_{ij} e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) \right]
-\]
++ (1 - y_i) \left( \frac{-x_{ij} e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) \right].
+\end{eqnarray*}
 
-\medskip
 
 Recordemos que:
 
-\[
+\begin{eqnarray*}
 \frac{\partial}{\partial \beta_j} \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
-= - \frac{1}{1 + e^{x_i^\top \beta}} \cdot e^{x_i^\top \beta} \cdot x_{ij}
-= - \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} x_{ij}
-\]
-
-\[
+&=& - \frac{1}{1 + e^{x_i^\top \beta}} \cdot e^{x_i^\top \beta} \cdot x_{ij}
+= - \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} x_{ij},\\
 \Rightarrow \frac{\partial}{\partial \beta_j} \ln \mathcal{L}(\beta)
-= y_i \cdot \frac{1}{1 + e^{x_i^\top \beta}} \cdot x_i
-= y_i \cdot \frac{x_i}{1 + e^{x_i^\top \beta}}
-\]
+&=& y_i \cdot \frac{1}{1 + e^{x_i^\top \beta}} \cdot x_i
+= y_i \cdot \frac{x_i}{1 + e^{x_i^\top \beta}}.
+\end{eqnarray*}
 
-\subsection{Hoja 24}
-\[
+Por lo tanto
+\begin{eqnarray*}
 \frac{\partial}{\partial \beta_j} \ln \mathcal{L}(\beta)
-= \sum_i \frac{\partial}{\partial \beta_j} \left[
+&=& \sum_i \frac{\partial}{\partial \beta_j} \left[
 y_i \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)
 + (1 - y_i) \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
-\right]
-\]
-
-\[
-= \sum_i \left[
+\right]\\
+&=& \sum_i \left[
 y_i \frac{\partial}{\partial \beta_j} \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)
 + (1 - y_i) \frac{\partial}{\partial \beta_j} \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
 \right]
-\]
+\end{eqnarray*}
 
 Dado que:
 
-\[
+\begin{eqnarray*}
 \frac{\partial}{\partial \beta_j} \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)
-= \frac{\partial}{\partial \beta_j} \left[ x_{ij} - \ln \left( 1 + e^{x_i^\top \beta} \right) \right]
-\]
+&=& \frac{\partial}{\partial \beta_j} \left[ x_{ij} - \ln \left( 1 + e^{x_i^\top \beta} \right) \right]
+= x_{ij} - \frac{1}{1 + e^{-x_i^\top \beta}} \cdot x_{ij}\\
+&=& x_{ij} \left[ 1 - \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right]= x_{ij} \cdot \frac{1}{1 + e^{x_i^\top \beta}},
+\end{eqnarray*}
 
-\[
-= x_{ij} - \frac{1}{1 + e^{-x_i^\top \beta}} \cdot x_{ij}
-= x_{ij} \left[ 1 - \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right]
-= x_{ij} \cdot \frac{1}{1 + e^{x_i^\top \beta}}
-\]
+por otra parte
 
-\subsection{Hoja 25}
-\[
+\begin{eqnarray*}
 \frac{\partial}{\partial \beta_j} \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right) 
-= \frac{\partial}{\partial \beta_j} \ln \left(1 + e^{x_i^\top \beta} \right)
-= - \frac{1}{1 + e^{x_i^\top \beta}} \cdot e^{x_i^\top \beta} \cdot x_{ij}
-= -x_{ij} \cdot \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}}
-\]
+&=& \frac{\partial}{\partial \beta_j} \ln \left(1 + e^{x_i^\top \beta} \right)
+= - \frac{1}{1 + e^{x_i^\top \beta}} \cdot e^{x_i^\top \beta} \cdot x_{ij}\\
+&=& -x_{ij} \cdot \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}}
+\end{eqnarray*}
 
-\medskip
-
-\[
-\Rightarrow \frac{\partial}{\partial \beta_j} \ln \mathcal{L}(\beta) =
+por lo tanto
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_j} \ln \mathcal{L}(\beta) &=&
 \sum y_i x_{ij} \cdot \frac{1}{1 + e^{x_i^\top \beta}} 
-- (1 - y_i) x_{ij} \cdot \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}}
-\]
-
-\[
-= \sum y_i x_{ij} (1 - \rho_i) - (1 - y_i) x_{ij} \rho_i
+- (1 - y_i) x_{ij} \cdot \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}}\\
+&=& \sum y_i x_{ij} (1 - \rho_i) - (1 - y_i) x_{ij} \rho_i
 = \sum x_{ij} (y_i - \rho_i) = 0
-\]
-
-\medskip
+\end{eqnarray*}
 
 En forma matricial:
 
-\[
-g(\beta) = \nabla_\beta \ln \mathcal{L}(\beta) = X^\top (y - \rho) = 0
-\]
-\subsection{Hoja 26}
+\begin{eqnarray}
+g(\beta) = \nabla_\beta \ln \mathcal{L}(\beta) = X^\top (y - \rho) = 0.
+\end{eqnarray}
 
-La segunda derivada en \(\beta\) está dada por:
+Ahora calculemos la segunda derivada de \(\beta\)
 
-\[
-\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)
-= \sum \left( \frac{-x_{ij} x_{ik} e^{x_i^\top \beta}}{(1 + e^{x_i^\top \beta})^2} \right)
-\]
+\begin{eqnarray*}
+\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)= \frac{\partial^2}{\partial \beta_j \partial \beta_k}\sum \left( \frac{-x_{ij} x_{ik} e^{x_i^\top \beta}}{(1 + e^{x_i^\top \beta})^2} \right)= \frac{\partial^2}{\partial \beta_j \partial \beta_k}\sum x_{ij} x_{ik} \, \rho_i \, (1 - \rho_i)
+\end{eqnarray*}
+entonces
 
-\[
-= \sum x_{ij} x_{ik} \, \rho_i \, (1 - \rho_i)
-\]
+\begin{eqnarray*}
+\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)= \frac{\partial}{\partial \beta_k} \sum (x_{ij}) (y_i - \rho_i)= -\sum x_{ij} \frac{\partial}{\partial \beta_k} \rho_i
+\end{eqnarray*}
+donde
 
-\[
-\frac{\partial^2}{\partial \beta_j \partial \beta_k} = \frac{\partial}{\partial \beta_k} \sum (x_{ij}) (y_i - \rho_i)
-= -\sum x_{ij} \frac{\partial}{\partial \beta_k} \rho_i
-\]
-
-Dado que:
-
-\[
+\begin{eqnarray*}
 \frac{\partial}{\partial \beta_k} \rho_i = \rho_i (1 - \rho_i) x_{ik}
-\]
+\end{eqnarray*}
+por lo tanto
 
-\[
-\Rightarrow \frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)
-= -\sum x_{ij} \rho_i (1 - \rho_i) x_{ik}
-\]
+\begin{eqnarray*}
+\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)= -\sum x_{ij} \rho_i (1 - \rho_i) x_{ik}= -\sum x_{ij} x_{ik} \rho_i (1 - \rho_i);
+\end{eqnarray*}
 
-\[
-= -\sum x_{ij} x_{ik} \rho_i (1 - \rho_i)
-\]
 
-\medskip
+Si $v_i := \rho_i (1 - \rho_i)$ y $\mathbb{V} = \mathrm{diag}(v_1, v_2, \dots, v_n)$, entonces
 
-Si \( v_i := \rho_i (1 - \rho_i) \) y \( \mathbb{V} = \mathrm{diag}(v_1, v_2, \dots, v_n) \)
+\begin{eqnarray*}
+\mathcal{H}(\beta) = \nabla^2_\beta \ln \mathcal{L}(\beta) = -X^\top \mathbb{V} X.
+\end{eqnarray*}
 
-\subsection{Hoja 27}
-\[
-\Rightarrow \mathcal{H}(\beta) = \nabla^2_\beta \ln \mathcal{L}(\beta) = -X^\top \mathbb{V} X
-\]
+que es negativa definida, es decir, es cóncava con un máximo global. La matriz de información \textit{LR} está dada por:
 
-que es negativa definida, es decir, es cóncava con un máximo global.
+\begin{eqnarray}
+\mathcal{I}(\beta) = -\mathbb{E}[\mathcal{H}(\beta)] = X^\top \mathbb{V} X,
+\end{eqnarray}
 
-\medskip
+con Varianza:
 
-La matriz de información LR está dada por:
+\begin{eqnarray}
+\mathbb{V}(\hat{\beta}) = \mathcal{I}^{-1}(\beta) = (X^\top \mathbb{V} X)^{-1}.
+\end{eqnarray}
 
-\[
-\mathcal{I}(\beta) = -\mathbb{E}[\mathcal{H}(\beta)] = X^\top \mathbb{V} X
-\]
+La \textit{log-verosimilitud regularizada} se define por
 
-Varianza:
+\begin{eqnarray*}
+\ln \mathcal{L}(\beta) &=& \sum_i y_i \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) + (1 - y_i) \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
+- \frac{\lambda}{2} \| \beta \|^2\\
+&=& \sum_i \ln \left( \frac{e^{y_i x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) - \frac{\lambda}{2} \| \beta \|^2
+\end{eqnarray*}
 
-\[
-\mathbb{V}(\hat{\beta}) = \mathcal{I}^{-1}(\beta) = (X^\top \mathbb{V} X)^{-1}
-\]
+\noindent donde $\lambda$  es el \textit{parámetro de regularización}.
 
-\medskip
 
-La log-verosimilitud regularizada se define por:
-
-\[
-\ln \mathcal{L}(\beta) = \sum_i y_i \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) + (1 - y_i) \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
-- \frac{\lambda}{2} \| \beta \|^2
-\]
-
-\[
-= \sum_i \ln \left( \frac{e^{y_i x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) - \frac{\lambda}{2} \| \beta \|^2
-\]
-
-\hfill \textit{Término de regularización}
-
-\medskip
-
-\noindent donde \( \lambda \) es el \textit{parámetro de regularización}.
-
-\subsection{Hoja 28}
-
-Para resultados binarios, la \textbf{función pérdida o desviación (DEV)} útil para medir la bondad de ajuste del modelo es la log-verosimilitud negativa, y está dada por:
-
-\[
-\mathrm{DEV}(\hat{\beta}) = -2 \ln \mathcal{L}(\hat{\beta})
-\]
-
-\begin{flushright}
-Hasmer \& Lemeshow (2000)\\
-Komarek (2004)
-\end{flushright}
-
+\begin{Note}
 \begin{itemize}
-    \item Minimizar DEV es equivalente a maximizar la log-verosimilitud.
-    \item El \textbf{gradiente conjugado} aplicado a IRLS proporciona mejores resultados para estimar \( \beta \) que cualquier otro método (Khalouf, 2002; Munka, 2003).
+\item Para resultados binarios, la \textbf{función pérdida o desviación (DEV)} útil para medir la bondad de ajuste del modelo es la log-verosimilitud negativa, y está dada por:
+
+\begin{eqnarray*}
+\mathrm{DEV}(\hat{\beta}) = -2 \ln \mathcal{L}(\hat{\beta})
+\end{eqnarray*}
+para mayor informaci\'on ver \cite{hosmer2000}. 
+\item Minimizar DEV es equivalente a maximizar la log-verosimilitud; 
+\item el \textbf{gradiente conjugado} aplicado a IRLS proporciona mejores resultados para estimar $\beta$ que cualquier otro método (Khalouf, 2002; Munka, 2003).
 \end{itemize}
+\end{Note}
 
+Retomando,
 
-\subsection{Hoja 29}
+\begin{eqnarray*}
+\nabla_\beta \ln \mathcal{L}(\beta) = X^\top (y - p) = 0,\\
+\nabla_\beta^2 \ln \mathcal{L}(\beta) = -X^\top \mathbb{V} X - \Sigma^{-1}.
+\end{eqnarray*}
 
+Se actualiza la fórmula para Newton-Raphson en la iteración $(CH)$, dada por:
 
-\[
-\nabla_\beta \ln \mathcal{L}(\beta) = X^\top (y - p) = 0
-\]
-
-\[
-\nabla_\beta^2 \ln \mathcal{L}(\beta) = -X^\top \mathbb{V} X - \Sigma^{-1}
-\]
-
-Se actualiza la fórmula para Newton-Raphson en la iteración \( (CH) \), dada por:
-
-\[
-\beta^{(CH)} = \beta + \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} X^\top \left( y - p \right)
-\]
+\begin{eqnarray*}
+\beta^{(CH)} = \beta + \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} X^\top \left( y - p \right).
+\end{eqnarray*}
 
 Caso:
 
-\[
+\begin{eqnarray}
 \beta^{(C)} = \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} \left( X^\top \mathbb{V} Z^{(C)} \right)
-\]
-
-\[
-\Rightarrow \beta^{(CH)} = \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} X^\top \left( \mathbb{V} Z^{(C)} + (y - p) \right)
-\]
-
-\[
-= \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} X^\top \mathbb{V} Z^{(C)}
-\]
+\end{eqnarray}
+por lo tanto
+\begin{eqnarray}
+\beta^{(CH)} = \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} X^\top \left( \mathbb{V} Z^{(C)} + (y - p) \right)= \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} X^\top \mathbb{V} Z^{(C)}
+\end{eqnarray}
 
 Donde:
 
-\[
+\begin{eqnarray}
 Z^{(C)} = X \beta^{(C)} + \mathbb{V}^{-1} (y - p)
 \quad \text{(Adjusted response, Hastie et al., 2009)}
-\]
-\subsection{Hoja 30}
-$\mathcal{I}\left( X^\top \mathbb{V} X + \lambda I \right)$ es densa, el cálculo iterativo puede ser extremadamente lento (Komarek, 2004)
+\end{eqnarray}
 
-\medskip
+\begin{Note}
+Si $\mathcal{I}\left( X^\top \mathbb{V} X + \lambda I \right)$ es densa, el cálculo iterativo puede ser extremadamente lento (Komarek, 2004). El problema de minimos cuadrados ponderados ser\'ia
 
-\textbf{For Weighted Least Squares (WLS) subproblem:}
+\begin{eqnarray}
+\left( X^\top \mathbb{V} X + \lambda I \right) \beta^{(CH)} = X^\top \mathbb{V}^{2^{(C)}},
+\end{eqnarray}
 
-\[
-\left( X^\top \mathbb{V} X + \lambda I \right) \beta^{(CH)} = X^\top \mathbb{V}^{2^{(C)}}
-\]
+que consiste en un sistema lineal de ecuaciones y variables, y resolverlo es equivalente a minimizar la función cuadrática:
 
-es un sistema lineal de ecuaciones y variables, y resolverlo es equivalente a minimizar la función cuadrática:
-
-\[
-\frac{1}{2} \beta^\top \left( X^\top \mathbb{V} X + \lambda I \right) \beta - \beta^\top \left( X^\top \mathbb{V}^{2^{(C)}} \right)
-\]
-
+\begin{eqnarray}
+\frac{1}{2} \beta^\top \left( X^\top \mathbb{V} X + \lambda I \right) \beta - \beta^\top \left( X^\top \mathbb{V}^{2^{(C)}} \right).
+\end{eqnarray}
+\end{Note}
 
 
 \begin{thebibliography}{99}

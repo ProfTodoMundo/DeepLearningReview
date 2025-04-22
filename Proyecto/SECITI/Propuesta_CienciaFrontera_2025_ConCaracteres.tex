@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[spanish]{babel}
+
+\usepackage{amsmath, amssymb, amsfonts}
+
+\usepackage{geometry}
+
+\usepackage{hyperref}
+
+\geometry{letterpaper, margin=2.5cm}
+
+\title{Propuesta de Investigación 2025\\Integración de Aprendizaje Automático en Sistemas de Colas con Encuestas}
+
+\author{Carlos [Tu Apellido]\\Universidad Autónoma de la Ciudad de México}
+
+\date{Abril 2025}
+
+\begin{document}
+
+\maketitle
+
+Propuesta de Investigación 2025
+
+\section*{Integración de Aprendizaje Automático en Sistemas de Colas con Encuestas}
+
+Carlos [Tu Apellido]
+
+Universidad Autónoma de la Ciudad de México
+
+Abril 2025
+
+\subsection*{Resumen Ejecutivo}
+
+Esta propuesta de investigación tiene como finalidad desarrollar una teoría unificada que integre modelos estocásticos de sistemas de colas —especialmente los llamados “polling systems”— con algoritmos de aprendizaje automático, en particular el aprendizaje por refuerzo. Este enfoque busca optimizar políticas de servicio en entornos dinámicos y no estacionarios, permitiendo adaptabilidad y mejora continua en tiempo real. La investigación se estructura en tres etapas: modelado teórico con base en procesos de Markov y semi-Markov; implementación de algoritmos de aprendizaje supervisado y por refuerzo; y validación mediante simulación computacional en Python y R. La propuesta se enmarca en el campo de las matemáticas aplicadas y la ciencia de datos, con aplicaciones directas en telecomunicaciones, logística y manufactura. El impacto potencial abarca tanto avances teóricos en teoría de colas como el desarrollo de herramientas prácticas para sistemas adaptativos. Se espera que los resultados incluyan publicaciones científicas, software de simulación, y recomendaciones de políticas de servicio aprendidas. Este proyecto se alinea completamente con los objetivos de la convocatoria de Ciencia Básica y de Frontera 2025, al fomentar investigación innovadora, interdisciplinaria y de impacto nacional.
+
+\subsection*{Objetivo General}
+
+Desarrollar un marco matemático-computacional que integre algoritmos de aprendizaje automático, particularmente aprendizaje por refuerzo, en sistemas de colas del tipo polling systems, con el fin de optimizar dinámicamente políticas de servicio en entornos variables. Esta integración permitirá formular modelos estocásticos adaptativos, con base en cadenas de Markov y procesos semi-Markov, capaces de ajustar sus decisiones en tiempo real y mejorar indicadores de desempeño como el tiempo de espera, la eficiencia y el throughput. El objetivo se alinea con la convocatoria al fomentar investigación de frontera que vincula matemáticas aplicadas, ciencia de datos y teoría de colas, con aplicaciones en sectores estratégicos como telecomunicaciones, manufactura y logística.
+
+\subsection*{Objetivos Específicos}
+
+Formular modelos estocásticos tipo polling que integren decisiones basadas en algoritmos de aprendizaje automático, considerando dinámicas reales.
+
+Analizar teóricamente la estabilidad y convergencia de los modelos híbridos desarrollados mediante técnicas de probabilidad y procesos estocásticos.
+
+Comparar cuantitativamente políticas tradicionales (round-robin, gated, exhaustive) con políticas aprendidas por ML en escenarios simulados.
+
+Implementar prototipos de simulación en Python/R y validar los resultados mediante pruebas controladas con métricas estándar del área.
+
+\subsection*{Antecedentes}
+
+La teoría de colas ha sido una herramienta fundamental para modelar y analizar sistemas de espera en una variedad de dominios, desde redes de comunicación hasta manufactura. En particular, los polling systems —modelos en los que un único servidor atiende múltiples colas según reglas cíclicas o prioritarias— representan una clase rica en comportamiento estocástico, pero típicamente dependiente de parámetros fijos y estructuras estáticas. Por otro lado, el aprendizaje automático ha revolucionado la toma de decisiones bajo incertidumbre, permitiendo adaptabilidad en contextos donde las condiciones cambian constantemente.
+
+Aunque existen estudios que combinan heurísticas de ML con simulaciones de sistemas de colas, la literatura aún carece de un enfoque sistemático que fusione ambos marcos desde una base matemática rigurosa. Se han reportado esfuerzos parciales en redes neuronales aplicadas a control de tráfico en redes, y estudios sobre sistemas de atención médica o logística con ML, pero sin integrar formalmente la estructura de polling systems ni analizar sus propiedades matemáticas fundamentales.
+
+Esta propuesta parte de la hipótesis de que los modelos estocásticos pueden enriquecerse significativamente al incorporar decisiones aprendidas por ML, manteniendo al mismo tiempo propiedades deseables como la ergodicidad, la estabilidad y la convergencia. A partir de esta visión, se propone desarrollar una teoría unificada que permita representar e implementar sistemas de colas dinámicos, informados por datos y optimizados de manera continua, lo que representaría un avance relevante en la frontera entre ciencia de datos y matemáticas aplicadas.
+
+\subsection*{Hipótesis o Preguntas de Investigación}
+
+H1: Es posible construir un modelo híbrido de aprendizaje automático y teoría de colas que preserve la estabilidad del sistema bajo condiciones estocásticas.
+
+H2: Las políticas de servicio derivadas de algoritmos de ML pueden superar en desempeño (tiempo de espera y throughput) a las políticas tradicionales en entornos no estacionarios.
+
+\subsection*{Pertinencia de la Propuesta}
+
+El proyecto se alinea con el objetivo general de la convocatoria al impulsar la investigación de frontera con enfoque interdisciplinario. Integra matemáticas aplicadas, ciencia de datos y sistemas estocásticos para abordar problemas reales en telecomunicaciones y logística. Además, contribuye a la formación de capacidades en áreas estratégicas y emergentes.
+
+\subsection*{Metodología}
+
+Se realizará una revisión exhaustiva de literatura en teoría de colas, aprendizaje por refuerzo y polling systems. Se construirán modelos estocásticos con base en procesos de Markov y semi-Markov. Se implementarán algoritmos de aprendizaje en Python/R y se desarrollarán simulaciones para evaluar políticas de servicio. Se analizarán propiedades como estabilidad, convergencia y eficiencia mediante técnicas matemáticas y computacionales.
+
+\subsection*{Resultados Esperados}
+
+Desarrollo de una teoría unificada entre aprendizaje automático y sistemas de colas. Publicaciones científicas en matemáticas aplicadas y ciencia de datos. Prototipos funcionales de simulación y visualización. Contribuciones a la optimización de políticas de servicio en sectores clave.
+
+\subsection*{Factores de Riesgo y Estrategias}
+
+Los principales riesgos son la complejidad matemática y computacional del modelo y la disponibilidad de datos para simulación. Para mitigarlos, se iniciará con modelos simplificados, se realizarán pruebas incrementales y se utilizarán datos sintéticos validados. Se prevé retroalimentación continua con expertos del área.
+
+\subsection*{Impacto Social}
+
+La investigación tiene potencial para mejorar significativamente la eficiencia de sistemas de atención al público, telecomunicaciones y logística. El uso de políticas adaptativas optimizadas mediante ML puede reducir tiempos de espera, costos operativos y mejorar la experiencia de usuarios en servicios públicos y privados.
+
+\subsection*{Bibliografía}
+
+Kleinrock, L. Queueing Systems, Vol. I. Wiley.
+
+Sutton, R. & Barto, A. Reinforcement Learning: An Introduction.
+
+Chen, H. & Yao, D. Fundamentals of Queueing Networks.
+
+Zhou, Z. et al. (2020). Queueing Theory Meets Deep Learning.
+
+Artículos recientes en IEEE, Springer y MDPI sobre ML y sistemas de colas.
+
+\\\textbf{Caracteres con espacios: 1796}
+
+\\\textbf{Caracteres con espacios: 1085}
+
+\\\textbf{Caracteres: 217}
+
+\\\textbf{Caracteres: 253}
+
+\\\textbf{Caracteres: 255}
+
+\\\textbf{Caracteres: 244}
+
+\\\textbf{Caracteres con espacios: 2975}
+
+\end{document}

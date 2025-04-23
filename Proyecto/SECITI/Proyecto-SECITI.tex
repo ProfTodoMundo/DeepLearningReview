@@ -95,30 +95,79 @@ En contraste, el aprendizaje automático —especialmente el aprendizaje por ref
 
 Esta propuesta parte de la hipótesis de que es posible enriquecer los modelos estocásticos mediante decisiones aprendidas a partir de datos, manteniendo propiedades clave como la estabilidad, ergodicidad y convergencia. Se plantea, por tanto, construir un marco unificado que permita representar e implementar sistemas de colas dinámicos, informados por datos y optimizados de manera continua. Esta integración representa una contribución significativa en la frontera entre matemáticas aplicadas y ciencia de datos.\footnote{\textit{2927 caracteres y 498 palabras}}
 
-
-
-
+%------------------------------------------------------------------------------------------
 \section{Hipótesis o Preguntas de Investigación}
-
+%------------------------------------------------------------------------------------------
 \begin{itemize}
-  \item H1: Es posible construir un modelo híbrido de aprendizaje automático y teoría de colas que preserve la estabilidad del sistema bajo condiciones estocásticas.
-  \item H2: Las políticas de servicio derivadas de algoritmos de ML pueden superar en desempeño (tiempo de espera y throughput) a las políticas tradicionales en entornos no estacionarios.
+  \item \textbf{1)} Es posible construir un modelo mixto que combine herramientas de aprendizaje automático y teoría de colas, bajo condiciones que aseguren la estabilidad del sistema o la existencia de un régimen estacionario.
+
+  \item \textbf{2)} Las medidas tradicionales de desempeño pueden ser superadas mediante algoritmos de aprendizaje supervisado, enfocados en estimar valores promedio de tiempos de servicio, tiempos de permanencia y tiempos de llegada al sistema.
+
+  \item \textbf{3)} Es viable implementar estos algoritmos de aprendizaje automático en lenguajes de programación como R o Python para calcular métricas estándar en sistemas de colas o de visitas.
+  
+  \item \textbf{4)} Es posible  implementar estos algoritmos de aprendizaje automático considerando, al menos la política de servicio exhaustiva y cerrada.
+
+  \item \textbf{5)} La metodología propuesta puede aplicarse de manera efectiva en sistemas reales como transporte, mecanismos de selección y telecomunicaciones.\footnote{\textit{950 caracteres y 161 palabras}}
 \end{itemize}
 
+%------------------------------------------------------------------------------------------
 \section{Pertinencia de la Propuesta}
-El proyecto se alinea con el objetivo general de la convocatoria al impulsar la investigación de frontera con enfoque interdisciplinario. Integra matemáticas aplicadas, ciencia de datos y sistemas estocásticos para abordar problemas reales en telecomunicaciones y logística. Además, contribuye a la formación de capacidades en áreas estratégicas y emergentes.
+%------------------------------------------------------------------------------------------
 
+El proyecto se alinea con los objetivos generales de la convocatoria al promover investigación de frontera con enfoque interdisciplinario. Integra matemáticas aplicadas, ciencia de datos y procesos estocásticos para resolver problemas reales en telecomunicaciones y logística. Aporta además al desarrollo de capacidades en áreas estratégicas emergentes. Aunque existe abundante literatura sobre sistemas de colas y visitas, los estudios que vinculan aprendizaje automático —como redes neuronales o aprendizaje por refuerzo— con teoría de colas siguen siendo escasos. Esta propuesta, por tanto, busca cubrir un vacío relevante mediante un marco formal que combine ambos enfoques y abra nuevas rutas de investigación en la modelación de sistemas dinámicos adaptativos.\footnote{\textit{798 caracteres y 139 palabras}}
+
+%------------------------------------------------------------------------------------------
 \section{Metodología}
-Se realizará una revisión exhaustiva de literatura en teoría de colas, aprendizaje por refuerzo y polling systems. Se construirán modelos estocásticos con base en procesos de Markov y semi-Markov. Se implementarán algoritmos de aprendizaje en Python/R y se desarrollarán simulaciones para evaluar políticas de servicio. Se analizarán propiedades como estabilidad, convergencia y eficiencia mediante técnicas matemáticas y computacionales.
+%------------------------------------------------------------------------------------------
+Se realizará una revisión exhaustiva de literatura reciente en teoría de colas, sistemas de visitas y técnicas de ciencia de datos, con énfasis en aprendizaje automático supervisado. A partir de ello, se desarrollarán modelos estocásticos basados en cadenas y procesos de Markov estacionarios. Se implementarán algoritmos de aprendizaje en Python y R, y se construirán simulaciones para evaluar políticas de servicio (exhaustiva, cerrada y limitada). Finalmente, se analizarán propiedades como estabilidad, convergencia y eficiencia mediante el cálculo de medidas de desempeño y estimaciones numéricas.\footnote{\textit{800 caracteres y 131 palabras}}
 
+%------------------------------------------------------------------------------------------
 \section{Resultados Esperados}
-Desarrollo de una teoría unificada entre aprendizaje automático y sistemas de colas. Publicaciones científicas en matemáticas aplicadas y ciencia de datos. Prototipos funcionales de simulación y visualización. Contribuciones a la optimización de políticas de servicio en sectores clave.
+%------------------------------------------------------------------------------------------
 
+Se propone desarrollar una metodología formal que mejore el desempeño de los sistemas de colas mediante la integración de técnicas de aprendizaje automático, con énfasis en el aprendizaje supervisado. Se elaborará un artículo científico para ser sometido a revisión en revistas especializadas en matemáticas aplicadas y ciencia de datos. Se construirán programas robustos en R y Python que permitan estimar métricas de desempeño en sistemas de colas y visitas bajo diferentes políticas de servicio. Además, se prevé la participación en eventos académicos para presentar tanto los avances como los resultados finales del proyecto. Finalmente, se aplicará la metodología desarrollada en al menos un sistema real, con el objetivo de validar su eficacia en un entorno práctico.\footnote{\textit{780 caracteres y 129 palabras}}
+
+%------------------------------------------------------------------------------------------
 \section{Factores de Riesgo y Estrategias}
-Los principales riesgos son la complejidad matemática y computacional del modelo y la disponibilidad de datos para simulación. Para mitigarlos, se iniciará con modelos simplificados, se realizarán pruebas incrementales y se utilizarán datos sintéticos validados. Se prevé retroalimentación continua con expertos del área.
+%------------------------------------------------------------------------------------------
+Los principales riesgos identificados son la complejidad matemática y computacional del modelo, así como la disponibilidad limitada de datos para simulación. Para mitigarlos, se comenzará con modelos simplificados, se realizarán pruebas incrementales y se emplearán datos sintéticos validados. Se contempla además una retroalimentación continua con expertos del área para validar supuestos y enfoques. En cuanto a las aplicaciones, se buscará contar con al menos un modelo funcional que sirva como prototipo para su posterior generalización. Un riesgo adicional es la dificultad para acceder a bibliografía especializada; en respuesta, se considerará la adquisición de fuentes clave mediante licencias digitales o redes institucionales de acceso académico.\footnote{\textit{774 caracteres y 127 palabras}}
 
+%------------------------------------------------------------------------------------------
 \section{Impacto Social}
-La investigación tiene potencial para mejorar significativamente la eficiencia de sistemas de atención al público, telecomunicaciones y logística. El uso de políticas adaptativas optimizadas mediante ML puede reducir tiempos de espera, costos operativos y mejorar la experiencia de usuarios en servicios públicos y privados.
+%------------------------------------------------------------------------------------------
+La investigación tiene un alto potencial para mejorar la eficiencia de sistemas de atención al público, como transporte, mecanismos de selección y asignación, telecomunicaciones y logística. La implementación de políticas adaptativas optimizadas mediante aprendizaje automático permitirá reducir tiempos de espera, disminuir costos operativos y mejorar la experiencia de los usuarios en servicios tanto públicos como privados. Asimismo, el uso de modelos estocásticos con integración de datos contribuirá a agilizar los tiempos de cómputo requeridos para estimar medidas de desempeño, permitiendo así una toma de decisiones más rápida y precisa. Estos avances pueden ser clave para mejorar procesos estratégicos en instituciones y empresas que dependen de la eficiencia operativa en entornos dinámicos.\footnote{\textit{792 caracteres y 129 palabras}}
+
+%------------------------------------------------------------------------------------------
+\section{Bibliografìa}
+%------------------------------------------------------------------------------------------
+
+\begin{enumerate}
+  \item Asmussen, S. (1987). \textit{Applied Probability and Queues}. John Wiley and Sons.
+  \item Boon, M. A. A., van der Mei, R. D., \& Winands, E. M. M. (2011). Applications of polling systems.
+  \item Chen, M. S., \& Yen, H. W. (2011). Applications of machine learning on multi-queue message scheduling. \textit{Expert Systems with Applications, 38}(4), 3323–3335.
+  \item Chocron, E., Cohen, I., \& Feigin, P. (2022). Delay prediction for managing multiclass service systems: An investigation of queueing theory and machine learning approaches. \textit{IEEE Transactions on Engineering Management, 71}, 4469–4479.
+  \item Disney, R. L., Farrell, R. L., \& Morais, P. R. (1973). A characterization of M/G/1 queues with renewal departure processes. \textit{Management Science, 19}(11), 1222–1228.
+  \item Efrosinin, D., Vishnevsky, V., Stepanova, N., \& Sztrik, J. (2025). Use cases of machine learning in queueing theory based on a GI/G/K system.
+  \item Glynn, P. W. (2022). Queueing theory: Past, present, and future. \textit{Queueing Systems, 100}(3), 169–171.
+  \item Kleinrock, L. (1975). \textit{Queueing Systems: Volume 1: Theory}. Wiley-Interscience.
+  \item Kyritsis, A. I., \& Deriaz, M. (2019). A machine learning approach to waiting time prediction in queueing scenarios. In \textit{2019 Second International Conference on Artificial Intelligence for Industries (AI4I)} (pp. 17–21). IEEE.
+  \item Levy, H., \& Sidi, M. (1990). Polling systems: Applications, modeling, and optimization. \textit{IEEE Transactions on Communications, 30}(10), 1750–1760.
+  \item Raeis, M., Tizghadam, A., \& Leon-Garcia, A. (2021). Queue-learning: A reinforcement learning approach for providing quality of service. In \textit{Proceedings of the AAAI Conference on Artificial Intelligence, 35}(1), 461–468.
+  \item Roubos, A. (2007). \textit{Polling Systems and Their Applications}. Vrije Universiteit Amsterdam.
+  \item Semenova, O. V., \& Vishnevskii, V. M. (2006). Mathematical methods to study the polling systems. \textit{Automation and Remote Control, 67}(2), 173–220.
+  \item Sidi, M., \& Levy, H. (1991). Polling systems with simultaneous arrivals. \textit{IEEE Transactions on Communications, 39}(6), 823–827.
+  \item Sokolov, A., Semenova, O., \& Larionov, A. (2024). Examining the performance of a distributed system through the application of queuing theory. In \textit{Distributed Computer and Communication Networks: 26th International Conference, DCCN 2023, Revised Selected Papers} (Vol. 2129, p. 16). Springer Nature.
+  \item Sutton, R. S., \& Barto, A. G. (2018). \textit{Reinforcement Learning: An Introduction} (2nd ed.). MIT Press.
+  \item Takagi, H. (1988). Queueing analysis of polling models. \textit{ACM Computing Surveys, 20}(1), 5–28.
+  \item Vishnevsky, V., \& Gorbunova, A. V. (2021). Application of machine learning methods to solving problems of queuing theory. In \textit{Information Technologies and Mathematical Modelling} (pp. 304–316). Springer.
+  \item Vishnevsky, V., Semenova, O., \& Bui, D. T. (2021). Using a machine learning approach for analysis of polling systems with correlated arrivals. In \textit{Distributed Computer and Communication Networks} (pp. 336–345). Springer.
+  \item Wang, H., \& Hart, B. (2025). Queueing theory-based spare parts prediction through machine learning. In \textit{2025 Annual Reliability and Maintainability Symposium (RAMS)} (pp. 1–7). IEEE.
+  \item Zhou, Z., Wang, X., \& Zhang, C. (2020). Queueing theory meets deep learning.\footnote{\textit{3155 caracteres y 447 palabras}}
+\end{enumerate}
+
+
+
+
 \section{Plan de Trabajo por Etapas}
 
 \subsection*{Etapa 1 — Año 2025 (Duración: 6 meses)}
@@ -263,42 +312,452 @@ La investigación tiene potencial para mejorar significativamente la eficiencia 
   \item Entrega del informe final y cierre del proyecto.
 \end{itemize}
 
-\section{Desglose Financiero Estimado por Etapa}
+\section{Plan de Trabajo por Etapas}
+
+\subsection*{Etapa 1 — Año 2025 (Duración: 6 meses)}
+\textbf{Descripción:} Durante esta primera fase se establecerán las bases conceptuales y matemáticas del proyecto. Se realizará una revisión exhaustiva de la literatura en teoría de colas, procesos estocásticos, y aprendizaje por refuerzo. Posteriormente, se formularán modelos base de polling systems con estructuras dinámicas, y se definirán formalmente las variables relevantes y métricas de desempeño. Se comenzará con la implementación de simulaciones iniciales de políticas clásicas (round-robin, gated, exhaustive) como referencia para análisis comparativo.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Realizar revisión bibliográfica y sistematización de modelos existentes de colas y aprendizaje automático.
+  \item Formular modelos matemáticos estocásticos básicos y definir métricas clave de desempeño.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Documento técnico con marco teórico y estado del arte.
+  \item Prototipo de simulación inicial de políticas tradicionales en sistemas de colas.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Revisión de al menos 50 artículos clave sobre ML y teoría de colas. (97 caracteres)
+  \item Modelado en papel y validación formal de condiciones de estabilidad. (91 caracteres)
+  \item Implementación de modelos clásicos con Python/SimPy. (67 caracteres)
+  \item Redacción del informe técnico de avance. (49 caracteres)
+\end{itemize}
+
+\subsection*{Etapa 2 — Año 2026 (Duración: 6 meses)}
+\textbf{Descripción:} Esta fase se centrará en la implementación computacional de los modelos propuestos y en el desarrollo de algoritmos de aprendizaje automático, particularmente aprendizaje por refuerzo. Se diseñarán entornos de simulación para probar políticas de servicio aprendidas dinámicamente y se compararán con políticas tradicionales. También se trabajará en la recolección de datos simulados y en la evaluación del rendimiento de los modelos mediante métricas cuantitativas.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Desarrollar e implementar algoritmos de ML adaptados a sistemas de colas.
+  \item Diseñar un entorno de simulación robusto para pruebas comparativas.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Código funcional de algoritmos de aprendizaje por refuerzo.
+  \item Informe de simulación con análisis comparativo y visualizaciones.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Codificación de entorno de simulación en Python con ML. (61 caracteres)
+  \item Integración de modelos de aprendizaje tipo Q-Learning. (59 caracteres)
+  \item Generación de conjuntos de datos sintéticos controlados. (58 caracteres)
+  \item Redacción del informe de resultados y visualizaciones. (56 caracteres)
+\end{itemize}
+
+\subsection*{Etapa 3 — Año 2027 (Duración: 6 meses)}
+\textbf{Descripción:} La última etapa estará enfocada en la validación teórica y práctica de los resultados obtenidos. Se realizarán análisis de estabilidad, convergencia y desempeño. Se prepararán artículos científicos para su publicación en revistas de alto impacto. También se desarrollará una herramienta de visualización interactiva y se socializarán los hallazgos con la comunidad académica.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Validar matemáticamente los modelos desarrollados.
+  \item Publicar y difundir los resultados científicos y técnicos del proyecto.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Artículo científico sometido a revista indexada.
+  \item Herramienta de visualización y reporte final del proyecto.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Evaluación formal de condiciones de estabilidad. (52 caracteres)
+  \item Envío de artículo a revista científica en matemáticas aplicadas. (68 caracteres)
+  \item Diseño y documentación de herramienta visual en Shiny o Dash. (64 caracteres)
+  \item Presentación de resultados en coloquios y congresos. (52 caracteres)
+\end{itemize}
+
+
+
+\section{Plan de Trabajo por Etapas}
+
+\subsection*{Etapa 1 — Año 2025 (Duración: 6 meses)}
+\textbf{Descripción:} Durante esta primera fase se establecerán las bases conceptuales y matemáticas del proyecto. Se realizará una revisión exhaustiva de la literatura en teoría de colas, procesos estocásticos, y aprendizaje por refuerzo. Posteriormente, se formularán modelos base de polling systems con estructuras dinámicas, y se definirán formalmente las variables relevantes y métricas de desempeño. Se comenzará con la implementación de simulaciones iniciales de políticas clásicas (round-robin, gated, exhaustive) como referencia para análisis comparativo.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Realizar revisión bibliográfica y sistematización de modelos existentes de colas y aprendizaje automático.
+  \item Formular modelos matemáticos estocásticos básicos y definir métricas clave de desempeño.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Documento técnico con marco teórico y estado del arte.
+  \item Prototipo de simulación inicial de políticas tradicionales en sistemas de colas.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Revisión de al menos 50 artículos clave sobre ML y teoría de colas. (97 caracteres)
+  \item Modelado en papel y validación formal de condiciones de estabilidad. (91 caracteres)
+  \item Implementación de modelos clásicos con Python/SimPy. (67 caracteres)
+  \item Redacción del informe técnico de avance. (49 caracteres)
+\end{itemize}
+
+\subsection*{Etapa 2 — Año 2026 (Duración: 6 meses)}
+\textbf{Descripción:} Esta fase se centrará en la implementación computacional de los modelos propuestos y en el desarrollo de algoritmos de aprendizaje automático, particularmente aprendizaje por refuerzo. Se diseñarán entornos de simulación para probar políticas de servicio aprendidas dinámicamente y se compararán con políticas tradicionales. También se trabajará en la recolección de datos simulados y en la evaluación del rendimiento de los modelos mediante métricas cuantitativas.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Desarrollar e implementar algoritmos de ML adaptados a sistemas de colas.
+  \item Diseñar un entorno de simulación robusto para pruebas comparativas.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Código funcional de algoritmos de aprendizaje por refuerzo.
+  \item Informe de simulación con análisis comparativo y visualizaciones.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Codificación de entorno de simulación en Python con ML. (61 caracteres)
+  \item Integración de modelos de aprendizaje tipo Q-Learning. (59 caracteres)
+  \item Generación de conjuntos de datos sintéticos controlados. (58 caracteres)
+  \item Redacción del informe de resultados y visualizaciones. (56 caracteres)
+\end{itemize}
+
+\subsection*{Etapa 3 — Año 2027 (Duración: 6 meses)}
+\textbf{Descripción:} La última etapa estará enfocada en la validación teórica y práctica de los resultados obtenidos. Se realizarán análisis de estabilidad, convergencia y desempeño. Se prepararán artículos científicos para su publicación en revistas de alto impacto. También se desarrollará una herramienta de visualización interactiva y se socializarán los hallazgos con la comunidad académica.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Validar matemáticamente los modelos desarrollados.
+  \item Publicar y difundir los resultados científicos y técnicos del proyecto.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Artículo científico sometido a revista indexada.
+  \item Herramienta de visualización y reporte final del proyecto.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Evaluación formal de condiciones de estabilidad. (52 caracteres)
+  \item Envío de artículo a revista científica en matemáticas aplicadas. (68 caracteres)
+  \item Diseño y documentación de herramienta visual en Shiny o Dash. (64 caracteres)
+  \item Presentación de resultados en coloquios y congresos. (52 caracteres)
+\end{itemize}
+\section{Plan de Trabajo por Etapas}
 
 \subsection*{Etapa 1 — Año 2025}
+\textbf{Duración:} 6 meses\\
+\textbf{Descripción:} Durante esta primera fase se establecerán las bases conceptuales y matemáticas del proyecto. Se realizará una revisión exhaustiva de la literatura en teoría de colas, procesos estocásticos, y aprendizaje por refuerzo. Posteriormente, se formularán modelos base de polling systems con estructuras dinámicas, y se definirán formalmente las variables relevantes y métricas de desempeño. Se comenzará con la implementación de simulaciones iniciales de políticas clásicas (round-robin, gated, exhaustive) como referencia para análisis comparativo.
+
+\textbf{Metas:}
 \begin{itemize}
-  \item \textbf{Adquisición de equipo de cómputo (iMac con máxima configuración)}: \$90,000 MXN
-  \item \textbf{Adquisición de estación de trabajo científica de alto rendimiento (procesadores múltiples, GPU, 64 GB RAM)}: \$120,000 MXN
-  \item \textbf{Adquisición de iPad de gran capacidad (pantalla de 12.9 pulgadas, ideal para lectura científica y anotaciones)}: \$45,000 MXN
-  \item \textbf{Monitor auxiliar de alta resolución para soporte en pantallas extendidas}: \$25,000 MXN
-  \item \textbf{Trackpad avanzado compatible con estación de trabajo y iMac}: \$8,000 MXN
-  \item \textbf{Compra de bibliografía especializada (libros, licencias digitales)}: \$30,000 MXN
-  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
-  \item \textbf{Otros (papelería, servicios)}: \$10,000 MXN
-  \item \textbf{Total estimado}: \textbf{\$358,000 MXN}
+  \item Realizar revisión bibliográfica y sistematización de modelos existentes de colas y aprendizaje automático.
+  \item Formular modelos matemáticos estocásticos básicos y definir métricas clave de desempeño.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Documento técnico con marco teórico y estado del arte.
+  \item Prototipo de simulación inicial de políticas tradicionales en sistemas de colas.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Revisión de al menos 50 artículos clave sobre ML y teoría de colas.
+  \item Modelado en papel y validación formal de condiciones de estabilidad.
+  \item Implementación de modelos clásicos con Python/SimPy.
+  \item Redacción del informe técnico de avance.
 \end{itemize}
 
 \subsection*{Etapa 2 — Año 2026}
+\textbf{Duración:} 12 meses\\
+\textbf{Descripción:} En esta segunda fase se desarrollarán e implementarán algoritmos de aprendizaje automático, en particular aprendizaje por refuerzo, aplicados a los modelos de colas formulados. Se evaluarán distintas arquitecturas de agentes de decisión adaptativa, midiendo su desempeño contra políticas tradicionales en diversos escenarios simulados. También se realizarán análisis matemáticos sobre estabilidad, convergencia y ergodicidad de los modelos híbridos. Esta etapa busca consolidar la parte computacional y teórica del proyecto mediante simulaciones robustas.
+
+\textbf{Metas:}
 \begin{itemize}
-  \item \textbf{Participación en congreso nacional/internacional (viaje + inscripción)}: \$50,000 MXN
-  \item \textbf{Apoyo a asistente de investigación (6 meses)}: \$60,000 MXN
-  \item \textbf{Software especializado / licencias (TensorFlow, MatLab, etc.)}: \$30,000 MXN
-  \item \textbf{Otros (hospedaje, materiales)}: \$10,000 MXN
-  \item \textbf{Total estimado}: \textbf{\$150,000 MXN}
+  \item Desarrollar e implementar algoritmos de ML aplicados a los modelos de colas.
+  \item Analizar y validar el comportamiento de los modelos híbridos mediante pruebas computacionales.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Repositorio de código con políticas de ML implementadas.
+  \item Informe técnico de análisis comparativo de políticas.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Diseño de entorno de simulación para aprendizaje por refuerzo.
+  \item Implementación de políticas con TensorFlow/Keras.
+  \item Ejecución de simulaciones comparativas en escenarios variables.
+  \item Análisis de resultados y validación con métricas de desempeño.
 \end{itemize}
 
 \subsection*{Etapa 3 — Año 2027}
+\textbf{Duración:} 12 meses\\
+\textbf{Descripción:} La etapa final se enfocará en la validación empírica de los modelos desarrollados y la preparación de publicaciones científicas. Se realizarán ajustes al modelo con base en los resultados obtenidos y se elaborarán herramientas de visualización de resultados. Además, se integrará un informe final con recomendaciones, implicaciones teóricas y aplicadas, así como posibles rutas para aplicaciones futuras en sectores estratégicos.
+
+\textbf{Metas:}
 \begin{itemize}
-  \item \textbf{Costo de publicación en revista indexada (open access)}: \$40,000 MXN
-  \item \textbf{Desarrollo y despliegue de herramienta web interactiva}: \$40,000 MXN
-  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
-  \item \textbf{Otros (traducción, edición, difusión)}: \$10,000 MXN
-  \item \textbf{Total estimado}: \textbf{\$120,000 MXN}
+  \item Validar los modelos en entornos simulados y ajustar parámetros finales.
+  \item Difundir los resultados a través de publicaciones, presentaciones y herramientas digitales.
 \end{itemize}
 
-\textbf{Monto total estimado del proyecto:} \textbf{\$628,000 MXN}
+\textbf{Entregables:}
+\begin{itemize}
+  \item Artículo científico para revista indexada.
+  \item Informe final y repositorio con visualización de resultados.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Ajuste final de hiperparámetros y simulaciones.
+  \item Redacción y envío de artículo a revista académica.
+  \item Generación de panel de visualización de políticas y desempeño.
+  \item Entrega del informe final y cierre del proyecto.
+\end{itemize}
+
+\section{Plan de Trabajo por Etapas}
+
+\subsection*{Etapa 1 — Año 2025 (Duración: 6 meses)}
+\textbf{Descripción:} Durante esta primera fase se establecerán las bases conceptuales y matemáticas del proyecto. Se realizará una revisión exhaustiva de la literatura en teoría de colas, procesos estocásticos, y aprendizaje por refuerzo. Posteriormente, se formularán modelos base de polling systems con estructuras dinámicas, y se definirán formalmente las variables relevantes y métricas de desempeño. Se comenzará con la implementación de simulaciones iniciales de políticas clásicas (round-robin, gated, exhaustive) como referencia para análisis comparativo.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Realizar revisión bibliográfica y sistematización de modelos existentes de colas y aprendizaje automático.
+  \item Formular modelos matemáticos estocásticos básicos y definir métricas clave de desempeño.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Documento técnico con marco teórico y estado del arte.
+  \item Prototipo de simulación inicial de políticas tradicionales en sistemas de colas.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Revisión de al menos 50 artículos clave sobre ML y teoría de colas. (97 caracteres)
+  \item Modelado en papel y validación formal de condiciones de estabilidad. (91 caracteres)
+  \item Implementación de modelos clásicos con Python/SimPy. (67 caracteres)
+  \item Redacción del informe técnico de avance. (49 caracteres)
+\end{itemize}
+
+\subsection*{Etapa 2 — Año 2026 (Duración: 6 meses)}
+\textbf{Descripción:} Esta fase se centrará en la implementación computacional de los modelos propuestos y en el desarrollo de algoritmos de aprendizaje automático, particularmente aprendizaje por refuerzo. Se diseñarán entornos de simulación para probar políticas de servicio aprendidas dinámicamente y se compararán con políticas tradicionales. También se trabajará en la recolección de datos simulados y en la evaluación del rendimiento de los modelos mediante métricas cuantitativas.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Desarrollar e implementar algoritmos de ML adaptados a sistemas de colas.
+  \item Diseñar un entorno de simulación robusto para pruebas comparativas.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Código funcional de algoritmos de aprendizaje por refuerzo.
+  \item Informe de simulación con análisis comparativo y visualizaciones.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Codificación de entorno de simulación en Python con ML. (61 caracteres)
+  \item Integración de modelos de aprendizaje tipo Q-Learning. (59 caracteres)
+  \item Generación de conjuntos de datos sintéticos controlados. (58 caracteres)
+  \item Redacción del informe de resultados y visualizaciones. (56 caracteres)
+\end{itemize}
+
+\subsection*{Etapa 3 — Año 2027 (Duración: 6 meses)}
+\textbf{Descripción:} La última etapa estará enfocada en la validación teórica y práctica de los resultados obtenidos. Se realizarán análisis de estabilidad, convergencia y desempeño. Se prepararán artículos científicos para su publicación en revistas de alto impacto. También se desarrollará una herramienta de visualización interactiva y se socializarán los hallazgos con la comunidad académica.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Validar matemáticamente los modelos desarrollados.
+  \item Publicar y difundir los resultados científicos y técnicos del proyecto.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Artículo científico sometido a revista indexada.
+  \item Herramienta de visualización y reporte final del proyecto.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Evaluación formal de condiciones de estabilidad. (52 caracteres)
+  \item Envío de artículo a revista científica en matemáticas aplicadas. (68 caracteres)
+  \item Diseño y documentación de herramienta visual en Shiny o Dash. (64 caracteres)
+  \item Presentación de resultados en coloquios y congresos. (52 caracteres)
+\end{itemize}
+\section{Plan de Trabajo por Etapas}
+
+\subsection*{Etapa 1 — Año 2025}
+\textbf{Duración:} 6 meses\\
+\textbf{Descripción:} Durante esta primera fase se establecerán las bases conceptuales y matemáticas del proyecto. Se realizará una revisión exhaustiva de la literatura en teoría de colas, procesos estocásticos, y aprendizaje por refuerzo. Posteriormente, se formularán modelos base de polling systems con estructuras dinámicas, y se definirán formalmente las variables relevantes y métricas de desempeño. Se comenzará con la implementación de simulaciones iniciales de políticas clásicas (round-robin, gated, exhaustive) como referencia para análisis comparativo.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Realizar revisión bibliográfica y sistematización de modelos existentes de colas y aprendizaje automático.
+  \item Formular modelos matemáticos estocásticos básicos y definir métricas clave de desempeño.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Documento técnico con marco teórico y estado del arte.
+  \item Prototipo de simulación inicial de políticas tradicionales en sistemas de colas.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Revisión de al menos 50 artículos clave sobre ML y teoría de colas.
+  \item Modelado en papel y validación formal de condiciones de estabilidad.
+  \item Implementación de modelos clásicos con Python/SimPy.
+  \item Redacción del informe técnico de avance.
+\end{itemize}
+
+\subsection*{Etapa 2 — Año 2026}
+\textbf{Duración:} 12 meses\\
+\textbf{Descripción:} En esta segunda fase se desarrollarán e implementarán algoritmos de aprendizaje automático, en particular aprendizaje por refuerzo, aplicados a los modelos de colas formulados. Se evaluarán distintas arquitecturas de agentes de decisión adaptativa, midiendo su desempeño contra políticas tradicionales en diversos escenarios simulados. También se realizarán análisis matemáticos sobre estabilidad, convergencia y ergodicidad de los modelos híbridos. Esta etapa busca consolidar la parte computacional y teórica del proyecto mediante simulaciones robustas.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Desarrollar e implementar algoritmos de ML aplicados a los modelos de colas.
+  \item Analizar y validar el comportamiento de los modelos híbridos mediante pruebas computacionales.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Repositorio de código con políticas de ML implementadas.
+  \item Informe técnico de análisis comparativo de políticas.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Diseño de entorno de simulación para aprendizaje por refuerzo.
+  \item Implementación de políticas con TensorFlow/Keras.
+  \item Ejecución de simulaciones comparativas en escenarios variables.
+  \item Análisis de resultados y validación con métricas de desempeño.
+\end{itemize}
+
+\subsection*{Etapa 3 — Año 2027}
+\textbf{Duración:} 12 meses\\
+\textbf{Descripción:} La etapa final se enfocará en la validación empírica de los modelos desarrollados y la preparación de publicaciones científicas. Se realizarán ajustes al modelo con base en los resultados obtenidos y se elaborarán herramientas de visualización de resultados. Además, se integrará un informe final con recomendaciones, implicaciones teóricas y aplicadas, así como posibles rutas para aplicaciones futuras en sectores estratégicos.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Validar los modelos en entornos simulados y ajustar parámetros finales.
+  \item Difundir los resultados a través de publicaciones, presentaciones y herramientas digitales.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Artículo científico para revista indexada.
+  \item Informe final y repositorio con visualización de resultados.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Ajuste final de hiperparámetros y simulaciones.
+  \item Redacción y envío de artículo a revista académica.
+  \item Generación de panel de visualización de políticas y desempeño.
+  \item Entrega del informe final y cierre del proyecto.
+\end{itemize}
+
+
+\section{Plan de Trabajo por Etapas}
+
+\subsection*{Etapa 1 — Año 2025}
+\textbf{Duración:} 6 meses\\
+\textbf{Descripción:} Durante esta primera fase se establecerán las bases conceptuales y matemáticas del proyecto. Se realizará una revisión exhaustiva de la literatura en teoría de colas, procesos estocásticos, y aprendizaje por refuerzo. Posteriormente, se formularán modelos base de polling systems con estructuras dinámicas, y se definirán formalmente las variables relevantes y métricas de desempeño. Se comenzará con la implementación de simulaciones iniciales de políticas clásicas (round-robin, gated, exhaustive) como referencia para análisis comparativo.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Realizar revisión bibliográfica y sistematización de modelos existentes de colas y aprendizaje automático.
+  \item Formular modelos matemáticos estocásticos básicos y definir métricas clave de desempeño.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Documento técnico con marco teórico y estado del arte.
+  \item Prototipo de simulación inicial de políticas tradicionales en sistemas de colas.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Revisión de al menos 50 artículos clave sobre ML y teoría de colas.
+  \item Modelado en papel y validación formal de condiciones de estabilidad.
+  \item Implementación de modelos clásicos con Python/SimPy.
+  \item Redacción del informe técnico de avance.
+\end{itemize}
+
+\subsection*{Etapa 2 — Año 2026}
+\textbf{Duración:} 12 meses\\
+\textbf{Descripción:} En esta segunda fase se desarrollarán e implementarán algoritmos de aprendizaje automático, en particular aprendizaje por refuerzo, aplicados a los modelos de colas formulados. Se evaluarán distintas arquitecturas de agentes de decisión adaptativa, midiendo su desempeño contra políticas tradicionales en diversos escenarios simulados. También se realizarán análisis matemáticos sobre estabilidad, convergencia y ergodicidad de los modelos híbridos. Esta etapa busca consolidar la parte computacional y teórica del proyecto mediante simulaciones robustas.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Desarrollar e implementar algoritmos de ML aplicados a los modelos de colas.
+  \item Analizar y validar el comportamiento de los modelos híbridos mediante pruebas computacionales.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Repositorio de código con políticas de ML implementadas.
+  \item Informe técnico de análisis comparativo de políticas.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Diseño de entorno de simulación para aprendizaje por refuerzo.
+  \item Implementación de políticas con TensorFlow/Keras.
+  \item Ejecución de simulaciones comparativas en escenarios variables.
+  \item Análisis de resultados y validación con métricas de desempeño.
+\end{itemize}
+
+\subsection*{Etapa 3 — Año 2027}
+\textbf{Duración:} 12 meses\\
+\textbf{Descripción:} La etapa final se enfocará en la validación empírica de los modelos desarrollados y la preparación de publicaciones científicas. Se realizarán ajustes al modelo con base en los resultados obtenidos y se elaborarán herramientas de visualización de resultados. Además, se integrará un informe final con recomendaciones, implicaciones teóricas y aplicadas, así como posibles rutas para aplicaciones futuras en sectores estratégicos.
+
+\textbf{Metas:}
+\begin{itemize}
+  \item Validar los modelos en entornos simulados y ajustar parámetros finales.
+  \item Difundir los resultados a través de publicaciones, presentaciones y herramientas digitales.
+\end{itemize}
+
+\textbf{Entregables:}
+\begin{itemize}
+  \item Artículo científico para revista indexada.
+  \item Informe final y repositorio con visualización de resultados.
+\end{itemize}
+
+\textbf{Actividades:}
+\begin{itemize}
+  \item Ajuste final de hiperparámetros y simulaciones.
+  \item Redacción y envío de artículo a revista académica.
+  \item Generación de panel de visualización de políticas y desempeño.
+  \item Entrega del informe final y cierre del proyecto.
+\end{itemize}
+
+
+\section{Plan de Trabajo por Etapas}
+
+% =======================
 
 \section{Semblanza}
+
+\section{Semblanza}
+Carlos Martínez Rodríguez es profesor-investigador en la UACM en el área de matemáticas aplicadas. Se especializa en teoría de colas, procesos estocásticos y ciencia de datos. Ha publicado en arXiv, ResearchGate y Academia.edu, contribuyendo en modelos de salud, urbanos y administrativos.
+
 Carlos Martínez Rodríguez es profesor-investigador en la Universidad Autónoma de la Ciudad de México (UACM), adscrito al área de matemáticas aplicadas. Su labor académica se centra en la modelación estocástica, teoría de colas y procesos regenerativos, con aplicaciones interdisciplinarias en ciencia de datos, sistemas de atención, y procesos sociales.
 
 Es autor de diversas publicaciones en plataformas académicas internacionales como \textit{arXiv}, donde ha difundido contribuciones sobre cadenas de Markov, modelos para el análisis de sistemas de salud y procesos de renovación. En \textit{ResearchGate}, mantiene un portafolio activo de investigación aplicada, incluyendo manuscritos de revisión, herramientas teóricas y aportaciones metodológicas. Además, en \textit{Academia.edu} comparte materiales docentes y avances de proyectos que buscan vincular la teoría con problemáticas actuales.
@@ -308,658 +767,27 @@ Su producción académica ha influido en el desarrollo de modelos matemáticos c
 Carlos colabora activamente en proyectos de ciencia básica y de frontera, y actualmente impulsa una línea de investigación sobre la incorporación de aprendizaje automático en sistemas estocásticos de servicio.
 
 \section{Publicaciones Destacadas}
+
+\section{Publicaciones Destacadas}
 \begin{itemize}
   \item D. Campos, C.A. Martínez, A. Contreras-Cristán y F. O'Reilly (2010). \textit{Inferences for mixtures of distributions for centrally censored data with partial identification}. Communications in Statistics -- Theory and Methods, 39(12), 2241--2263.
   \item Cuellar, P., Castañeda-Ortiz, E.J., Rosales-Zarza, C., Martínez-Rodríguez, C.E., Canela-Pérez, I., Rodríguez, M.A., Valdés, J., \& Azuara-Liceaga, E. (2024). \textit{Genome-Wide Classification of Myb Domain-Containing Protein Families in Entamoeba invadens}.
 \end{itemize}
 
 
-\section{Plan de Trabajo por Etapas}
-
-\subsection*{Etapa 1 — Año 2025 (Duración: 6 meses)}
-\textbf{Descripción:} Durante esta primera fase se establecerán las bases conceptuales y matemáticas del proyecto. Se realizará una revisión exhaustiva de la literatura en teoría de colas, procesos estocásticos, y aprendizaje por refuerzo. Posteriormente, se formularán modelos base de polling systems con estructuras dinámicas, y se definirán formalmente las variables relevantes y métricas de desempeño. Se comenzará con la implementación de simulaciones iniciales de políticas clásicas (round-robin, gated, exhaustive) como referencia para análisis comparativo.
-
-\textbf{Metas:}
 \begin{itemize}
-  \item Realizar revisión bibliográfica y sistematización de modelos existentes de colas y aprendizaje automático.
-  \item Formular modelos matemáticos estocásticos básicos y definir métricas clave de desempeño.
+  \item D. Campos et al. (2010). \textit{Inferences for mixtures of distributions for centrally censored data...}
+  \item Cuellar et al. (2024). \textit{Genome-Wide Classification of Myb Domain-Containing Protein Families...}
 \end{itemize}
 
-\textbf{Entregables:}
-\begin{itemize}
-  \item Documento técnico con marco teórico y estado del arte.
-  \item Prototipo de simulación inicial de políticas tradicionales en sistemas de colas.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Revisión de al menos 50 artículos clave sobre ML y teoría de colas. (97 caracteres)
-  \item Modelado en papel y validación formal de condiciones de estabilidad. (91 caracteres)
-  \item Implementación de modelos clásicos con Python/SimPy. (67 caracteres)
-  \item Redacción del informe técnico de avance. (49 caracteres)
-\end{itemize}
-
-\subsection*{Etapa 2 — Año 2026 (Duración: 6 meses)}
-\textbf{Descripción:} Esta fase se centrará en la implementación computacional de los modelos propuestos y en el desarrollo de algoritmos de aprendizaje automático, particularmente aprendizaje por refuerzo. Se diseñarán entornos de simulación para probar políticas de servicio aprendidas dinámicamente y se compararán con políticas tradicionales. También se trabajará en la recolección de datos simulados y en la evaluación del rendimiento de los modelos mediante métricas cuantitativas.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Desarrollar e implementar algoritmos de ML adaptados a sistemas de colas.
-  \item Diseñar un entorno de simulación robusto para pruebas comparativas.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Código funcional de algoritmos de aprendizaje por refuerzo.
-  \item Informe de simulación con análisis comparativo y visualizaciones.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Codificación de entorno de simulación en Python con ML. (61 caracteres)
-  \item Integración de modelos de aprendizaje tipo Q-Learning. (59 caracteres)
-  \item Generación de conjuntos de datos sintéticos controlados. (58 caracteres)
-  \item Redacción del informe de resultados y visualizaciones. (56 caracteres)
-\end{itemize}
-
-\subsection*{Etapa 3 — Año 2027 (Duración: 6 meses)}
-\textbf{Descripción:} La última etapa estará enfocada en la validación teórica y práctica de los resultados obtenidos. Se realizarán análisis de estabilidad, convergencia y desempeño. Se prepararán artículos científicos para su publicación en revistas de alto impacto. También se desarrollará una herramienta de visualización interactiva y se socializarán los hallazgos con la comunidad académica.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Validar matemáticamente los modelos desarrollados.
-  \item Publicar y difundir los resultados científicos y técnicos del proyecto.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Artículo científico sometido a revista indexada.
-  \item Herramienta de visualización y reporte final del proyecto.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Evaluación formal de condiciones de estabilidad. (52 caracteres)
-  \item Envío de artículo a revista científica en matemáticas aplicadas. (68 caracteres)
-  \item Diseño y documentación de herramienta visual en Shiny o Dash. (64 caracteres)
-  \item Presentación de resultados en coloquios y congresos. (52 caracteres)
-\end{itemize}
-
-
-
-
-\section{Hipótesis o Preguntas de Investigación}
-\begin{itemize}
-  \item H1: Es posible construir un modelo híbrido de aprendizaje automático y teoría de colas que preserve la estabilidad del sistema bajo condiciones estocásticas.
-  \item H2: Las políticas de servicio derivadas de algoritmos de ML pueden superar en desempeño (tiempo de espera y throughput) a las políticas tradicionales en entornos no estacionarios.
-\end{itemize}
-
-\section{Pertinencia de la Propuesta}
-El proyecto se alinea con el objetivo general de la convocatoria al impulsar la investigación de frontera con enfoque interdisciplinario. Integra matemáticas aplicadas, ciencia de datos y sistemas estocásticos para abordar problemas reales en telecomunicaciones y logística. Además, contribuye a la formación de capacidades en áreas estratégicas y emergentes.
-
-\section{Metodología}
-Se realizará una revisión exhaustiva de literatura en teoría de colas, aprendizaje por refuerzo y polling systems. Se construirán modelos estocásticos con base en procesos de Markov y semi-Markov. Se implementarán algoritmos de aprendizaje en Python/R y se desarrollarán simulaciones para evaluar políticas de servicio. Se analizarán propiedades como estabilidad, convergencia y eficiencia mediante técnicas matemáticas y computacionales.
-
-\section{Resultados Esperados}
-Desarrollo de una teoría unificada entre aprendizaje automático y sistemas de colas. Publicaciones científicas en matemáticas aplicadas y ciencia de datos. Prototipos funcionales de simulación y visualización. Contribuciones a la optimización de políticas de servicio en sectores clave.
-
-\section{Factores de Riesgo y Estrategias}
-Los principales riesgos son la complejidad matemática y computacional del modelo y la disponibilidad de datos para simulación. Para mitigarlos, se iniciará con modelos simplificados, se realizarán pruebas incrementales y se utilizarán datos sintéticos validados. Se prevé retroalimentación continua con expertos del área.
-
-\section{Impacto Social}
-La investigación tiene potencial para mejorar significativamente la eficiencia de sistemas de atención al público, telecomunicaciones y logística. El uso de políticas adaptativas optimizadas mediante ML puede reducir tiempos de espera, costos operativos y mejorar la experiencia de usuarios en servicios públicos y privados.
-\section{Plan de Trabajo por Etapas}
-
-\subsection*{Etapa 1 — Año 2025 (Duración: 6 meses)}
-\textbf{Descripción:} Durante esta primera fase se establecerán las bases conceptuales y matemáticas del proyecto. Se realizará una revisión exhaustiva de la literatura en teoría de colas, procesos estocásticos, y aprendizaje por refuerzo. Posteriormente, se formularán modelos base de polling systems con estructuras dinámicas, y se definirán formalmente las variables relevantes y métricas de desempeño. Se comenzará con la implementación de simulaciones iniciales de políticas clásicas (round-robin, gated, exhaustive) como referencia para análisis comparativo.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Realizar revisión bibliográfica y sistematización de modelos existentes de colas y aprendizaje automático.
-  \item Formular modelos matemáticos estocásticos básicos y definir métricas clave de desempeño.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Documento técnico con marco teórico y estado del arte.
-  \item Prototipo de simulación inicial de políticas tradicionales en sistemas de colas.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Revisión de al menos 50 artículos clave sobre ML y teoría de colas. (97 caracteres)
-  \item Modelado en papel y validación formal de condiciones de estabilidad. (91 caracteres)
-  \item Implementación de modelos clásicos con Python/SimPy. (67 caracteres)
-  \item Redacción del informe técnico de avance. (49 caracteres)
-\end{itemize}
-
-\subsection*{Etapa 2 — Año 2026 (Duración: 6 meses)}
-\textbf{Descripción:} Esta fase se centrará en la implementación computacional de los modelos propuestos y en el desarrollo de algoritmos de aprendizaje automático, particularmente aprendizaje por refuerzo. Se diseñarán entornos de simulación para probar políticas de servicio aprendidas dinámicamente y se compararán con políticas tradicionales. También se trabajará en la recolección de datos simulados y en la evaluación del rendimiento de los modelos mediante métricas cuantitativas.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Desarrollar e implementar algoritmos de ML adaptados a sistemas de colas.
-  \item Diseñar un entorno de simulación robusto para pruebas comparativas.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Código funcional de algoritmos de aprendizaje por refuerzo.
-  \item Informe de simulación con análisis comparativo y visualizaciones.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Codificación de entorno de simulación en Python con ML. (61 caracteres)
-  \item Integración de modelos de aprendizaje tipo Q-Learning. (59 caracteres)
-  \item Generación de conjuntos de datos sintéticos controlados. (58 caracteres)
-  \item Redacción del informe de resultados y visualizaciones. (56 caracteres)
-\end{itemize}
-
-\subsection*{Etapa 3 — Año 2027 (Duración: 6 meses)}
-\textbf{Descripción:} La última etapa estará enfocada en la validación teórica y práctica de los resultados obtenidos. Se realizarán análisis de estabilidad, convergencia y desempeño. Se prepararán artículos científicos para su publicación en revistas de alto impacto. También se desarrollará una herramienta de visualización interactiva y se socializarán los hallazgos con la comunidad académica.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Validar matemáticamente los modelos desarrollados.
-  \item Publicar y difundir los resultados científicos y técnicos del proyecto.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Artículo científico sometido a revista indexada.
-  \item Herramienta de visualización y reporte final del proyecto.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Evaluación formal de condiciones de estabilidad. (52 caracteres)
-  \item Envío de artículo a revista científica en matemáticas aplicadas. (68 caracteres)
-  \item Diseño y documentación de herramienta visual en Shiny o Dash. (64 caracteres)
-  \item Presentación de resultados en coloquios y congresos. (52 caracteres)
-\end{itemize}
-\section{Plan de Trabajo por Etapas}
-
-\subsection*{Etapa 1 — Año 2025}
-\textbf{Duración:} 6 meses\\
-\textbf{Descripción:} Durante esta primera fase se establecerán las bases conceptuales y matemáticas del proyecto. Se realizará una revisión exhaustiva de la literatura en teoría de colas, procesos estocásticos, y aprendizaje por refuerzo. Posteriormente, se formularán modelos base de polling systems con estructuras dinámicas, y se definirán formalmente las variables relevantes y métricas de desempeño. Se comenzará con la implementación de simulaciones iniciales de políticas clásicas (round-robin, gated, exhaustive) como referencia para análisis comparativo.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Realizar revisión bibliográfica y sistematización de modelos existentes de colas y aprendizaje automático.
-  \item Formular modelos matemáticos estocásticos básicos y definir métricas clave de desempeño.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Documento técnico con marco teórico y estado del arte.
-  \item Prototipo de simulación inicial de políticas tradicionales en sistemas de colas.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Revisión de al menos 50 artículos clave sobre ML y teoría de colas.
-  \item Modelado en papel y validación formal de condiciones de estabilidad.
-  \item Implementación de modelos clásicos con Python/SimPy.
-  \item Redacción del informe técnico de avance.
-\end{itemize}
-
-\subsection*{Etapa 2 — Año 2026}
-\textbf{Duración:} 12 meses\\
-\textbf{Descripción:} En esta segunda fase se desarrollarán e implementarán algoritmos de aprendizaje automático, en particular aprendizaje por refuerzo, aplicados a los modelos de colas formulados. Se evaluarán distintas arquitecturas de agentes de decisión adaptativa, midiendo su desempeño contra políticas tradicionales en diversos escenarios simulados. También se realizarán análisis matemáticos sobre estabilidad, convergencia y ergodicidad de los modelos híbridos. Esta etapa busca consolidar la parte computacional y teórica del proyecto mediante simulaciones robustas.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Desarrollar e implementar algoritmos de ML aplicados a los modelos de colas.
-  \item Analizar y validar el comportamiento de los modelos híbridos mediante pruebas computacionales.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Repositorio de código con políticas de ML implementadas.
-  \item Informe técnico de análisis comparativo de políticas.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Diseño de entorno de simulación para aprendizaje por refuerzo.
-  \item Implementación de políticas con TensorFlow/Keras.
-  \item Ejecución de simulaciones comparativas en escenarios variables.
-  \item Análisis de resultados y validación con métricas de desempeño.
-\end{itemize}
-
-\subsection*{Etapa 3 — Año 2027}
-\textbf{Duración:} 12 meses\\
-\textbf{Descripción:} La etapa final se enfocará en la validación empírica de los modelos desarrollados y la preparación de publicaciones científicas. Se realizarán ajustes al modelo con base en los resultados obtenidos y se elaborarán herramientas de visualización de resultados. Además, se integrará un informe final con recomendaciones, implicaciones teóricas y aplicadas, así como posibles rutas para aplicaciones futuras en sectores estratégicos.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Validar los modelos en entornos simulados y ajustar parámetros finales.
-  \item Difundir los resultados a través de publicaciones, presentaciones y herramientas digitales.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Artículo científico para revista indexada.
-  \item Informe final y repositorio con visualización de resultados.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Ajuste final de hiperparámetros y simulaciones.
-  \item Redacción y envío de artículo a revista académica.
-  \item Generación de panel de visualización de políticas y desempeño.
-  \item Entrega del informe final y cierre del proyecto.
-\end{itemize}
 
 \section{Desglose Financiero Estimado por Etapa}
 
-\subsection*{Etapa 1 — Año 2025}
-\begin{itemize}
-  \item \textbf{Adquisición de equipo de cómputo (iMac con máxima configuración)}: \$90,000 MXN
-  \item \textbf{Adquisición de estación de trabajo científica de alto rendimiento (procesadores múltiples, GPU, 64 GB RAM)}: \$120,000 MXN
-  \item \textbf{Adquisición de iPad de gran capacidad (pantalla de 12.9 pulgadas, ideal para lectura científica y anotaciones)}: \$45,000 MXN
-  \item \textbf{Monitor auxiliar de alta resolución para soporte en pantallas extendidas}: \$25,000 MXN
-  \item \textbf{Trackpad avanzado compatible con estación de trabajo y iMac}: \$8,000 MXN
-  \item \textbf{Compra de bibliografía especializada (libros, licencias digitales)}: \$30,000 MXN
-  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
-  \item \textbf{Otros (papelería, servicios)}: \$10,000 MXN
-  \item \textbf{Total estimado}: \textbf{\$358,000 MXN}
-\end{itemize}
-
-\subsection*{Etapa 2 — Año 2026}
-\begin{itemize}
-  \item \textbf{Participación en congreso nacional/internacional (viaje + inscripción)}: \$50,000 MXN
-  \item \textbf{Apoyo a asistente de investigación (6 meses)}: \$60,000 MXN
-  \item \textbf{Software especializado / licencias (TensorFlow, MatLab, etc.)}: \$30,000 MXN
-  \item \textbf{Otros (hospedaje, materiales)}: \$10,000 MXN
-  \item \textbf{Total estimado}: \textbf{\$150,000 MXN}
-\end{itemize}
-
-\subsection*{Etapa 3 — Año 2027}
-\begin{itemize}
-  \item \textbf{Costo de publicación en revista indexada (open access)}: \$40,000 MXN
-  \item \textbf{Desarrollo y despliegue de herramienta web interactiva}: \$40,000 MXN
-  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
-  \item \textbf{Otros (traducción, edición, difusión)}: \$10,000 MXN
-  \item \textbf{Total estimado}: \textbf{\$120,000 MXN}
-\end{itemize}
-
-\textbf{Monto total estimado del proyecto:} \textbf{\$628,000 MXN}
-
-
-\section{Hipótesis o Preguntas de Investigación}
-\begin{itemize}
-  \item H1: Es posible construir un modelo híbrido de aprendizaje automático y teoría de colas que preserve la estabilidad del sistema bajo condiciones estocásticas.
-  \item H2: Las políticas de servicio derivadas de algoritmos de ML pueden superar en desempeño (tiempo de espera y throughput) a las políticas tradicionales en entornos no estacionarios.
-\end{itemize}
-
-\section{Pertinencia de la Propuesta}
-El proyecto se alinea con el objetivo general de la convocatoria al impulsar la investigación de frontera con enfoque interdisciplinario. Integra matemáticas aplicadas, ciencia de datos y sistemas estocásticos para abordar problemas reales en telecomunicaciones y logística. Además, contribuye a la formación de capacidades en áreas estratégicas y emergentes.
-
-\section{Metodología}
-Se realizará una revisión exhaustiva de literatura en teoría de colas, aprendizaje por refuerzo y polling systems. Se construirán modelos estocásticos con base en procesos de Markov y semi-Markov. Se implementarán algoritmos de aprendizaje en Python/R y se desarrollarán simulaciones para evaluar políticas de servicio. Se analizarán propiedades como estabilidad, convergencia y eficiencia mediante técnicas matemáticas y computacionales.
-
-\section{Resultados Esperados}
-Desarrollo de una teoría unificada entre aprendizaje automático y sistemas de colas. Publicaciones científicas en matemáticas aplicadas y ciencia de datos. Prototipos funcionales de simulación y visualización. Contribuciones a la optimización de políticas de servicio en sectores clave.
-
-\section{Factores de Riesgo y Estrategias}
-Los principales riesgos son la complejidad matemática y computacional del modelo y la disponibilidad de datos para simulación. Para mitigarlos, se iniciará con modelos simplificados, se realizarán pruebas incrementales y se utilizarán datos sintéticos validados. Se prevé retroalimentación continua con expertos del área.
-
-\section{Impacto Social}
-La investigación tiene potencial para mejorar significativamente la eficiencia de sistemas de atención al público, telecomunicaciones y logística. El uso de políticas adaptativas optimizadas mediante ML puede reducir tiempos de espera, costos operativos y mejorar la experiencia de usuarios en servicios públicos y privados.
-\section{Plan de Trabajo por Etapas}
-
-\subsection*{Etapa 1 — Año 2025 (Duración: 6 meses)}
-\textbf{Descripción:} Durante esta primera fase se establecerán las bases conceptuales y matemáticas del proyecto. Se realizará una revisión exhaustiva de la literatura en teoría de colas, procesos estocásticos, y aprendizaje por refuerzo. Posteriormente, se formularán modelos base de polling systems con estructuras dinámicas, y se definirán formalmente las variables relevantes y métricas de desempeño. Se comenzará con la implementación de simulaciones iniciales de políticas clásicas (round-robin, gated, exhaustive) como referencia para análisis comparativo.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Realizar revisión bibliográfica y sistematización de modelos existentes de colas y aprendizaje automático.
-  \item Formular modelos matemáticos estocásticos básicos y definir métricas clave de desempeño.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Documento técnico con marco teórico y estado del arte.
-  \item Prototipo de simulación inicial de políticas tradicionales en sistemas de colas.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Revisión de al menos 50 artículos clave sobre ML y teoría de colas. (97 caracteres)
-  \item Modelado en papel y validación formal de condiciones de estabilidad. (91 caracteres)
-  \item Implementación de modelos clásicos con Python/SimPy. (67 caracteres)
-  \item Redacción del informe técnico de avance. (49 caracteres)
-\end{itemize}
-
-\subsection*{Etapa 2 — Año 2026 (Duración: 6 meses)}
-\textbf{Descripción:} Esta fase se centrará en la implementación computacional de los modelos propuestos y en el desarrollo de algoritmos de aprendizaje automático, particularmente aprendizaje por refuerzo. Se diseñarán entornos de simulación para probar políticas de servicio aprendidas dinámicamente y se compararán con políticas tradicionales. También se trabajará en la recolección de datos simulados y en la evaluación del rendimiento de los modelos mediante métricas cuantitativas.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Desarrollar e implementar algoritmos de ML adaptados a sistemas de colas.
-  \item Diseñar un entorno de simulación robusto para pruebas comparativas.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Código funcional de algoritmos de aprendizaje por refuerzo.
-  \item Informe de simulación con análisis comparativo y visualizaciones.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Codificación de entorno de simulación en Python con ML. (61 caracteres)
-  \item Integración de modelos de aprendizaje tipo Q-Learning. (59 caracteres)
-  \item Generación de conjuntos de datos sintéticos controlados. (58 caracteres)
-  \item Redacción del informe de resultados y visualizaciones. (56 caracteres)
-\end{itemize}
-
-\subsection*{Etapa 3 — Año 2027 (Duración: 6 meses)}
-\textbf{Descripción:} La última etapa estará enfocada en la validación teórica y práctica de los resultados obtenidos. Se realizarán análisis de estabilidad, convergencia y desempeño. Se prepararán artículos científicos para su publicación en revistas de alto impacto. También se desarrollará una herramienta de visualización interactiva y se socializarán los hallazgos con la comunidad académica.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Validar matemáticamente los modelos desarrollados.
-  \item Publicar y difundir los resultados científicos y técnicos del proyecto.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Artículo científico sometido a revista indexada.
-  \item Herramienta de visualización y reporte final del proyecto.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Evaluación formal de condiciones de estabilidad. (52 caracteres)
-  \item Envío de artículo a revista científica en matemáticas aplicadas. (68 caracteres)
-  \item Diseño y documentación de herramienta visual en Shiny o Dash. (64 caracteres)
-  \item Presentación de resultados en coloquios y congresos. (52 caracteres)
-\end{itemize}
-\section{Plan de Trabajo por Etapas}
-
-\subsection*{Etapa 1 — Año 2025}
-\textbf{Duración:} 6 meses\\
-\textbf{Descripción:} Durante esta primera fase se establecerán las bases conceptuales y matemáticas del proyecto. Se realizará una revisión exhaustiva de la literatura en teoría de colas, procesos estocásticos, y aprendizaje por refuerzo. Posteriormente, se formularán modelos base de polling systems con estructuras dinámicas, y se definirán formalmente las variables relevantes y métricas de desempeño. Se comenzará con la implementación de simulaciones iniciales de políticas clásicas (round-robin, gated, exhaustive) como referencia para análisis comparativo.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Realizar revisión bibliográfica y sistematización de modelos existentes de colas y aprendizaje automático.
-  \item Formular modelos matemáticos estocásticos básicos y definir métricas clave de desempeño.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Documento técnico con marco teórico y estado del arte.
-  \item Prototipo de simulación inicial de políticas tradicionales en sistemas de colas.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Revisión de al menos 50 artículos clave sobre ML y teoría de colas.
-  \item Modelado en papel y validación formal de condiciones de estabilidad.
-  \item Implementación de modelos clásicos con Python/SimPy.
-  \item Redacción del informe técnico de avance.
-\end{itemize}
-
-\subsection*{Etapa 2 — Año 2026}
-\textbf{Duración:} 12 meses\\
-\textbf{Descripción:} En esta segunda fase se desarrollarán e implementarán algoritmos de aprendizaje automático, en particular aprendizaje por refuerzo, aplicados a los modelos de colas formulados. Se evaluarán distintas arquitecturas de agentes de decisión adaptativa, midiendo su desempeño contra políticas tradicionales en diversos escenarios simulados. También se realizarán análisis matemáticos sobre estabilidad, convergencia y ergodicidad de los modelos híbridos. Esta etapa busca consolidar la parte computacional y teórica del proyecto mediante simulaciones robustas.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Desarrollar e implementar algoritmos de ML aplicados a los modelos de colas.
-  \item Analizar y validar el comportamiento de los modelos híbridos mediante pruebas computacionales.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Repositorio de código con políticas de ML implementadas.
-  \item Informe técnico de análisis comparativo de políticas.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Diseño de entorno de simulación para aprendizaje por refuerzo.
-  \item Implementación de políticas con TensorFlow/Keras.
-  \item Ejecución de simulaciones comparativas en escenarios variables.
-  \item Análisis de resultados y validación con métricas de desempeño.
-\end{itemize}
-
-\subsection*{Etapa 3 — Año 2027}
-\textbf{Duración:} 12 meses\\
-\textbf{Descripción:} La etapa final se enfocará en la validación empírica de los modelos desarrollados y la preparación de publicaciones científicas. Se realizarán ajustes al modelo con base en los resultados obtenidos y se elaborarán herramientas de visualización de resultados. Además, se integrará un informe final con recomendaciones, implicaciones teóricas y aplicadas, así como posibles rutas para aplicaciones futuras en sectores estratégicos.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Validar los modelos en entornos simulados y ajustar parámetros finales.
-  \item Difundir los resultados a través de publicaciones, presentaciones y herramientas digitales.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Artículo científico para revista indexada.
-  \item Informe final y repositorio con visualización de resultados.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Ajuste final de hiperparámetros y simulaciones.
-  \item Redacción y envío de artículo a revista académica.
-  \item Generación de panel de visualización de políticas y desempeño.
-  \item Entrega del informe final y cierre del proyecto.
-\end{itemize}
+\section{Desglose Financiero Estimado por Etapa}
 
 \section{Desglose Financiero Estimado por Etapa}
 
-\subsection*{Etapa 1 — Año 2025}
-\begin{itemize}
-  \item \textbf{Adquisición de equipo de cómputo (iMac con máxima configuración)}: \$90,000 MXN
-  \item \textbf{Adquisición de estación de trabajo científica de alto rendimiento (procesadores múltiples, GPU, 64 GB RAM)}: \$120,000 MXN
-  \item \textbf{Adquisición de iPad de gran capacidad (pantalla de 12.9 pulgadas, ideal para lectura científica y anotaciones)}: \$45,000 MXN
-  \item \textbf{Monitor auxiliar de alta resolución para soporte en pantallas extendidas}: \$25,000 MXN
-  \item \textbf{Trackpad avanzado compatible con estación de trabajo y iMac}: \$8,000 MXN
-  \item \textbf{Compra de bibliografía especializada (libros, licencias digitales)}: \$30,000 MXN
-  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
-  \item \textbf{Otros (papelería, servicios)}: \$10,000 MXN
-  \item \textbf{Total estimado}: \textbf{\$358,000 MXN}
-\end{itemize}
-
-\subsection*{Etapa 2 — Año 2026}
-\begin{itemize}
-  \item \textbf{Participación en congreso nacional/internacional (viaje + inscripción)}: \$50,000 MXN
-  \item \textbf{Apoyo a asistente de investigación (6 meses)}: \$60,000 MXN
-  \item \textbf{Software especializado / licencias (TensorFlow, MatLab, etc.)}: \$30,000 MXN
-  \item \textbf{Otros (hospedaje, materiales)}: \$10,000 MXN
-  \item \textbf{Total estimado}: \textbf{\$150,000 MXN}
-\end{itemize}
-
-\subsection*{Etapa 3 — Año 2027}
-\begin{itemize}
-  \item \textbf{Costo de publicación en revista indexada (open access)}: \$40,000 MXN
-  \item \textbf{Desarrollo y despliegue de herramienta web interactiva}: \$40,000 MXN
-  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
-  \item \textbf{Otros (traducción, edición, difusión)}: \$10,000 MXN
-  \item \textbf{Total estimado}: \textbf{\$120,000 MXN}
-\end{itemize}
-
-\textbf{Monto total estimado del proyecto:} \textbf{\$628,000 MXN}
-
-
-
-\subsection*{Hipótesis o Preguntas de Investigación}
-
-H1: Es posible construir un modelo híbrido de aprendizaje automático y teoría de colas que preserve la estabilidad del sistema bajo condiciones estocásticas.
-
-H2: Las políticas de servicio derivadas de algoritmos de ML pueden superar en desempeño (tiempo de espera y throughput) a las políticas tradicionales en entornos no estacionarios.
-
-\subsection*{Pertinencia de la Propuesta}
-
-El proyecto se alinea con el objetivo general de la convocatoria al impulsar la investigación de frontera con enfoque interdisciplinario. Integra matemáticas aplicadas, ciencia de datos y sistemas estocásticos para abordar problemas reales en telecomunicaciones y logística. Además, contribuye a la formación de capacidades en áreas estratégicas y emergentes.
-
-\subsection*{Metodología}
-
-Se realizará una revisión exhaustiva de literatura en teoría de colas, aprendizaje por refuerzo y polling systems. Se construirán modelos estocásticos con base en procesos de Markov y semi-Markov. Se implementarán algoritmos de aprendizaje en Python/R y se desarrollarán simulaciones para evaluar políticas de servicio. Se analizarán propiedades como estabilidad, convergencia y eficiencia mediante técnicas matemáticas y computacionales.
-
-\subsection*{Resultados Esperados}
-
-Desarrollo de una teoría unificada entre aprendizaje automático y sistemas de colas. Publicaciones científicas en matemáticas aplicadas y ciencia de datos. Prototipos funcionales de simulación y visualización. Contribuciones a la optimización de políticas de servicio en sectores clave.
-
-\subsection*{Factores de Riesgo y Estrategias}
-
-Los principales riesgos son la complejidad matemática y computacional del modelo y la disponibilidad de datos para simulación. Para mitigarlos, se iniciará con modelos simplificados, se realizarán pruebas incrementales y se utilizarán datos sintéticos validados. Se prevé retroalimentación continua con expertos del área.
-
-\subsection*{Impacto Social}
-
-La investigación tiene potencial para mejorar significativamente la eficiencia de sistemas de atención al público, telecomunicaciones y logística. El uso de políticas adaptativas optimizadas mediante ML puede reducir tiempos de espera, costos operativos y mejorar la experiencia de usuarios en servicios públicos y privados.
-
-\section{Plan de Trabajo por Etapas}
-
-\subsection*{Etapa 1 — Año 2025}
-\textbf{Duración:} 6 meses\\
-\textbf{Descripción:} Durante esta primera fase se establecerán las bases conceptuales y matemáticas del proyecto. Se realizará una revisión exhaustiva de la literatura en teoría de colas, procesos estocásticos, y aprendizaje por refuerzo. Posteriormente, se formularán modelos base de polling systems con estructuras dinámicas, y se definirán formalmente las variables relevantes y métricas de desempeño. Se comenzará con la implementación de simulaciones iniciales de políticas clásicas (round-robin, gated, exhaustive) como referencia para análisis comparativo.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Realizar revisión bibliográfica y sistematización de modelos existentes de colas y aprendizaje automático.
-  \item Formular modelos matemáticos estocásticos básicos y definir métricas clave de desempeño.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Documento técnico con marco teórico y estado del arte.
-  \item Prototipo de simulación inicial de políticas tradicionales en sistemas de colas.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Revisión de al menos 50 artículos clave sobre ML y teoría de colas.
-  \item Modelado en papel y validación formal de condiciones de estabilidad.
-  \item Implementación de modelos clásicos con Python/SimPy.
-  \item Redacción del informe técnico de avance.
-\end{itemize}
-
-\subsection*{Etapa 2 — Año 2026}
-\textbf{Duración:} 12 meses\\
-\textbf{Descripción:} En esta segunda fase se desarrollarán e implementarán algoritmos de aprendizaje automático, en particular aprendizaje por refuerzo, aplicados a los modelos de colas formulados. Se evaluarán distintas arquitecturas de agentes de decisión adaptativa, midiendo su desempeño contra políticas tradicionales en diversos escenarios simulados. También se realizarán análisis matemáticos sobre estabilidad, convergencia y ergodicidad de los modelos híbridos. Esta etapa busca consolidar la parte computacional y teórica del proyecto mediante simulaciones robustas.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Desarrollar e implementar algoritmos de ML aplicados a los modelos de colas.
-  \item Analizar y validar el comportamiento de los modelos híbridos mediante pruebas computacionales.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Repositorio de código con políticas de ML implementadas.
-  \item Informe técnico de análisis comparativo de políticas.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Diseño de entorno de simulación para aprendizaje por refuerzo.
-  \item Implementación de políticas con TensorFlow/Keras.
-  \item Ejecución de simulaciones comparativas en escenarios variables.
-  \item Análisis de resultados y validación con métricas de desempeño.
-\end{itemize}
-
-\subsection*{Etapa 3 — Año 2027}
-\textbf{Duración:} 12 meses\\
-\textbf{Descripción:} La etapa final se enfocará en la validación empírica de los modelos desarrollados y la preparación de publicaciones científicas. Se realizarán ajustes al modelo con base en los resultados obtenidos y se elaborarán herramientas de visualización de resultados. Además, se integrará un informe final con recomendaciones, implicaciones teóricas y aplicadas, así como posibles rutas para aplicaciones futuras en sectores estratégicos.
-
-\textbf{Metas:}
-\begin{itemize}
-  \item Validar los modelos en entornos simulados y ajustar parámetros finales.
-  \item Difundir los resultados a través de publicaciones, presentaciones y herramientas digitales.
-\end{itemize}
-
-\textbf{Entregables:}
-\begin{itemize}
-  \item Artículo científico para revista indexada.
-  \item Informe final y repositorio con visualización de resultados.
-\end{itemize}
-
-\textbf{Actividades:}
-\begin{itemize}
-  \item Ajuste final de hiperparámetros y simulaciones.
-  \item Redacción y envío de artículo a revista académica.
-  \item Generación de panel de visualización de políticas y desempeño.
-  \item Entrega del informe final y cierre del proyecto.
-\end{itemize}
-
-
-\section{Plan de Trabajo por Etapas}
-
-% ... (secciones anteriores del plan de trabajo) ...
-
 \section{Desglose Financiero Estimado por Etapa}
-
-\subsection*{Etapa 1 — Año 2025}
-\begin{itemize}
-  \item \textbf{Adquisición de equipo de cómputo (iMac con máxima configuración)}: \$90,000 MXN
-  \item \textbf{Adquisición de estación de trabajo científica de alto rendimiento (procesadores múltiples, GPU, 64 GB RAM)}: \$120,000 MXN
-  \item \textbf{Adquisición de iPad de gran capacidad (pantalla de 12.9 pulgadas, ideal para lectura científica y anotaciones)}: \$45,000 MXN
-  \item \textbf{Monitor auxiliar de alta resolución para soporte en pantallas extendidas}: \$25,000 MXN
-  \item \textbf{Trackpad avanzado compatible con estación de trabajo y iMac}: \$8,000 MXN
-  \item \textbf{Compra de bibliografía especializada (libros, licencias digitales)}: \$30,000 MXN
-  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
-  \item \textbf{Otros (papelería, servicios)}: \$10,000 MXN
-  \item \textbf{Total estimado}: \textbf{\$358,000 MXN}
-\end{itemize}
-
-\subsection*{Etapa 2 — Año 2026}
-\begin{itemize}
-  \item \textbf{Participación en congreso nacional/internacional (viaje + inscripción)}: \$50,000 MXN
-  \item \textbf{Apoyo a asistente de investigación (6 meses)}: \$60,000 MXN
-  \item \textbf{Software especializado / licencias (TensorFlow, MatLab, etc.)}: \$30,000 MXN
-  \item \textbf{Otros (hospedaje, materiales)}: \$10,000 MXN
-  \item \textbf{Total estimado}: \textbf{\$150,000 MXN}
-\end{itemize}
-
-\subsection*{Etapa 3 — Año 2027}
-\begin{itemize}
-  \item \textbf{Costo de publicación en revista indexada (open access)}: \$40,000 MXN
-  \item \textbf{Desarrollo y despliegue de herramienta web interactiva}: \$40,000 MXN
-  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
-  \item \textbf{Otros (traducción, edición, difusión)}: \$10,000 MXN
-  \item \textbf{Total estimado}: \textbf{\$120,000 MXN}
-\end{itemize}
-
-\textbf{Monto total estimado del proyecto:} \textbf{\$628,000 MXN}
-
-% =======================
-
-
-
-\section{Hipótesis o Preguntas de Investigación}
-\begin{itemize}
-  \item H1: Es posible construir un modelo híbrido de aprendizaje automático y teoría de colas que preserve la estabilidad del sistema bajo condiciones estocásticas.
-  \item H2: Las políticas de servicio derivadas de algoritmos de ML pueden superar en desempeño a las políticas tradicionales en entornos no estacionarios.
-\end{itemize}
-
-\section{Pertinencia de la Propuesta}
-El proyecto se alinea con el objetivo general de la convocatoria al impulsar la investigación de frontera con enfoque interdisciplinario. Integra matemáticas aplicadas, ciencia de datos y sistemas estocásticos para abordar problemas reales en telecomunicaciones y logística.
-
-\section{Metodología}
-Se realizará una revisión exhaustiva de literatura, se construirán modelos estocásticos y se implementarán algoritmos de aprendizaje automático en Python/R para evaluar su desempeño mediante simulaciones.
-
-\section{Resultados Esperados}
-\begin{itemize}
-  \item Desarrollo de teoría unificada entre ML y teoría de colas.
-  \item Publicaciones científicas y prototipos de simulación.
-  \item Recomendaciones de políticas de servicio aprendidas.
-\end{itemize}
-
-\section{Factores de Riesgo y Estrategias}
-Riesgos: complejidad del modelo y datos limitados. Estrategias: uso de modelos simplificados, pruebas incrementales y retroalimentación continua con expertos.
-
-\section{Impacto Social}
-Potencial para mejorar sistemas de atención, logística y telecomunicaciones, optimizando recursos y experiencia del usuario mediante políticas adaptativas basadas en ML.
-
-\section{Plan de Trabajo por Etapas}
-% (Contenido existente ya está bien estructurado)
 
 \section{Desglose Financiero Estimado por Etapa}
 
@@ -996,93 +824,141 @@ Potencial para mejorar sistemas de atención, logística y telecomunicaciones, o
 
 \noindent\textbf{Monto total estimado del proyecto:} \textbf{\$628,000 MXN}
 
-\section{Semblanza}
-Carlos Martínez Rodríguez es profesor-investigador en la UACM en el área de matemáticas aplicadas. Se especializa en teoría de colas, procesos estocásticos y ciencia de datos. Ha publicado en arXiv, ResearchGate y Academia.edu, contribuyendo en modelos de salud, urbanos y administrativos.
 
-\section{Publicaciones Destacadas}
+\subsection*{Etapa 1 — Año 2025}
 \begin{itemize}
-  \item D. Campos et al. (2010). \textit{Inferences for mixtures of distributions for centrally censored data...}
-  \item Cuellar et al. (2024). \textit{Genome-Wide Classification of Myb Domain-Containing Protein Families...}
+  \item \textbf{Adquisición de equipo de cómputo (iMac con máxima configuración)}: \$90,000 MXN
+  \item \textbf{Adquisición de estación de trabajo científica de alto rendimiento (procesadores múltiples, GPU, 64 GB RAM)}: \$120,000 MXN
+  \item \textbf{Adquisición de iPad de gran capacidad (pantalla de 12.9 pulgadas, ideal para lectura científica y anotaciones)}: \$45,000 MXN
+  \item \textbf{Monitor auxiliar de alta resolución para soporte en pantallas extendidas}: \$25,000 MXN
+  \item \textbf{Trackpad avanzado compatible con estación de trabajo y iMac}: \$8,000 MXN
+  \item \textbf{Compra de bibliografía especializada (libros, licencias digitales)}: \$30,000 MXN
+  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
+  \item \textbf{Otros (papelería, servicios)}: \$10,000 MXN
+  \item \textbf{Total estimado}: \textbf{\$358,000 MXN}
 \end{itemize}
 
-\section{Bibliografía}
+\subsection*{Etapa 2 — Año 2026}
 \begin{itemize}
-  \item Kleinrock, L. \textit{Queueing Systems, Vol. I}. Wiley.
-  \item Sutton, R. \& Barto, A. \textit{Reinforcement Learning: An Introduction}.
-  \item Chen, H. \& Yao, D. \textit{Fundamentals of Queueing Networks}.
-  \item Zhou, Z. et al. (2020). \textit{Queueing Theory Meets Deep Learning}.
-  \item Artículos recientes en IEEE, Springer y MDPI sobre ML y sistemas de colas.
+  \item \textbf{Participación en congreso nacional/internacional (viaje + inscripción)}: \$50,000 MXN
+  \item \textbf{Apoyo a asistente de investigación (6 meses)}: \$60,000 MXN
+  \item \textbf{Software especializado / licencias (TensorFlow, MatLab, etc.)}: \$30,000 MXN
+  \item \textbf{Otros (hospedaje, materiales)}: \$10,000 MXN
+  \item \textbf{Total estimado}: \textbf{\$150,000 MXN}
 \end{itemize}
 
-
-\section{Bibliografía}
+\subsection*{Etapa 3 — Año 2027}
 \begin{itemize}
-  \item Kleinrock, L. \textit{Queueing Systems, Vol. I}. Wiley.
-  \item Sutton, R. \& Barto, A. \textit{Reinforcement Learning: An Introduction}.
-  \item Chen, H. \& Yao, D. \textit{Fundamentals of Queueing Networks}.
-  \item Zhou, Z. et al. (2020). \textit{Queueing Theory Meets Deep Learning}.
-  \item Artículos recientes en IEEE, Springer y MDPI sobre ML y sistemas de colas.
-  
+  \item \textbf{Costo de publicación en revista indexada (open access)}: \$40,000 MXN
+  \item \textbf{Desarrollo y despliegue de herramienta web interactiva}: \$40,000 MXN
+  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
+  \item \textbf{Otros (traducción, edición, difusión)}: \$10,000 MXN
+  \item \textbf{Total estimado}: \textbf{\$120,000 MXN}
 \end{itemize}
 
-\begin{thebibliography}{99}
+\textbf{Monto total estimado del proyecto:} \textbf{\$628,000 MXN}
 
-\bibitem{Adan} Adan, I. J. B. F., van Leeuwaarden, J. S. H., and Winands, E. M. M. (2006). On the Application of Rouche’s Theorem in Queueing Theory. \textit{Operations Research Letters}, 34(3), 355-360.
+\subsection*{Etapa 1 — Año 2025}
+\begin{itemize}
+  \item \textbf{Adquisición de equipo de cómputo (iMac con máxima configuración)}: \$90,000 MXN
+  \item \textbf{Adquisición de estación de trabajo científica de alto rendimiento (procesadores múltiples, GPU, 64 GB RAM)}: \$120,000 MXN
+  \item \textbf{Adquisición de iPad de gran capacidad (pantalla de 12.9 pulgadas, ideal para lectura científica y anotaciones)}: \$45,000 MXN
+  \item \textbf{Monitor auxiliar de alta resolución para soporte en pantallas extendidas}: \$25,000 MXN
+  \item \textbf{Trackpad avanzado compatible con estación de trabajo y iMac}: \$8,000 MXN
+  \item \textbf{Compra de bibliografía especializada (libros, licencias digitales)}: \$30,000 MXN
+  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
+  \item \textbf{Otros (papelería, servicios)}: \$10,000 MXN
+  \item \textbf{Total estimado}: \textbf{\$358,000 MXN}
+\end{itemize}
 
-\bibitem{Asmussen} Asmussen, S. (1987). \textit{Applied Probability and Queues}. John Wiley and Sons.
+\subsection*{Etapa 2 — Año 2026}
+\begin{itemize}
+  \item \textbf{Participación en congreso nacional/internacional (viaje + inscripción)}: \$50,000 MXN
+  \item \textbf{Apoyo a asistente de investigación (6 meses)}: \$60,000 MXN
+  \item \textbf{Software especializado / licencias (TensorFlow, MatLab, etc.)}: \$30,000 MXN
+  \item \textbf{Otros (hospedaje, materiales)}: \$10,000 MXN
+  \item \textbf{Total estimado}: \textbf{\$150,000 MXN}
+\end{itemize}
 
-\bibitem{Bhat} Bhat, N. (2008). \textit{An Introduction to Queueing Theory: Modelling and Analysis in Applications}. Birkhauser.
+\subsection*{Etapa 3 — Año 2027}
+\begin{itemize}
+  \item \textbf{Costo de publicación en revista indexada (open access)}: \$40,000 MXN
+  \item \textbf{Desarrollo y despliegue de herramienta web interactiva}: \$40,000 MXN
+  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
+  \item \textbf{Otros (traducción, edición, difusión)}: \$10,000 MXN
+  \item \textbf{Total estimado}: \textbf{\$120,000 MXN}
+\end{itemize}
 
-\bibitem{BosBoon} van den Bos, L., and Boon, M. (2013). \textit{Networks of Polling Systems} (report). Eindhoven University of Technology.
-
-\bibitem{BoonMeiWinands} Boon, M. A. A., van der Mei, R. D., and Winands, E. M. M. (2011). Applications of Polling Systems. February 24, 2011.
-
-\bibitem{Boxma} Boxma, J. O. (1991). Analysis and Optimization of Polling Systems, Queueing, Performance and Control in ATM, pp. 173-183.
-
-\bibitem{Boxma2} Boxma J. O., Pseudoconservation Laws in Cyclic Service Systems, Journal of Applied Probability, vol. 24, 1987, pp. 949-964.
-
-\bibitem{CooperI} Cooper, R. B., and Murray, G. (1969). Queues Served in Cyclic Order. \textit{The Bell System Technical Journal}, 48, 675-689.
-
-\bibitem{Daley68} Daley, D. J. (1968). The Correlation Structure of the Output Process of Some Single Server Queueing Systems. \textit{The Annals of Mathematical Statistics}, 39(3), 1007-1019.
-
-\bibitem{Disney} Disney, R. L., Farrell, R. L., and Morais, P. R. (1973). A Characterization of $M/G/1$ Queues with Renewal Departure Processes. \textit{Management Science}, 19(11), Theory Series, 1222-1228.
-
-\bibitem{Down} Down, D. (1998). On the Stability of Polling Models with Multiple Servers. \textit{Journal of Applied Probability}, 35(3), 925-935.
-
-\bibitem{Stability} Fricker, C., and Jaïbi, M. R. (1998). Stability of Multi-server Polling Models. Institute National de Recherche en Informatique et en Automatique.
-
-
-\bibitem{KaspiMandelbaum} Kaspi, H., and Mandelbaum, A. (1992). Regenerative Closed Queueing Networks. \textit{Stochastics: An International Journal of Probability and Stochastic Processes}, 39(4), 239-258.
-
-\bibitem{Kleinrock} Kleinrock, L. (1975). \textit{Queueing Systems: Theory, Volume 1}. Wiley-Interscience.
-
-\bibitem{LevySidi} Levy, H., and Sidi, M. (1990). Polling Systems: Applications, Modeling, and Optimization. \textit{IEEE Transactions on Communications}, 30(10), 1750-1760.
-
-
-\bibitem{MeynTweedie2} Meyn, S. P., and Tweedie, R. L. (1993). \textit{Markov Chains and Stochastic Stability}. Springer-Verlag.
-
-\bibitem{MeynDown} Meyn, S. P., and Down, D. (1994). Stability of Generalized Jackson Networks. \textit{The Annals of Applied Probability}.
+\textbf{Monto total estimado del proyecto:} \textbf{\$628,000 MXN}
 
 
-\bibitem{Roubos} Roubos, A. (2007). \textit{Polling Systems and their Applications}. Vrije Universiteit Amsterdam.
 
-\bibitem{Serfozo} Serfozo, R. (2009). \textit{Basics of Applied Stochastic Processes}. Springer-Verlag.
+\subsection*{Etapa 1 — Año 2025}
+\begin{itemize}
+  \item \textbf{Adquisición de equipo de cómputo (iMac con máxima configuración)}: \$90,000 MXN
+  \item \textbf{Adquisición de estación de trabajo científica de alto rendimiento (procesadores múltiples, GPU, 64 GB RAM)}: \$120,000 MXN
+  \item \textbf{Adquisición de iPad de gran capacidad (pantalla de 12.9 pulgadas, ideal para lectura científica y anotaciones)}: \$45,000 MXN
+  \item \textbf{Monitor auxiliar de alta resolución para soporte en pantallas extendidas}: \$25,000 MXN
+  \item \textbf{Trackpad avanzado compatible con estación de trabajo y iMac}: \$8,000 MXN
+  \item \textbf{Compra de bibliografía especializada (libros, licencias digitales)}: \$30,000 MXN
+  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
+  \item \textbf{Otros (papelería, servicios)}: \$10,000 MXN
+  \item \textbf{Total estimado}: \textbf{\$358,000 MXN}
+\end{itemize}
 
-\bibitem{Sharpe} Sharpe, M. (1998). \textit{General Theory of Markov Processes}. Academic.
+\subsection*{Etapa 2 — Año 2026}
+\begin{itemize}
+  \item \textbf{Participación en congreso nacional/internacional (viaje + inscripción)}: \$50,000 MXN
+  \item \textbf{Apoyo a asistente de investigación (6 meses)}: \$60,000 MXN
+  \item \textbf{Software especializado / licencias (TensorFlow, MatLab, etc.)}: \$30,000 MXN
+  \item \textbf{Otros (hospedaje, materiales)}: \$10,000 MXN
+  \item \textbf{Total estimado}: \textbf{\$150,000 MXN}
+\end{itemize}
+
+\subsection*{Etapa 3 — Año 2027}
+\begin{itemize}
+  \item \textbf{Costo de publicación en revista indexada (open access)}: \$40,000 MXN
+  \item \textbf{Desarrollo y despliegue de herramienta web interactiva}: \$40,000 MXN
+  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
+  \item \textbf{Otros (traducción, edición, difusión)}: \$10,000 MXN
+  \item \textbf{Total estimado}: \textbf{\$120,000 MXN}
+\end{itemize}
+
+\textbf{Monto total estimado del proyecto:} \textbf{\$628,000 MXN}
 
 
-\bibitem{SidiLevy1} Sidi, M., and Levy, H. (1990). Customer Routing in Polling Systems. In P. King, I. Mitrani, and R. Pooley (Eds.), \textit{Proceedings Performance '90}. North-Holland, Amsterdam.
 
-\bibitem{SidiLevy2} Sidi, M., and Levy, H. (1991). Polling Systems with Simultaneous Arrivals. \textit{IEEE Transactions on Communications}, 39(6), 823-827.
+\subsection*{Etapa 1 — Año 2025}
+\begin{itemize}
+  \item \textbf{Adquisición de equipo de cómputo (iMac con máxima configuración)}: \$90,000 MXN
+  \item \textbf{Adquisición de estación de trabajo científica de alto rendimiento (procesadores múltiples, GPU, 64 GB RAM)}: \$120,000 MXN
+  \item \textbf{Adquisición de iPad de gran capacidad (pantalla de 12.9 pulgadas, ideal para lectura científica y anotaciones)}: \$45,000 MXN
+  \item \textbf{Monitor auxiliar de alta resolución para soporte en pantallas extendidas}: \$25,000 MXN
+  \item \textbf{Trackpad avanzado compatible con estación de trabajo y iMac}: \$8,000 MXN
+  \item \textbf{Compra de bibliografía especializada (libros, licencias digitales)}: \$30,000 MXN
+  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
+  \item \textbf{Otros (papelería, servicios)}: \$10,000 MXN
+  \item \textbf{Total estimado}: \textbf{\$358,000 MXN}
+\end{itemize}
 
-\bibitem{TakagiI} Takagi, H., and Kleinrock, L. (1986). Analysis of Polling Systems. Cambridge: MIT Press.
+\subsection*{Etapa 2 — Año 2026}
+\begin{itemize}
+  \item \textbf{Participación en congreso nacional/internacional (viaje + inscripción)}: \$50,000 MXN
+  \item \textbf{Apoyo a asistente de investigación (6 meses)}: \$60,000 MXN
+  \item \textbf{Software especializado / licencias (TensorFlow, MatLab, etc.)}: \$30,000 MXN
+  \item \textbf{Otros (hospedaje, materiales)}: \$10,000 MXN
+  \item \textbf{Total estimado}: \textbf{\$150,000 MXN}
+\end{itemize}
 
-\bibitem{TakagiII} Takagi, H. (1988). Queueing Analysis of Polling Models. \textit{ACM Computing Surveys}, 20(1), 5-28.
-\bibitem{MeiBorst} van der Mei, R. D., and Borst, S. C. (1997). Analysis of Multiple-server Polling Systems by Means of the Power-Series Algorithm. \textit{Stochastic Models}, 13(2), 339-369.
+\subsection*{Etapa 3 — Año 2027}
+\begin{itemize}
+  \item \textbf{Costo de publicación en revista indexada (open access)}: \$40,000 MXN
+  \item \textbf{Desarrollo y despliegue de herramienta web interactiva}: \$40,000 MXN
+  \item \textbf{Apoyo a asistente de investigación (3 meses)}: \$30,000 MXN
+  \item \textbf{Otros (traducción, edición, difusión)}: \$10,000 MXN
+  \item \textbf{Total estimado}: \textbf{\$120,000 MXN}
+\end{itemize}
 
+\textbf{Monto total estimado del proyecto:} \textbf{\$628,000 MXN}
 
-\bibitem{Semenova} Vishnevskii, V. M., and Semenova, O. V. (2006). Mathematical Methods to Study the Polling Systems. \textit{Automation and Remote Control}, 67(2), 173-220.
-
-\bibitem{Winands} Winands, E. M. M., Adan, I. J. B. F., and van Houtum, G. J. (2006). Mean Value Analysis for Polling Systems. \textit{Queueing Systems}, 54, 35-44.
-\end{thebibliography}
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  9 APR 2025 10:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  24 APR 2025 20:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -568,7 +568,14 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-(./regresion_logit_probit_con_apendices_limpios.toc)
+(./regresion_logit_probit_con_apendices_limpios.toc
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 1.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 1.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 1.
+)
 \tf@toc=\write4
 \openout4 = `regresion_logit_probit_con_apendices_limpios.toc'.
 
@@ -580,127 +587,15 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 124.
+ [1
+
+{/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
+al/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}]
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
 164.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [1
+)
 
-{/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
-al/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/202
-4/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
-
-LaTeX Warning: File `regresion_logit_probit_con_apendices_limpios_files/figure-
-latex/unnamed-chunk-2-1.pdf' not found on input line 177.
-
-
-./regresion_logit_probit_con_apendices_limpios.tex:177: Package pdftex.def Erro
-r: File `regresion_logit_probit_con_apendices_limpios_files/figure-latex/unname
-d-chunk-2-1.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.177 ...files/figure-latex/unnamed-chunk-2-1.pdf}
-                                                  
-? 
-
-LaTeX Warning: File `regresion_logit_probit_con_apendices_limpios_files/figure-
-latex/unnamed-chunk-3-1.pdf' not found on input line 226.
-
-
-./regresion_logit_probit_con_apendices_limpios.tex:226: Package pdftex.def Erro
-r: File `regresion_logit_probit_con_apendices_limpios_files/figure-latex/unname
-d-chunk-3-1.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.226 ...files/figure-latex/unnamed-chunk-3-1.pdf}
-                                                  
-? 
-[2]
-
-LaTeX Warning: File `regresion_logit_probit_con_apendices_limpios_files/figure-
-latex/unnamed-chunk-4-1.pdf' not found on input line 272.
-
-
-./regresion_logit_probit_con_apendices_limpios.tex:272: Package pdftex.def Erro
-r: File `regresion_logit_probit_con_apendices_limpios_files/figure-latex/unname
-d-chunk-4-1.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.272 ...files/figure-latex/unnamed-chunk-4-1.pdf}
-                                                  
-? 
-[3]
-
-LaTeX Warning: File `regresion_logit_probit_con_apendices_limpios_files/figure-
-latex/unnamed-chunk-5-1.pdf' not found on input line 295.
-
-
-./regresion_logit_probit_con_apendices_limpios.tex:295: Package pdftex.def Erro
-r: File `regresion_logit_probit_con_apendices_limpios_files/figure-latex/unname
-d-chunk-5-1.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.295 ...files/figure-latex/unnamed-chunk-5-1.pdf}
-                                                  
-? 
-
-LaTeX Warning: File `regresion_logit_probit_con_apendices_limpios_files/figure-
-latex/unnamed-chunk-6-1.pdf' not found on input line 347.
-
-
-./regresion_logit_probit_con_apendices_limpios.tex:347: Package pdftex.def Erro
-r: File `regresion_logit_probit_con_apendices_limpios_files/figure-latex/unname
-d-chunk-6-1.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.347 ...files/figure-latex/unnamed-chunk-6-1.pdf}
-                                                  
-? 
-[4] [5] (./regresion_logit_probit_con_apendices_limpios.aux)
- ***********
-LaTeX2e <2023-11-01> patch level 1
-L3 programming layer <2024-02-20>
- ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
-Here is how much of TeX's memory you used:
- 13956 strings out of 474116
- 231248 string characters out of 5743681
- 1943187 words of memory out of 5000000
- 36046 multiletter control sequences out of 15000+600000
- 591643 words of font info for 80 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 83i,6n,93p,1041b,486s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/lo
-cal/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive
-/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2024/texmf
--dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2024/texmf-dist/fonts
-/type1/public/lm/lmtk10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/pub
-lic/lm/lmtt10.pfb>
-Output written on regresion_logit_probit_con_apendices_limpios.pdf (5 pages, 18
-0923 bytes).
-PDF statistics:
- 181 PDF objects out of 1000 (max. 8388607)
- 159 compressed objects within 2 object streams
- 34 named destinations out of 1000 (max. 500000)
- 18649 words of extra memory for PDF output out of 20736 (max. 10000000)
-
+LaTeX Warning: File `regresion_logit_probit_con_apendices_limpios_files/fig

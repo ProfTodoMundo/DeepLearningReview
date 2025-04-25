@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  9 APR 2025 12:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  24 APR 2025 20:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -390,7 +390,7 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 23.
 
-No file Notas_Regresion_Logistica_Lineal.aux.
+(./Notas_Regresion_Logistica_Lineal.aux)
 \openout1 = `Notas_Regresion_Logistica_Lineal.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
@@ -411,6 +411,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
+
 (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count296
@@ -468,10 +469,13 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring ON on input line 36.
+(./Notas_Regresion_Logistica_Lineal.out)
+(./Notas_Regresion_Logistica_Lineal.out)
 \@outlinefile=\write3
 \openout3 = `Notas_Regresion_Logistica_Lineal.out'.
 
 LaTeX Font Info:    Trying to load font information for U+msa on input line 39.
+
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -484,9 +488,10 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-No file Notas_Regresion_Logistica_Lineal.toc.
+(./Notas_Regresion_Logistica_Lineal.toc)
 \tf@toc=\write4
 \openout4 = `Notas_Regresion_Logistica_Lineal.toc'.
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -520,23 +525,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-
-
-Package rerunfilecheck Warning: File `Notas_Regresion_Logistica_Lineal.out' has
- changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Notas_Regresion_Logistica_Lineal.ou
-t':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  CDBE24D8931E72D406D6BF079FD74E99;1968.
+Package rerunfilecheck Info: File `Notas_Regresion_Logistica_Lineal.out' has no
+t changed.
+(rerunfilecheck)             Checksum: CDBE24D8931E72D406D6BF079FD74E99;1968.
  ) 
 Here is how much of TeX's memory you used:
- 12390 strings out of 474116
- 188232 string characters out of 5743681
+ 12415 strings out of 474116
+ 188850 string characters out of 5743681
  1938187 words of memory out of 5000000
- 34565 multiletter control sequences out of 15000+600000
+ 34582 multiletter control sequences out of 15000+600000
  572432 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  79i,13n,93p,399b,458s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -553,11 +550,11 @@ exlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/tex
 live/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texli
 ve/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texliv
 e/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Notas_Regresion_Logistica_Lineal.pdf (4 pages, 147157 bytes).
+Output written on Notas_Regresion_Logistica_Lineal.pdf (4 pages, 149438 bytes).
 
 PDF statistics:
- 107 PDF objects out of 1000 (max. 8388607)
- 74 compressed objects within 1 object stream
+ 161 PDF objects out of 1000 (max. 8388607)
+ 127 compressed objects within 2 object streams
  18 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 105 words of extra memory for PDF output out of 10000 (max. 10000000)
 

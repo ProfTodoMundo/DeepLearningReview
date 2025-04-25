@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  9 APR 2025 12:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  24 APR 2025 20:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -314,7 +314,7 @@ File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count289
 \l__pdf_internal_box=\box53
 )
-No file Notas_Regresion_Lineal_Hojas_01_10.aux.
+(./Notas_Regresion_Lineal_Hojas_01_10.aux)
 \openout1 = `Notas_Regresion_Lineal_Hojas_01_10.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
@@ -335,6 +335,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -370,11 +371,14 @@ LaTeX Font Info:    ... okay on input line 13.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring OFF on input line 13.
+(./Notas_Regresion_Lineal_Hojas_01_10.out)
+(./Notas_Regresion_Lineal_Hojas_01_10.out)
 \@outlinefile=\write3
 \openout3 = `Notas_Regresion_Lineal_Hojas_01_10.out'.
 
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
 6.
+
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -425,23 +429,15 @@ nc/dvips/lm/lm-mathsy.enc}] [2] [3] (./Notas_Regresion_Lineal_Hojas_01_10.aux)
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-
-
-Package rerunfilecheck Warning: File `Notas_Regresion_Lineal_Hojas_01_10.out' h
-as changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Notas_Regresion_Lineal_Hojas_01_10.
-out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+Package rerunfilecheck Info: File `Notas_Regresion_Lineal_Hojas_01_10.out' has 
+not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 9353 strings out of 474116
- 143311 string characters out of 5743681
+ 9361 strings out of 474116
+ 143647 string characters out of 5743681
  1937187 words of memory out of 5000000
- 31598 multiletter control sequences out of 15000+600000
+ 31600 multiletter control sequences out of 15000+600000
  591548 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,281b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s

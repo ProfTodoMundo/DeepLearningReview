@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  23 APR 2025 22:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  24 APR 2025 20:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -498,13 +498,7 @@ Chapter 7.
 Chapter 8.
 [10
 
-]
-./resumen_logistic_regression_formal.tex:56: Misplaced alignment tab character 
-&.
-l.56 King, G., &
-                 Zeng, L. (2001). Logistic regression in rare events data. \\
-? 
-[11
+] [11
 
 ] (./resumen_logistic_regression_formal.aux)
  ***********
@@ -520,14 +514,14 @@ as changed.
 
 Package rerunfilecheck Info: Checksums for `resumen_logistic_regression_formal.
 out':
-(rerunfilecheck)             Before: EDC995A4BB2EB8A7273170760259C7C9;1368
+(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
 (rerunfilecheck)             After:  B4B825937481869ABF9F851FB188E85A;1467.
  ) 
 Here is how much of TeX's memory you used:
- 11349 strings out of 474116
- 176855 string characters out of 5743681
+ 11340 strings out of 474116
+ 176765 string characters out of 5743681
  1927187 words of memory out of 5000000
- 33545 multiletter control sequences out of 15000+600000
+ 33536 multiletter control sequences out of 15000+600000
  563171 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  79i,6n,93p,436b,461s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -535,11 +529,11 @@ Here is how much of TeX's memory you used:
 ></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
 /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></u
 sr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on resumen_logistic_regression_formal.pdf (12 pages, 65783 bytes
+Output written on resumen_logistic_regression_formal.pdf (12 pages, 65522 bytes
 ).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
- 94 compressed objects within 1 object stream
+ 92 PDF objects out of 1000 (max. 8388607)
+ 69 compressed objects within 1 object stream
  22 named destinations out of 1000 (max. 500000)
- 65 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

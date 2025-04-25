@@ -30,30 +30,6 @@ Se definen conceptos clave del aprendizaje autom\'atico:
 Se destaca el ejemplo del programa de damas de Samuel, que mejora jugando contra s\'i mismo.
 
 
-\begin{figure}[h!]
-\centering
-\begin{tikzpicture}[
-    node distance=1.5cm and 2cm,
-    every node/.style={font=\small},
-    box/.style={draw, rounded corners, minimum width=2.8cm, minimum height=1cm, align=center}
-]
-
-\node[box] (main) {Types of Machine Learning};
-
-\node[box, below left=of main] (sup) {Supervised\\Learning};
-\node[box, below=of main] (unsup) {Un-supervised\\Learning};
-\node[box, below right=of main] (rein) {Reinforcement\\Learning};
-\node[box, right=1.5cm of rein] (rec) {Recommender\\System};
-
-\draw (main.south) -- (sup.north);
-\draw (main.south) -- (unsup.north);
-\draw (main.south) -- (rein.north);
-\draw (main.south) -- (rec.north);
-
-\end{tikzpicture}
-\caption{Types of Machine Learning}
-\end{figure}
-
 
 \section{Tipos de Algoritmos de Aprendizaje}
 \subsection{Aprendizaje Supervisado}

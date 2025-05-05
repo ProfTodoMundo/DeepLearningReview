@@ -1,0 +1,104 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in}
+
+\title{Pierre-François Verhulst (1804–1849): Pionero del Modelo Logístico Poblacional}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+Pierre-François Verhulst fue un matemático y estadístico \textbf{belga} del siglo XIX, reconocido por formular el \textbf{modelo logístico de crecimiento poblacional}. Su trabajo surgió en el contexto de una Europa en rápida transformación científica, donde el estudio matemático de fenómenos sociales comenzaba a tomar forma. La ecuación logística desarrollada por Verhulst es fundamental en áreas como la demografía, la ecología, la biología matemática y la teoría de sistemas dinámicos.
+
+\section{Contexto Histórico: Europa en el Siglo XIX y el Desarrollo de la Estadística}
+
+El siglo XIX en Europa fue una época de grandes avances científicos. Intelectuales como Thomas R. Malthus y Adolphe Quetelet empezaron a aplicar métodos estadísticos al estudio de la sociedad. La obra de Malthus sobre el crecimiento poblacional influenció directamente los trabajos posteriores. En este clima intelectual surgió Verhulst, quien buscó una formulación matemática adecuada que incorporara los límites naturales al crecimiento de la población.
+
+\section{Vida y Formación Académica}
+
+Pierre-François Verhulst nació en Bruselas el 28 de octubre de 1804. Estudió en el Ateneo de Bruselas, bajo la influencia de Adolphe Quetelet, y luego en la Universidad de Gante, donde obtuvo su doctorado en 1825. Trabajó como profesor en el Musée de Sciences et Lettres de Bruselas y en la Université Libre de Bruxelles.
+
+En 1841 fue admitido en la Académie Royale des Sciences et Belles-Lettres de Bruxelles, y en 1848 fue elegido su presidente. Falleció en Bruselas el 15 de febrero de 1849 a los 44 años.
+
+\section{El Modelo Logístico de Crecimiento Poblacional}
+
+\subsection{Planteamiento del Problema}
+
+Inspirado en las ideas de Malthus y Quetelet, Verhulst propuso una ecuación para describir el crecimiento poblacional bajo recursos limitados:
+
+\begin{equation}
+\frac{dP}{dt} = r P \left( 1 - \frac{P}{K} \right)
+\end{equation}
+
+donde:
+\begin{itemize}
+    \item \( P(t) \) es la población en el tiempo \( t \),
+    \item \( r \) es la tasa intrínseca de crecimiento,
+    \item \( K \) es la capacidad de carga del entorno.
+\end{itemize}
+
+\subsection{Solución de la Ecuación}
+
+La solución general de la ecuación diferencial es:
+
+\begin{equation}
+P(t) = \frac{K}{1 + A e^{-r t}}
+\end{equation}
+
+donde \( A \) es una constante determinada por las condiciones iniciales.
+
+Esta solución describe un crecimiento inicial rápido que se ralentiza conforme la población se aproxima al límite \( K \).
+
+\subsection{Interpretación}
+
+Cuando la población es pequeña (\( P \ll K \)), el crecimiento es aproximadamente exponencial. A medida que la población crece, la competencia por recursos disminuye la tasa de crecimiento, hasta que eventualmente la población se estabiliza en el valor \( K \).
+
+\section{Impacto Posterior}
+
+\subsection{Impacto en la Demografía}
+
+En la década de 1920, Raymond Pearl y Lowell Reed redescubrieron la ecuación logística aplicándola al crecimiento de la población de Estados Unidos. Desde entonces, la ecuación ha sido una herramienta fundamental en demografía para modelar poblaciones humanas y analizar fenómenos de transición demográfica.
+
+\subsection{Impacto en la Ecología y Biología Matemática}
+
+La ecuación logística fue adoptada en ecología para modelar el crecimiento de poblaciones animales y vegetales. Se convirtió en un modelo clásico para estudiar dinámicas poblacionales bajo restricciones de recursos, siendo la base para extensiones posteriores como los modelos depredador-presa de Lotka-Volterra.
+
+\subsection{Impacto en la Teoría de Sistemas Dinámicos}
+
+A partir de la década de 1970, el \textit{mapa logístico} basado en la ecuación de Verhulst:
+
+\begin{equation}
+P_{n+1} = r P_n \left(1 - \frac{P_n}{K}\right)
+\end{equation}
+
+fue utilizado en el estudio de la teoría del caos. Investigadores como Robert M. May demostraron que, dependiendo del valor de \( r \), el sistema puede mostrar bifurcaciones, ciclos periódicos o incluso caos determinista.
+
+\section{Conclusiones y Legado}
+
+Pierre-François Verhulst anticipó la importancia de considerar límites naturales en el crecimiento poblacional. Su modelo logístico no solo se consolidó como herramienta esencial en demografía, sino que también abrió el camino para el estudio cuantitativo en ecología y sistemas dinámicos no lineales. Aunque inicialmente su contribución pasó desapercibida, el redescubrimiento posterior confirmó su legado científico.
+
+\section{Referencias}
+
+\begin{itemize}
+    \item Bacaër, N. (2011). \textit{A Short History of Mathematical Population Dynamics}. London: Springer.
+    \item Ausloos, M., \& Dirickx, M. (Eds.). (2006). \textit{The Logistic Map and the Route to Chaos: From the Beginnings to Modern Applications}. Berlin: Springer.
+    \item O'Connor, J. J., \& Robertson, E. F. (2014). Pierre Verhulst (1804–1849). \textit{MacTutor History of Mathematics Archive}, University of St Andrews.
+    \item Pearl, R., \& Reed, L. J. (1920). On the Rate of Growth of the Population of the United States since 1790 and its Mathematical Representation. \textit{Proceedings of the National Academy of Sciences, 6}(6), 275–288.
+    \item Kingsland, S. (1982). The Refractory Model: The Logistic Curve and the History of Population Ecology. \textit{The Quarterly Review of Biology, 57}(1), 29–52.
+    \item Verhulst, P.-F. (1838). Notice sur la loi que la population suit dans son accroissement. \textit{Correspondance mathématique et physique}, 10, 113–121.
+    \item Verhulst, P.-F. (1845). Recherches mathématiques sur la loi d’accroissement de la population. \textit{Nouveaux Mémoires de l’Académie Royale des Sciences et Belles-Lettres de Bruxelles}, 18, 1–42.
+    \item Encyclopedia of Mathematics. (n.d.). Pearl-Verhulst logistic process. Recuperado de \url{https://encyclopediaofmath.org/wiki/Pearl-Verhulst_logistic_process}
+\end{itemize}
+
+\end{document}

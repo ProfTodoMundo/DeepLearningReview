@@ -598,4 +598,37 @@ LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
-LaTeX Warning: File `regresion_logit_probit_con_apendices_limpios_files/fig
+LaTeX Warning: File `regresion_logit_probit_con_apendices_limpios_files/figure-
+latex/unnamed-chunk-2-1.pdf' not found on input line 177.
+
+
+./regresion_logit_probit_con_apendices_limpios.tex:177: Package pdftex.def Erro
+r: File `regresion_logit_probit_con_apendices_limpios_files/figure-latex/unname
+d-chunk-2-1.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.177 ...files/figure-latex/unnamed-chunk-2-1.pdf}
+                                                  
+? 
+./regresion_logit_probit_con_apendices_limpios.tex:177: Emergency stop.
+ ...                                              
+                                                  
+l.177 ...files/figure-latex/unnamed-chunk-2-1.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+ 
+Here is how much of TeX's memory you used:
+ 13868 strings out of 474116
+ 220655 string characters out of 5743681
+ 1948187 words of memory out of 5000000
+ 35937 multiletter control sequences out of 15000+600000
+ 607307 words of font info for 104 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 83i,6n,93p,1041b,470s stack positions out of 10000i,1000n,20000p,200000b,200000s
+./regresion_logit_probit_con_apendices_limpios.tex:177:  ==> Fatal error occurr
+ed, no output PDF file produced!

@@ -243,17 +243,19 @@ Tanto el subajuste como el sobreajuste pueden ser debido a la insuficiente calid
 \section{Fundamentos}
 %____________________________________________________________
 
-Para resolver el problema de regresi\'on lineal se requiere encontrar $\beta_0$ y $\beta_1$ tal que:
+El an\'alisis de regresi\'on estima la variable dependiente $y$, dado el rango de valores de la variable $x$. El modelo de regresi\'on se plantea:
 
 \begin{eqnarray*}
-\hat{y} = \beta_0 + \beta_1 x
+y&=&\beta_{0}+\beta_{1}x+\epsilon,\textrm{ caso univariado,}\\
+y&=&\sum_{j=0}^{q}\beta_{j}x_{j}; x_{0}=1,\textrm{ caso multivariado.}
 \end{eqnarray*}
 
-se aproxime al mínimo de todos los posibles coeficientes de regresión $\beta_0$ y $\beta_1$:
+Para resolver el problema de regresi\'on lineal univariado se requiere encontrar $\beta_0$ y $\beta_1$ minimizando la funci\'on de versosimilitud:
 
 \begin{eqnarray*}
-(\beta_0, \beta_1) = \arg \min_{(\beta_0, \beta_1)} \sum \left[ y_i - (\beta_0 + \beta_1 x_i) \right]^2
+L(\beta_0^*, \beta_1) = \sum_{i=1}^{n} [y_i - (\beta_0^* + \beta_1(x_i - \bar{x}))]^2;
 \end{eqnarray*}
+
 
 Que se obtiene resolviendo
 \begin{eqnarray*}
@@ -261,58 +263,52 @@ Que se obtiene resolviendo
 \frac{\partial}{\partial \beta_1} \sum \left[ y_i - (\beta_0 + \beta_1 x_i) \right]^2 = 0.
 \end{eqnarray*}
 
-Utilizando un modelo lineal centralizado:
+Si se define
 
 \begin{eqnarray*}
-y_i = \beta_0^* + \beta_1 (x_i - \bar{x}) + \varepsilon_i
+y_i = \beta_0^* + \beta_1 (x_i - \bar{x}) + \varepsilon_i,\textrm{ donde }\beta_0 = \beta_0^* + \beta_1 \bar{x}.
 \end{eqnarray*}
 
-donde:
 
-\begin{eqnarray*}
-\beta_0 = \beta_0^* + \beta_1 \bar{x}.
-\end{eqnarray*}
-
-se requiere resolver para $\beta_0^*$. Entonces
+Entonces se tiene 
 
 \begin{eqnarray*}
 \frac{\partial}{\partial \beta_0^*} \sum \left[ y_i - (\beta_0^* + \beta_1 \bar{x}) \right]^2 &=& 0\\
-\frac{\partial}{\partial \beta_1} \sum \left[ y_i - (\beta_0^* + \beta_1 \bar{x}) \right]^2&=& 0.
+\frac{\partial}{\partial \beta_1^*} \sum \left[ y_i - (\beta_0^* + \beta_1 \bar{x}) \right]^2&=& 0.
 \end{eqnarray*}
 
 Sabemos que:
 
 \begin{eqnarray*}
-\beta_0 = \beta_0^* + \beta_1 \bar{x} \quad \Rightarrow \quad \beta_0^* = \beta_0 - \beta_1 \bar{x}
+\beta_0 = \beta_0^* + \beta_1 \bar{x}, \textrm{ entonces }\quad \beta_0^* = \beta_0 - \beta_1 \bar{x},\textrm{ por lo tanto}
 \end{eqnarray*}
-
-por lo tanto
-\begin{eqnarray*}
-\frac{\partial}{\partial \beta_0} \sum \left[ y_i - \left( \beta_0 + \beta_1 \bar{x} \right) \right]^2 =0
-&\Leftrightarrow& \sum \frac{\partial}{\partial \beta_0} \left[ y_i - (\beta_0 + \beta_1 \bar{x}) \right]^2 = 0\\
-\frac{\partial}{\partial \beta_0} \sum \left[ y_i - (\beta_0 + \beta_1 \bar{x}) \right]^2 = 0&\Leftrightarrow& \sum \frac{\partial}{\partial \beta_0} \left[ y_i - \left( \beta_0^* - \beta_1 \bar{x} + \beta_1 x_i \right) \right]^2 = 0\\
-\sum \frac{\partial}{\partial \beta_0} \left[ y_i - \left( \beta_0^* - (x_i - \bar{x}) \beta_1 \right) \right]^2 = 0&\Leftrightarrow& - \sum 2 \left[ y_i - \left( \beta_0^* - (x_i - \bar{x}) \beta_1 \right) \right](-1) = 0
-\end{eqnarray*}
-
-por lo tanto
-\begin{eqnarray*}
-2 \sum \left[ y_i - \left( \beta_0^* + (x_i - \bar{x}) \beta_1 \right) \right] (-1) = 0&\Leftrightarrow&
--2 \sum \left[ y_i - \beta_0^* - \beta_1 (x_i - \bar{x}) \right] = 0\\
-\Leftrightarrow \sum y_i - n \beta_0^* - \beta_1 \sum (x_i - \bar{x}) = 0
-&\Leftrightarrow& n \beta_0^* = \sum y_i \\
-\textrm{ya que } \sum (x_i - \bar{x}) = 0,
-&\textrm{por lo tanto}&\beta_0^* = \bar{y}.
-\end{eqnarray*}
-
-Por otra parte la derivada respecto a $\beta_1$
 
 \begin{eqnarray*}
-\frac{\partial}{\partial \beta_1} \sum \left[ y_i - \left( \beta_0^* + \beta_1 x_i \right) \right]^2 = 0
-&\Leftrightarrow&\frac{\partial}{\partial \beta_1} \sum \left[ y_i - \left( \beta_0^* - \beta_1 \bar{x} + \beta_1 x_i \right) \right]^2 = 0\\
-\frac{\partial}{\partial \beta_1} \sum \left[ y_i - \left( \beta_0^* + \beta_1 (x_i - \bar{x}) \right) \right]^2 = 0&\Leftrightarrow&
-2 \sum \left[ y_i - \left( \beta_0^* + \beta_1 (x_i - \bar{x}) \right) \right](x_i - \bar{x}) (-1) = 0
+\frac{\partial}{\partial \beta_0} \sum \left[ y_i - \left( \beta_0 + \beta_1 \bar{x} \right) \right]^2 &=&\sum \frac{\partial}{\partial \beta_0} \left[ y_i - (\beta_0 + \beta_1 \bar{x}) \right]^2
+= \sum \frac{\partial}{\partial \beta_0} \left[ y_i - \left( \beta_0^* - \beta_1 \bar{x} + \beta_1 x_i \right) \right]^2\\
+ &=& \sum \frac{\partial}{\partial \beta_0} \left[ y_i - \left( \beta_0^* - (x_i - \bar{x}) \beta_1 \right) \right]^2 = - \sum 2 \left[ y_i - \left( \beta_0^* - (x_i - \bar{x}) \beta_1 \right) \right](-1) \\
+ &=&0
 \end{eqnarray*}
-de aqu\'i
+
+entonces
+\begin{eqnarray*}
+2 \sum \left[ y_i - \left( \beta_0^* + (x_i - \bar{x}) \beta_1 \right) \right] (-1) = -2 \sum \left[ y_i - \beta_0^* - \beta_1 (x_i - \bar{x}) \right] \\
+=\sum y_i - n \beta_0^* - \beta_1 \sum (x_i - \bar{x}) =\sum y_i -n \beta_0^* =0,
+\end{eqnarray*}
+
+entonces, $ \sum y_i =n \beta_0^*$,  ya que $\sum (x_i - \bar{x}) = 0$, por lo tanto
+\begin{eqnarray}
+\beta_0^* = \bar{y}.
+\end{eqnarray}
+
+Por otra parte, la derivada respecto a $\beta_1$:
+
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_1} \sum \left[ y_i - \left( \beta_0^* + \beta_1 x_i \right) \right]^2 &=&\frac{\partial}{\partial \beta_1} \sum \left[ y_i - \left( \beta_0^* - \beta_1 \bar{x} + \beta_1 x_i \right) \right]^2 =\frac{\partial}{\partial \beta_1} \sum \left[ y_i - \left( \beta_0^* + \beta_1 (x_i - \bar{x}) \right) \right]^2\\
+&=& 2 \sum \left[ y_i - \left( \beta_0^* + \beta_1 (x_i - \bar{x}) \right) \right](x_i - \bar{x}) (-1) = 0,
+\end{eqnarray*}
+
+de aqu\'i que 
 
 \begin{eqnarray*}
 \sum \left[ y_i - \left( \beta_0^* + \beta_1 (x_i - \bar{x}) \right) \right](x_i - \bar{x})=\sum y_i (x_i - \bar{x}) - \beta_0^* \sum (x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = 0.
@@ -321,24 +317,23 @@ de aqu\'i
 Recordar que $\beta_0^* = \bar{y}$, entonces:
 
 \begin{eqnarray*}
-\sum y_i (x_i - \bar{x}) - \bar{y} \sum (x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = 0\\
-\Leftrightarrow \sum (y_i - \bar{y})(x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = 0\\
-\Rightarrow \beta_1 = \frac{\sum (y_i - \bar{y})(x_i - \bar{x})}{\sum (x_i - \bar{x})^2} = \frac{S_{xy}}{S_{xx}}
+\sum y_i (x_i - \bar{x}) - \bar{y} \sum (x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = \sum (y_i - \bar{y})(x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = 0
 \end{eqnarray*}
 
+entonces 
+\begin{eqnarray}
+ \beta_1 = \frac{\sum (y_i - \bar{y})(x_i - \bar{x})}{\sum (x_i - \bar{x})^2} = \frac{S_{xy}}{S_{xx}},
+\end{eqnarray}
+
 por lo tanto
-\begin{eqnarray*}
+\begin{eqnarray}
 \boxed{ \beta_1 = \frac{S_{xy}}{S_{xx}}, } \quad \textrm{ y }\boxed{ \beta_0 = \bar{y} - \beta_1 \bar{x}.}
-\end{eqnarray*}
+\end{eqnarray}
 
 
 \begin{Ejem}\textbf{Caso Bernoulli}
 
-Sea $X \in \mathbb{R}^{n \times d}$, donde $n$ es el  número de instancias; $d$ el  número de características; $y$ un vector binario de resultados. Para todo $x_i \in \mathbb{R}^d$, la salida es $y_i \in \{0,1\}$. El objetivo es clasificar la instancia $x_i$ como positiva o negativa.
-
-\medskip
-
-Una instancia se puede pensar como un intento Bernoulli con esperanza $\mathbb{E}[y_i | x_i]$ o probabilidad $\rho_i$. Se propone el modelo
+Sea $X \in \mathbb{R}^{n \times d}$, donde $n$ es el  número de instancias; $d$ el  número de características; $y$ un vector binario de resultados. Para todo $x_i \in \mathbb{R}^d$, la salida es $y_i \in \{0,1\}$. El objetivo es clasificar la instancia $x_i$ como positiva o negativa. Una instancia se puede pensar como un intento Bernoulli con esperanza $\mathbb{E}[y_i | x_i]$ o probabilidad $\rho_i$. Se propone el modelo
 \begin{eqnarray*}
 y = X \beta + \varepsilon, \quad \text{donde }\varepsilon \text{es el vector error}.
 \end{eqnarray*}
@@ -382,8 +377,7 @@ y
 \quad \text{es el vector de parámetros.}
 \end{eqnarray*}
 
-Supongamos que la intersección está incluida en el vector $\beta$, es decir, $X_i = [1, x_i^\top]$ y
-$\beta = [\beta_0, \boldsymbol{\beta}^\top]$.  Como $y$ es una variable aleatoria Bernoulli con probabilidad $\rho_i$, se tiene:
+Supongamos que $X_i = [1, x_i^\top]$ y $\beta = [\beta_0, \boldsymbol{\beta}^\top]$.  Como $y$ es una variable aleatoria Bernoulli con probabilidad $\rho_i$, se tiene:
 
 \begin{eqnarray*}
 P(y_i) = 
@@ -409,7 +403,7 @@ y_i = X_i^\top \beta + \varepsilon_i, \quad \text{donde} \quad
 \end{eqnarray*}
 
 \end{Ejem}
-con $\varepsilon_i \sim \text{Binomial}$, con esperanza:
+donde $\varepsilon_i \sim \text{Binomial}$, con esperanza:
 
 \begin{eqnarray*}
 \mathbb{E}[\varepsilon_i] = (1 - \rho_i)(\rho_i + (1 - \rho_i))(1 - \rho_i) = 0;
@@ -423,43 +417,29 @@ y varianza:
 = \rho_i (1 - \rho_i).
 \end{eqnarray*}
 
-\begin{Note}
-Este error no se distribuye normalmente, por lo tanto, la aproximación por mínimos cuadrados no se puede aplicar. Además, dado que \( y_i \in \{0, 1\} \), el modelo reglinal puede arrojar valores mayores que 1 y menores que 0. Por tanto, es mejor el modelo logístico.
-\end{Note}
-
-Se sabe que 
+Ahora, se sabe que 
 \begin{eqnarray*}
-\mathbb{E}[Y_i = 1 \mid x_i, \beta] = \rho_i = \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} = \frac{1}{1 + e^{-x_i^\top \beta}}
+\mathbb{E}[Y_i = 1 \mid x_i, \beta] = \rho_i = \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} = \frac{1}{1 + e^{-x_i^\top \beta}};
 \end{eqnarray*}
 
 si se define
 \begin{eqnarray*}
-\eta_i = g(\rho_i) &=& \ln \left( \frac{\rho_i}{1 - \rho_i} \right) = x_i^\top \beta\\
-\textrm{entonces }\eta &=& X 
+\eta_i = g(\rho_i) &=& \ln \left( \frac{\rho_i}{1 - \rho_i} \right) = x_i^\top \beta \textrm{ entonces }\eta = X. 
 \end{eqnarray*}
 
-\begin{Note}
-La función \textit{logit} implícitamente coloca un hiperplano que separa:
-\end{Note}
-
-\begin{eqnarray*}
-\beta^\top x > 0 \quad \Longleftrightarrow \quad \text{instancia positiva},\\
-\beta^\top x < 0 \quad \Longleftrightarrow \quad \text{instancia negativa}.
-\end{eqnarray*}
-
-\noindent Ahora definamos la \textbf{Función de verosimilitud:}
+Ahora definamos la \textbf{Función de verosimilitud:}
 
 \begin{eqnarray*}
 \mathcal{L}(\beta) =\prod_{i=1}^{n} \rho_i^{y_i} (1 - \rho_i)^{1 - y_i}
 = \prod_{i=1}^{n} \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)^{y_i}
-\left( \frac{1}{1 + e^{x_i^\top \beta}} \right)^{1 - y_i}\\
+\left( \frac{1}{1 + e^{x_i^\top \beta}} \right)^{1 - y_i},
 \end{eqnarray*}
-aplicando el logaritmo
+aplicando el logaritmo natural
 \begin{eqnarray*}
-\ln \mathcal{L}(\beta) =\sum_{i=1}^{n} \left[y_i \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) + (1 - y_i) \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)\right]
+\ln \mathcal{L}(\beta) =\sum_{i=1}^{n} \left[y_i \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) + (1 - y_i) \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)\right].
 \end{eqnarray*}
 
-Calculemos  el gradiente y la matriz Hessiana:
+Calculando  el gradiente y la matriz Hessiana:
 
 \begin{eqnarray*}
 \frac{\partial}{\partial \beta_j} \ln \mathcal{L}(\beta)
@@ -473,11 +453,15 @@ Recordemos que:
 \begin{eqnarray*}
 \frac{\partial}{\partial \beta_j} \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
 &=& - \frac{1}{1 + e^{x_i^\top \beta}} \cdot e^{x_i^\top \beta} \cdot x_{ij}
-= - \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} x_{ij},\\
-\Rightarrow \frac{\partial}{\partial \beta_j} \ln \mathcal{L}(\beta)
-&=& y_i \cdot \frac{1}{1 + e^{x_i^\top \beta}} \cdot x_i
+= - \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} x_{ij},
+\end{eqnarray*}
+
+entonces
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_j} \ln \mathcal{L}(\beta)= y_i \cdot \frac{1}{1 + e^{x_i^\top \beta}} \cdot x_i
 = y_i \cdot \frac{x_i}{1 + e^{x_i^\top \beta}}.
 \end{eqnarray*}
+
 
 Por lo tanto
 \begin{eqnarray*}
@@ -489,10 +473,10 @@ y_i \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)
 &=& \sum_i \left[
 y_i \frac{\partial}{\partial \beta_j} \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)
 + (1 - y_i) \frac{\partial}{\partial \beta_j} \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
-\right]
+\right].
 \end{eqnarray*}
 
-Dado que:
+Dado que
 
 \begin{eqnarray*}
 \frac{\partial}{\partial \beta_j} \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)
@@ -507,7 +491,7 @@ por otra parte
 \frac{\partial}{\partial \beta_j} \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right) 
 &=& \frac{\partial}{\partial \beta_j} \ln \left(1 + e^{x_i^\top \beta} \right)
 = - \frac{1}{1 + e^{x_i^\top \beta}} \cdot e^{x_i^\top \beta} \cdot x_{ij}\\
-&=& -x_{ij} \cdot \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}}
+&=& -x_{ij} \cdot \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}},
 \end{eqnarray*}
 
 por lo tanto
@@ -516,24 +500,25 @@ por lo tanto
 \sum y_i x_{ij} \cdot \frac{1}{1 + e^{x_i^\top \beta}} 
 - (1 - y_i) x_{ij} \cdot \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}}\\
 &=& \sum y_i x_{ij} (1 - \rho_i) - (1 - y_i) x_{ij} \rho_i
-= \sum x_{ij} (y_i - \rho_i) = 0
+= \sum x_{ij} (y_i - \rho_i) = 0.
 \end{eqnarray*}
 
-En forma matricial:
-
-\begin{eqnarray}
-g(\beta) = \nabla_\beta \ln \mathcal{L}(\beta) = X^\top (y - \rho) = 0.
-\end{eqnarray}
-
-Ahora calculemos la segunda derivada de \(\beta\)
+En forma matricial se puede reescribir como
 
 \begin{eqnarray*}
-\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)= \frac{\partial^2}{\partial \beta_j \partial \beta_k}\sum \left( \frac{-x_{ij} x_{ik} e^{x_i^\top \beta}}{(1 + e^{x_i^\top \beta})^2} \right)= \frac{\partial^2}{\partial \beta_j \partial \beta_k}\sum x_{ij} x_{ik} \, \rho_i \, (1 - \rho_i)
+g(\beta) = \nabla_\beta \ln \mathcal{L}(\beta) = X^\top (y - \rho) = 0.
 \end{eqnarray*}
+
+Ahora calculemos la segunda derivada de $\beta$
+
+\begin{eqnarray*}
+\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)= \frac{\partial^2}{\partial \beta_j \partial \beta_k}\sum \left( \frac{-x_{ij} x_{ik} e^{x_i^\top \beta}}{(1 + e^{x_i^\top \beta})^2} \right)= \frac{\partial^2}{\partial \beta_j \partial \beta_k}\sum x_{ij} x_{ik} \, \rho_i \, (1 - \rho_i),
+\end{eqnarray*}
+
 entonces
 
 \begin{eqnarray*}
-\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)= \frac{\partial}{\partial \beta_k} \sum (x_{ij}) (y_i - \rho_i)= -\sum x_{ij} \frac{\partial}{\partial \beta_k} \rho_i
+\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)= \frac{\partial}{\partial \beta_k} \sum (x_{ij}) (y_i - \rho_i)= -\sum x_{ij} \frac{\partial}{\partial \beta_k} \rho_i,
 \end{eqnarray*}
 donde
 
@@ -543,53 +528,35 @@ donde
 por lo tanto
 
 \begin{eqnarray*}
-\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)= -\sum x_{ij} \rho_i (1 - \rho_i) x_{ik}= -\sum x_{ij} x_{ik} \rho_i (1 - \rho_i);
+\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)= -\sum x_{ij} \rho_i (1 - \rho_i) x_{ik}= -\sum x_{ij} x_{ik} \rho_i (1 - \rho_i).
 \end{eqnarray*}
 
 
 Si $v_i := \rho_i (1 - \rho_i)$ y $\mathbb{V} = \mathrm{diag}(v_1, v_2, \dots, v_n)$, entonces
 
 \begin{eqnarray*}
-\mathcal{H}(\beta) = \nabla^2_\beta \ln \mathcal{L}(\beta) = -X^\top \mathbb{V} X.
+\mathcal{H}(\beta) = \nabla^2_\beta \ln \mathcal{L}(\beta) = -X^\top \mathbb{V} X
 \end{eqnarray*}
-
 que es negativa definida, es decir, es cóncava con un máximo global. La matriz de información \textit{LR} está dada por:
 
-\begin{eqnarray}
+\begin{eqnarray*}
 \mathcal{I}(\beta) = -\mathbb{E}[\mathcal{H}(\beta)] = X^\top \mathbb{V} X,
-\end{eqnarray}
+\end{eqnarray*}
 
 con Varianza:
 
-\begin{eqnarray}
+\begin{eqnarray*}
 \mathbb{V}(\hat{\beta}) = \mathcal{I}^{-1}(\beta) = (X^\top \mathbb{V} X)^{-1}.
-\end{eqnarray}
+\end{eqnarray*}
 
 La \textit{log-verosimilitud regularizada} se define por
 
 \begin{eqnarray*}
 \ln \mathcal{L}(\beta) &=& \sum_i y_i \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) + (1 - y_i) \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
 - \frac{\lambda}{2} \| \beta \|^2\\
-&=& \sum_i \ln \left( \frac{e^{y_i x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) - \frac{\lambda}{2} \| \beta \|^2
+&=& \sum_i \ln \left( \frac{e^{y_i x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) - \frac{\lambda}{2} \| \beta \|^2,
 \end{eqnarray*}
-
-\noindent donde $\lambda$  es el \textit{parámetro de regularización}.
-
-
-\begin{Note}
-\begin{itemize}
-\item Para resultados binarios, la \textbf{función pérdida o desviación (DEV)} útil para medir la bondad de ajuste del modelo es la log-verosimilitud negativa, y está dada por:
-
-\begin{eqnarray*}
-\mathrm{DEV}(\hat{\beta}) = -2 \ln \mathcal{L}(\hat{\beta})
-\end{eqnarray*}
-para mayor informaci\'on ver \cite{hosmer2000}. 
-\item Minimizar DEV es equivalente a maximizar la log-verosimilitud; 
-\item el \textbf{gradiente conjugado} aplicado a IRLS proporciona mejores resultados para estimar $\beta$ que cualquier otro método (Khalouf, 2002; Munka, 2003).
-\end{itemize}
-\end{Note}
-
-Retomando,
+donde $\lambda$  es el \textit{parámetro de regularización}. Retomando,
 
 \begin{eqnarray*}
 \nabla_\beta \ln \mathcal{L}(\beta) = X^\top (y - p) = 0,\\
@@ -602,39 +569,140 @@ Se actualiza la fórmula para Newton-Raphson en la iteración $(CH)$, dada por:
 \beta^{(CH)} = \beta + \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} X^\top \left( y - p \right).
 \end{eqnarray*}
 
-Caso:
-
-\begin{eqnarray}
+donde 
+\begin{eqnarray*}
 \beta^{(C)} = \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} \left( X^\top \mathbb{V} Z^{(C)} \right)
-\end{eqnarray}
+\end{eqnarray*}
 por lo tanto
-\begin{eqnarray}
-\beta^{(CH)} = \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} X^\top \left( \mathbb{V} Z^{(C)} + (y - p) \right)= \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} X^\top \mathbb{V} Z^{(C)}
-\end{eqnarray}
+\begin{eqnarray*}
+\beta^{(CH)} = \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} X^\top \left( \mathbb{V} Z^{(C)} + (y - p) \right)= \left( X^\top \mathbb{V} X + \lambda I \right)^{-1} X^\top \mathbb{V} Z^{(C)},
+\end{eqnarray*}
 
-Donde:
+luego, se tiene la respuesta ajustada (Hastie et al., 2009)
 
-\begin{eqnarray}
-Z^{(C)} = X \beta^{(C)} + \mathbb{V}^{-1} (y - p)
-\quad \text{(Adjusted response, Hastie et al., 2009)}
-\end{eqnarray}
+\begin{eqnarray*}
+Z^{(C)} = X \beta^{(C)} + \mathbb{V}^{-1} (y - p).
+\end{eqnarray*}
 
-\begin{Note}
+
 Si $\mathcal{I}\left( X^\top \mathbb{V} X + \lambda I \right)$ es densa, el cálculo iterativo puede ser extremadamente lento (Komarek, 2004). El problema de minimos cuadrados ponderados ser\'ia
 
-\begin{eqnarray}
+\begin{eqnarray*}
 \left( X^\top \mathbb{V} X + \lambda I \right) \beta^{(CH)} = X^\top \mathbb{V}^{2^{(C)}},
-\end{eqnarray}
+\end{eqnarray*}
 
 que consiste en un sistema lineal de ecuaciones y variables, y resolverlo es equivalente a minimizar la función cuadrática:
 
-\begin{eqnarray}
+\begin{eqnarray*}
 \frac{1}{2} \beta^\top \left( X^\top \mathbb{V} X + \lambda I \right) \beta - \beta^\top \left( X^\top \mathbb{V}^{2^{(C)}} \right).
-\end{eqnarray}
-\end{Note}
+\end{eqnarray*}
 
 
 
+\begin{Ejem}
+Supongamos que se tienen $\mathcal{D}=\left\{u^{(1)},u^{(2)},\ldots,u^{(N)}\right\}$ observaciones, supongamos adem\'as que se tienen datos generados con distrubuci\'on $U\sim\left(U;\theta\right)$. Calculemos la funci\'on de verosimlitud.
+
+\begin{eqnarray*}
+\mathcal{L}\left(\theta\right)=\prod_{i=1}^{N}p\left(u^{(i)};\theta\right)
+\end{eqnarray*}
+donde
+\begin{eqnarray*}
+\theta_{ML}=\operatorname*{arg\,max}_{\theta}\mathcal{L}\left(\theta\right)=\operatorname*{arg\,max}_{\theta}\sum_{i=1}^{N}\log p\left(u^{(i)};\theta\right)
+\end{eqnarray*}
+donde tanto $log(f(x))$ y $\operatorname*{arg\,max}_{\theta}$ son funciones mon\'otonas crecientes. supongamos que se tiene un ruido gaussiano com media $0$ y varianza $\sigma^{2}$, entonces
+
+\begin{eqnarray*}
+y^{(i)}=h_{\theta}\left(x^{(i)}\right)+\epsilon^{(i)}=\theta^{\top}\mathbf{X}^{(i)}+\epsilon^{(i)},
+\end{eqnarray*}
+por lo tanto
+\begin{eqnarray*}
+y^{(i)}\sim N\left(\theta^{\top}\mathbf{X}^{(i)},\sigma^{2}\right), 
+\end{eqnarray*}
+entonces
+\begin{eqnarray*}
+p\left(y|\mathbf{X},\theta,\sigma^{2}\right)&=&\prod_{i=1}^{N}p\left(y|\mathbf{x}^{(i)},\theta,\sigma^{2}\right)=\prod_{i=1}^{N}\left(2\pi\sigma^{2}\right)e^{-\frac{1}{2\sigma^{2}}\left(y^{(i)}-\theta^{\top}\mathbf{x}^{(i)}\right)^{2}}\\
+&=&\left(2\pi\sigma^{2}\right)^{-\frac{N}{2}}e^{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{2}\left(y^{(i)}-\theta^{\top}\mathbf{x}^{(i)}\right)^{2}}\\
+&=&\left(2\pi\sigma^{2}\right)^{-\frac{N}{2}}e^{-\frac{1}{2\sigma^{2}}\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)}
+\end{eqnarray*}
+entonces la verosimilitud es
+
+\begin{eqnarray*}
+p\left(y|\mathbf{X},\theta,\sigma^{2}\right)=\left(2\pi\sigma^{2}\right)^{-\frac{N}{2}}e^{-\frac{1}{2\sigma^{2}}\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)}
+\end{eqnarray*}
+
+y la log-verosimilitud es
+\begin{eqnarray*}
+\mathcal{L}\left(\theta,\sigma^{2}\right)=-\frac{N}{2}\log\left(2\pi\sigma^{2}\right)\left[-\frac{1}{2\sigma^{2}}\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)\right].
+\end{eqnarray*}
+Maximizar la log-verosimilitud con respecto a$\theta$ es equivalente a maximizar $-\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)$ que a su vez es equivalente a minimizar $\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)$.
+\end{Ejem}
+
+\begin{Ejem}
+Se define la función sigmoide
+\begin{eqnarray*}
+\sigma(u) = \frac{1}{1 + e^{-u}} \quad \Rightarrow \text{logistic regression classifier}
+\end{eqnarray*}
+donde la regla de decisión para $y$
+\begin{eqnarray*}
+y = \sigma(h_{\boldsymbol{\theta}}(x)) = \sigma(\boldsymbol{\theta}^{\top} x)
+\end{eqnarray*}
+
+Matemáticamente, la probabilidad de que un ejemplo pertenezca a la clase 1 es:
+\begin{eqnarray*}
+p\left(y^{(i)} = 1 \mid x^{(i)}; \boldsymbol{\theta} \right) &=& \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\\
+p\left(y^{(i)} = 0 \mid x^{(i)}; \boldsymbol{\theta} \right) &=& 1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})
+\end{eqnarray*}
+
+la probabilidad conjunta en función de $y^{(i)}$
+\begin{eqnarray*}
+p\left(y^{(i)} \mid x^{(i)}; \boldsymbol{\theta} \right) = 
+\sigma(\boldsymbol{\theta}^{\top} x^{(i)})^{y^{(i)}} \cdot \left[1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right]^{1 - y^{(i)}}
+\end{eqnarray*}
+mientras que la probabilidad conjunta de todas las etiquetas
+\begin{eqnarray*}
+\prod_{i=1}^{N} \sigma(\boldsymbol{\theta}^{\top} x^{(i)})^{y^{(i)}} \left(1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right)^{(1 - y^{(i)})}
+\end{eqnarray*}
+La log-verosimilitud para regresión logística está dada por:
+\begin{eqnarray*}
+\ell(\boldsymbol{\theta}) = \sum_{i=1}^{N} y^{(i)} \log \left( \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right) + 
+(1 - y^{(i)}) \log \left( 1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right)
+\end{eqnarray*}
+Antes de calcular la derivada, recordemos:
+\begin{eqnarray*}
+\sigma(z) = \frac{1}{1 + e^{-z}}
+\end{eqnarray*}
+con derivada
+\begin{eqnarray*}
+\frac{d}{dz} \sigma(z) = \frac{d}{dz} \left(1 + e^{-z} \right)^{-1} = 
+-(1 + e^{-z})^{-2} \cdot (-e^{-z}) =
+\frac{e^{-z}}{(1 + e^{-z})^2}
+\end{eqnarray*}
+además:
+\begin{eqnarray*}
+\sigma(z) &=& \frac{1}{1 + e^{-z}} \Rightarrow 1 - \sigma(z) = \frac{e^{-z}}{1 + e^{-z}}\\
+&\Rightarrow& \sigma(z)(1 - \sigma(z)) = \frac{e^{-z}}{(1 + e^{-z})^2}\\
+&\therefore& \frac{d}{dz} \sigma(z) = \sigma(z)(1 - \sigma(z))
+\end{eqnarray*}
+Derivando la log-verosimilitud respecto a $theta_{j}$ la función $\ell(\boldsymbol{\theta})$:
+\begin{eqnarray*}
+\frac{\partial \ell(\boldsymbol{\theta})}{\partial \theta_j} &=& 
+\sum_{i=1}^{N} \left[ y^{(i)} \log \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) +
+(1 - y^{(i)}) \log (1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})) \right]\\
+&=& \sum_{i=1}^{N} \left[ \frac{y^{(i)}}{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})} 
+- \frac{1 - y^{(i)}}{1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})} \right]
+\cdot \frac{d}{d\theta_j} \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\\
+&=& \sum_{i=1}^{N} \left[ \frac{y^{(i)}}{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})} 
+- \frac{1 - y^{(i)}}{1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})} \right]
+\cdot  \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\sigma(1-\boldsymbol{\theta}^{\top} x^{(i)})x_{j}^{(i)}\\
+&=& \sum_{i=1}^{N} \left[ \frac{y^{(i)}- \sigma(\boldsymbol{\theta}^{\top}x^{(i)})}
+{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})(1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}))} \right]
+\cdot  \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\sigma(1-\boldsymbol{\theta}^{\top} x^{(i)})x_{j}^{(i)}\\
+&=&\sum_{i=1}^{N}\left[y^{(i)}-\sigma(\boldsymbol{\theta}^{\top} x^{(i)})\right]x_{j}^{(i)} 
+\end{eqnarray*}
+la cual es la funci\'on recursiva para calcular el gradiente.
+\end{Ejem}
+
+\begin{Ejem}
 El modelo lineal univariado se expresa como:
 
 \begin{eqnarray*}
@@ -698,7 +766,7 @@ y
 h_{\mathbf{\theta}}(\mathbf{X}) = \mathbf{\theta}^{T} \mathbf{X} = \mathbf{X}^{T} \mathbf{\theta}.
 \end{eqnarray*}
 Por lo tanto
-\begin{eqnarray}
+\begin{eqnarray*}
 \hat{\textbf{y}} &= \mathbf{X} \mathbf{\theta} \quad \Leftrightarrow \quad 
 \begin{bmatrix}
 \hat{y}^{(1)} \\
@@ -724,7 +792,7 @@ x_0^{(N)} & x_1^{(N)} & \cdots & x_d^{(N)} \\
 \vdots \\
 \theta_d
 \end{bmatrix},
-\end{eqnarray}
+\end{eqnarray*}
 
 donde $\mathbf{X} \in \mathbb{R}^{N \times (d+1)}$, $\hat{\mathbf{y}} \in \mathbb{R}^{N \times 1}$ y $\mathbf{\theta} \in \mathbb{R}^{(d+1) \times 1}$. Entonces
 
@@ -737,15 +805,15 @@ J(\mathbf{\theta}) &=& \frac{1}{2N} \sum_{i=1}^{N} \left( \mathbf{\theta}^{T} \m
 \end{eqnarray*}
 
 por lo tanto
-\begin{eqnarray}
+\begin{eqnarray*}
 J(\mathbf{\theta}) = \frac{1}{2N} (\mathbf{X} \mathbf{\theta} - \mathbf{y})^{\top} (\mathbf{X} \mathbf{\theta} - \mathbf{y}).
-\end{eqnarray}
+\end{eqnarray*}
 
 Recordemos que $\mathbf{\theta}^{\top} \mathbf{X}^{\top} \mathbf{y} = (\mathbf{X}^{\top} \mathbf{y})^{\top} \mathbf{\theta}$, $(\mathbf{X}^{\top} \mathbf{y})^{\top} = \mathbf{y}^{\top} \mathbf{X}$ y $(\mathbf{a}^{\top} \mathbf{b}) = (\mathbf{b}^{\top} \mathbf{a})$, por lo tanto podemos reescribir:
 
-\begin{eqnarray}
+\begin{eqnarray*}
 J(\mathbf{\theta}) = \frac{1}{2N}\left( \mathbf{\theta}^{\top}\left(\mathbf{X}^{\top}\mathbf{X}\right)\mathbf{\theta}- 2\left(\mathbf{X}^{\top}y\right)^{\top}\mathbf{\theta}+ \mathbf{y}^{\top}\mathbf{y}\right).
-\end{eqnarray}
+\end{eqnarray*}
 
 Calculando el gradiente e igualando a cero:
 
@@ -760,547 +828,13 @@ Alternativamente (gradiente descendente)
 \begin{eqnarray*}
 \frac{\partial J(\boldsymbol{\theta})}{\partial \theta_j} = \frac{1}{N} \sum_{i=1}^{N} \left( h_{\theta}(x^{(i)}) - y^{(i)} \right) x_j^{(i)}.
 \end{eqnarray*}
+\end{Ejem}
 
 \begin{Note}
-\begin{itemize}
-\item Resolver por gradiente descentiente, y calcular $ (X^{\top} X)^{-1}$ puede ser dif\'icil.
-\item $(X^{\top} X)^{\top}=X^{\top}(X^{\top})^{\top}=X^{\top} X$.
-\end{itemize}
+$(X^{\top} X)^{\top}=X^{\top}(X^{\top})^{\top}=X^{\top} X$.
 \end{Note}
 
-\begin{Ejem}
-Ahora calculemos la log-verosimilitud considerando que cada variable se distribuye Bernoulli: $p\left(x|\theta\right)=\theta~{x}\left(1-\theta\right)^{1-x}$ para $x=0,1$.
-Sea  $x_1, x_2, \dots, x_n, \quad \theta = \frac{1}{n} \sum_{i=1}^{n} x_i$, entonces $\theta=\sum_{i=1}^{n}\frac{x_{i}}{n}$ es el valor m\'as probable para estimar $\theta$. La función de verosimilitud conjunta
-\begin{eqnarray}
-\Psi(x_1, x_2, \dots, x_n; \theta) = \prod_{i=1}^{n} f(x_i; \theta)= \theta^{\sum_{i=1}^{n} x_i} (1 - \theta)^{n - \sum_{i=1}^{n} x_i},
-\end{eqnarray}
-
-entonces la funci\'on de  Log-verosimilitud est\'a dada por:
-\begin{eqnarray}
-\log L(\theta) = \sum_{i=1}^{n} x_i \log \theta + (n - \sum_{i=1}^{n} x_i) \log (1 - \theta),
-\end{eqnarray}
-
-calculando la derivada de la log-verosimilitud
-\begin{eqnarray}
-\frac{\partial \log L(\theta)}{\partial \theta} &=& \frac{\sum_{i=1}^{n} x_i}{\theta} - \frac{n - \sum_{i=1}^{n}x_i}{1 - \theta}\\
-&=& \frac{(1 - \theta) \sum_{i=1}^{n} x_i - (n - \sum_{i=1}^{n} x_i) \theta}{\theta (1 - \theta)} = \frac{\sum_{i=1}^{n} x_i - n \theta}{\theta (1 - \theta)},
-\end{eqnarray}
-igualando a cero y resolviendo
-\begin{eqnarray}
-\frac{\sum_{i=1}^{n}x_i - n \theta}{\theta (1 - \theta)}=0\Leftrightarrow \theta =\frac{\sum_{i=1}^{n} x_{i}}{n}.
-\end{eqnarray}
-\end{Ejem}
-
-\begin{Ejem}
-Supongamos que se tienen $\mathcal{D}=\left\{u^{(1)},u^{(2)},\ldots,u^{(N)}\right\}$ observaciones, supongamos adem\'as que se tienen datos generados con distrubuci\'on $U\sim\left(U;\theta\right)$. Calculemos la funci\'on de verosimlitud.
-
-\begin{eqnarray}
-\mathcal{L}\left(\theta\right)=\prod_{i=1}^{N}p\left(u^{(i)};\theta\right)
-\end{eqnarray}
-donde
-\begin{eqnarray}
-\theta_{ML}=\operatorname*{arg\,max}_{\theta}\mathcal{L}\left(\theta\right)=\operatorname*{arg\,max}_{\theta}\sum_{i=1}^{N}\log p\left(u^{(i)};\theta\right)
-\end{eqnarray}
-donde tanto $log(f(x))$ y $\operatorname*{arg\,max}_{\theta}$ son funciones mon\'otonas crecientes. supongamos que se tiene un ruido gaussiano com media $0$ y varianza $\sigma^{2}$, entonces
-
-\begin{eqnarray}
-y^{(i)}=h_{\theta}\left(x^{(i)}\right)+\epsilon^{(i)}=\theta^{\top}\mathbf{X}^{(i)}+\epsilon^{(i)},
-\end{eqnarray}
-por lo tanto
-\begin{eqnarray}
-y^{(i)}\sim N\left(\theta^{\top}\mathbf{X}^{(i)},\sigma^{2}\right), 
-\end{eqnarray}
-entonces
-\begin{eqnarray}
-p\left(y|\mathbf{X},\theta,\sigma^{2}\right)&=&\prod_{i=1}^{N}p\left(y|\mathbf{x}^{(i)},\theta,\sigma^{2}\right)=\prod_{i=1}^{N}\left(2\pi\sigma^{2}\right)e^{-\frac{1}{2\sigma^{2}}\left(y^{(i)}-\theta^{\top}\mathbf{x}^{(i)}\right)^{2}}\\
-&=&\left(2\pi\sigma^{2}\right)^{-\frac{N}{2}}e^{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{2}\left(y^{(i)}-\theta^{\top}\mathbf{x}^{(i)}\right)^{2}}\\
-&=&\left(2\pi\sigma^{2}\right)^{-\frac{N}{2}}e^{-\frac{1}{2\sigma^{2}}\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)}
-\end{eqnarray}
-entonces la verosimilitud es
-
-\begin{eqnarray}
-p\left(y|\mathbf{X},\theta,\sigma^{2}\right)=\left(2\pi\sigma^{2}\right)^{-\frac{N}{2}}e^{-\frac{1}{2\sigma^{2}}\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)}
-\end{eqnarray}
-
-y la log-verosimilitud es
-\begin{eqnarray}
-\mathcal{L}\left(\theta,\sigma^{2}\right)=-\frac{N}{2}\log\left(2\pi\sigma^{2}\right)\left[-\frac{1}{2\sigma^{2}}\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)\right].
-\end{eqnarray}
-Maximizar la log-verosimilitud con respecto a$\theta$ es equivalente a maximizar $-\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)$ que a su vez es equivalente a minimizar $\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)$.
-
-\end{Ejem}
-
-Se define la función sigmoide
-\begin{eqnarray}
-\sigma(u) = \frac{1}{1 + e^{-u}} \quad \Rightarrow \text{logistic regression classifier}
-\end{eqnarray}
-donde la regla de decisión para $y$
-\begin{eqnarray}
-y = \sigma(h_{\boldsymbol{\theta}}(x)) = \sigma(\boldsymbol{\theta}^{\top} x)
-\end{eqnarray}
-
-\text{Matemáticamente, la probabilidad de que un ejemplo pertenezca a la clase 1 es:}
-\begin{eqnarray}
-p\left(y^{(i)} = 1 \mid x^{(i)}; \boldsymbol{\theta} \right) &=& \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\\
-p\left(y^{(i)} = 0 \mid x^{(i)}; \boldsymbol{\theta} \right) &=& 1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})
-\end{eqnarray}
-
-la probabilidad conjunta en función de $y^{(i)}$
-\begin{eqnarray}
-p\left(y^{(i)} \mid x^{(i)}; \boldsymbol{\theta} \right) = 
-\sigma(\boldsymbol{\theta}^{\top} x^{(i)})^{y^{(i)}} \cdot \left[1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right]^{1 - y^{(i)}}
-\end{eqnarray}
-mientras que la probabilidad conjunta de todas las etiquetas
-\begin{eqnarray}
-\prod_{i=1}^{N} \sigma(\boldsymbol{\theta}^{\top} x^{(i)})^{y^{(i)}} \left(1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right)^{(1 - y^{(i)})}
-\end{eqnarray}
-La log-verosimilitud para regresión logística está dada por:
-\begin{eqnarray}
-\ell(\boldsymbol{\theta}) = \sum_{i=1}^{N} y^{(i)} \log \left( \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right) + 
-(1 - y^{(i)}) \log \left( 1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right)
-\end{eqnarray}
-Antes de calcular la derivada, recordemos:
-\begin{eqnarray}
-\sigma(z) = \frac{1}{1 + e^{-z}}
-\end{eqnarray}
-con derivada
-\begin{eqnarray}
-\frac{d}{dz} \sigma(z) = \frac{d}{dz} \left(1 + e^{-z} \right)^{-1} = 
--(1 + e^{-z})^{-2} \cdot (-e^{-z}) =
-\frac{e^{-z}}{(1 + e^{-z})^2}
-\end{eqnarray}
-además:
-\begin{eqnarray}
-\sigma(z) &=& \frac{1}{1 + e^{-z}} \Rightarrow 1 - \sigma(z) = \frac{e^{-z}}{1 + e^{-z}}\\
-&\Rightarrow& \sigma(z)(1 - \sigma(z)) = \frac{e^{-z}}{(1 + e^{-z})^2}\\
-&\therefore& \frac{d}{dz} \sigma(z) = \sigma(z)(1 - \sigma(z))
-\end{eqnarray}
-Derivando la log-verosimilitud respecto a $theta_{j}$ la función $\ell(\boldsymbol{\theta})$:
-\begin{eqnarray}
-\frac{\partial \ell(\boldsymbol{\theta})}{\partial \theta_j} &=& 
-\sum_{i=1}^{N} \left[ y^{(i)} \log \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) +
-(1 - y^{(i)}) \log (1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})) \right]\\
-&=& \sum_{i=1}^{N} \left[ \frac{y^{(i)}}{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})} 
-- \frac{1 - y^{(i)}}{1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})} \right]
-\cdot \frac{d}{d\theta_j} \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\\
-&=& \sum_{i=1}^{N} \left[ \frac{y^{(i)}}{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})} 
-- \frac{1 - y^{(i)}}{1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})} \right]
-\cdot  \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\sigma(1-\boldsymbol{\theta}^{\top} x^{(i)})x_{j}^{(i)}\\
-&=& \sum_{i=1}^{N} \left[ \frac{y^{(i)}- \sigma(\boldsymbol{\theta}^{\top}x^{(i)})}
-{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})(1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}))} \right]
-\cdot  \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\sigma(1-\boldsymbol{\theta}^{\top} x^{(i)})x_{j}^{(i)}\\
-&=&\sum_{i=1}^{N}\left[y^{(i)}-\sigma(\boldsymbol{\theta}^{\top} x^{(i)})\right]x_{j}^{(i)} 
-\end{eqnarray}
-la cual es la funci\'on recursiva para calcular el gradiente.
-
-
-\section{Apendice}
-
-%__________________________________________________
-\subsection{Fundamentos de la Regresi\'on Log\'istica}
-%__________________________________________________
-
-Dado un conjunto de datos $(x_i, y_i)$ para $i = 1, \dots, n$, queremos encontrar los coeficientes $\beta_0$ y $\beta_1$ que minimicen el error cuadr\'atico:
-\begin{eqnarray*}
-\sum_{i=1}^{n} (y_i - (\beta_0 + \beta_1 x_i))^2.
-\end{eqnarray*}
-
-
-Es m\'as sencillo resolver este problema usando la forma \emph{centralizada}:
-\begin{eqnarray*}
-y_i = \beta_0^* + \beta_1(x_i - \bar{x}) + \varepsilon_i,
-\end{eqnarray*}
-donde:
-\begin{eqnarray*}
-\beta_0 = \beta_0^* - \beta_1 \bar{x},
-\end{eqnarray*}
-se quiere minimizar la funci\'on de versosimilitud:
-
-\begin{eqnarray*}
-L(\beta_0^*, \beta_1) = \sum_{i=1}^{n} [y_i - (\beta_0^* + \beta_1(x_i - \bar{x}))]^2;
-\end{eqnarray*}
-
-por ello debemos de calcular la derivada parcial:
-\begin{eqnarray*}
-\frac{\partial L(\beta_0^*, \beta_1)}{\partial \beta_0^*} = \sum_{i=1}^{n} 2[y_i - (\beta_0^* + \beta_1(x_i - \bar{x}))](-1)= -2 \sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})].
-\end{eqnarray*}
-
-Igualando a cero y resolviendo:
-\begin{eqnarray*}
-\sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})] &=& 0;\\
-n \beta_0^* + \beta_1 \sum_{i=1}^{n}(x_i - \bar{x})& =& \sum_{i=1}^{n} y_i,
-\end{eqnarray*}
-dado que  $\sum_{i=1}^{n}(x_i - \bar{x}) = 0$, se tiene
-\begin{eqnarray*}
-n \beta_0^* = \sum_{i=1}^{n} y_i \Rightarrow \beta_0^* = \bar{y}.
-\end{eqnarray*}
-
-Ahora  derivamos con respecto a $\beta_1$:
-\begin{eqnarray*}
-\frac{\partial L}{\partial \beta_1} &= \sum_{i=1}^{n} 2[y_i - \beta_0^* - \beta_1(x_i - \bar{x})](-1)(x_i - \bar{x})= -2 \sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})](x_i - \bar{x}),
-\end{eqnarray*}
-
-Igualando a cero y resolviendo
-\begin{eqnarray*}
-\sum_{i=1}^{n} [y_i - \beta_0^* - \beta_1(x_i - \bar{x})](x_i - \bar{x}) &=& 0\textrm{ recordemos que }\beta_0^* = \bar{y},\\
-\sum_{i=1}^{n} [y_i - \bar{y} - \beta_1(x_i - \bar{x})](x_i - \bar{x}) &=& 0\\
-\sum_{i=1}^{n} (y_i - \bar{y})(x_i - \bar{x}) - \beta_1 \sum_{i=1}^{n} (x_i - \bar{x})^2 &=& 0
-\end{eqnarray*}
-
-Despejamos $\beta_1$:
-\begin{eqnarray*}
-\beta_1 = \frac{\sum_{i=1}^{n} (y_i - \bar{y})(x_i - \bar{x})}{\sum_{i=1}^{n} (x_i - \bar{x})^2} = \frac{S_{xy}}{S_{xx}}.
-\end{eqnarray*}
-
-Por lo tanto
-\begin{eqnarray*}
-\beta_0 = \beta_0^* - \beta_1 \bar{x} = \bar{y} - \beta_1 \bar{x}.
-\end{eqnarray*}
-
-
-
-\begin{Ejem}
-Para una variable binaria $y_i \in \{0,1\}$, el modelo de regresión logística predice la probabilidad:
-\begin{eqnarray*}
-    p_i = \frac{1}{1 + e^{-x_i \beta}}
-\end{eqnarray*}
-con funci\'on de verosimilitud
-\begin{eqnarray*}
-    L(\beta) = \prod_{i=1}^n p_i^{y_i} (1 - p_i)^{1 - y_i}
-\end{eqnarray*}
-
-y Log-verosimilitud
-\begin{eqnarray*}
-\ell(\beta) = \sum_{i=1}^n \left[ y_i \ln(p_i) + (1 - y_i) \ln(1 - p_i) \right]
-\end{eqnarray*}
-
-Usando que $p_i = \frac{1}{1 + e^{-x_i \beta}}$, entonces:
-\begin{eqnarray*}
-    \ell(\beta) = \sum_{i=1}^n \left[ y_i x_i \beta - \ln(1 + e^{x_i \beta}) \right]
-\end{eqnarray*}
-
-con  Gradiente y Hessiano
-
-Partimos de:
-\begin{eqnarray*}
-    \ell(\beta) = \sum_{i=1}^n \left[ y_i x_i \beta - \ln(1 + e^{x_i \beta}) \right]
-\end{eqnarray*}
-
-Derivando con respecto a $\beta_j$:
-\begin{eqnarray*}
-    \frac{\partial \ell(\beta)}{\partial \beta_j} = \sum_{i=1}^n \left[ y_i x_{ij} - \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} x_{ij} \right] = \sum_{i=1}^n x_{ij}(y_i - p_i)
-\end{eqnarray*}
-
-donde la forma vectorial del gradiente:
-\begin{eqnarray*}
-    \nabla_\beta \ell(\beta) = X^\top (\mathbf{y} - \mathbf{p})
-\end{eqnarray*}
-
-La derivada del gradiente es:
-\begin{eqnarray*}
-    \frac{\partial^2 \ell(\beta)}{\partial \beta_j \partial \beta_k} = - \sum_{i=1}^n x_{ij} x_{ik} p_i (1 - p_i)
-\end{eqnarray*}
-
-Forma matricial:
-\begin{eqnarray*}
-    \nabla^2_\beta \ell(\beta) = - X^\top V X, \quad \text{donde } V = \text{diag}(p_i (1 - p_i))
-\end{eqnarray*} 
-
-
-Penalización L2 añadida a la log-verosimilitud:
-\begin{eqnarray*}
-    \ell_\lambda(\beta) = \ell(\beta) - \frac{\lambda}{2} \|\beta\|^2
-\end{eqnarray*}
-
-Gradiente regularizado:
-\begin{eqnarray*}
-    \nabla_\beta \ell_\lambda(\beta) = X^\top (\mathbf{y} - \mathbf{p}) - \lambda \beta
-\end{eqnarray*}
-
-Hessiano regularizado:
-\begin{eqnarray*}
-    \nabla^2_\beta \ell_\lambda(\beta) = - X^\top V X - \lambda I
-\end{eqnarray*}
-
-Actualización de Newton truncado:
-\begin{eqnarray*}
-    \beta^{(k+1)} = \beta^{(k)} + s
-\end{eqnarray*}
-Donde $s$ resuelve:
-\begin{eqnarray*}
-    (X^\top V X + \lambda I) s = X^\top V z - \lambda \beta
-\end{eqnarray*}
-
-Ajuste del intercepto (King \& Zeng)
-\begin{eqnarray*}
-    \tilde{\beta}_0 = \hat{\beta}_0 - \ln \left[ \left( \frac{1 - \tau}{\tau} \right) \left( \frac{\hat{y}}{1 - \hat{y}} \right) \right]
-\end{eqnarray*}
-
-Peso para observación $i$:
-\begin{eqnarray*}
-    w_i = \frac{Q_i}{H_i}
-\end{eqnarray*}
-
-Verosimilitud ponderada:
-\begin{eqnarray*}
-    \ell_w(\beta) = \sum_{i=1}^n w_i \ln \left( \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} \right)
-\end{eqnarray*}
-
-
-Log-verosimilitud penalizada (ajuste de Jeffreys):
-\begin{eqnarray*}
-    \ell^*(\beta) = \ell(\beta) + \frac{1}{2} \log |I(\beta)|
-\end{eqnarray*}
-
-Regla de decisión
-
-\begin{eqnarray*}
-    \hat{y}_i =
-    \begin{cases}
-        1 & \text{si } p_i \geq c \\
-        0 & \text{si } p_i < c
-    \end{cases}, \quad \text{con } c = 0.5
-\end{eqnarray*}
-\end{Ejem}
-
-
-%\section*{Modelo base de regresión logística}
-La RL modela la probabilidad de un evento binario $y_i \in \{0,1\}$ en función de un vector de predictores $x_i$ mediante:
-\begin{equation}
-    p_i = \frac{1}{1 + e^{-x_i \beta}}
-\end{equation}
-
-La verosimilitud del modelo es:
-\begin{equation}
-    L(\beta) = \prod_{i=1}^n p_i^{y_i}(1 - p_i)^{1 - y_i}
-\end{equation}
-
-Y su log-verosimilitud:
-\begin{equation}
-    \ell(\beta) = \sum_{i=1}^{n} \left[ y_i \ln(p_i) + (1 - y_i) \ln(1 - p_i) \right]
-\end{equation}
-
-%\section*{Derivadas: Gradiente y Hessiano}
-\begin{itemize}
-    \item Gradiente:
-    \begin{equation}
-        \nabla_{\beta} \ell(\beta) = X^T (\mathbf{y} - \mathbf{p})
-    \end{equation}
-    \item Hessiano:
-    \begin{equation}
-        \nabla^2_{\beta} \ell(\beta) = - X^T V X, \quad \text{donde } V = \text{diag}(p_i(1 - p_i))
-    \end{equation}
-\end{itemize}
-
-%\section*{Regularización}
-Para evitar el sobreajuste, se añade un término de penalización L2 (ridge):
-\begin{equation}
-    \ell_{\lambda}(\beta) = \ell(\beta) - \frac{\lambda}{2} \|\beta\|^2
-\end{equation}
-
-\begin{itemize}
-    \item Gradiente regularizado:
-    \begin{equation}
-        \nabla_{\beta} \ell_{\lambda}(\beta) = X^T (\mathbf{y} - \mathbf{p}) - \lambda \beta
-    \end{equation}
-    \item Hessiano regularizado:
-    \begin{equation}
-        \nabla^2_{\beta} \ell_{\lambda}(\beta) = - X^T V X - \lambda I
-    \end{equation}
-\end{itemize}
-
-%\section*{Algoritmo IRLS (Iteratively Reweighted Least Squares)}
-Una técnica común para estimar los parámetros del modelo es IRLS, que utiliza pesos $v_i = p_i(1 - p_i)$ y variables ajustadas $z_i$:
-
-\begin{equation}
-    z_i = x_i \hat{\beta} + \frac{y_i - p_i}{v_i}
-\end{equation}
-
-En cada iteración, se resuelve:
-\begin{equation}
-    (X^T V X + \lambda I) \hat{\beta}^{(c+1)} = X^T V z^{(c)}
-\end{equation}
-
-Este método es eficiente para bases de datos de tamaño moderado.
-
-%\section*{Algoritmo CG (Conjugate Gradient)}
-En problemas a gran escala, se recomienda el método del gradiente conjugado:
-
-\begin{itemize}
-    \item Se inicializa el residuo $r^{(0)} = b - A\beta^{(0)}$.
-    \item Se actualizan las direcciones de búsqueda y pasos óptimos iterativamente.
-    \item Permite resolver sistemas lineales sin invertir matrices.
-\end{itemize}
-
-Es especialmente útil cuando $X^T V X$ es grande o disperso.
-
-%\section*{Correcciones para eventos raros}
-\begin{itemize}
-    \item \textbf{Ajuste del intercepto:} basado en la tasa real de eventos:
-    \begin{equation}
-        \tilde{\beta}_0 = \hat{\beta}_0 - \ln \left( \frac{1 - \tau}{\tau} \cdot \frac{y}{1 - y} \right)
-    \end{equation}
-    \item \textbf{Ponderación:} modifica la verosimilitud con pesos:
-    \begin{equation}
-        \ell(\beta|y,X) = \sum_{i=1}^n w_i \ln \left( \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} \right)
-    \end{equation}
-\end{itemize}
-
-%\section*{Conclusiones clave}
-\begin{itemize}
-    \item La regresión logística es robusta y se adapta bien a diferentes contextos de datos.
-    \item Las técnicas de regularización y los métodos numéricos como IRLS y CG la hacen escalable.
-    \item Las correcciones para eventos raros mejoran la inferencia en muestras sesgadas.
-    \item Es una herramienta base para modelos más complejos como regresión multinomial o clasificación ordinal.
-\end{itemize}
-
-
-\begin{itemize}
-
-\item La funci\'on log\'istica transforma la probabilidad de un evento en \textbf{odds}, y posteriormente en \textbf{log-odds} (\textit{logit}), acotando los valores entre 0 y 1. Esto asegura interpretaciones coherentes para eventos dicot\'omicos. El modelo toma la forma:
-
-\begin{eqnarray*}
-\text{logit}(p) = \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1X_1 + \beta_2X_2 + \ldots + \beta_kX_k
-\end{eqnarray*}
-
-\item \textbf{Evaluaci\'on general}
-Se emplean dos pruebas principales:
-\begin{itemize}
-  \item \textbf{Raz\'on de verosimilitudes (likelihood ratio test)}: compara un modelo completo con uno nulo, evaluando si los predictores mejoran significativamente la predicci\'on.
-  \item \textbf{Prueba de Hosmer-Lemeshow}: mide el ajuste entre valores observados y esperados por deciles de riesgo. Un valor $p > 0.05$ indica buen ajuste.
-\end{itemize}
-
-\item \textbf{Evaluaci\'on de predictores}
-La significancia individual de cada predictor se eval\'ua con el \textbf{estad\'istico Wald}, basado en la relaci\'on entre el coeficiente estimado y su error est\'andar. Tambi\'en se puede usar la raz\'on de verosimilitudes para cada predictor.
-
-\item \textbf{Exactitud Predictiva y Discriminaci\'on}
-
-\begin{itemize}
-  \item \textbf{Tabla de clasificaci\'on}: compara predicciones contra observaciones reales, generando m\'etricas como sensibilidad, especificidad, precisi\'on y valor predictivo.
-  \item \textbf{Curva ROC (Receiver Operating Characteristic)}: representa la sensibilidad frente a 1 - especificidad. El \'area bajo la curva (AUC) cuantifica la capacidad discriminativa del modelo. Un AUC de 0.5 indica clasificaci\'on aleatoria, mientras que 1.0 representa clasificaci\'on perfecta.
-\end{itemize}
-
-\item \textbf{Validaci\'on del Modelo}
-
-Se destaca la importancia de validar los modelos, ya sea de manera \textbf{interna} (con subconjuntos del mismo conjunto de datos) o \textbf{externa} (con nuevos datos). Se discuten m\'etodos como \textit{bootstrap}, \textit{jackknife} y validaci\'on cruzada.
-
-Tambi\'en se mencionan medidas como:
-\begin{itemize}
-  \item \textbf{$R^2$ de Cox \& Snell}
-  \item \textbf{$R^2$ de Nagelkerke}
-\end{itemize}
-Estas proporcionan informaci\'on sobre el poder explicativo del modelo, aunque no son equivalentes al $R^2$ cl\'asico de regresi\'on lineal.
-\end{itemize}
-
-
-
-Para una variable binaria $y_i \in \{0,1\}$, el modelo de regresión logística predice la probabilidad:
-\[
-p_i = \frac{1}{1 + e^{-x_i \beta}}
-\]
-
-%\subsection*{Función de verosimilitud}
-\[
-L(\beta) = \prod_{i=1}^n p_i^{y_i} (1 - p_i)^{1 - y_i}
-\]
-
-%\subsection*{Log-verosimilitud}
-\[
-\ell(\beta) = \sum_{i=1}^n \left[ y_i \ln(p_i) + (1 - y_i) \ln(1 - p_i) \right]
-\]
-
-%\section*{Derivadas}
-
-\textbf{Gradiente}:
-\[
-\nabla_\beta \ell(\beta) = X^\top (y - p)
-\]
-
-\textbf{Hessiano (segunda derivada)}:
-\[
-\nabla^2_\beta \ell(\beta) = - X^\top V X, \quad V = \text{diag}(p_i (1 - p_i))
-\]
-
-%\section*{Regularización Ridge (L2)}
-Se añade un término penalizado:
-\[
-\ell_\lambda(\beta) = \ell(\beta) - \frac{\lambda}{2} \|\beta\|^2
-\]
-
-Gradiente regularizado:
-\[
-\nabla_\beta \ell_\lambda(\beta) = X^\top (y - p) - \lambda \beta
-\]
-
-Hessiano regularizado:
-\[
-\nabla^2_\beta \ell_\lambda(\beta) = - X^\top V X - \lambda I
-\]
-
-%\section*{TR-IRLS (Trust Region IRLS)}
-Actualización generalizada del paso de Newton:
-\[
-\beta^{(k+1)} = \beta^{(k)} + s
-\]
-Donde $s$ es solución de:
-\[
-(X^\top V X + \lambda I) s = X^\top V z - \lambda \beta
-\]
-
-%\section*{Eventos raros y correcciones}
-5\subsection*{Ajuste del intercepto (King \& Zeng)}
-\[
-\tilde{\beta}_0 = \hat{\beta}_0 - \ln \left[ \left( \frac{1 - \tau}{\tau} \right) \left( \frac{\hat{y}}{1 - \hat{y}} \right) \right]
-\]
-
-%\subsection*{Muestreo estratificado}
-Peso para observación $i$:
-\[
-w_i = \frac{Q_i}{H_i}
-\]
-Verosimilitud ponderada:
-\[
-\ell_w(\beta) = \sum_{i=1}^n w_i \ln \left( \frac{e^{x_i \beta}}{1 + e^{x_i \beta}} \right)
-\]
-
-%\section*{Corrección de Firth}
-Se basa en el ajuste de penalización de tipo Jeffreys:
-\[
-\ell^*(\beta) = \ell(\beta) + \frac{1}{2} \log |I(\beta)|
-\]
-
-%\section*{Regla de decisión}
-\[
-\hat{y}_i =
-\begin{cases}
-1 & \text{si } p_i \geq c \\\\
-0 & \text{si } p_i < c
-\end{cases}
-\quad \text{(usualmente } c = 0.5)
-\]
-
-
-\newpage
-
-
-\begin{Note}
-
-La prueba \textbf{F} es más estable que otras pruebas.
-
-\begin{eqnarray}
-F = \frac{\sum (\hat{y}_i - \bar{y}_i)^2 / (m - 1)}{\sum (y_i - \hat{y}_i)^2 / (n - m)} \sim F(m - 1, n - m)
-\end{eqnarray}
-
-Donde si $F > F_\alpha(m - 1, n - m)$, entonces una relación lineal significativa entre $y$ y $x_1, x_2, \dots, x_m$ es razonable desde la perspectiva de la prueba de hipótesis con prioridad $ \alpha$.
-
-mientras que la prueba $t$ est\'a dada por
-\begin{eqnarray}
-t_j = \frac{\beta_j}{\sqrt{c_{jj}} \sqrt{ \frac{\sum (y_i - \hat{y}_i)^2}{n - m} }},
-\end{eqnarray}
-donde \( c_{jj} \) es la componente \( j \)-ésima de la matriz inversa \( (X^\top X)^{-1} \).
-\end{Note}
-
-
+\end{document}
 
 
 \begin{thebibliography}{99}

@@ -1,0 +1,17 @@
+\contentsline {section}{\numberline {1}Regresión Logística: Log-verosimilitud y derivadas}{2}{section.1}%
+\contentsline {section}{\numberline {2}Derivación recursiva del gradiente}{2}{section.2}%
+\contentsline {section}{\numberline {3}Regresión Lineal}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Historia}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Modelo de Regresión Lineal}{2}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Regresión Polinomial}{3}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Estimaciones con modelo lineal centrado}{3}{section.4}%
+\contentsline {section}{\numberline {5}Evaluación del modelo lineal}{3}{section.5}%
+\contentsline {subsection}{\numberline {5.1}F-test}{3}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}t-test}{3}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Fundamentos de la Regresión Logística}{3}{section.6}%
+\contentsline {section}{\numberline {7}Función logística y función logit}{3}{section.7}%
+\contentsline {section}{\numberline {8}Log-verosimilitud y derivadas}{4}{section.8}%
+\contentsline {section}{\numberline {9}Regularización}{4}{section.9}%
+\contentsline {section}{\numberline {10}Desviación}{4}{section.10}%
+\contentsline {section}{\numberline {11}Newton-Raphson}{4}{section.11}%
+\contentsline {section}{\numberline {12}WLS y función cuadrática}{4}{section.12}%

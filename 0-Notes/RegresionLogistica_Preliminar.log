@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  5 MAY 2025 17:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  9 MAY 2025 08:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -542,7 +542,7 @@ File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count324
 \l__pdf_internal_box=\box105
 )
-No file RegresionLogistica_Preliminar.aux.
+(./RegresionLogistica_Preliminar.aux)
 \openout1 = `RegresionLogistica_Preliminar.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
@@ -564,10 +564,13 @@ LaTeX Font Info:    ... okay on input line 36.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
 Package hyperref Info: Link coloring OFF on input line 36.
+ (./RegresionLogistica_Preliminar.out)
+(./RegresionLogistica_Preliminar.out)
 \@outlinefile=\write3
 \openout3 = `RegresionLogistica_Preliminar.out'.
 
 \c@lstlisting=\count325
+
 (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count326
@@ -720,22 +723,15 @@ L3 programming layer <2024-02-20>
 
 LaTeX Warning: There were undefined references.
 
-
-Package rerunfilecheck Warning: File `RegresionLogistica_Preliminar.out' has ch
-anged.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `RegresionLogistica_Preliminar.out':
-
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+Package rerunfilecheck Info: File `RegresionLogistica_Preliminar.out' has not c
+hanged.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 14469 strings out of 474116
- 226081 string characters out of 5743681
+ 14477 strings out of 474116
+ 226377 string characters out of 5743681
  1950187 words of memory out of 5000000
- 36586 multiletter control sequences out of 15000+600000
+ 36588 multiletter control sequences out of 15000+600000
  572103 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,14n,79p,1537b,667s stack positions out of 10000i,1000n,20000p,200000b,200000s

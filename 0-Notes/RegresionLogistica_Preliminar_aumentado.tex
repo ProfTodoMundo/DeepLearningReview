@@ -1,5 +1,5 @@
 %===========================================
-\documentclass[12pt]{report}
+\documentclass[12pt]{article}
 %===========================================
 \usepackage[utf8]{inputenc}
 %\usepackage[margin=2.5in]{geometry}
@@ -44,7 +44,7 @@
 \maketitle
 \tableofcontents
 %__________________________
-\chapter{Principios}
+%\chapter{Principios}
 %__________________________
 
 %---------------------------------------------------------
@@ -147,11 +147,11 @@ V\left(\hat{\beta}_{1}\right)=\frac{\sigma^{2}}{S_{xx}}
 Se tiene la siguiente proposici\'on
 
 \begin{Prop}
-\begin{eqnarray*}
+\begin{eqnarray}
 E\left(\hat{\beta}_{0}\right)&=&\beta_{0},\\
 V\left(\hat{\beta}_{0}\right)&=&\sigma^{2}\left(\frac{1}{n}+\frac{\overline{x}^{2}}{S_{xx}}\right),\\
 Cov\left(\hat{\beta}_{0},\hat{\beta}_{1}\right)&=&-\frac{\sigma^{2}\overline{x}}{S_{xx}}.
-\end{eqnarray*}
+\end{eqnarray}
 \end{Prop}
 
 Para estimar $\sigma^{2}$ es preciso definir la diferencia entre la observaci\'on $y_{k}$, y el valor predecido $\hat{y}_{k}$, es decir
@@ -169,8 +169,11 @@ sustituyendo $\hat{y}_{k}=\hat{\beta}_{0}+\hat{\beta}_{1}x_{k}$ se obtiene
 \begin{eqnarray*}
 SC_{E}&=&\sum_{k=1}^{n}y_{k}^{2}-n\overline{y}^{2}-\hat{\beta}_{1}S_{xy}=S_{yy}-\hat{\beta}_{1}S_{xy},\\
 E\left(SC_{E}\right)&=&\left(n-2\right)\sigma^{2},\textrm{ por lo tanto}\\
-\hat{\sigma}^{2}&=&\frac{SC_{E}}{n-2}=MC_{E}\textrm{ es un estimador insesgado de }\sigma^{2}.
 \end{eqnarray*}
+
+\begin{eqnarray}
+\hat{\sigma}^{2}=\frac{SC_{E}}{n-2}=MC_{E}, \textrm{ estimador insesgado de }\sigma^{2}.
+\end{eqnarray}
 
 %---------------------------------------------------------
 \subsection{Prueba de Hip\'otesis en RLS}
@@ -200,7 +203,7 @@ t_{0}=\frac{\hat{\beta}_{1}-\hat{\beta}_{1,0}}{\sqrt{MC_{E}/S_{xx}}},
 que se distribuye $t$ con $n-2$ grados de libertad bajo $H_{0}:\beta_{1}=\beta_{1,0}$. Se rechaza $H_{0}$ si 
 
 \begin{equation}\label{Zona.Rechazo.Beta.1}
-t_{0}|>t_{\alpha/2,n-2}.
+t_{0}>t_{\alpha/2,n-2}.
 \end{equation}
 
 
@@ -218,7 +221,7 @@ t_{0}=\frac{\hat{\beta}_{0}-\beta_{0,0}}{MC_{E}\left[\frac{1}{n}+\frac{\overline
 con el que rechazamos la hip\'otesis nula si
 
 \begin{equation}\label{Zona.Rechazo.Beta.0}
-t_{0}|>t_{\alpha/2,n-2}.
+t_{0}>t_{\alpha/2,n-2}.
 \end{equation}
 
 No rechazar $H_{0}:\beta_{1}=0$ es equivalente a decir que no hay relaci\'on lineal entre $x$ y $y$. Alternativamente, si $H_{0}:\beta_{1}=0$ se rechaza, esto implica que $x$ explica la variabilidad de $y$, es decir, podr\'ia significar que la l\'inea recta esel modelo adecuado. El procedimiento de prueba para $H_{0}:\beta_{1}=0$ puede realizarse de la siguiente manera:
@@ -243,7 +246,7 @@ Por lo tanto, efectivamente se tiene
 S_{yy}=\sum_{k=1}^{n}\left(\hat{y}_{k}-\overline{y}\right)^{2}+\sum_{k=1}^{n}\left(y_{k}-\hat{y}_{k}\right)^{2},
 \end{equation}
 
-donde se hacen las definiciones
+entonces se tiene que 
 
 \begin{eqnarray}
 SC_{E}&=&\sum_{k=1}^{n}\left(\hat{y}_{k}-\overline{y}\right)^{2}\cdots\textrm{Suma de Cuadrados del Error}\\
@@ -308,9 +311,9 @@ t_{0}=\frac{\hat{\beta}_{1}}{\sqrt{MC_{E}/S_{xx}}}.
 \end{equation}
 
 Elevando al cuadrado ambos t\'erminos:
-\begin{eqnarray*}
-t_{0}^{2}=\frac{\hat{\beta}_{1}^{2}S_{xx}}{MC_{E}}=\frac{\hat{\beta}_{1}S_{xy}}{MC_{E}}=\frac{MC_{R}}{MC_{E}}
-\end{eqnarray*}
+\begin{eqnarray}
+t_{0}^{2}=\frac{\hat{\beta}_{1}^{2}S_{xx}}{MC_{E}}=\frac{\hat{\beta}_{1}S_{xy}}{MC_{E}}=\frac{MC_{R}}{MC_{E}}.
+\end{eqnarray}
 Observar que $t_{0}^{2}=F_{0}$, por tanto la prueba que se utiliza para $t_{0}$ es la misma que para $F_{0}$.
 
 %---------------------------------------------------------
@@ -344,7 +347,7 @@ Supongamos que se tiene un valor $x_{0}$ de inter\'es, entonces la estimaci\'on 
 \hat{y}_{0}=\hat{\beta}_{0}+\hat{\beta}_{1}x_{0}.
 \end{equation}
 
-Esta nueva observaci\'on es independiente de las utilizadas para obtener el modelo de regresi\'on, por tanto, el intervalo en torno a la recta de regresi\'on es inapropiado, puesto que se basa \'unicamente en los datos empleados para ajustar el modelo de regresi\'on. El intervalo de confianza en torno a la recta de regresi\'on se refiere a la respuesta media verdadera $x=x_{0}$, no a observaciones futuras. Sea $y_{0}$ la observaci\'on futura en $x=x_{0}$, y sea $\hat{y}_{0}$ dada en la ecuaci\'on anterior, el estimador de $y_{0}$. Si se define la variable aleatoria $$w=y_{0}-\hat{y}_{0},$$ esta se distribuye normalmente con media cero y varianza $$V\left(w\right)=\sigma^{2}\left[1+\frac{1}{n}+\frac{\left(x-x_{0}\right)^2}{S_{xx}}\right]$$ dado que $y_{0}$ es independiente de $\hat{y}_{0}$, por lo tanto el intervalo de predicci\'on al nivel $\alpha$ para futuras observaciones $x_{0}$ es
+Esta nueva observaci\'on es independiente de las utilizadas para obtener el modelo de regresi\'on, por tanto, el intervalo en torno a la recta de regresi\'on es inapropiado, puesto que se basa \'unicamente en los datos empleados para ajustar el modelo de regresi\'on. El intervalo de confianza en torno a la recta de regresi\'on se refiere a la respuesta media verdadera $x=x_{0}$, no a observaciones futuras. Sea $y_{0}$ la observaci\'on futura en $x=x_{0}$, y sea $\hat{y}_{0}$ dada en la ecuaci\'on anterior, el estimador de $y_{0}$. Si se define la variable aleatoria $$w=y_{0}-\hat{y}_{0},$$ esta se distribuye normalmente con media cero y varianza $$V\left(w\right)=\sigma^{2}\left[1+\frac{1}{n}+\frac{\left(x-x_{0}\right)^2}{S_{xx}}\right],$$ dado que $y_{0}$ es independiente de $\hat{y}_{0}$, por lo tanto el intervalo de predicci\'on al nivel $\alpha$ para futuras observaciones $x_{0}$ es
 
 \begin{eqnarray*}
 \hat{y}_{0}-t_{\alpha/2,n-2}\sqrt{MC_{E}\left[1+\frac{1}{n}+\frac{\left(x-x_{0}\right)^2}{S_{xx}}\right]}\leq y_{0}\\
@@ -368,8 +371,7 @@ donde $SC_{EP}$ es la suma de cuadrados atribuibles al error puro, y $SC_{FDA}$ 
 R^{2}=\frac{SC_{R}}{S_{yy}}=1-\frac{SC_{E}}{S_{yy}},
 \end{equation}
 
-se denomina coeficiente de determinaci\'on y se utiliza para saber si el modelo de regresi\'on es suficiente o no. Se puede demostrar que $0\leq R^{2}\leq1$, una manera de interpretar este valor es que si $R^{2}=k$, entonces el modelo de regresi\'on explica el $k*100\%$ de la variabilidad en los datos.
-$R^{2}$ 
+se denomina coeficiente de determinaci\'on y se utiliza para saber si el modelo de regresi\'on es suficiente o no. Se puede demostrar que $0\leq R^{2}\leq1$, una manera de interpretar este valor es que si $R^{2}=k$, entonces el modelo de regresi\'on explica el $k*100\%$ de la variabilidad en los datos. En lo que corresponde a  $R^{2}$ 
 
 \begin{itemize}
 \item No mide la magnitud de la pendiente de la recta de regresi\'on.
@@ -379,7 +381,7 @@ $R^{2}$
 \end{itemize}
 
 %<--__--__--__--><--__--__--__--><--__--__--__--><--__--__--__-->
-\chapter{Regresi\'on Log\'istica}
+%\chapter{Regresi\'on Log\'istica}
 %<--__--__--__--><--__--__--__--><--__--__--__--><--__--__--__-->
 
 
@@ -431,9 +433,9 @@ donde:
 \end{itemize}
 
 Para encontrar los valores óptimos de los coeficientes, se toman las derivadas parciales de la función de costo con respecto a cada coeficiente y se igualan a cero:
-\begin{equation}
+\begin{equation*}
 \frac{\partial J}{\partial \beta_j} = 0 \quad \text{para } j = 0, 1, \ldots, n.
-\end{equation}
+\end{equation*}
 
 Resolviendo este sistema de ecuaciones, se obtienen los valores de los coeficientes que minimizan la función de costo. La deducción de la fórmula de la regresión logística comienza con la necesidad de modelar la probabilidad de un evento binario. Queremos encontrar una función que relacione las variables independientes con la probabilidad de que la variable dependiente tome el valor $1$. La probabilidad de que el evento ocurra, $P(Y=1)$, se denota como $p$. La probabilidad de que el evento no ocurra, $P(Y=0)$, es $1-p$. Los \textbf{odds} (chances) de que ocurra el evento se definen como:
 \begin{equation}
@@ -453,15 +455,15 @@ La transformación logit es útil porque convierte el rango de la probabilidad (
 
 Aquí, $\beta_0$ es el t\'ermino constante y $\beta_1, \beta_2, \ldots, \beta_n$ son los coeficientes asociados con las variables independientes $X_1, X_2, \ldots, X_n$. Para expresar $p$ en función de una combinación lineal de las variables independientes, invertimos la transformación logit. Partimos de la ecuación \ref{Ec.logit}, aplicando la funci\'on exponencial en ambos lados:
 
-\begin{eqnarray}
+\begin{eqnarray*}
 \frac{p}{1-p} = e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_n X_n}.
-\end{eqnarray}
+\end{eqnarray*}
 
 Despejando $p$:
 
-\begin{eqnarray}
+\begin{eqnarray*}
 p = \frac{e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_n X_n}}{1 + e^{\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_n X_n}}.
-\end{eqnarray}
+\end{eqnarray*}
 
 La expresión final que obtenemos es conocida como la \textbf{función logística}:
 
@@ -495,9 +497,9 @@ Trabajar directamente con esta función de verosimilitud puede ser complicado de
 
 Aquí, $\log$ representa el logaritmo natural. Esta transformación es válida porque el logaritmo es una función monótona creciente, lo que significa que maximizar la log-verosimilitud es equivalente a maximizar la verosimilitud original. En la regresión logística, la probabilidad $p_i$ está dada por la función logística:
 
-\begin{equation}
+\begin{equation*}
 p_i = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_n X_{in})}}.
-\end{equation}
+\end{equation*}
 
 Sustituyendo esta expresión en la función de log-verosimilitud, obtenemos:
 
@@ -620,32 +622,32 @@ El algoritmo Newton-Raphson para la regresión logística se puede resumir en lo
 
 El método de Newton-Raphson permite encontrar los coeficientes que maximizan la función de log-verosimilitud de manera eficiente.  En espec\'ifico para un conjunto de $n$ observaciones, la función de verosimilitud $L$ se define como el producto de las probabilidades individuales de observar cada dato:
 
-\begin{equation}
+\begin{eqnarray*}
 L(\beta_0, \beta_1, \ldots, \beta_n) = \prod_{i=1}^{n} p_i^{y_i} (1 - p_i)^{1 - y_i},
-\end{equation}
+\end{eqnarray*}
 
 donde $y_i$ es el valor observado de la variable dependiente para la $i$-ésima observación y $p_i$ es la probabilidad predicha de que $Y_i = 1$. Aquí, $p_i$ es dado por la función logística:
 
-\begin{equation}
+\begin{eqnarray*}
 p_i = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_n X_{in})}}.
-\end{equation}
+\end{eqnarray*}
 
 Tomando el logaritmo:
-\begin{equation}
+\begin{eqnarray*}
 \log L(\beta_0, \beta_1, \ldots, \beta_n) = \sum_{i=1}^{n} \left[ y_i \log(p_i) + (1 - y_i) \log(1 - p_i) \right].
-\end{equation}
+\end{eqnarray*}
 
 Sustituyendo $p_i$:
 
-\begin{equation}
+\begin{eqnarray*}
 \log L(\beta_0, \beta_1, \ldots, \beta_n) = \sum_{i=1}^{n} \left[ y_i (\beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_n X_{in}) - \log(1 + e^{\beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_n X_{in}}) \right].
-\end{equation}
+\end{eqnarray*}
 
 Dado que el objetivo es encontrar los valores de $\beta_0, \beta_1, \ldots, \beta_n$ que maximicen la función de log-verosimilitud.  Para $\beta_j$, la derivada parcial de la función de log-verosimilitud es:
 
-\begin{equation}
+\begin{eqnarray*}
 \frac{\partial \log L}{\partial \beta_j} = \sum_{i=1}^{n} \left[ y_i X_{ij} - \frac{X_{ij} e^{\beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_n X_{in}}}{1 + e^{\beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \ldots + \beta_n X_{in}}} \right].
-\end{equation}
+\end{eqnarray*}
 
 Esto se simplifica a (comparar con la ecuaci\'on \ref{Eq.1.14}):
 
@@ -694,6 +696,574 @@ Los pasos del algoritmo Newton-Raphson para la regresión logística son:
 \end{Algthm}
 
 Como se puede observar, la diferencia entre el Algoritmo \ref{Algoritmo1} y el Algoritmo \ref{Algoritmo2} son m\'inimas.
+
+
+%>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<%
+%\chapter{Revisando la Regresión Logística}
+%>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<%
+
+%____________________________________________________________
+\section{Desarrollo}
+%____________________________________________________________
+
+El an\'alisis de regresi\'on estima la variable dependiente $y$, dado el rango de valores de la variable $x$. El modelo de regresi\'on se plantea:
+
+\begin{eqnarray*}
+y&=&\beta_{0}+\beta_{1}x+\epsilon,\textrm{ caso univariado,}\\
+y&=&\sum_{j=0}^{q}\beta_{j}x_{j}; x_{0}=1,\textrm{ caso multivariado.}
+\end{eqnarray*}
+
+Para resolver el problema de regresi\'on lineal univariado se requiere encontrar $\beta_0$ y $\beta_1$ minimizando la funci\'on de versosimilitud:
+
+\begin{eqnarray*}
+L(\beta_0^*, \beta_1) = \sum_{i=1}^{n} [y_i - (\beta_0^* + \beta_1(x_i - \bar{x}))]^2;
+\end{eqnarray*}
+
+
+Que se obtiene resolviendo
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_0} \sum \left[ y_i - (\beta_0 + \beta_1 x_i) \right]^2 = 0,\\
+\frac{\partial}{\partial \beta_1} \sum \left[ y_i - (\beta_0 + \beta_1 x_i) \right]^2 = 0.
+\end{eqnarray*}
+
+Si se define
+
+\begin{eqnarray*}
+y_i = \beta_0^* + \beta_1 (x_i - \bar{x}) + \varepsilon_i,\textrm{ donde }\beta_0 = \beta_0^* + \beta_1 \bar{x}.
+\end{eqnarray*}
+
+
+Entonces se tiene 
+
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_0^*} \sum \left[ y_i - (\beta_0^* + \beta_1 \bar{x}) \right]^2 &=& 0,\\
+\frac{\partial}{\partial \beta_1^*} \sum \left[ y_i - (\beta_0^* + \beta_1 \bar{x}) \right]^2&=& 0.
+\end{eqnarray*}
+
+Sabemos que:
+
+\begin{eqnarray*}
+\beta_0 = \beta_0^* + \beta_1 \bar{x}, \textrm{ entonces }\quad \beta_0^* = \beta_0 - \beta_1 \bar{x},\textrm{ por lo tanto}
+\end{eqnarray*}
+
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_0} \sum \left[ y_i - \left( \beta_0 + \beta_1 \bar{x} \right) \right]^2 &=&\sum \frac{\partial}{\partial \beta_0} \left[ y_i - (\beta_0 + \beta_1 \bar{x}) \right]^2
+= \sum \frac{\partial}{\partial \beta_0} \left[ y_i - \left( \beta_0^* - \beta_1 \bar{x} + \beta_1 x_i \right) \right]^2\\
+ &=& \sum \frac{\partial}{\partial \beta_0} \left[ y_i - \left( \beta_0^* - (x_i - \bar{x}) \beta_1 \right) \right]^2 = - \sum 2 \left[ y_i - \left( \beta_0^* - (x_i - \bar{x}) \beta_1 \right) \right](-1) \\
+ &=&0,
+\end{eqnarray*}
+
+entonces
+\begin{eqnarray*}
+2 \sum \left[ y_i - \left( \beta_0^* + (x_i - \bar{x}) \beta_1 \right) \right] (-1) = -2 \sum \left[ y_i - \beta_0^* - \beta_1 (x_i - \bar{x}) \right] \\
+=\sum y_i - n \beta_0^* - \beta_1 \sum (x_i - \bar{x}) =\sum y_i -n \beta_0^* =0,
+\end{eqnarray*}
+
+entonces, $ \sum y_i =n \beta_0^*$,  ya que $\sum (x_i - \bar{x}) = 0$, por lo tanto
+\begin{eqnarray}
+\beta_0^* = \bar{y}.
+\end{eqnarray}
+
+Por otra parte, la derivada respecto a $\beta_1$:
+
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_1} \sum \left[ y_i - \left( \beta_0^* + \beta_1 x_i \right) \right]^2 &=&\frac{\partial}{\partial \beta_1} \sum \left[ y_i - \left( \beta_0^* - \beta_1 \bar{x} + \beta_1 x_i \right) \right]^2 =\frac{\partial}{\partial \beta_1} \sum \left[ y_i - \left( \beta_0^* + \beta_1 (x_i - \bar{x}) \right) \right]^2\\
+&=& 2 \sum \left[ y_i - \left( \beta_0^* + \beta_1 (x_i - \bar{x}) \right) \right](x_i - \bar{x}) (-1) = 0,
+\end{eqnarray*}
+
+de aqu\'i que 
+
+\begin{eqnarray*}
+\sum \left[ y_i - \left( \beta_0^* + \beta_1 (x_i - \bar{x}) \right) \right](x_i - \bar{x})=\sum y_i (x_i - \bar{x}) - \beta_0^* \sum (x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = 0.
+\end{eqnarray*}
+
+Recordar que $\beta_0^* = \bar{y}$, entonces:
+
+\begin{eqnarray*}
+\sum y_i (x_i - \bar{x}) - \bar{y} \sum (x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = \sum (y_i - \bar{y})(x_i - \bar{x}) - \beta_1 \sum (x_i - \bar{x})^2 = 0
+\end{eqnarray*}
+
+entonces 
+\begin{eqnarray}
+ \beta_1 = \frac{\sum (y_i - \bar{y})(x_i - \bar{x})}{\sum (x_i - \bar{x})^2} = \frac{S_{xy}}{S_{xx}},
+\end{eqnarray}
+
+por lo tanto
+\begin{eqnarray}
+\boxed{ \beta_1 = \frac{S_{xy}}{S_{xx}}, } \quad \textrm{ y }\boxed{ \beta_0 = \bar{y} - \beta_1 \bar{x}.}
+\end{eqnarray}
+
+
+\begin{Ejem}\textbf{Caso Bernoulli}
+
+Sea $X \in \mathbb{R}^{n \times d}$, donde $n$ es el  número de instancias; $d$ el  número de características; $y$ un vector binario de resultados. Para todo $x_i \in \mathbb{R}^d$, la salida es $y_i \in \{0,1\}$. El objetivo es clasificar la instancia $x_i$ como positiva o negativa. Una instancia se puede pensar como un intento Bernoulli con esperanza $\mathbb{E}[y_i | x_i]$ o probabilidad $\rho_i$. Se propone el modelo
+\begin{eqnarray*}
+y = X \beta + \varepsilon, \quad \text{donde }\varepsilon \text{es el vector error}.
+\end{eqnarray*}
+
+\begin{eqnarray*}
+y = 
+\begin{pmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_n
+\end{pmatrix},
+\quad
+X = 
+\begin{bmatrix}
+1 & x_{11} & x_{12} & \cdots & x_{1d} \\
+1 & x_{21} & x_{22} & \cdots & x_{2d} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & x_{n1} & x_{n2} & \cdots & x_{nd}
+\end{bmatrix},
+\quad
+\varepsilon = 
+\begin{pmatrix}
+\varepsilon_1 \\
+\varepsilon_2 \\
+\vdots \\
+\varepsilon_n
+\end{pmatrix},
+\end{eqnarray*}
+
+y
+
+\begin{eqnarray*}
+\beta = 
+\begin{pmatrix}
+\beta_0 \\
+\beta_1 \\
+\vdots \\
+\beta_d
+\end{pmatrix}
+\quad \text{es el vector de parámetros.}
+\end{eqnarray*}
+
+Supongamos que $X_i = [1, x_i^\top]$ y $\beta = [\beta_0, \boldsymbol{\beta}^\top]$.  Como $y$ es una variable aleatoria Bernoulli con probabilidad $\rho_i$, se tiene:
+
+\begin{eqnarray*}
+P(y_i) = 
+\begin{cases}
+\rho_i, & \text{si } y_i = 1, \\
+1 - \rho_i, & \text{si } y_i = 0.
+\end{cases}
+\end{eqnarray*}
+Entonces
+\begin{eqnarray*}
+\mathbb{E}[y_i] &=& 1 \cdot \rho_i + 0 \cdot (1 - \rho_i) = \rho_i = X_i^\top \beta,\\
+\mathbb{V}[y_i] &=& \rho_i (1 - \rho_i).
+\end{eqnarray*}
+
+Por lo tanto se tiene
+\begin{eqnarray*}
+y_i = X_i^\top \beta + \varepsilon_i, \quad \text{donde} \quad
+\varepsilon_i =
+\begin{cases}
+1 - \rho_i, & \text{si } y_i = 1, \\
+ \rho_i, & \text{si } y_i = 0.
+\end{cases}
+\end{eqnarray*}
+
+\end{Ejem}
+donde $\varepsilon_i \sim \text{Binomial}$, con esperanza:
+
+\begin{eqnarray*}
+\mathbb{E}[\varepsilon_i] = (1 - \rho_i)(\rho_i + (1 - \rho_i))(1 - \rho_i) = 0;
+\end{eqnarray*}
+
+y varianza:
+
+\begin{eqnarray*}
+\mathbb{V}[\varepsilon_i] = \mathbb{E}[\varepsilon_i^2] - (\mathbb{E}[\varepsilon_i])^2
+= (1 - \rho_i)^2 \rho_i + (-\rho_i)^2 (1 - \rho_i) \neq 0
+= \rho_i (1 - \rho_i).
+\end{eqnarray*}
+
+Ahora, se sabe que 
+\begin{eqnarray*}
+\mathbb{E}[Y_i = 1 \mid x_i, \beta] = \rho_i = \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} = \frac{1}{1 + e^{-x_i^\top \beta}};
+\end{eqnarray*}
+
+si se define
+\begin{eqnarray*}
+\eta_i = g(\rho_i) &=& \ln \left( \frac{\rho_i}{1 - \rho_i} \right) = x_i^\top \beta \textrm{ entonces }\eta = X. 
+\end{eqnarray*}
+
+Ahora definamos la \textbf{Función de verosimilitud:}
+
+\begin{eqnarray*}
+\mathcal{L}(\beta) =\prod_{i=1}^{n} \rho_i^{y_i} (1 - \rho_i)^{1 - y_i}
+= \prod_{i=1}^{n} \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)^{y_i}
+\left( \frac{1}{1 + e^{x_i^\top \beta}} \right)^{1 - y_i},
+\end{eqnarray*}
+aplicando el logaritmo natural
+\begin{eqnarray*}
+\ln \mathcal{L}(\beta) =\sum_{i=1}^{n} \left[y_i \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) + (1 - y_i) \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)\right].
+\end{eqnarray*}
+
+Calculando  el gradiente y la matriz Hessiana:
+
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_j} \ln \mathcal{L}(\beta)
+= \sum \left[ y_i \left( \frac{x_{ij}}{1 + e^{x_i^\top \beta}} \right)
++ (1 - y_i) \left( \frac{-x_{ij} e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) \right].
+\end{eqnarray*}
+
+
+Recordemos que:
+
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_j} \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
+&=& - \frac{1}{1 + e^{x_i^\top \beta}} \cdot e^{x_i^\top \beta} \cdot x_{ij}
+= - \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} x_{ij},
+\end{eqnarray*}
+
+entonces
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_j} \ln \mathcal{L}(\beta)= y_i \cdot \frac{1}{1 + e^{x_i^\top \beta}} \cdot x_i
+= y_i \cdot \frac{x_i}{1 + e^{x_i^\top \beta}}.
+\end{eqnarray*}
+
+
+Por lo tanto
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_j} \ln \mathcal{L}(\beta)
+&=& \sum_i \frac{\partial}{\partial \beta_j} \left[
+y_i \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)
++ (1 - y_i) \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
+\right]\\
+&=& \sum_i \left[
+y_i \frac{\partial}{\partial \beta_j} \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)
++ (1 - y_i) \frac{\partial}{\partial \beta_j} \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
+\right].
+\end{eqnarray*}
+
+Dado que
+
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_j} \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right)
+&=& \frac{\partial}{\partial \beta_j} \left[ x_{ij} - \ln \left( 1 + e^{x_i^\top \beta} \right) \right]
+= x_{ij} - \frac{1}{1 + e^{-x_i^\top \beta}} \cdot x_{ij}\\
+&=& x_{ij} \left[ 1 - \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right]= x_{ij} \cdot \frac{1}{1 + e^{x_i^\top \beta}},
+\end{eqnarray*}
+
+por otra parte
+
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_j} \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right) 
+&=& \frac{\partial}{\partial \beta_j} \ln \left(1 + e^{x_i^\top \beta} \right)
+= - \frac{1}{1 + e^{x_i^\top \beta}} \cdot e^{x_i^\top \beta} \cdot x_{ij}\\
+&=& -x_{ij} \cdot \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}},
+\end{eqnarray*}
+
+por lo tanto
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_j} \ln \mathcal{L}(\beta) &=&
+\sum y_i x_{ij} \cdot \frac{1}{1 + e^{x_i^\top \beta}} 
+- (1 - y_i) x_{ij} \cdot \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}}\\
+&=& \sum y_i x_{ij} (1 - \rho_i) - (1 - y_i) x_{ij} \rho_i
+= \sum x_{ij} (y_i - \rho_i) = 0.
+\end{eqnarray*}
+
+En forma matricial se puede reescribir como
+
+\begin{eqnarray*}
+g(\beta) = \nabla_\beta \ln \mathcal{L}(\beta) = X^\top (y - \rho) = 0.
+\end{eqnarray*}
+
+Ahora calculemos la segunda derivada de $\beta$
+
+\begin{eqnarray*}
+\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)= \frac{\partial^2}{\partial \beta_j \partial \beta_k}\sum \left( \frac{-x_{ij} x_{ik} e^{x_i^\top \beta}}{(1 + e^{x_i^\top \beta})^2} \right)= \frac{\partial^2}{\partial \beta_j \partial \beta_k}\sum x_{ij} x_{ik} \, \rho_i \, (1 - \rho_i),
+\end{eqnarray*}
+
+entonces
+
+\begin{eqnarray*}
+\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)= \frac{\partial}{\partial \beta_k} \sum (x_{ij}) (y_i - \rho_i)= -\sum x_{ij} \frac{\partial}{\partial \beta_k} \rho_i,
+\end{eqnarray*}
+donde
+
+\begin{eqnarray*}
+\frac{\partial}{\partial \beta_k} \rho_i = \rho_i (1 - \rho_i) x_{ik}
+\end{eqnarray*}
+por lo tanto
+
+\begin{eqnarray*}
+\frac{\partial^2}{\partial \beta_j \partial \beta_k} \ln \mathcal{L}(\beta)= -\sum x_{ij} \rho_i (1 - \rho_i) x_{ik}= -\sum x_{ij} x_{ik} \rho_i (1 - \rho_i).
+\end{eqnarray*}
+
+
+Si $v_i := \rho_i (1 - \rho_i)$ y $\mathbb{V} = \mathrm{diag}(v_1, v_2, \dots, v_n)$, entonces
+
+\begin{eqnarray*}
+\mathcal{H}(\beta) = \nabla^2_\beta \ln \mathcal{L}(\beta) = -X^\top \mathbb{V} X
+\end{eqnarray*}
+que es negativa definida, es decir, es cóncava con un máximo global. La matriz de información \textit{LR} está dada por:
+
+\begin{eqnarray*}
+\mathcal{I}(\beta) = -\mathbb{E}[\mathcal{H}(\beta)] = X^\top \mathbb{V} X,
+\end{eqnarray*}
+
+con Varianza:
+
+\begin{eqnarray*}
+\mathbb{V}(\hat{\beta}) = \mathcal{I}^{-1}(\beta) = (X^\top \mathbb{V} X)^{-1}.
+\end{eqnarray*}
+
+La \textit{log-verosimilitud regularizada} se define por
+
+\begin{eqnarray*}
+\ln \mathcal{L}(\beta) &=& \sum_i y_i \ln \left( \frac{e^{x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) + (1 - y_i) \ln \left( \frac{1}{1 + e^{x_i^\top \beta}} \right)
+- \frac{\lambda}{2} \| \beta \|^2\\
+&=& \sum_i \ln \left( \frac{e^{y_i x_i^\top \beta}}{1 + e^{x_i^\top \beta}} \right) - \frac{\lambda}{2} \| \beta \|^2,
+\end{eqnarray*}
+donde $\lambda$  es el \textit{parámetro de regularización}. Retomando,
+
+\begin{eqnarray*}
+\nabla_\beta \ln \mathcal{L}(\beta) = X^\top (y - p) = 0,\\
+\nabla_\beta^2 \ln \mathcal{L}(\beta) = -X^\top \mathbb{V} X - \Sigma^{-1}.
+\end{eqnarray*}
+
+
+
+
+\begin{Ejem}
+Supongamos que se tienen $\mathcal{D}=\left\{u^{(1)},u^{(2)},\ldots,u^{(N)}\right\}$ observaciones, supongamos adem\'as que se tienen datos generados con distrubuci\'on $U\sim\left(U;\theta\right)$. Calculemos la funci\'on de verosimlitud.
+
+\begin{eqnarray*}
+\mathcal{L}\left(\theta\right)=\prod_{i=1}^{N}p\left(u^{(i)};\theta\right)
+\end{eqnarray*}
+donde
+\begin{eqnarray*}
+\theta_{ML}=\operatorname*{arg\,max}_{\theta}\mathcal{L}\left(\theta\right)=\operatorname*{arg\,max}_{\theta}\sum_{i=1}^{N}\log p\left(u^{(i)};\theta\right)
+\end{eqnarray*}
+donde tanto $log(f(x))$ y $\operatorname*{arg\,max}_{\theta}$ son funciones mon\'otonas crecientes. supongamos que se tiene un ruido gaussiano com media $0$ y varianza $\sigma^{2}$, entonces
+
+\begin{eqnarray*}
+y^{(i)}=h_{\theta}\left(x^{(i)}\right)+\epsilon^{(i)}=\theta^{\top}\mathbf{X}^{(i)}+\epsilon^{(i)},
+\end{eqnarray*}
+por lo tanto
+\begin{eqnarray*}
+y^{(i)}\sim N\left(\theta^{\top}\mathbf{X}^{(i)},\sigma^{2}\right), 
+\end{eqnarray*}
+entonces
+\begin{eqnarray*}
+p\left(y|\mathbf{X},\theta,\sigma^{2}\right)&=&\prod_{i=1}^{N}p\left(y|\mathbf{x}^{(i)},\theta,\sigma^{2}\right)=\prod_{i=1}^{N}\left(2\pi\sigma^{2}\right)e^{-\frac{1}{2\sigma^{2}}\left(y^{(i)}-\theta^{\top}\mathbf{x}^{(i)}\right)^{2}}\\
+&=&\left(2\pi\sigma^{2}\right)^{-\frac{N}{2}}e^{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{2}\left(y^{(i)}-\theta^{\top}\mathbf{x}^{(i)}\right)^{2}}\\
+&=&\left(2\pi\sigma^{2}\right)^{-\frac{N}{2}}e^{-\frac{1}{2\sigma^{2}}\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)}
+\end{eqnarray*}
+entonces la verosimilitud es
+
+\begin{eqnarray*}
+p\left(y|\mathbf{X},\theta,\sigma^{2}\right)=\left(2\pi\sigma^{2}\right)^{-\frac{N}{2}}e^{-\frac{1}{2\sigma^{2}}\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)}
+\end{eqnarray*}
+
+y la log-verosimilitud es
+\begin{eqnarray*}
+\mathcal{L}\left(\theta,\sigma^{2}\right)=-\frac{N}{2}\log\left(2\pi\sigma^{2}\right)\left[-\frac{1}{2\sigma^{2}}\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)\right].
+\end{eqnarray*}
+Maximizar la log-verosimilitud con respecto a$\theta$ es equivalente a maximizar $-\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)$ que a su vez es equivalente a minimizar $\left(y-\mathbf{X}\theta\right)^{\top}\left(y-\mathbf{X}\theta\right)$.
+\end{Ejem}
+
+\begin{Ejem}
+Se define la función sigmoide
+\begin{eqnarray*}
+\sigma(u) = \frac{1}{1 + e^{-u}} \quad \Rightarrow \text{clasificador de regresión logística}
+\end{eqnarray*}
+donde la regla de decisión para $y$
+\begin{eqnarray*}
+y = \sigma(h_{\boldsymbol{\theta}}(x)) = \sigma(\boldsymbol{\theta}^{\top} x)
+\end{eqnarray*}
+
+Matemáticamente, la probabilidad de que un ejemplo pertenezca a la clase 1 es:
+\begin{eqnarray*}
+p\left(y^{(i)} = 1 \mid x^{(i)}; \boldsymbol{\theta} \right) &=& \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\\
+p\left(y^{(i)} = 0 \mid x^{(i)}; \boldsymbol{\theta} \right) &=& 1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})
+\end{eqnarray*}
+
+la probabilidad conjunta en función de $y^{(i)}$
+\begin{eqnarray*}
+p\left(y^{(i)} \mid x^{(i)}; \boldsymbol{\theta} \right) = 
+\sigma(\boldsymbol{\theta}^{\top} x^{(i)})^{y^{(i)}} \cdot \left[1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right]^{1 - y^{(i)}}
+\end{eqnarray*}
+mientras que la probabilidad conjunta de todas las etiquetas
+\begin{eqnarray*}
+\prod_{i=1}^{N} \sigma(\boldsymbol{\theta}^{\top} x^{(i)})^{y^{(i)}} \left(1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right)^{(1 - y^{(i)})}
+\end{eqnarray*}
+La log-verosimilitud para regresión logística está dada por:
+\begin{eqnarray*}
+\ell(\boldsymbol{\theta}) = \sum_{i=1}^{N} y^{(i)} \log \left( \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right) + 
+(1 - y^{(i)}) \log \left( 1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) \right)
+\end{eqnarray*}
+Antes de calcular la derivada, recordemos:
+\begin{eqnarray*}
+\sigma(z) = \frac{1}{1 + e^{-z}}
+\end{eqnarray*}
+con derivada
+\begin{eqnarray*}
+\frac{d}{dz} \sigma(z) = \frac{d}{dz} \left(1 + e^{-z} \right)^{-1} = 
+-(1 + e^{-z})^{-2} \cdot (-e^{-z}) =
+\frac{e^{-z}}{(1 + e^{-z})^2}
+\end{eqnarray*}
+además:
+\begin{eqnarray*}
+\sigma(z) &=& \frac{1}{1 + e^{-z}} \Rightarrow 1 - \sigma(z) = \frac{e^{-z}}{1 + e^{-z}}\\
+&\Rightarrow& \sigma(z)(1 - \sigma(z)) = \frac{e^{-z}}{(1 + e^{-z})^2}\\
+&\therefore& \frac{d}{dz} \sigma(z) = \sigma(z)(1 - \sigma(z))
+\end{eqnarray*}
+Derivando la log-verosimilitud respecto a $theta_{j}$ la función $\ell(\boldsymbol{\theta})$:
+\begin{eqnarray*}
+\frac{\partial \ell(\boldsymbol{\theta})}{\partial \theta_j} &=& 
+\sum_{i=1}^{N} \left[ y^{(i)} \log \sigma(\boldsymbol{\theta}^{\top} x^{(i)}) +
+(1 - y^{(i)}) \log (1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})) \right]\\
+&=& \sum_{i=1}^{N} \left[ \frac{y^{(i)}}{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})} 
+- \frac{1 - y^{(i)}}{1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})} \right]
+\cdot \frac{d}{d\theta_j} \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\\
+&=& \sum_{i=1}^{N} \left[ \frac{y^{(i)}}{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})} 
+- \frac{1 - y^{(i)}}{1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)})} \right]
+\cdot  \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\sigma(1-\boldsymbol{\theta}^{\top} x^{(i)})x_{j}^{(i)}\\
+&=& \sum_{i=1}^{N} \left[ \frac{y^{(i)}- \sigma(\boldsymbol{\theta}^{\top}x^{(i)})}
+{\sigma(\boldsymbol{\theta}^{\top} x^{(i)})(1 - \sigma(\boldsymbol{\theta}^{\top} x^{(i)}))} \right]
+\cdot  \sigma(\boldsymbol{\theta}^{\top} x^{(i)})\sigma(1-\boldsymbol{\theta}^{\top} x^{(i)})x_{j}^{(i)}\\
+&=&\sum_{i=1}^{N}\left[y^{(i)}-\sigma(\boldsymbol{\theta}^{\top} x^{(i)})\right]x_{j}^{(i)} 
+\end{eqnarray*}
+la cual es la funci\'on recursiva para calcular el gradiente.
+\end{Ejem}
+
+\begin{Ejem}
+El modelo lineal univariado se expresa como:
+
+\begin{eqnarray*}
+h_\theta(x) = \theta_0 + \theta_1 x
+\end{eqnarray*}
+
+donde la función de \textit{Costo (SSE - Error Cuadrático medio)} está definida por:
+
+\begin{eqnarray*}
+J(\theta_0, \theta_1) = \frac{1}{2N} \sum_{i=1}^{N} \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2
+\end{eqnarray*}
+
+Nuestro objetivo es encontrar los valores de $\theta_0$ y $\theta_1$ que minimicen la función de costo
+
+\begin{eqnarray*}
+\min_{\theta_0, \theta_1} J(\theta_0, \theta_1)
+\end{eqnarray*}
+
+El gradiente de la función de costo respecto a $\theta_0$
+
+\begin{eqnarray*}
+\frac{\partial J(\theta_0, \theta_1)}{\partial \theta_0} = \frac{1}{N} \sum_{i=1}^{N} \left( h_\theta(x^{(i)}) - y^{(i)} \right)
+\end{eqnarray*}
+
+y el gradiente de la función de costo respecto a $\theta_1$
+
+\begin{eqnarray*}
+\frac{\partial J(\theta_0, \theta_1)}{\partial \theta_1} = \frac{1}{N} \sum_{i=1}^{N} x^{(i)} \left( h_\theta(x^{(i)}) - y^{(i)} \right).
+\end{eqnarray*}
+
+Para minimizar $J(\theta_0, \theta_1)$, se pueden utilizar métodos iterativos, como el de gradiente descentiente
+\begin{eqnarray*}
+\theta_j := \theta_j - \alpha \cdot \frac{\partial J(\theta)}{\partial \theta_j}, \quad j = 0, 1;
+\end{eqnarray*}
+
+donde $\alpha$ es la corrección de la direcci\'on de descenso.
+
+
+\begin{eqnarray*}
+\theta_{0}&=& \frac{1}{N} \left\{\sum_{i=1}^{N} y^{(i)}-\theta_{1} \sum_{i=1}^{N}  x^{(i)}\right\},\\
+\theta_{1}&=& \frac{N\sum_{i=1}^{N} y^{(i)}x^{(i)} -\sum_{i=1}^{N} y^{(i)}\sum_{i=1}^{N} x^{(i)}}{N\sum_{i=1}^{N} (x^{(i)})^{2}-(\sum_{i=1}^{N} x^{(i)})^{2}}.
+\end{eqnarray*}
+
+Para el caso multivariado ser\'ia
+
+\begin{eqnarray*}
+h_{\theta}\left(x\right)=\sum_{i=1}^{d}\theta_{i}x_{i}+\theta_{0}=\sum_{i=0}^{d}\theta_{i}x_{i}\textrm{, con }x_{0}=1,
+\end{eqnarray*}
+es decir, en forma matricial se puede ver como
+
+\begin{eqnarray*}
+h_{\theta}(x) &= \theta^{T} X\textrm{, } X = \begin{pmatrix} x_0 \\ x_1 \\ \vdots \\ x_d \end{pmatrix},
+\end{eqnarray*}
+con 
+\begin{eqnarray*}
+J(\theta) &= J(\theta_0, \theta_1, \ldots, \theta_d) = \frac{1}{2N} \sum_{i=1}^{N} \left( \theta^{T} x^{(i)} - y^{(i)} \right)^2.
+\end{eqnarray*}
+y
+
+\begin{eqnarray*}
+h_{\mathbf{\theta}}(\mathbf{X}) = \mathbf{\theta}^{T} \mathbf{X} = \mathbf{X}^{T} \mathbf{\theta}.
+\end{eqnarray*}
+Por lo tanto
+\begin{eqnarray*}
+\hat{\textbf{y}} &= \mathbf{X} \mathbf{\theta} \quad \Leftrightarrow \quad 
+\begin{bmatrix}
+\hat{y}^{(1)} \\
+\hat{y}^{(2)} \\
+\vdots \\
+\hat{y}^{(N)}
+\end{bmatrix} =
+\begin{bmatrix}
+h_{\theta}\mathbf{x}^{(1)} \\
+h_{\theta}\mathbf{x}^{(2)} \\
+\vdots \\
+h_{\theta}\mathbf{x}^{(N)}
+\end{bmatrix}= 
+\begin{bmatrix}
+x_0^{(1)} & x_1^{(1)} & \cdots & x_d^{(1)} \\
+x_0^{(2)} & x_1^{(2)} & \cdots & x_d^{(2)} \\
+\vdots & \vdots & \ddots & \vdots \\
+x_0^{(N)} & x_1^{(N)} & \cdots & x_d^{(N)} \\
+\end{bmatrix}
+\begin{bmatrix}
+\theta_0 \\
+\theta_1 \\
+\vdots \\
+\theta_d
+\end{bmatrix},
+\end{eqnarray*}
+
+donde $\mathbf{X} \in \mathbb{R}^{N \times (d+1)}$, $\hat{\mathbf{y}} \in \mathbb{R}^{N \times 1}$ y $\mathbf{\theta} \in \mathbb{R}^{(d+1) \times 1}$. Entonces
+
+\begin{eqnarray*}
+J(\mathbf{\theta}) &=& \frac{1}{2N} \sum_{i=1}^{N} \left( \mathbf{\theta}^{T} \mathbf{x}^{(i)} - y^{(i)} \right)^2 = \frac{1}{2N} \sum_{i=1}^{N} \left( \hat{y}^{(i)} - y^{(i)} \right)^2\\
+&=& \frac{1}{2N} | \hat{\mathbf{y}} - \mathbf{y} |_2^2 = \frac{1}{2N} (\hat{\mathbf{y}} - \mathbf{y})^{T} (\hat{\mathbf{y}} - \mathbf{y})=\frac{1}{2N}\left(\mathbf{X}\mathbf{\theta}-y\right)^{\top}\left(\mathbf{X}\mathbf{\theta}-y\right)\\
+&=&\frac{1}{2N}\left\{\mathbf{\theta}^{\top}\left(\mathbf{X}^{\top}\mathbf{X}\right)\mathbf{\theta}-\mathbf{\theta}^{\top}\mathbf{X}^{\top}y-y^{\top}\mathbf{X}\mathbf{\theta}+y^{\top}y\right\}\\
+&=&\frac{1}{2N}\left\{\mathbf{\theta}^{\top}\left(\mathbf{X}^{\top}\mathbf{X}\right)\mathbf{\theta}-\left(\mathbf{X}^{\top}y\right)^{\top}\mathbf{\theta}-\left(\mathbf{X}^{\top}y\right)^{\top}\mathbf{\theta}+y^{\top}y\right\}\\
+&=&\frac{1}{2N}\left\{\mathbf{\theta}^{\top}\left(\mathbf{X}^{\top}\mathbf{X}\right)\mathbf{\theta}-2\left(\mathbf{X}^{\top}y\right)^{\top}\mathbf{\theta}+y^{\top}y\right\}
+\end{eqnarray*}
+
+por lo tanto
+\begin{eqnarray*}
+J(\mathbf{\theta}) = \frac{1}{2N} (\mathbf{X} \mathbf{\theta} - \mathbf{y})^{\top} (\mathbf{X} \mathbf{\theta} - \mathbf{y}).
+\end{eqnarray*}
+
+Recordemos que $\mathbf{\theta}^{\top} \mathbf{X}^{\top} \mathbf{y} = (\mathbf{X}^{\top} \mathbf{y})^{\top} \mathbf{\theta}$, $(\mathbf{X}^{\top} \mathbf{y})^{\top} = \mathbf{y}^{\top} \mathbf{X}$ y $(\mathbf{a}^{\top} \mathbf{b}) = (\mathbf{b}^{\top} \mathbf{a})$, por lo tanto podemos reescribir:
+
+\begin{eqnarray*}
+J(\mathbf{\theta}) = \frac{1}{2N}\left( \mathbf{\theta}^{\top}\left(\mathbf{X}^{\top}\mathbf{X}\right)\mathbf{\theta}- 2\left(\mathbf{X}^{\top}y\right)^{\top}\mathbf{\theta}+ \mathbf{y}^{\top}\mathbf{y}\right).
+\end{eqnarray*}
+
+Calculando el gradiente e igualando a cero:
+
+\begin{eqnarray*}
+\nabla_{\boldsymbol{\theta}} J(\boldsymbol{\theta})&=& -\frac{1}{2N} \left\{ \boldsymbol{\theta}^{\top} (X^{\top}X)\boldsymbol{\theta} - 2(X^{\top} \mathbf{y})^{\top} \boldsymbol{\theta} + \mathbf{y}^{\top} \mathbf{y} \right\}\\
+&=& \frac{1}{2N} \left\{ 2 X^{\top} X \boldsymbol{\theta} - 2 X^{\top} \mathbf{y} \right\}
+\nabla_{\boldsymbol{\theta}}\\
+ J(\boldsymbol{\theta})&=& 0 \Leftrightarrow X^{\top} X \boldsymbol{\theta} = X^{\top} \mathbf{y} \Leftrightarrow \boldsymbol{\theta}= (X^{\top} X)^{-1} X^{\top} \mathbf{y}
+\end{eqnarray*}
+Alternativamente (gradiente descendente)
+
+\begin{eqnarray*}
+\frac{\partial J(\boldsymbol{\theta})}{\partial \theta_j} = \frac{1}{N} \sum_{i=1}^{N} \left( h_{\theta}(x^{(i)}) - y^{(i)} \right) x_j^{(i)}.
+\end{eqnarray*}
+\end{Ejem}
+
+\begin{Note}
+$(X^{\top} X)^{\top}=X^{\top}(X^{\top})^{\top}=X^{\top} X$.
+\end{Note}
+
 
 %<>==<><>==<><>==<><>==<><>==<><>==<><>==<><>==<>
 \section{Notas finales}
@@ -930,9 +1500,157 @@ donde $\text{SE}(\beta_j)$ es el error est\'andar de $\beta_j$.
 \textbf{P-valor: } El p-valor indica la probabilidad de obtener un coeficiente tan extremo como el observado, asumiendo que la hip\'otesis nula es verdadera. Un p-valor menor que el nivel de significancia $\alpha$ (t\'ipicamente 0.05) indica que podemos rechazar la hip\'otesis nula.
 \end{Note}
 
+
+\begin{Note}
+La \textbf{regresi\'on} es un m\'etodo valioso de investigaci\'on debido a su vers\'atil aplicaci\'on en diferentes \'areas. Por ejemplo, se puede utilizar para examinar asociaciones entre un resultado y varias variables independientes (tambi\'en com\'unmente conocidas como covariables, predictores o variables explicativas) o para determinar qu\'e tan bien puede predecirse un resultado a partir de un conjunto de variables independientes. Adicionalmente, uno puede estar interesado en controlar el efecto de variables independientes espec\'ificas, particularmente aquellas que act\'uan como variables de confusi\'on (es decir, cuya relaci\'on tanto con el resultado como con otra variable independiente oscurece la relaci\'on entre esa variable independiente y el resultado).
+
+En cuanto a las estrategias de modelado, existen tres tipos generales:
+\begin{itemize}
+\item \textit{ directa/estándar}, 
+\item \textit{secuencial/jerárquica} y 
+\item \textit{por pasos/estadística}, 
+\end{itemize}
+cada una con distinto énfasis y propósito. \medskip
+
+El ajuste general del modelo de regresi\'on log\'istica a los datos de muestra se eval\'ua utilizando varias \textit{medidas de bondad de ajuste}, donde un mejor ajuste se caracteriza por una menor diferencia entre los valores observados y los valores predichos por el modelo. La regresi\'on log\'istica es ideal para predecir la probabilidad de ocurrencia de un evento binario (s\'i/no) y se basa en la transformaci\'on log\'istica del \textit{odds ratio} (raz\'on de probabilidades). A diferencia de la regresi\'on lineal, no requiere que las variables independientes sigan una distribuci\'on normal ni que la relaci\'on con la dependiente sea lineal. Los supuestos b\'asicos que deben cumplirse para la regresi\'on log\'istica incluyen
+\begin{itemize}
+\item independencia de errores, 
+\item linealidad en el \textit{logit} para variables continuas, 
+\item ausencia de multicolinealidad y 
+\item falta de valores at\'ipicos fuertemente influyentes.
+\item existencia de un n\'umero adecuado de eventos por variable independiente para evitar un modelo sobreajustado, con un m\'inimo com\'unmente recomendado de “reglas pr\'acticas” que van de 10 a 20 eventos por covariable.
+\end{itemize}
+
+Para asegurar que la regresi\'on log\'istica produzca un modelo preciso, se deben considerar factores cr\'iticos como la selecci\'on de variables independientes y la elecci\'on de la estrategia de construcci\'on del modelo.
+
+\begin{Criterio}
+
+\textbf{Criterio de selecci\'on} Es muy importante seleccionar correctamente las variables independientes. Aunque la regresi\'on log\'istica es bastante flexible y permite distintos tipos de variables (continuas, ordinales y categ\'oricas), alternativamente, uno podr\'ia optar por incluir todas las variables independientes relevantes independientemente de sus resultados univariados, ya que puede haber variables cl\'inicamente importantes que merezcan inclusi\'on a pesar de su desempe\~no estad\'istico; sin embargo,  incluir demasiadas variables independientes en el modelo puede conducir a un modelo matem\'aticamente inestable, con menor capacidad de generalizaci\'on m\'as all\'a de la muestra actual del estudio \cite{tabachnick2007,hosmer2000}.\medskip
+
+Una parte clave del proceso de selecci\'on de variables es reconocer y considerar el papel de los posibles factores de confusi\'on. Como se describi\'o previamente, las variables de confusi\'on son aquellas cuya relaci\'on tanto con el resultado como con otra variable independiente oculta la verdadera asociaci\'on entre esa variable independiente y el resultado. Independientemente del m\'etodo para seleccionar las variables independientes, deben cumplirse ciertos supuestos b\'asicos: 
+
+\begin{Sup}
+\textbf{Independencia de los errores} Todos los resultados del grupo de muestra deben ser independientes entre s\'i; si los datos incluyen mediciones repetidas u otros resultados correlacionados, los errores tambi\'en estar\'an correlacionados. 
+\end{Sup}
+
+\begin{Sup} \textbf{Linealidad en el logit} para las variables continuas independientes, debe existir una relaci\'on lineal entre estas variables y sus respectivos resultados transformados en logit. Esto se puede realizar a trav\'es de la creaci\'on de un t\'ermino de interacci\'on entre cada variable continua independiente y su logaritmo natural. Si alguno de estos t\'erminos es estad\'isticamente significativo, se considera que el supuesto no se cumple.
+\end{Sup}
+
+\begin{Sup} \textbf{Ausencia de multicolinealidad}, o redundancia entre variables independientes,  un modelo de regresi\'on log\'istica con variables independientes altamente correlacionadas usualmente genera errores est\'andar grandes para los coeficientes beta estimados. La soluci\'on com\'un es eliminar una o m\'as variables redundantes.
+\end{Sup}
+
+\begin{Sup} \textbf{Ausencia de valores at\'ipicos altamente influyentes}, es decir, casos en los que el resultado predicho para un miembro de la muestra difiere considerablemente de su valor real, si hay demasiados valores at\'ipicos, la precisi\'on general del modelo puede verse comprometida. La detecci\'on de valores at\'ipicos se realiza examinando los residuales (diferencia entre los valores predichos y los resultados reales) junto con estad\'isticas diagn\'osticas y gr\'aficas; luego, se puede comparar el ajuste general del modelo y los coeficientes beta estimados con y sin los casos at\'ipicos, dependiendo de la magnitud del cambio, uno podr\'ia conservar los valores at\'ipicos cuyo efecto no sea alto o eliminar aquellos con una influencia particularmente fuerte sobre el modelo.
+\end{Sup}
+\end{Criterio}
+
+\begin{Criterio} \textbf{N\'umero de variables a incluir} Como parte del proceso de selecci\'on de qu\'e variables independientes incluir, tambi\'en se debe decidir cu\'antas. El reto es seleccionar el menor n\'umero posible de variables independientes que expliquen mejor el resultado sin descuidar las limitaciones del tama\~no de muestra. En t\'erminos generales, un modelo sobreajustado tiene coeficientes beta estimados para las variables independientes mucho mayores de lo que deber\'ian ser, adem\'as de errores est\'andar m\'as altos de lo esperado. Este tipo de situaci\'on genera inestabilidad en el modelo porque la regresi\'on log\'istica requiere m\'as resultados que variables independientes para poder iterar soluciones diferentes en busca del mejor ajuste a trav\'es del m\'etodo de m\'axima verosimilitud. Aunque no existe un est\'andar universalmente aceptado, hay algunas \textit{reglas generales} derivadas en parte de estudios de simulaci\'on. Una de estas reglas sugiere que por cada variable independiente, debe haber al menos 10 resultados por cada categor\'ia binaria, siendo el resultado menos frecuente el que determina el n\'umero m\'aximo de variables independientes \cite{peduzzi1996, agresti2007}. Algunos estad\'isticos recomiendan una \textit{regla general} a\'un m\'as estricta de 20 resultados por variable independiente, dado que una relaci\'on m\'as alta tiende a mejorar la validez del modelo\cite{feinstein1996}. 
+\end{Criterio}
+\end{Note}
+
+\begin{Note}
+Adem\'as de la cuidadosa selecci\'on de las variables independientes, se debe elegir el tipo adecuado de modelo de regresi\'on log\'istica para el estudio. De hecho, seleccionar una estrategia de construcci\'on del modelo est\'a estrechamente relacionado con la elecci\'on de variables independientes, por lo que estos dos componentes deben considerarse simult\'aneamente al planear un an\'alisis de regresi\'on log\'istica.
+
+Existen tres enfoques generales para la construcci\'on del modelo que se aplican a las t\'ecnicas de regresi\'on en general, cada uno con un \'enfasis y prop\'osito diferente: 
+\begin{itemize}
+\item[a) ] \textbf{Directo} (completo, est\'andar o simult\'aneo): Este enfoque es una especie de valor por defecto, ya que introduce todas las variables independientes en el modelo al mismo tiempo y no hace suposiciones sobre el orden o la importancia relativa de dichas variables. El enfoque directo es m\'as adecuado si no existen hip\'otesis previas sobre cu\'ales variables tienen mayor relevancia que otras. 
+
+\item[ b) ] \textbf{Secuencial} (jer\'arquico):  las variables se a\~naden secuencialmente para evaluar si mejoran el modelo de acuerdo a un orden predeterminado de prioridad. Aunque este enfoque es \'util para clarificar patrones causales entre variables independientes y resultados, puede volverse complejo conforme aumentan los patrones causales, dificultando as\'i la obtenci\'on de conclusiones definitivas sobre los datos en algunos casos.
+
+\item[c) ] \textbf{Paso a paso} (estad\'istico): En contraste con los dos m\'etodos anteriores, la regresi\'on paso a paso identifica variables independientes que deben mantenerse o eliminarse del modelo. Existen distintos tipos de t\'ecnicas paso a paso, incluyendo selecci\'on hacia adelante y eliminaci\'on hacia atr\'as con una contribuci\'on no significativa al resultado son eliminadas una por una hasta que s\'olo queden las variables estad\'isticamente significativas. Otra estrategia de construcci\'on del modelo que es conceptualmente similar a la regresi\'on por pasos se llama \textit{selecci\'on del mejor subconjunto'}, en la que se comparan modelos separados con diferentes n\'umeros de variables independientes para determinar el mejor ajuste.
+\end{itemize}
+
+Estas estrategias de construcci\'on no son necesariamente intercambiables, ya que pueden producir diferentes medidas de ajuste del modelo y diferentes estimaciones puntuales para las variables independientes a partir de los mismos datos. Por lo tanto, identificar el modelo apropiado para los objetivos del estudio es extremadamente importante.
+
+
+La regresi\'on por pasos se basa en una selecci\'on automatizada de variables que tiende a aprovechar factores aleatorios en una muestra dada.  Adem\'as, puede producir modelos que no parecen completamente razonables desde una perspectiva biol\'ogica, algunos argumentan que la regresi\'on por pasos se reserva mejor para el tamizaje preliminar o \'unicamente para pruebas de hip\'otesis, como en casos de resultados novedosos y una comprensi\'on limitada de las contribuciones de las variables independientes. Sin embargo, otros se\~nalan que los m\'etodos por pasos no son en s\'i el problema (y de hecho pueden ser bastante efectivos en ciertos contextos); en cambio, el verdadero problema es una interpretaci\'on descuidada de los resultados sin valorar completamente los pros y contras de este enfoque. Por tanto, si uno elige crear un modelo por pasos, es importante validar posteriormente los resultados antes de sacar conclusiones.
+
+Al validar modelos de regresi\'on log\'istica, existen numerosos m\'etodos entre los cuales elegir, cada uno m\'as o menos apropiado seg\'un los par\'ametros del estudio como el tama\~no de muestra. Para establecer la validez interna, los m\'etodos comunes incluyen: 
+
+\begin{itemize}
+\item[a) ] \textbf{M\'etodo de retenci\'on, o divisi\'on de la muestra en dos subgrupos} antes de la construcci\'on del modelo, con el grupo de \textit{entrenamiento} usado para crear el modelo de regresi\'on log\'istica y el grupo de \textit{prueba} usado para validarlo; \cite{altman2000, kohavi1995} 
+
+\item[b) ] \textbf{Validaci\'on cruzada \textit{k-fold} o divisi\'on de la muestra en $k$ subgrupos de igual tama\~no} para prop\'ositos de entrenamiento y validaci\'on;\cite{kohavi1995} 
+
+\item[c) ] \textbf{Validaci\'on cruzada \textit{uno fuera} (leave-one-out)}, una variante del m\'etodo \textit{k-fold} donde el n\'umero de particiones es igual al n\'umero de sujetos en la muestra;\cite{kohavi1995} y 
+
+\item[d) ] \textbf{Bootstrapping} es decir, obtener submuestras repetidas con reemplazo de toda la muestra \cite{kohavi1995,efron1993}.
+\end{itemize}
+
+Adem\'as de validar internamente el modelo, uno deber\'ia intentar validarlo externamente en un nuevo entorno de estudio como una prueba adicional de su viabilidad estad\'istica y utilidad cl\'inica \cite{altman2000,miller1991}.
+
+Una vez que se ha creado el modelo de regresi\'on log\'istica, se determina qu\'e tan bien se ajusta a los datos de la muestra en su totalidad. Dos de los m\'etodos m\'as comunes para evaluar el ajuste del modelo son la prueba de chi-cuadrado de Pearson y la desviaci\'on residual. Ambas miden la diferencia entre los resultados observados y los resultados predichos por el modelo, donde un mal ajuste del modelo se indica mediante valores de prueba elevados, lo que se\~nala una diferencia mayor \cite{hosmer2000, hosmer1997, kuss2002}. \medskip
+
+Otra medida com\'unmente utilizada del ajuste del modelo es la prueba de bondad de ajuste de \textit{Hosmer-Lemeshow}, que divide a los sujetos en grupos iguales (a menudo de 10) seg\'un su probabilidad estimada del resultado. El decil m\'as bajo est\'a compuesto por aquellos que tienen menor probabilidad de experimentar el resultado. Si el modelo tiene buen ajuste, los sujetos que experimentaron el resultado principal caer\'an en su mayor\'ia en los deciles de mayor riesgo. Un modelo con mal ajuste resultar\'a en sujetos distribuidos de manera m\'as uniforme a lo largo de los deciles de riesgo para ambos resultados binarios \cite{tabachnick2007, hosmer2000}.\medskip
+
+Las ventajas de las pruebas de Hosmer-Lemeshow incluyen su aplicaci\'on sencilla y facilidad de interpretaci\'on, las limitaciones incluyen la dependencia de las pruebas sobre c\'omo se definen los puntos de corte de los grupos y los algoritmos computacionales utilizados, as\'i como una menor capacidad para identificar modelos con mal ajuste en ciertas circunstancias.  \medskip
+
+Otras alternativas menos comunes para evaluar el ajuste del modelo son descritas por Hosmer et al \cite{hosmer1997} y Kuss \cite{kuss2002}. Otra opci\'on para ampliar los resultados del ajuste del modelo y de las estad\'isticas diagn\'osticas, es evaluando la capacidad del modelo para discriminar entre grupos. Las formas comunes de hacer esto incluyen 
+
+\begin{itemize}
+\item[a) ]  Tablas de clasificaci\'on, donde la pertenencia a un grupo dentro de una categor\'ia binaria del resultado se predice usando probabilidades estimadas y puntos de corte predefinidos, y 
+\item[b) ]  \'Area bajo la curva caracter\'istica operativa del receptor (\textbf{AUROC}), donde un valor de 0.5 significa que el modelo no es mejor que el azar para discriminar entre los sujetos que tienen el resultado y los que no, y un valor de 1.0 indica que el modelo discrimina perfectamente entre sujetos. \textit{El AUROC se usa a menudo cuando se desean considerar diferentes puntos de corte para la clasificaci\'on y as\'i maximizar tanto la sensibilidad como la especificidad} \cite{zou2007}.
+\end{itemize}
+
+Las variables independientes usualmente se presentan como razones de momios (ORs, por sus siglas en ingl\'es), que revelan la fuerza de la contribuci\'on de la variable independiente al resultado y se definen como las probabilidades de que ocurra el resultado ($\hat{Y}$) frente a que no ocurra, $(1 - \hat{Y})$, para cada variable independiente. La relaci\'on entre la raz\'on de momios (OR) y el coeficiente beta estimado de la variable independiente se expresa como $\text{OR} = e^{\beta_i}$. Con base en esta f\'ormula, un cambio de una unidad en la variable independiente multiplica la probabilidad del resultado por la cantidad contenida en $e^{\beta_i}$.\medskip
+
+Para un modelo de regresi\'on log\'istica con solo una variable independiente, la OR se considera \textit{no ajustada} porque no hay otras variables cuya influencia deba ser ajustada o restada. En contraste, si el modelo de regresi\'on log\'istica incluye m\'ultiples variables independientes, las OR ahora son \textit{ajustadas} porque representan la contribuci\'on \'unica de la variable independiente despu\'es de ajustar (o restar) los efectos de las otras variables en el modelo, en conclusi\'on las OR ajustadas suelen ser menores que sus contrapartes no ajustadas. Interpretar las OR tambi\'en depende de si la variable independiente es continua o categ\'orica. Para las variables continuas, primero se debe identificar una unidad de medida significativa que exprese mejor el grado de cambio en el resultado asociado con esa variable independiente. Finalmente, los intervalos de confianza (\textbf{IC}) al 95\% se informan rutinariamente junto con las OR como una medida de precisi\'on (es decir, si los hallazgos probablemente se mantendr\'an en la poblaci\'on no observada). Si el IC cruza 1.00, es posible que no haya una diferencia significativa en esa poblaci\'on. 
+
+En problemas de clasificación con etiquetas binarias o etiquetas con una cantidad finita de opciones, la evaluación usualmente se realiza por medio de la matriz de confusión: el número de verdaderos/falsos positivos y negativos.
+
+\begin{center}
+\begin{tabular}{|c|c|c|}\hline
+\textbf{Resultado}& Positivo & Negativo\\\hline
+Predecido Positivo& \textbf{TP} & \textbf{FP}\\\hline
+Predicido Negativo& \textbf{FN} & \textbf{TN}\\\hline
+\end{tabular}
+\end{center}
+
+Para problemas de regresión con etiquetas de valores continuos usualmente se calcula la raíz del error cuadrático medio
+
+\begin{eqnarray*}
+RMSE=\sqrt{\frac{1}{N}\sum_{i=1}^{N}\left(y_{i}-\hat{y}\right)^2},\\
+R^2=1-\frac{\sum_{i=1}^{N}\left(y_{i}-\hat{y}\right)^2}{\sum_{i=1}^{N}\left(y_{i}-\overline{y}\right)^2}.
+\end{eqnarray*}
+
+En cualquiera de los dos casos la evaluación final se lleva a cabo en el conjunto de prueba, el cuál es esencial dado que el último objetivo es obtener el predictor más general en los datos no utilizados para entrenar el algoritmo. Las siguientes métricas se utilizan para medir el rendimiento de un modelo en función de su capacidad para predecir correctamente las clases de un conjunto de datos. \medskip
+
+\textbf{Recall} (Sensibilidad): Conocido como sensibilidad o tasa positiva real, mide la capacidad de un modelo para identificar correctamente todos los ejemplos positivos en un conjunto de datos. Se calcula como el número de verdaderos positivos dividido por la suma de verdaderos positivos y falsos negativos:
+
+\begin{equation}
+Recall = \frac{Verdaderos\ Positivos}{Verdaderos\ Positivos + Falsos\ Negativos}.
+\end{equation}
+
+Un recall alto significa que el modelo es bueno para detectar los casos positivos, minimizando los falsos negativos. Es importante en situaciones donde los falsos negativos son costosos o críticos.\medskip
+
+\textbf{Precision} (Precisión): La precisión mide la capacidad de un modelo para predecir correctamente los casos positivos entre todas las predicciones positivas que realiza. Se calcula como el número de verdaderos positivos dividido por la suma de verdaderos positivos y falsos positivos:
+
+\begin{equation}
+Precision = \frac{Verdaderos\ Positivos}{Verdaderos\ Positivos + Falsos\ Positivos}.
+\end{equation}
+
+Una alta precisión significa que el modelo tiene una baja tasa de falsos positivos, es decir, que cuando predice una clase como positiva, es probable que sea correcta. La precisión es importante en situaciones en las que los falsos positivos son costosos o no deseados.\medskip
+
+\textbf{Specificity} (Especificidad): La especificidad mide la capacidad de un modelo para predecir correctamente los casos negativos entre todas las predicciones negativas que realiza. También se conoce como tasa negativa real. Se calcula como el número de verdaderos negativos dividido por la suma de verdaderos negativos y falsos positivos:
+
+\begin{equation}
+Specificity=\frac{Verdaderos\ Negativos}{Verdaderos\ Negativos+Falsos\ Positivos}.\end{equation}
+Una alta especificidad indica que el modelo es bueno para identificar correctamente los casos negativos, minimizando los falsos positivos. Esto es importante en situaciones en las que los falsos positivos son costosos o problem\'aticos.
+
+Estas métricas proporcionan una forma más completa de evaluar el rendimiento de un modelo de clasificación que simplemente mirar la precisión general.\medskip 
+
+ La \textbf{subestimación} ocurre cuando un predictor falla en encontrar patrones incluso en los datos de entrenamiento (cuando un modelo lineal simple se utiliza para explicar dependencia dependencias no lineales en los datos). \medskip
+ 
+ El \textbf{sobreajuste} ocurre cuando el desempeño de un predictor disminuye notablemente en los datos de prueba en comparación con los datos de prueba, debido al aprendizaje de demasiado detalle y ruido, en lugar de identificar patrones generales. \medskip
+ 
+Tanto el subajuste como el sobreajuste pueden ser debido a la insuficiente calidad de los datos: ruido excesivo, características faltantes o irrelevantes, sesgo en los datos, o datos dispersos. También pueden ocurrir como consecuencia de una pobre aplicación del algoritmo: excesiva o insuficiente flexibilidad en la selección de los parámetros, protocolo de entrenamiento inapropiado, o contaminación de los datos de entrenamiento con el conjunto de datos de prueba.
+
+
+\end{Note}
+
+
 %>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<%
-
-
+%>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<%
+\newpage
 
 \begin{thebibliography}{99}
 

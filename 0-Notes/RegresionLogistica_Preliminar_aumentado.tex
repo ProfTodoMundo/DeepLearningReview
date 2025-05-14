@@ -232,6 +232,9 @@ S_{yy}&=&\sum_{k=1}^{n}\left(y_{k}-\overline{y}\right)^{2}=\sum_{k=1}^{n}\left(\
 &&\sum_{k=1}^{n}\left(\hat{y}_{k}-\overline{y}\right)\left(y_{k}-\hat{y}_{k}\right)=\sum_{k=1}^{n}\hat{y}_{k}\left(y_{k}-\hat{y}_{k}\right)-\sum_{k=1}^{n}\overline{y}\left(y_{k}-\hat{y}_{k}\right)\\
 &=&\sum_{k=1}^{n}\hat{y}_{k}\left(y_{k}-\hat{y}_{k}\right)-\overline{y}\sum_{k=1}^{n}\left(y_{k}-\hat{y}_{k}\right)\\
 &=&\sum_{k=1}^{n}\left(\hat{\beta}_{0}+\hat{\beta}_{1}x_{k}\right)\left(y_{k}-\hat{\beta}_{0}-\hat{\beta}_{1}x_{k}\right)-\overline{y}\sum_{k=1}^{n}\left(y_{k}-\hat{\beta}_{0}-\hat{\beta}_{1}x_{k}\right)\\
+\end{eqnarray*}
+
+\begin{eqnarray*}
 &=&\sum_{k=1}^{n}\hat{\beta}_{0}\left(y_{k}-\hat{\beta}_{0}-\hat{\beta}_{1}x_{k}\right)+\sum_{k=1}^{n}\hat{\beta}_{1}x_{k}\left(y_{k}-\hat{\beta}_{0}-\hat{\beta}_{1}x_{k}\right)-\overline{y}\sum_{k=1}^{n}\left(y_{k}-\hat{\beta}_{0}-\hat{\beta}_{1}x_{k}\right)\\
 &=&\hat{\beta}_{0}\sum_{k=1}^{n}\left(y_{k}-\hat{\beta}_{0}-\hat{\beta}_{1}x_{k}\right)+\hat{\beta}_{1}\sum_{k=1}^{n}x_{k}\left(y_{k}-\hat{\beta}_{0}-\hat{\beta}_{1}x_{k}\right)-\overline{y}\sum_{k=1}^{n}\left(y_{k}-\hat{\beta}_{0}-\hat{\beta}_{1}x_{k}\right)\\
 &=&0+0+0=0.
@@ -247,8 +250,8 @@ S_{yy}=\sum_{k=1}^{n}\left(\hat{y}_{k}-\overline{y}\right)^{2}+\sum_{k=1}^{n}\le
 entonces se tiene que 
 
 \begin{eqnarray}
-SC_{E}&=&\sum_{k=1}^{n}\left(\hat{y}_{k}-\overline{y}\right)^{2}\cdots\textrm{Suma de Cuadrados del Error}\\
-SC_{R}&=&\sum_{k=1}^{n}\left(y_{k}-\hat{y}_{k}\right)^{2}\cdots\textrm{ Suma de Regresi\'on de Cuadrados}
+SC_{E}&=&\sum_{k=1}^{n}\left(\hat{y}_{k}-\overline{y}\right)^{2}\cdots\textrm{Suma de Cuadrados del Error}.\\
+SC_{R}&=&\sum_{k=1}^{n}\left(y_{k}-\hat{y}_{k}\right)^{2}\cdots\textrm{ Suma de Regresi\'on de Cuadrados}.
 \end{eqnarray}
 
 Por lo tanto la ecuaci\'on (\ref{Suma.Total.Cuadrados}) se puede reescribir como 
@@ -257,14 +260,14 @@ Por lo tanto la ecuaci\'on (\ref{Suma.Total.Cuadrados}) se puede reescribir como
 S_{yy}=SC_{R}+SC_{E},
 \end{equation}
 
-recordemos que $SC_{E}=S_{yy}-\hat{\beta}_{1}S_{xy}$
+recordemos que $SC_{E}=S_{yy}-\hat{\beta}_{1}S_{xy}$, entonces
 
 \begin{eqnarray*}
-S_{yy}&=&SC_{R}+\left( S_{yy}-\hat{\beta}_{1}S_{xy}\right)\\
+S_{yy}&=&SC_{R}+\left( S_{yy}-\hat{\beta}_{1}S_{xy}\right),\\
 S_{xy}&=&\frac{1}{\hat{\beta}_{1}}SC_{R},
 \end{eqnarray*}
 
-entonces $S_{xy}$ tiene $n-1$ grados de libertad y $SC_{R}$ y $SC_{E}$ tienen 1 y $n-2$ grados de libertad respectivamente.
+luego, $S_{xy}$ tiene $n-1$ grados de libertad y $SC_{R}$ y $SC_{E}$ tienen 1 y $n-2$ grados de libertad respectivamente.
 
 \begin{Prop}
 \begin{equation}
@@ -278,7 +281,7 @@ adem\'as, $SC_{E}$ y $SC_{R}$ son independientes.
 Recordemos que $\hat{\beta}_{1}=\frac{S_{xy}}{S_{xx}}$. Para $H_{0}:\beta_{1}=0$ verdadera,
 
 \begin{eqnarray*}
-F_{0}=\frac{SC_{R}/1}{SC_{E}/(n-2)}=\frac{MC_{R}}{MC_{E}}
+F_{0}=\frac{SC_{R}/1}{SC_{E}/(n-2)}=\frac{MC_{R}}{MC_{E}},
 \end{eqnarray*}
 
 se distribuye $F_{1,n-2}$, y se rechazar\'ia $H_{0}$ si $F_{0}>F_{\alpha,1,n-2}$. El procedimiento de prueba de hip\'otesis puede presentarse como la tabla de an\'alisis de varianza \ref{Tabla.Analisis.Varianza}:
@@ -387,26 +390,14 @@ se denomina coeficiente de determinaci\'on y se utiliza para saber si el modelo 
 \section{Regresi\'on m\'ultiple}
 %<>==<><>==<><>==<><>==<><>==<><>==<><>==<><>==<>
 
-La regresión logística es una técnica de modelado estadístico utilizada para predecir la probabilidad de un evento binario (es decir, un evento que tiene dos posibles resultados) en función de una o más variables independientes.  Un modelo de regresión logística describe cómo una variable dependiente binaria $Y$ (que puede tomar los valores $0$ o $1$) está relacionada con una o más variables independientes $X_1, X_2, \ldots, X_n$. A diferencia de la regresión lineal, que predice un valor continuo, la regresión logística predice una probabilidad que puede ser interpretada como la probabilidad de que $Y=1$ dado un conjunto de valores para $X_1, X_2, \ldots, X_n$, la regresión logística está diseñada para manejar situaciones donde la respuesta es categórica. En su forma más común, la regresión logística binaria, el modelo predice la probabilidad de que un evento ocurra en función de una o más variables independientes. Este tipo de regresión toma la forma de un modelo no lineal, debido a la naturaleza discreta de la variable dependiente. La regresión lineal busca modelar la relación entre una variable dependiente continua $Y$ y una o más variables independientes $X_1, X_2, \ldots, X_n$ mediante una ecuación de la forma:
+La regresión logística es una técnica de modelado estadístico utilizada para predecir la probabilidad de un evento binario (es decir, un evento que tiene dos posibles resultados) en función de una o más variables independientes.  Un modelo de regresión logística describe cómo una variable dependiente binaria $Y$ (que puede tomar los valores $0$ o $1$) está relacionada con una o más variables independientes $X_1, X_2, \ldots, X_n$. A diferencia de la regresión lineal, que predice un valor continuo, la regresión logística predice una probabilidad que puede ser interpretada como la probabilidad de que $Y=1$ dado un conjunto de valores para $X_1, X_2, \ldots, X_n$, la regresión logística está diseñada para manejar situaciones donde la respuesta es categórica. 
+\medskip
+
+En su forma más común, la regresión logística binaria, el modelo predice la probabilidad de que un evento ocurra en función de una o más variables independientes. Este tipo de regresión toma la forma de un modelo no lineal, debido a la naturaleza discreta de la variable dependiente. La regresión lineal busca modelar la relación entre una variable dependiente continua $Y$ y una o más variables independientes $X_1, X_2, \ldots, X_n$ mediante una ecuación de la forma:
 
 \begin{eqnarray}
 Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_n X_n + \epsilon,
 \end{eqnarray}
-
-donde $\beta_0, \beta_1, \ldots, \beta_n$ son los coeficientes del modelo y $\epsilon$ es el término de error.  La ecuación de la regresión logística es:
-
-\begin{eqnarray}
-\text{logit}(p) = \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_n X_n,
-\end{eqnarray}
-donde $p$ es la probabilidad de que $Y=1$. La función logística es:
-\begin{eqnarray}
-p = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_n X_n)}}.
-\end{eqnarray}
-
-La regresión lineal es utilizada para predecir el valor de una variable dependiente continua en función de una o más variables independientes. El modelo de regresión lineal tiene la forma:
-\begin{equation}
-Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_n X_n + \epsilon,
-\end{equation}
 donde:
 \begin{itemize}
     \item[a) ] $Y$ es la variable dependiente.
@@ -415,6 +406,15 @@ donde:
     \item[d) ] $X_1, X_2, \ldots, X_n$ son las variables independientes.
     \item[e) ] $\epsilon$ es el término de error, que representa la desviación de los datos observados de los valores predichos por el modelo.
 \end{itemize}
+
+%La ecuación de la regresión logística es:
+%\begin{eqnarray}
+%\text{logit}(p) = \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_n X_n,
+%\end{eqnarray}
+%donde $p$ es la probabilidad de que $Y=1$. La función logística es:
+%\begin{eqnarray}
+%p = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_n X_n)}}.
+%\end{eqnarray}
 
 El objetivo de la regresión lineal es encontrar los valores de los coeficientes $\beta_0, \beta_1, \ldots, \beta_n$ que minimicen la suma de los cuadrados de las diferencias entre los valores observados y los valores predichos. Este método se conoce como mínimos cuadrados ordinarios (OLS, por sus siglas en inglés). La función de costo a minimizar es:
 
@@ -435,12 +435,15 @@ Para encontrar los valores óptimos de los coeficientes, se toman las derivadas 
 \frac{\partial J}{\partial \beta_j} = 0 \quad \text{para } j = 0, 1, \ldots, n.
 \end{equation*}
 
-Resolviendo este sistema de ecuaciones, se obtienen los valores de los coeficientes que minimizan la función de costo. La deducción de la fórmula de la regresión logística comienza con la necesidad de modelar la probabilidad de un evento binario. Queremos encontrar una función que relacione las variables independientes con la probabilidad de que la variable dependiente tome el valor $1$. La probabilidad de que el evento ocurra, $P(Y=1)$, se denota como $p$. La probabilidad de que el evento no ocurra, $P(Y=0)$, es $1-p$. Los \textbf{odds} (chances) de que ocurra el evento se definen como:
+Resolviendo este sistema de ecuaciones, se obtienen los valores de los coeficientes que minimizan la función de costo. 
+\medskip
+
+La deducción de la fórmula de la regresión logística comienza con la necesidad de modelar la probabilidad de un evento binario. Queremos encontrar una función que relacione las variables independientes con la probabilidad de que la variable dependiente tome el valor $1$. La probabilidad de que el evento ocurra, $P(Y=1)$, se denota como $p$. La probabilidad de que el evento no ocurra, $P(Y=0)$, es $1-p$. Los \textbf{odds} (chances/momios) de que ocurra el evento se definen como:
 \begin{equation}
 \text{odds} = \frac{p}{1-p}.
 \end{equation}
 
-Los odds indican cuántas veces más probable es que ocurra el evento frente a que no ocurra. Para simplificar el modelado de los \textit{odds}, se aplica el logaritmo natural, obteniendo la función \textbf{logit}:
+Los momios indican cuántas veces más probable es que ocurra el evento frente a que no ocurra. Para simplificar el modelado de los \textit{momios}, se aplica el logaritmo natural, obteniendo la función \textbf{logit}:
 \begin{equation}
 \text{logit}(p) = \log\left(\frac{p}{1-p}\right).
 \end{equation}
@@ -448,7 +451,7 @@ Los odds indican cuántas veces más probable es que ocurra el evento frente a q
 La transformación logit es útil porque convierte el rango de la probabilidad (0, 1) al rango de números reales $\left(-\infty, \infty\right)$. La idea clave de la regresión logística es modelar la transformación logit de la probabilidad como una combinación lineal de las variables independientes:
 
 \begin{equation}\label{Ec.logit}
-\text{logit}(p) = \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_n X_n.
+\text{logit}(p) := \log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_n X_n.
 \end{equation}
 
 Aquí, $\beta_0$ es el t\'ermino constante y $\beta_1, \beta_2, \ldots, \beta_n$ son los coeficientes asociados con las variables independientes $X_1, X_2, \ldots, X_n$. Para expresar $p$ en función de una combinación lineal de las variables independientes, invertimos la transformación logit. Partimos de la ecuación \ref{Ec.logit}, aplicando la funci\'on exponencial en ambos lados:

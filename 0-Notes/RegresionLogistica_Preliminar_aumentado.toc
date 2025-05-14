@@ -1,10 +1,10 @@
-\contentsline {section}{\numberline {1}An\'alisis de Regresion Lineal (RL)}{1}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Propiedades de los Estimadores $\hat {\beta }_{0}$ y $\hat {\beta }_{1}$}{3}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Prueba de Hip\'otesis en RLS}{4}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Estimaci\'on de Intervalos en RLS}{7}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Predicci\'on}{8}{subsection.1.4}%
-\contentsline {section}{\numberline {2}Regresi\'on m\'ultiple}{9}{section.2}%
-\contentsline {section}{\numberline {3}Método de Máxima Verosimilitud}{11}{section.3}%
-\contentsline {section}{\numberline {4}Método de Newton-Raphson}{12}{section.4}%
-\contentsline {section}{\numberline {5}Desarrollo}{15}{section.5}%
-\contentsline {section}{\numberline {6}Notas finales}{23}{section.6}%
+\contentsline {section}{\numberline {1}An\'alisis de Regresion Lineal (RL)}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Propiedades de los Estimadores $\mathaccentV {hat}05E{\beta }_{0}$ y $\mathaccentV {hat}05E{\beta }_{1}$}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Prueba de Hip\'otesis en RLS}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Estimaci\'on de Intervalos en RLS}{7}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Predicci\'on}{7}{subsection.1.4}
+\contentsline {section}{\numberline {2}Regresi\'on m\'ultiple}{9}{section.2}
+\contentsline {section}{\numberline {3}M\IeC {\'e}todo de M\IeC {\'a}xima Verosimilitud}{10}{section.3}
+\contentsline {section}{\numberline {4}M\IeC {\'e}todo de Newton-Raphson}{12}{section.4}
+\contentsline {section}{\numberline {5}Desarrollo}{15}{section.5}
+\contentsline {section}{\numberline {6}Notas finales}{23}{section.6}

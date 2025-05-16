@@ -517,7 +517,7 @@ p = \frac{1}{1 + e^{-\left(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_
 Esta función describe cómo las variables independientes se relacionan con la probabilidad de que el evento de interés ocurra. Los coeficientes $\beta_0, \beta_1, \ldots, \beta_n$ se estiman a partir de los datos utilizando el método de máxima verosimilitud.
 
 %<>==<><>==<><>==<><>==<><>==<><>==<><>==<><>==<>
-\section{Método de Máxima Verosimilitud}
+\subsection{Método de Máxima Verosimilitud}
 %<>==<><>==<><>==<><>==<><>==<><>==<><>==<><>==<>
 
 Para estimar los coeficientes $\beta_0, \beta_1, \ldots, \beta_n$ en la regresión logística, utilizamos el método de máxima verosimilitud. La idea es encontrar los valores de los coeficientes que maximicen la probabilidad de observar los datos dados. Esta probabilidad se expresa mediante la función de verosimilitud $L$. La función de verosimilitud $L(\beta_0, \beta_1, \ldots, \beta_n)$ para un conjunto de $n$ observaciones se define como el producto de las probabilidades de las observaciones dadas las variables independientes:
@@ -620,7 +620,7 @@ Para encontrar los coeficientes que maximizan la log-verosimilitud, resolvemos e
 Este sistema de ecuaciones no tiene una solución analítica cerrada, por lo que se resuelve numéricamente utilizando métodos iterativos como el algoritmo de Newton-Raphson.
 
 %<>==<><>==<><>==<><>==<><>==<><>==<><>==<><>==<>
-\section{Método de Newton-Raphson}
+\subsection{Método de Newton-Raphson}
 %<>==<><>==<><>==<><>==<><>==<><>==<><>==<><>==<>
 
 El método de Newton-Raphson es un algoritmo iterativo que se utiliza para encontrar las raíces de una función. En el contexto de la regresión logística, se utiliza para maximizar la función de log-verosimilitud encontrando los valores de los coeficientes $\beta_0, \beta_1, \ldots, \beta_n$. Este m\'etodo se basa en una aproximación de segundo orden de la función objetivo. Dado un valor inicial de los coeficientes $\boldsymbol{\beta}^{(0)}$, se actualiza iterativamente el valor de los coeficientes utilizando la fórmula:

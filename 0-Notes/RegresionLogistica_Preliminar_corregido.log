@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  15 MAY 2025 18:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  15 MAY 2025 18:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**RegresionLogistica_Preliminar_aumentado.tex
-(./RegresionLogistica_Preliminar_aumentado.tex
+**RegresionLogistica_Preliminar_corregido.tex
+(./RegresionLogistica_Preliminar_corregido.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 (/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
@@ -547,8 +547,8 @@ File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count329
 \l__pdf_internal_box=\box105
 )
-(./RegresionLogistica_Preliminar_aumentado.aux)
-\openout1 = `RegresionLogistica_Preliminar_aumentado.aux'.
+(./RegresionLogistica_Preliminar_corregido.aux)
+\openout1 = `RegresionLogistica_Preliminar_corregido.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
 LaTeX Font Info:    ... okay on input line 42.
@@ -570,10 +570,10 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 42.
 LaTeX Font Info:    ... okay on input line 42.
 Package hyperref Info: Link coloring OFF on input line 42.
 
-(./RegresionLogistica_Preliminar_aumentado.out)
-(./RegresionLogistica_Preliminar_aumentado.out)
+(./RegresionLogistica_Preliminar_corregido.out)
+(./RegresionLogistica_Preliminar_corregido.out)
 \@outlinefile=\write3
-\openout3 = `RegresionLogistica_Preliminar_aumentado.out'.
+\openout3 = `RegresionLogistica_Preliminar_corregido.out'.
 
 \c@lstlisting=\count330
 
@@ -649,9 +649,9 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 45.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-(./RegresionLogistica_Preliminar_aumentado.toc)
+(./RegresionLogistica_Preliminar_corregido.toc)
 \tf@toc=\write4
-\openout4 = `RegresionLogistica_Preliminar_aumentado.toc'.
+\openout4 = `RegresionLogistica_Preliminar_corregido.toc'.
 
  [1
 
@@ -723,7 +723,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1647--1648
 et-works. Preprint at
  []
 
-[32] (./RegresionLogistica_Preliminar_aumentado.aux)
+[32] (./RegresionLogistica_Preliminar_corregido.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -732,13 +732,13 @@ L3 programming layer <2024-02-20>
 
 LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `RegresionLogistica_Preliminar_aumentado.out'
+Package rerunfilecheck Info: File `RegresionLogistica_Preliminar_corregido.out'
  has not changed.
-(rerunfilecheck)             Checksum: E78CD3E078C4B8DC03F4A3C4B540E471;1656.
+(rerunfilecheck)             Checksum: 15B8225F45DD18E9822E812459A31C66;1684.
  ) 
 Here is how much of TeX's memory you used:
  14860 strings out of 474116
- 230526 string characters out of 5743681
+ 230546 string characters out of 5743681
  1950187 words of memory out of 5000000
  36804 multiletter control sequences out of 15000+600000
  574309 words of font info for 94 fonts, out of 8000000 for 9000
@@ -769,7 +769,7 @@ e/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
 2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texl
 ive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/
 texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on RegresionLogistica_Preliminar_aumentado.pdf (32 pages, 429784
+Output written on RegresionLogistica_Preliminar_corregido.pdf (32 pages, 430149
  bytes).
 PDF statistics:
  551 PDF objects out of 1000 (max. 8388607)

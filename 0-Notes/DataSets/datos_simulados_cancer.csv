@@ -1,4 +1,4 @@
-"Edad","IMC","Menopausia","Tamano_Tumor","Grado","ER","PR","HER2.","BRCA1","Ki67","Quimio","Hormonoterapia","Recidiva"
+"Edad","IMC","Menopausia","Tamano_Tumor","Grado","ER","PR","HER2","BRCA1","Ki67","Quimio","Hormonoterapia","Recidiva"
 49,23,"Post",18.2,2,0,1,0,0,9.8,0,0,0
 53,22.8,"Pre",30.7,2,1,1,1,0,27.7,0,1,0
 71,26.9,"Post",18,3,1,0,0,0,10.4,1,1,0

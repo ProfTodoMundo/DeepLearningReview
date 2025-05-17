@@ -86,6 +86,7 @@ ggplot(datos_cancer, aes(x = Tamano_Tumor, y = prob_predicha)) +
        y = "Probabilidad estimada de recidiva",
        color = "Recidiva real") + theme_minimal()
 #---- 2 ECUACIONES IMPORTANTES ----
+
 ##---- 2.1 CALCULO DE LA LOG-VEROSIMILITUD ----  
 loglik_manual <- function(beta, X, y) {
   eta <- X %*% beta;
@@ -106,7 +107,70 @@ log_likelihood_grad <- function(beta, X, y) {
   p <- sigmoid(X %*% beta)
   t(X) %*% (p - y)
 }
-##---- 2.5 Gradiente Conjugado no lineal (Fletcher-Reeves simplificado) ----
+
+# Hessiana de la log-verosimilitud negativa
+hessian <- function(beta, X) {
+  p <- sigmoid(X %*% beta)
+  W <- diag(as.numeric(p * (1 - p)))
+  t(X) %*% W %*% X
+}
+
+newton_raphson_logit <- function(X, y, tol = 1e-6, max_iter = 100) {
+  beta <- rep(0, ncol(X))  # Paso 1: inicialización
+  for (i in 1:max_iter) {
+    grad <- gradient(beta, X, y)        # Paso 2: gradiente
+    H <- hessian(beta, X)               # Paso 2: hessiana
+    beta_new <- beta - solve(H, grad)   # Paso 3: actualización
+    
+    # Paso 4: criterio de convergencia
+    if (max(abs(beta_new - beta)) < tol) {
+      cat("Convergió en", i, "iteraciones\n")
+      return(beta_new)
+    }
+    
+    beta <- beta_new
+  }
+  warning("No convergió en el número máximo de iteraciones")
+  return(beta)
+}
+
+# Gradiente: g(β)
+grad_loglik <- function(beta, X, y) {
+  p <- sigmoid(X %*% beta)
+  t(X) %*% (p - y)
+}
+
+# Hessiana: H(β)
+hess_loglik <- function(beta, X) {
+  p <- sigmoid(X %*% beta)
+  W <- diag(as.numeric(p * (1 - p)))
+  t(X) %*% W %*% X
+}
+
+newton_raphson_beta_k <- function(X, y, tol = 1e-6, max_iter = 100) {
+  beta_k <- rep(0, ncol(X))  # Paso 1: inicialización
+  
+  for (k in 1:max_iter) {
+    g_k <- grad_loglik(beta_k, X, y)   # Paso 2: gradiente
+    H_k <- hess_loglik(beta_k, X)      # Paso 2: hessiana
+    
+    # Paso 3: actualización
+    beta_k1 <- beta_k - solve(H_k, g_k)
+    
+    # Paso 4: criterio de convergencia
+    if (max(abs(beta_k1 - beta_k)) < tol) {
+      cat("Convergió en", k, "iteraciones\n")
+      return(beta_k1)
+    }
+    
+    beta_k <- beta_k1
+  }
+  
+  warning("No convergió en el número máximo de iteraciones")
+  return(beta_k)
+}
+
+##---- Gradiente Conjugado no lineal (Fletcher-Reeves simplificado) ----
 gradiente_conjugado <- function(X, y, max_iter = 1000, tol = 1e-6) {
   n <- ncol(X)
   beta <- rep(0, n)
@@ -128,68 +192,5 @@ gradiente_conjugado <- function(X, y, max_iter = 1000, tol = 1e-6) {
   warning("No convergió") # investigar como se implemento 
   return(beta) # el Gradiente conjugado
 }
-#---- 3. IMPLEMENTACION ----
-X <- model.matrix(modelo_cancer); print(X)
-y <- datos_cancer$Recidiva; print(y)
-beta_hat <- coef(modelo_cancer)
-loglik_manual(beta_hat, X, y)  # Debería ser cercano al logLik(modelo)
 
-X <- model.matrix(Recidiva ~ Edad + Tamano_Tumor + 
-                    Grado + PR + HER2 + BRCA1 + Ki67 +
-                    Hormonoterapia, data = datos_cancer); print(X)
-y <- datos_cancer$Recidiva; print(y)
-coef_conjugado <- gradiente_conjugado(X, y)
-coef_glm <- coef(glm(Recidiva ~ Edad + Tamano_Tumor + Grado + PR + 
-                       HER2 + BRCA1 + Ki67 + Hormonoterapia,
-                     data = datos_cancer, family = binomial))
-round(data.frame(
-  Variable = names(coef_glm),
-  Coef_GLM = coef_glm,
-  Coef_GradConj = coef_conjugado
-), 4)
-#---- 4. NUEVO EJERCICIO DE SIMULACION ----
-##---- 4.1 INICIALIZACION DE VARIABLES ----
-set.seed(123)
-n <- 500
-edad <- round(runif(n, 25, 80))
-tamano_tumor <- round(runif(n, 5, 50))
-progesterona <- round(runif(n, 1, 100))
-HER2 <- rbinom(n, 1, 0.25)
-RE <- rbinom(n, 1, 0.6)
-RP <- rbinom(n, 1, 0.55)
-densidad_mamaria <- sample(1:4, n, replace = TRUE)
-###---- 4.2. Coeficientes simulados----
-log_odds <- -4 + 0.03 * edad + 0.05 * tamano_tumor - 0.1 * progesterona +
-  0.8 * HER2 + 0.6 * RE + 0.5 * RP + 0.3 * densidad_mamaria
-###---- 4.3. Probabilidad y diagnóstico ----
-prob <- 1 / (1 + exp(-log_odds))
-diagnostico <- rbinom(n, 1, prob)
-###---- 4.4. Base de datos ----
-datos <- data.frame(edad, tamano_tumor, progesterona,
-                    HER2, RE, RP, densidad_mamaria, 
-                    diagnostico)
-###---- 4.5. Modelo de regresión logística (MLE) ----
-modelo <- glm(diagnostico ~ ., data = datos, family = binomial)
-summary(modelo)
-###---- 4.6. Comparar coeficientes verdaderos vs estimados----
-coef_verdaderos <- c(-4, 0.03, 0.05, -0.1, 0.8, 0.6, 0.5, 0.3)
-names(coef_verdaderos) <- names(coef(modelo))
-comparacion <- data.frame(
-  Coef_Verdadero = coef_verdaderos,
-  Coef_Estimado = coef(modelo)
-)
-print(comparacion)
-###---- 4.7. Visualizar con función sigmoide ----
-datos$probabilidad_estimada <- predict(modelo, type = "response")
-ggplot(datos, aes(x = edad, y = probabilidad_estimada, color = factor(diagnostico))) +
-  geom_point(alpha = 0.6) +
-  stat_function(fun = function(x) 1 / (1 + exp(-(-4 + 0.03 * x + 0.05 * 25 - 0.1 * 50))),
-                color = "black", linetype = "dashed", size = 1.2) +
-  labs(title = "Función Sigmoide Estimada vs Real",
-       x = "Edad", y = "Probabilidad Estimada",
-       color = "Diagnóstico") +
-  theme_minimal()
 
-write.csv(datos_cancer, "datos_cancer_simulados.csv", row.names = FALSE)
-View(datos_cancer)
-head(datos_cancer)

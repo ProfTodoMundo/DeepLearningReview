@@ -45,7 +45,6 @@ modelo_chd <- glm(enfermedad ~ edad + colesterol + presion,
 
 summary(modelo_cancer)
 summary(modelo_chd)
-
 # ---- Evaluación: odds ratio e IC 95% ----
 exp(cbind(OR = coef(modelo_cancer), confint(modelo_cancer)))
 exp(cbind(OR = coef(modelo_chd), confint(modelo_chd)))

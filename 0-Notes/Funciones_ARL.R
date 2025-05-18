@@ -66,6 +66,85 @@ gradiente_conjugado <- function(X, y, max_iter = 1000, tol = 1e-6) {
   warning("GC no convergió")
   return(list(beta = beta, iter = max_iter, normas = normas))
 }
+##---- Función sigmoide ----
+sigmoid <- function(z) {
+  1 / (1 + exp(-z))
+}
+##---- Gradiente de la función de log-verosimilitud ----
+gradient <- function(X, y, beta) {
+  p <- sigmoid(X %*% beta)
+  t(X) %*% (p - y)
+}
+##---- Producto Hessiano aproximado ----
+hessian_approx <- function(X, beta) {
+  p <- sigmoid(X %*% beta)
+  W <- diag(as.vector(p * (1 - p)))
+  t(X) %*% W %*% X
+}
+##---- Método de gradiente conjugado (versión simplificada) ----
+conjugate_gradient <- function(X, y, tol = 1e-6, max_iter = 1000) {
+  beta <- matrix(0, ncol(X), 1)
+  r <- -gradient(X, y, beta)
+  d <- r
+  iter <- 0
+  while (sqrt(sum(r^2)) > tol && iter < max_iter) {
+    Hd <- hessian_approx(X, beta) %*% d
+    alpha <- as.numeric(t(r) %*% r / (t(d) %*% Hd))
+    beta <- beta + alpha * d
+    r_new <- r - alpha * Hd
+    beta_new <- beta
+    if (sqrt(sum(r_new^2)) < tol) break
+    beta <- beta_new
+    beta_new <- NULL
+    beta_r <- t(r_new) %*% r_new / t(r) %*% r
+    d <- r_new + as.numeric(beta_r) * d
+    r <- r_new
+    iter <- iter + 1
+  }
+  return(list(beta = beta, iter = iter))
+}
+
+
+# ============================================
+# Función de verosimilitud para MLE
+# ============================================
+log_likelihood <- function(beta, X, y) {
+  p <- 1 / (1 + exp(-X %*% beta))
+  ll <- sum(y * log(p) + (1 - y) * log(1 - p))
+  return(-ll)  # Negativa porque optim minimiza
+}
+
+# Gradiente de la log-verosimilitud
+log_likelihood_grad <- function(beta, X, y) {
+  p <- 1 / (1 + exp(-X %*% beta))
+  grad <- -t(X) %*% (y - p)
+  return(as.vector(grad))
+}
+
+# Estimación MLE para cáncer
+mle_cancer <- optim(par = c(0, 0, 0),
+                    fn = log_likelihood,
+                    gr = log_likelihood_grad,
+                    method = "BFGS",
+                    X = x_cancer,
+                    y = y_cancer,
+                    control = list(fnscale = 1))
+
+# Estimación MLE para CHD
+mle_chd <- optim(par = c(0, 0, 0),
+                 fn = log_likelihood,
+                 gr = log_likelihood_grad,
+                 method = "BFGS",
+                 X = x_chd,
+                 y = y_chd,
+                 control = list(fnscale = 1))
+
+# Resultados
+cat("\n--- Resultados MLE Cáncer ---\n")
+print(mle_cancer$par)
+cat("\n--- Resultados MLE CHD ---\n")
+print(mle_chd$par)
+
 ##---- 3 INICIALIZANDO LAS VARIABLES Y PARAMETROS ----
 n <- 1000
 set.seed(123)

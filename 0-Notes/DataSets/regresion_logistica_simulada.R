@@ -4,6 +4,7 @@ set.seed(123)
 library(pROC)
 library(ggplot2)
 library(broom)
+library(dplyr)
 # ---- 1. Simulación de datos de cáncer de mama ----
 n_1 <- 1000
 edad_cancer_1 <- round(rnorm(n_1, mean = 55, sd = 10))
@@ -155,615 +156,140 @@ beta_cancer_5 <- c(-5, 0.08, 1.2)
 logit_cancer_5 <- x_cancer_5 %*% beta_cancer_5
 p_cancer_5 <- 1 / (1 + exp(-logit_cancer_5))
 y_cancer_5 <- rbinom(n_5, 1, p_cancer_5)
-#---- 6. DATOS DE ENFERMEDADES DEL CORAZON ----
-n_6 <- 500
-edad_6 <- round(runif(n_6, 35, 80))                      # Edad entre 35 y 80
-psistolica_6 <- round(rnorm(n_6, 130, 20))               # Presión sistólica
-colesterol_6 <- round(rnorm(n_6, 200, 40))               # Colesterol total
-diabetes_6 <- rbinom(n_6, 1, 0.2)                        # Presencia de diabetes (20%)
-obesidad_6 <- rbinom(n_6, 1, 0.3)                        # Obesidad (30%)
-tabaco_6 <- rbinom(n_6, 1, 0.25)                         # Fumador (25%)
-##---- 2.2 INICIALIZACION DE PARAMETROS DEL MODELO ----
-beta_0 <- -6;      beta_edad <- 0.04; beta_psis <- 0.02; 
-beta_col <- 0.01;  beta_diab <- 0.7;  beta_obes <- 0.5; beta_taba <- 0.6;
-###---- 2.2.1 MODELO LOGIT----
-log_odds_6 <- beta_0 + beta_edad * edad_6 + beta_psis * psistolica_6 + 
-  beta_col * colesterol_6 + beta_diab * diabetes_6 + 
-  beta_obes * obesidad_6 + beta_taba * tabaco_6
-prob_chd_6 <- 1 / (1 + exp(-log_odds_6))
-CHD_6 <- rbinom(n_6, 1, prob_chd_6)
-###---- 2.2.2 CREACION DATA FRAME ----
-datos_chd_6 <- data.frame(
-  edad_6, psistolica_6, colesterol_6, diabetes_6, 
-  obesidad_6, tabaco_6, CHD_6)
-View(datos_chd_6)
-head(datos_chd)
-###---- 2.2.3 CREACION DE ARCHIVO .csv ---- 
-write.csv(datos_chd, "datos_simulados_CHD.csv", row.names = FALSE)
-
-
-
-# Simulación de datos para enfermedad cardíaca (CHD)
+#----  8. Simulación de datos - Cáncer ----
 set.seed(123)
-n <- 200
-AGE <- rnorm(n, mean = 55, sd = 10)
-CHOL <- rnorm(n, mean = 220, sd = 30)
-SMOKING <- rbinom(n, 1, prob = 0.4)
-
-# Simulación del resultado binario CHD
-lin_pred <- -6 + 0.05 * AGE + 0.03 * CHOL + 1.5 * SMOKING
-prob_CHD <- 1 / (1 + exp(-lin_pred))
-CHD <- rbinom(n, 1, prob_CHD)
-
-data_chd <- data.frame(AGE, CHOL, SMOKING, CHD)
-
-# Ajuste del modelo logístico
-modelo_chd <- glm(CHD ~ AGE + CHOL + SMOKING, data = data_chd, family = binomial)
-
-# Predicción del valor lineal y la probabilidad
-xbeta <- predict(modelo_chd, type = "link")
-probabilidades <- predict(modelo_chd, type = "response")
-
-# Gráfica de la sigmoide con clasificación de puntos
-x_vals <- seq(min(xbeta) - 1, max(xbeta) + 1, length.out = 500)
-y_vals <- 1 / (1 + exp(-x_vals))
-
-# Plot
-plot(x_vals, y_vals, type = "l", lwd = 2, col = "blue",
-     xlab = expression(X*beta), ylab = "Probabilidad", main = "Curva sigmoide con clasificación")
-abline(h = 0.5, lty = 2, col = "red")
-abline(v = 0, lty = 2, col = "gray")
-
-# Puntos observados
-points(xbeta[data_chd$CHD == 0], data_chd$CHD[data_chd$CHD == 0], col = "darkred", pch = 4)
-points(xbeta[data_chd$CHD == 1], data_chd$CHD[data_chd$CHD == 1], col = "darkgreen", pch = 16)
-
-# Leyenda
-legend("bottomright", legend = c("Sigmoide", "CHD = 0", "CHD = 1"),
-       col = c("blue", "darkred", "darkgreen"), pch = c(NA, 4, 16), lty = c(1, NA, NA), lwd = c(2, NA, NA))
-
-
-# --------------------------------------------------
-# Métricas de evaluación del modelo
-# --------------------------------------------------
-
-# Convertir probabilidades a clases usando un umbral de 0.5
-pred_clase <- ifelse(probabilidades >= 0.5, 1, 0)
-
-# Matriz de confusión
-conf_matrix <- table(Predicho = pred_clase, Real = datos$CHD)
-print("Matriz de confusión:")
-print(conf_matrix)
-
-# Cálculo de sensibilidad, especificidad, precisión y exactitud
-TP <- conf_matrix[2, 2]
-TN <- conf_matrix[1, 1]
-FP <- conf_matrix[2, 1]
-FN <- conf_matrix[1, 2]
-
-sensibilidad <- TP / (TP + FN)
-especificidad <- TN / (TN + FP)
-precision <- TP / (TP + FP)
-exactitud <- (TP + TN) / sum(conf_matrix)
-
-cat("\nSensibilidad:", sensibilidad, 
-    "\nEspecificidad:", especificidad, 
-    "\nPrecisión:", precision,
-    "\nExactitud:", exactitud, "\n")
-
-
-
-# ========================================
-# Simulación de datos para regresión logística
-# Incluye datos de cáncer y enfermedad cardíaca
-# Cálculo del MLE y gráfica de la sigmoide
-# ========================================
-
-# Librerías necesarias
-library(ggplot2)
-library(dplyr)
-
-# ---------------------------
-# Simulación de datos - Cáncer
-# ---------------------------
+n_8 <- 100
+edad_cancer_8 <- runif(n_8, 30, 80)
+b0_cancer_8 <- -6
+b1_cancer_8 <- 0.1
+log_odds_cancer_8 <- b0_cancer_8 + b1_cancer_8 * edad_cancer_8
+prob_cancer_8 <- 1 / (1 + exp(-log_odds_cancer_8))
+diagnostico_cancer_8 <- rbinom(n_8, 1, prob_cancer_8)
+datos_cancer_8 <- data.frame(Edad = edad_cancer_8, Diagnostico = diagnostico_cancer_8)
+##---- Ajuste del modelo y estimación MLE ----
+modelo_cancer_8 <- glm(diagnostico_cancer_8 ~ Edad_8, family = binomial, data = datos_cancer_8)
+summary(modelo_cancer_8)
+#---- 9. Simulación y ajuste de modelo logístico para cáncer de mama ---
 set.seed(123)
-n <- 100
-edad_cancer <- runif(n, 30, 80)
-b0_cancer <- -6
-b1_cancer <- 0.1
-log_odds_cancer <- b0_cancer + b1_cancer * edad_cancer
-prob_cancer <- 1 / (1 + exp(-log_odds_cancer))
-diagnostico_cancer <- rbinom(n, 1, prob_cancer)
-
-datos_cancer <- data.frame(
-  Edad = edad_cancer,
-  Diagnostico = diagnostico_cancer
+n_9 <- 500
+edad_9 <- rnorm(n_9, mean = 55, sd = 10)
+tamano_tumor_9 <- rnorm(n_9, mean = 2.5, sd = 1)
+progesterona_9 <- rnorm(n_9, mean = 15, sd = 5)
+HER2_9 <- rbinom(n_9, 1, 0.3)
+RE_9 <- rbinom(n_9, 1, 0.6)
+RP_9 <- rbinom(n_9, 1, 0.5)
+densidad_mamaria_9 <- rnorm(n_9, mean = 0.6, sd = 0.2)
+##---- Log-odds simulados con coeficientes reales ----
+log_odds_9 <- -4 + 0.03 * edad_9 + 0.05 * tamano_tumor_9 - 0.1 * progesterona_9 +
+  0.8 * HER2_9 + 0.6 * RE_9 + 0.5 * RP_9 + 0.3 * densidad_mamaria_9
+probabilidad_9 <- 1 / (1 + exp(-log_odds_9))
+cancer_9 <- rbinom(n_9, 1, probabilidad_9)
+##---- Construir el data frame ----
+datos_9 <- data.frame(
+  edad_9, tamano_tumor_9, progesterona_9, HER2_9, RE_9, RP_9,
+  densidad_mamaria_9, cancer_9 = factor(cancer_9)
 )
-
-# ---------------------------
-# Simulación de datos - Enfermedad Coronaria
-# ---------------------------
-edad_chd <- runif(n, 30, 80)
-b0_chd <- -8
-b1_chd <- 0.12
-log_odds_chd <- b0_chd + b1_chd * edad_chd
-prob_chd <- 1 / (1 + exp(-log_odds_chd))
-diagnostico_chd <- rbinom(n, 1, prob_chd)
-
-datos_chd <- data.frame(
-  Edad = edad_chd,
-  Diagnostico = diagnostico_chd
-)
-
-# ---------------------------
-# Ajuste del modelo y estimación MLE
-# ---------------------------
-modelo_cancer <- glm(Diagnostico ~ Edad, family = binomial, data = datos_cancer)
-modelo_chd <- glm(Diagnostico ~ Edad, family = binomial, data = datos_chd)
-
-summary(modelo_cancer)
-summary(modelo_chd)
-
-# ---------------------------
-# Gráfica de la curva sigmoide para CHD
-# ---------------------------
-edad_seq <- seq(30, 80, length.out = 300)
-b0 <- coef(modelo_chd)[1]
-b1 <- coef(modelo_chd)[2]
-prob_pred <- 1 / (1 + exp(-(b0 + b1 * edad_seq)))
-
-datos_sigmoide <- data.frame(Edad = edad_seq, Probabilidad = prob_pred)
-
-ggplot() +
-  geom_point(data = datos_chd, aes(x = Edad, y = Diagnostico), alpha = 0.5) +
-  geom_line(data = datos_sigmoide, aes(x = Edad, y = Probabilidad), color = "blue", size = 1.2) +
-  labs(title = "Curva Sigmoide - Probabilidad de Enfermedad Coronaria",
-       x = "Edad",
-       y = "Probabilidad estimada") +
-  theme_minimal()
-
-# Simulación y ajuste de modelo logístico para cáncer de mama
-
-# 1. Simular datos
-set.seed(123)
-n <- 500
-edad <- rnorm(n, mean = 55, sd = 10)
-tamano_tumor <- rnorm(n, mean = 2.5, sd = 1)
-progesterona <- rnorm(n, mean = 15, sd = 5)
-HER2 <- rbinom(n, 1, 0.3)
-RE <- rbinom(n, 1, 0.6)
-RP <- rbinom(n, 1, 0.5)
-densidad_mamaria <- rnorm(n, mean = 0.6, sd = 0.2)
-
-# Log-odds simulados con coeficientes reales
-log_odds <- -4 + 0.03 * edad + 0.05 * tamano_tumor - 0.1 * progesterona +
-  0.8 * HER2 + 0.6 * RE + 0.5 * RP + 0.3 * densidad_mamaria
-probabilidad <- 1 / (1 + exp(-log_odds))
-cancer <- rbinom(n, 1, probabilidad)
-
-# Construir el data frame
-datos <- data.frame(
-  edad, tamano_tumor, progesterona, HER2, RE, RP,
-  densidad_mamaria, cancer = factor(cancer)
-)
-
-# 2. Ajustar modelo logístico con glm()
-modelo <- glm(cancer ~ edad + tamano_tumor + progesterona + HER2 + RE + RP + densidad_mamaria,
-              data = datos, family = binomial())
-
-# 3. Comparación de coeficientes
-coef_verdaderos <- c("(Intercept)" = -4, "edad" = 0.03, "tamano_tumor" = 0.05,
+##---- Ajustar modelo logístico con glm() ----
+modelo_9 <- glm(cancer_9 ~ edad_9 + tamano_tumor_9 +
+                  progesterona_9 + HER2_9 + RE_9 +
+                  RP_9 + densidad_mamaria_9,
+              data = datos_9, family = binomial())
+##---- Comparación de coeficientes ----
+coef_verdaderos_9 <- c("(Intercept)" = -4, "edad" = 0.03, "tamano_tumor" = 0.05,
                      "progesterona" = -0.1, "HER2" = 0.8, "RE" = 0.6,
                      "RP" = 0.5, "densidad_mamaria" = 0.3)
-
-coef_estimados <- coef(modelo)
-comparacion <- data.frame(
-  Coeficiente = names(coef_verdaderos),
-  Verdadero = coef_verdaderos,
-  Estimado = round(coef_estimados[names(coef_verdaderos)], 4),
-  Diferencia = round(coef_estimados[names(coef_verdaderos)] - coef_verdaderos, 4)
+coef_estimados_9 <- coef(modelo_9)
+comparacion_9 <- data.frame(
+  Coeficiente = names(coef_verdaderos_9),
+  Verdadero = coef_verdaderos_9,
+  Estimado = round(coef_estimados_9[names(coef_verdaderos_9)], 4),
+  Diferencia = round(coef_estimados_9[names(coef_verdaderos_9)] - coef_verdaderos_9, 4)
 )
-
-print(comparacion)
-
-# 4. Visualizar sigmoide
+print(comparacion_9)
+##---- Visualizar sigmoide ----
 library(ggplot2)
-
-datos$prob_predicha <- predict(modelo, type = "response")
-
-ggplot(datos, aes(x = edad, y = prob_predicha, color = cancer)) +
+datos_9$prob_predicha <- predict(modelo_9, type = "response")
+ggplot(datos_9, aes(x = edad_9, y = prob_predicha, color = cancer_9)) +
   geom_point(alpha = 0.6) +
   stat_smooth(method = "glm", method.args = list(family = "binomial"),
               se = FALSE, color = "black") +
   labs(title = "Probabilidad predicha vs edad",
        y = "Probabilidad predicha", x = "Edad")
-
-
-# Simulación y ajuste de modelo logístico para cáncer de mama
-
-# 1. Simular datos
+#---- 10. Simulación y ajuste de modelo logístico para cáncer de mama ----
 set.seed(123)
-n <- 500
-edad <- rnorm(n, mean = 55, sd = 10)
-tamano_tumor <- rnorm(n, mean = 2.5, sd = 1)
-progesterona <- rnorm(n, mean = 15, sd = 5)
-HER2 <- rbinom(n, 1, 0.3)
-RE <- rbinom(n, 1, 0.6)
-RP <- rbinom(n, 1, 0.5)
-densidad_mamaria <- rnorm(n, mean = 0.6, sd = 0.2)
-
-# Log-odds simulados con coeficientes reales
-log_odds <- -4 + 0.03 * edad + 0.05 * tamano_tumor - 0.1 * progesterona +
-  0.8 * HER2 + 0.6 * RE + 0.5 * RP + 0.3 * densidad_mamaria
-probabilidad <- 1 / (1 + exp(-log_odds))
-cancer <- rbinom(n, 1, probabilidad)
-
-# Construir el data frame
-datos <- data.frame(
-  edad, tamano_tumor, progesterona, HER2, RE, RP,
-  densidad_mamaria, cancer = factor(cancer)
-)
-
-# 2. Ajustar modelo logístico con glm()
-modelo <- glm(cancer ~ edad + tamano_tumor + progesterona + HER2 + RE + RP + densidad_mamaria,
-              data = datos, family = binomial())
-
-# 3. Comparación de coeficientes
-coef_verdaderos <- c("(Intercept)" = -4, "edad" = 0.03, "tamano_tumor" = 0.05,
-                     "progesterona" = -0.1, "HER2" = 0.8, "RE" = 0.6,
-                     "RP" = 0.5, "densidad_mamaria" = 0.3)
-
-coef_estimados <- coef(modelo)
-comparacion <- data.frame(
-  Coeficiente = names(coef_verdaderos),
-  Verdadero = coef_verdaderos,
-  Estimado = round(coef_estimados[names(coef_verdaderos)], 4),
-  Diferencia = round(coef_estimados[names(coef_verdaderos)] - coef_verdaderos, 4)
-)
-
-print(comparacion)
-
-# 4. Visualizar sigmoide
-library(ggplot2)
-
-datos$prob_predicha <- predict(modelo, type = "response")
-
-ggplot(datos, aes(x = edad, y = prob_predicha, color = cancer)) +
+n_10 <- 500
+edad_10 <- rnorm(n_10, mean = 55, sd = 10)
+tamano_tumor_10 <- rnorm(n_10, mean = 2.5, sd = 1)
+progesterona_10 <- rnorm(n_10, mean = 15, sd = 5)
+HER2_10 <- rbinom(n_10, 1, 0.3)
+RE_10 <- rbinom(n_10, 1, 0.6)
+RP_10 <- rbinom(n_10, 1, 0.5)
+densidad_mamaria_10 <- rnorm(n_10, mean = 0.6, sd = 0.2)
+##---- Log-odds simulados con coeficientes reales ----
+log_odds_10 <- -4 + 0.03 * edad_10 + 0.05 * tamano_tumor_10 -
+  0.1 * progesterona_10 + 0.8 * HER2_10 + 0.6 * RE_10 +
+  0.5 * RP_10 + 0.3 * densidad_mamaria_10
+probabilidad_10 <- 1 / (1 + exp(-log_odds_10))
+cancer_10 <- rbinom(n_10, 1, probabilidad_10)
+##---- Construir el data frame ----
+datos_10 <- data.frame(
+  edad_10, tamano_tumor_10, progesterona_10, HER2_10,
+  RE_10, RP_10, densidad_mamaria_10, cancer_10 = factor(cancer_10))
+##---- Ajustar modelo logístico con glm() ----
+modelo_10 <- glm(cancer_10 ~ edad_10 + tamano_tumor_10 +
+                   progesterona_10 + HER2_10 + RE_10 +
+                   RP_10 + densidad_mamaria_10,
+              data = datos_10, family = binomial())
+##---- Comparación de coeficientes ----
+coef_verdaderos_10 <- c("(Intercept)" = -4, "edad" = 0.03, 
+                        "tamano_tumor" = 0.05, "progesterona" = -0.1,
+                        "HER2" = 0.8, "RE" = 0.6, "RP" = 0.5,
+                        "densidad_mamaria" = 0.3)
+coef_estimados_10 <- coef(modelo_10)
+comparacion_10 <- data.frame(
+  Coeficiente = names(coef_verdaderos_10),
+  Verdadero = coef_verdaderos_10,
+  Estimado = round(coef_estimados_10[names(coef_verdaderos_10)], 4),
+  Diferencia = round(coef_estimados_10[names(coef_verdaderos_10)] -
+                       coef_verdaderos_10, 4))
+print(comparacion_10)
+##---- Visualizar sigmoide ----
+datos_10$prob_predicha <- predict(modelo_10, type = "response")
+ggplot(datos_10, aes(x = edad_10, y = prob_predicha, color = cancer_10)) +
   geom_point(alpha = 0.6) +
   stat_smooth(method = "glm", method.args = list(family = "binomial"),
               se = FALSE, color = "black") +
   labs(title = "Probabilidad predicha vs edad",
        y = "Probabilidad predicha", x = "Edad")
-
-
-# Simulación de datos para enfermedad coronaria (CHD)
-
+#---- 11. Simulación de datos de cáncer de mama ----
 set.seed(123)
-n <- 200
-
-# Simulación de variables
-edad <- rnorm(n, mean = 55, sd = 10)
-colesterol <- rnorm(n, mean = 220, sd = 30)
-presion_sistolica <- rnorm(n, mean = 130, sd = 15)
-fumar <- rbinom(n, 1, prob = 0.3)
-diabetes <- rbinom(n, 1, prob = 0.2)
-
-# Simular log-odds con coeficientes establecidos manualmente
-log_odds <- -5 + 0.04 * edad + 0.03 * colesterol + 0.05 * presion_sistolica + 0.8 * fumar + 1.2 * diabetes
-probabilidades <- 1 / (1 + exp(-log_odds))
-CHD <- rbinom(n, 1, prob = probabilidades)
-
-# Data frame
-datos_chd <- data.frame(
-  edad, colesterol, presion_sistolica, fumar, diabetes, CHD
-)
-
-# Ajuste con glm
-modelo_glm <- glm(CHD ~ edad + colesterol + presion_sistolica + fumar + diabetes, 
-                  data = datos_chd, family = binomial)
-
-summary(modelo_glm)
-
-# Comparar coeficientes reales y estimados
-coef_simulados <- c("(Intercept)" = -5, edad = 0.04, colesterol = 0.03, presion_sistolica = 0.05,
-                    fumar = 0.8, diabetes = 1.2)
-coef_estimados <- coef(modelo_glm)
-
-comparacion <- data.frame(Simulado = coef_simulados[names(coef_estimados)],
-                          Estimado = round(coef_estimados, 3))
-print(comparacion)
-
-# Visualizar la sigmoide respecto a la edad
+n_11 <- 200
+edad_11 <- round(runif(n_11, 30, 80))
+tamano_tumor_11 <- round(rnorm(n_11, mean = 25, sd = 10), 1)
+progesterona_11 <- round(rnorm(n_11, mean = 15, sd = 5), 1)
+##---- Coeficientes simulados para cáncer ----
+log_odds_11 <- -4 + 0.03 * edad_11 + 
+  0.05 * tamano_tumor_11 - 0.1 * progesterona_11
+probabilidad_cancer_11 <- 1 / (1 + exp(-log_odds_11))
+cancer_11 <- rbinom(n_11, 1, probabilidad_cancer_11)
+datos_cancer_11 <- data.frame(edad_11, tamano_tumor_11,
+                              progesterona_11, cancer_11)
+##---- Ajuste de modelo con glm ----
+modelo_cancer_11 <- glm(cancer_11 ~ edad_11 +
+                          tamano_tumor_11 +
+                          progesterona_11, 
+                        family = binomial, 
+                        data = datos_cancer_11)
+summary(modelo_cancer_11)
+##---- Gráfico para visualización ----
 library(ggplot2)
-edad_seq <- seq(min(edad), max(edad), length.out = 100)
-pred_data <- data.frame(
-  edad = edad_seq,
-  colesterol = mean(colesterol),
-  presion_sistolica = mean(presion_sistolica),
-  fumar = 0,
-  diabetes = 0
-)
-pred_data$prob <- predict(modelo_glm, newdata = pred_data, type = "response")
-
-ggplot(datos_chd, aes(x = edad, y = CHD)) +
-  geom_jitter(width = 0.5, height = 0.05, alpha = 0.4) +
-  geom_line(data = pred_data, aes(x = edad, y = prob), color = "blue", size = 1) +
-  labs(title = "Curva Sigmoide: Probabilidad de CHD vs Edad", y = "Probabilidad estimada", x = "Edad")
-
-
-# Simulación de datos para enfermedad coronaria (CHD)
-
-set.seed(123)
-n <- 200
-
-# Simulación de variables
-edad <- rnorm(n, mean = 55, sd = 10)
-colesterol <- rnorm(n, mean = 220, sd = 30)
-presion_sistolica <- rnorm(n, mean = 130, sd = 15)
-fumar <- rbinom(n, 1, prob = 0.3)
-diabetes <- rbinom(n, 1, prob = 0.2)
-
-# Simular log-odds con coeficientes establecidos manualmente
-log_odds <- -5 + 0.04 * edad + 0.03 * colesterol + 0.05 * presion_sistolica + 0.8 * fumar + 1.2 * diabetes
-probabilidades <- 1 / (1 + exp(-log_odds))
-CHD <- rbinom(n, 1, prob = probabilidades)
-
-# Data frame
-datos_chd <- data.frame(
-  edad, colesterol, presion_sistolica, fumar, diabetes, CHD
-)
-
-# Ajuste con glm
-modelo_glm <- glm(CHD ~ edad + colesterol + presion_sistolica + fumar + diabetes, 
-                  data = datos_chd, family = binomial)
-
-summary(modelo_glm)
-
-# Comparar coeficientes reales y estimados
-coef_simulados <- c("(Intercept)" = -5, edad = 0.04, colesterol = 0.03, presion_sistolica = 0.05,
-                    fumar = 0.8, diabetes = 1.2)
-coef_estimados <- coef(modelo_glm)
-
-comparacion <- data.frame(Simulado = coef_simulados[names(coef_estimados)],
-                          Estimado = round(coef_estimados, 3))
-print(comparacion)
-
-# Visualizar la sigmoide respecto a la edad
-library(ggplot2)
-edad_seq <- seq(min(edad), max(edad), length.out = 100)
-pred_data <- data.frame(
-  edad = edad_seq,
-  colesterol = mean(colesterol),
-  presion_sistolica = mean(presion_sistolica),
-  fumar = 0,
-  diabetes = 0
-)
-pred_data$prob <- predict(modelo_glm, newdata = pred_data, type = "response")
-
-ggplot(datos_chd, aes(x = edad, y = CHD)) +
-  geom_jitter(width = 0.5, height = 0.05, alpha = 0.4) +
-  geom_line(data = pred_data, aes(x = edad, y = prob), color = "blue", size = 1) +
-  labs(title = "Curva Sigmoide: Probabilidad de CHD vs Edad", y = "Probabilidad estimada", x = "Edad")
-
-
-
-# Simulación de datos de cáncer de mama
-set.seed(123)
-n <- 200
-edad <- round(runif(n, 30, 80))
-tamano_tumor <- round(rnorm(n, mean = 25, sd = 10), 1)
-progesterona <- round(rnorm(n, mean = 15, sd = 5), 1)
-
-# Coeficientes simulados para cáncer
-log_odds <- -4 + 0.03 * edad + 0.05 * tamano_tumor - 0.1 * progesterona
-probabilidad_cancer <- 1 / (1 + exp(-log_odds))
-cancer <- rbinom(n, 1, probabilidad_cancer)
-
-datos_cancer <- data.frame(edad, tamano_tumor, progesterona, cancer)
-
-# Ajuste de modelo con glm
-modelo_cancer <- glm(cancer ~ edad + tamano_tumor + progesterona, family = binomial, data = datos_cancer)
-summary(modelo_cancer)
-
-# Gráfico para visualización
-library(ggplot2)
-ggplot(datos_cancer, aes(x = edad, y = probabilidad_cancer, color = factor(cancer))) +
+ggplot(datos_cancer_11, aes(x = edad_11,
+                            y = probabilidad_cancer_11,
+                            color = factor(cancer_11))) +
   geom_point(alpha = 0.6) +
-  stat_function(fun = function(x) 1 / (1 + exp(-(coef(modelo_cancer)[1] + coef(modelo_cancer)[2]*x +
-                                                   coef(modelo_cancer)[3]*mean(tamano_tumor) +
-                                                   coef(modelo_cancer)[4]*mean(progesterona)))), 
+  stat_function(fun = function(x) 1 / (1 + exp(-(coef(modelo_cancer_11)[1] + coef(modelo_cancer_11)[2]*x +
+                                                   coef(modelo_cancer_11)[3]*mean(tamano_tumor_11) +
+                                                   coef(modelo_cancer_11)[4]*mean(progesterona_11)))), 
                 color = "black", linetype = "dashed") +
   labs(title = "Regresión logística: Cáncer de mama", y = "Probabilidad estimada", color = "Diagnóstico")
 
-# Simulación de datos para enfermedad cardíaca
-set.seed(456)
-n <- 200
-edad_chd <- round(runif(n, 30, 80))
-colesterol <- round(rnorm(n, mean = 200, sd = 30), 1)
-
-# Coeficientes simulados para CHD
-log_odds_chd <- -6 + 0.04 * edad_chd + 0.02 * colesterol
-probabilidad_chd <- 1 / (1 + exp(-log_odds_chd))
-chd <- rbinom(n, 1, probabilidad_chd)
-
-datos_chd <- data.frame(edad = edad_chd, colesterol, chd)
-
-# Ajuste de modelo con glm
-modelo_chd <- glm(chd ~ edad + colesterol, family = binomial, data = datos_chd)
-summary(modelo_chd)
-
-# Gráfico para visualización
-ggplot(datos_chd, aes(x = edad, y = probabilidad_chd, color = factor(chd))) +
-  geom_point(alpha = 0.6) +
-  stat_function(fun = function(x) 1 / (1 + exp(-(coef(modelo_chd)[1] + coef(modelo_chd)[2]*x +
-                                                   coef(modelo_chd)[3]*mean(colesterol)))), 
-                color = "black", linetype = "dashed") +
-  labs(title = "Regresión logística: Enfermedad cardíaca", y = "Probabilidad estimada", color = "Diagnóstico")
-
-
-
-# ============================================
-# Script para calcular métricas de clasificación
-# ============================================
-
-# Cargar datos simulados (asegúrate de tener el archivo correcto)
-datos <- read.csv("datos_simulados_cancer.csv")  # Modifica si usas otro dataset
-
-# Ajustar un modelo de regresión logística
-modelo <- glm(Enfermo ~ ., data = datos, family = binomial)
-
-# Obtener probabilidades predichas
-probabilidades <- predict(modelo, type = "response")
-
-# Convertir probabilidades en clases binarias usando umbral 0.5
-pred <- ifelse(probabilidades > 0.5, 1, 0)
-
-# Real (etiquetas verdaderas)
-real <- datos$Enfermo
-
-# Generar matriz de confusión
-confusion <- table(Predicho = pred, Real = real)
-print("Matriz de Confusión:")
-print(confusion)
-
-# Extraer valores
-TP <- confusion["1", "1"]
-FP <- confusion["1", "0"]
-FN <- confusion["0", "1"]
-TN <- confusion["0", "0"]
-
-# Calcular métricas
-recall <- TP / (TP + FN)
-precision <- TP / (TP + FP)
-specificity <- TN / (TN + FP)
-
-# Imprimir resultados
-cat("Recall (Sensibilidad):", recall, "\n")
-cat("Precisión:", precision, "\n")
-cat("Especificidad:", specificity, "\n")
-
-
-
-# Paquetes necesarios
-library(pROC)
-
-# Cargar datos simulados
-set.seed(123)
-n <- 200
-edad <- rnorm(n, mean = 50, sd = 10)
-grupo <- as.factor(sample(1:4, n, replace = TRUE))
-chd <- rbinom(n, 1, prob = 1 / (1 + exp(-(0.05 * edad - 0.5 * as.numeric(grupo)))))
-
-data <- data.frame(edad, grupo, chd)
-
-# Ajustar modelo de regresión logística
-modelo <- glm(chd ~ edad + grupo, data = data, family = binomial)
-
-# Predicción de probabilidades
-probabilidades <- predict(modelo, type = "response")
-
-# Umbral para clasificación
-umbral <- 0.5
-predicciones <- ifelse(probabilidades > umbral, 1, 0)
-
-# Matriz de confusión
-TP <- sum(predicciones == 1 & data$chd == 1)
-FP <- sum(predicciones == 1 & data$chd == 0)
-FN <- sum(predicciones == 0 & data$chd == 1)
-TN <- sum(predicciones == 0 & data$chd == 0)
-
-# Cálculo de métricas
-recall <- TP / (TP + FN)
-precision <- TP / (TP + FP)
-specificity <- TN / (TN + FP)
-
-cat("Recall:", round(recall, 3), "\n")
-cat("Precision:", round(precision, 3), "\n")
-cat("Specificity:", round(specificity, 3), "\n")
-
-# Calcular y graficar la curva ROC
-roc_obj <- roc(data$chd, probabilidades)
-plot(roc_obj, col = "blue", main = "Curva ROC")
-auc_value <- auc(roc_obj)
-cat("AUC:", round(auc_value, 3), "\n")
-
-
-# ======================================
-# VISUALIZACIÓN DE LA CURVA SIGMOIDE
-# ======================================
-
-# Suponiendo que ya tienes tu modelo logístico entrenado:
-# modelo_chd <- glm(CHD ~ AGE + CHOL + SMOKING, data = data_chd, family = binomial)
-
-# Generamos una secuencia de valores lineales para la combinación Xβ
-x_vals <- seq(-10, 10, length.out = 500)
-sigmoid <- function(x) 1 / (1 + exp(-x))
-y_vals <- sigmoid(x_vals)
-
-# Graficamos la función sigmoide
-plot(x_vals, y_vals, type = "l", lwd = 2, col = "blue",
-     main = "Función Sigmoide", xlab = expression(X*beta), ylab = "Probabilidad")
-abline(h = 0.5, lty = 2, col = "red")
-abline(v = 0, lty = 2, col = "gray")
-
-# Leyenda
-legend("bottomright", legend = c("Sigmoide", "Umbral = 0.5"), 
-       col = c("blue", "red"), lty = c(1, 2), lwd = 2)
-
-
-
-# Modelo logístico entrenado (ejemplo con CHD)
-modelo_chd <- glm(CHD ~ AGE + CHOL + SMOKING, data = data_chd, family = binomial)
-
-# Calculamos el valor lineal Xβ para cada observación
-xbeta <- predict(modelo_chd, type = "link")  # Xβ_i
-probabilidades <- predict(modelo_chd, type = "response")  # Sigmoide(Xβ_i)
-
-# Creamos el gráfico base de la función sigmoide
-x_vals <- seq(min(xbeta)-1, max(xbeta)+1, length.out = 500)
-y_vals <- 1 / (1 + exp(-x_vals))
-
-plot(x_vals, y_vals, type = "l", lwd = 2, col = "blue",
-     xlab = expression(X*beta), ylab = "Probabilidad", main = "Curva sigmoide con clasificación")
-abline(h = 0.5, lty = 2, col = "red")
-abline(v = 0, lty = 2, col = "gray")
-
-# Añadimos los puntos reales clasificados
-points(xbeta[data_chd$CHD == 0], data_chd$CHD[data_chd$CHD == 0], col = "darkred", pch = 4)
-points(xbeta[data_chd$CHD == 1], data_chd$CHD[data_chd$CHD == 1], col = "darkgreen", pch = 16)
-
-# Leyenda
-legend("bottomright", legend = c("Sigmoide", "CHD = 0", "CHD = 1"),
-       col = c("blue", "darkred", "darkgreen"), pch = c(NA, 4, 16), lty = c(1, NA, NA), lwd = c(2, NA, NA))
-
-
-#---- 3. IMPLEMENTACION ----
-X <- model.matrix(modelo_cancer); print(X)
-y <- datos_cancer$Recidiva; print(y)
-beta_hat <- coef(modelo_cancer)
-loglik_manual(beta_hat, X, y)  # Debería ser cercano al logLik(modelo)
-
-X <- model.matrix(Recidiva ~ Edad + Tamano_Tumor + 
-                    Grado + PR + HER2 + BRCA1 + Ki67 +
-                    Hormonoterapia, data = datos_cancer); print(X)
-y <- datos_cancer$Recidiva; print(y)
-coef_conjugado <- gradiente_conjugado(X, y)
-coef_glm <- coef(glm(Recidiva ~ Edad + Tamano_Tumor + Grado + PR + 
-                       HER2 + BRCA1 + Ki67 + Hormonoterapia,
-                     data = datos_cancer, family = binomial))
-round(data.frame(
-  Variable = names(coef_glm),
-  Coef_GLM = coef_glm,
-  Coef_GradConj = coef_conjugado
-), 4)
-
-
-##---- Aplicación a los datos simulados de cáncer ----
-datos_cancer$edad
-datos_cancer$tamano_tumor
-datos_cancer$sobrevivio
-X_cancer <- as.matrix(cbind(1, datos_cancer$edad, datos_cancer$tamano_tumor))
-y_cancer <- as.matrix(datos_cancer$sobrevivio)
-cg_cancer <- conjugate_gradient(X_cancer, y_cancer)
-print("Coeficientes estimados (cáncer):")
-print(cg_cancer$beta)

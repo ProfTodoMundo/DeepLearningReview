@@ -6,79 +6,68 @@ library(ggplot2)
 library(broom)
 library(dplyr)
 # ---- 1. SIMULACION DE DATOS DE CANCER ----
-n_1 <- 1000
+n_8 <- 100;
+n_5 <- 200; n_11 <- 200
+n_3 <- 500; n_9 <- 500; n_10 <- 500
+n_1 <- 1000; n_4 <- 1000;
 n_2 <- 1300
-n_3 <- 500
-n_4 <- 1000
-n_5 <- 200
-n_8 <- 100
-n_9 <- 500
-n_10 <- 500
-n_11 <- 200
 #---- VARIABLES A CONSIDERAR ----
-edad_cancer_1 <- round(rnorm(n_1, mean = 55, sd = 10))
-tamano_tumor_1 <- round(rnorm(n_1, mean = 30, sd = 10), 1)
-progesterona_1 <- round(rnorm(n_1, mean = 15, sd = 5), 1)
-
-age_2 <- round(runif(n_2, 20, 80))
-tumor_size_2 <- round(rnorm(n_2, 2.5, 1), 1)
-marker_A_2 <- round(rnorm(n_2, 1.0, 0.3), 1)
-marker_B_2 <- round(rnorm(n_2, 1.2, 0.4), 1)
-
-
-edad_3 <- round(runif(n_3, 25, 80))
+##---- EDAD ----
+edad_cancer_1  <- round(rnorm(n_1, mean = 55, sd = 10))
+edad_cancer_4  <- round(rnorm(n_4, mean = 55, sd = 10))
+edad_cancer_5  <- round(rnorm(n_5, mean = 55, sd = 10))
+edad_cancer_9  <- round(rnorm(n_9, mean = 55, sd = 10))
+edad_cancer_10 <- round(rnorm(n_10, mean = 55, sd = 10))
+edad_cancer_2  <- round(runif(n_2, 20, 80))
+edad_cancer_3  <- round(runif(n_3, 25, 80))
+edad_cancer_8  <- round(runif(n_8, 30, 80))
+edad_cancer_11 <- round(runif(n_11, 30, 80))
+##---- TAMANHO DEL TUMOR ----
+tamano_tumor_1 <- round(rnorm(n_1, mean = 30,  sd = 10), 1)
+tamano_tumor_2 <- round(rnorm(n_2, mean = 2.5, sd = 1), 1)
+tamano_tumor_4 <- round(rnorm(n_4, mean = 30,  sd = 10), 1)
+tamano_tumor_9 <- round(rnorm(n_9, mean = 2.5, sd = 1), 1)
+tamano_tumor_10 <- round(rnorm(n_10, mean = 2.5, sd = 1), 1)
+tamano_tumor_11 <- round(rnorm(n_11, mean = 25,  sd = 10), 1)
 tamano_tumor_3 <- round(runif(n_3, 5, 50))
-progesterona_3 <- round(runif(n_3, 1, 100))
-HER2_3 <- rbinom(n_3, 1, 0.25)
-RE_3 <- rbinom(n_3, 1, 0.6)
-RP_3 <- rbinom(n_3, 1, 0.55)
-densidad_mamaria_3 <- sample(1:4, n_3, replace = TRUE)
-
-
-edad_cancer_4 <- round(rnorm(n_4, mean = 55, sd = 10))
-tamano_tumor_4 <- round(rnorm(n_4, mean = 30, sd = 10), 1)
+##---- PROGESTERONA ----
+progesterona_1 <- round(rnorm(n_1, mean = 15, sd = 5), 1)
 progesterona_4 <- round(rnorm(n_4, mean = 15, sd = 5), 1)
-
-edad_cancer_5 <- rnorm(n_5, mean = 55, sd = 10)
-gen_cancer_5 <- rbinom(n_5, 1, prob = 0.4)
-x_cancer_5 <- cbind(1, edad_cancer_5, gen_cancer_5)
-beta_cancer_5 <- c(-5, 0.08, 1.2)
-
-edad_cancer_8 <- runif(n_8, 30, 80)
-b0_cancer_8 <- -6
-b1_cancer_8 <- 0.1
-
-
-edad_9 <- rnorm(n_9, mean = 55, sd = 10)
-tamano_tumor_9 <- rnorm(n_9, mean = 2.5, sd = 1)
-progesterona_9 <- rnorm(n_9, mean = 15, sd = 5)
-HER2_9 <- rbinom(n_9, 1, 0.3)
-RE_9 <- rbinom(n_9, 1, 0.6)
-RP_9 <- rbinom(n_9, 1, 0.5)
-densidad_mamaria_9 <- rnorm(n_9, mean = 0.6, sd = 0.2)
-
-
-edad_10 <- rnorm(n_10, mean = 55, sd = 10)
-tamano_tumor_10 <- rnorm(n_10, mean = 2.5, sd = 1)
-progesterona_10 <- rnorm(n_10, mean = 15, sd = 5)
+progesterona_9 <- round(rnorm(n_9, mean = 15, sd = 5),1)
+progesterona_10 <- round(rnorm(n_10, mean = 15, sd = 5),1)
+progesterona_11 <- round(round(rnorm(n_11, mean = 15, sd = 5), 1))
+progesterona_3 <- round(runif(n_3, 1, 100))
+##---- HER ----
+HER2_3  <- rbinom(n_3, 1, 0.25)
 HER2_10 <- rbinom(n_10, 1, 0.3)
+HER2_9  <- rbinom(n_9, 1, 0.3)
+##---- RE ----
+RE_3  <- rbinom(n_3, 1, 0.6)
 RE_10 <- rbinom(n_10, 1, 0.6)
+RE_9  <- rbinom(n_9, 1, 0.6)
+##---- RP ----
+RP_3  <- rbinom(n_3, 1, 0.55)
+RP_9  <- rbinom(n_9, 1, 0.5)
 RP_10 <- rbinom(n_10, 1, 0.5)
+##---- DENSIDAD MAMARIA ----
+densidad_mamaria_3  <- sample(1:4, n_3, replace = TRUE)
+densidad_mamaria_9  <- rnorm(n_9, mean = 0.6, sd = 0.2)
 densidad_mamaria_10 <- rnorm(n_10, mean = 0.6, sd = 0.2)
-
-edad_11 <- round(runif(n_11, 30, 80))
-tamano_tumor_11 <- round(rnorm(n_11, mean = 25, sd = 10), 1)
-progesterona_11 <- round(rnorm(n_11, mean = 15, sd = 5), 1)
-
+##---- MARCADOR A ----
+marker_A_2 <- round(rnorm(n_2, 1.0, 0.3), 1)
+##---- MARCADOR B ----
+marker_B_2 <- round(rnorm(n_2, 1.2, 0.4), 1)
+##---- GEN CANCER ----
+gen_cancer_5 <- rbinom(n_5, 1, prob = 0.4)
 #---- LOG ODDS ----
 
 log_odds_cancer_1 <- -4 + 0.03 * edad_cancer_1 + 
   0.05 * tamano_tumor_1 - 0.1 * progesterona_1
 
-log_odds_2 <- -3.126 + 0.032 * age_2 + 0.732 * tumor_size_2 +
+log_odds_2 <- -3.126 + 0.032 * edad_cancer_2 + 0.732 * tamano_tumor_2 +
   1.348 * marker_A_2 + 0.898 * marker_B_2
   
-log_odds_3 <- -4 + 0.03 * edad_3 + 0.05 * tamano_tumor_3 -
+log_odds_3 <- -4 + 0.03 * edad_cancer_3 + 0.05 * tamano_tumor_3 -
   0.1 * progesterona_3 +
   0.8 * HER2_3 + 0.6 * RE_3 + 0.5 * RP_3 +
   0.3 * densidad_mamaria_3
@@ -86,19 +75,23 @@ log_odds_3 <- -4 + 0.03 * edad_3 + 0.05 * tamano_tumor_3 -
 log_odds_cancer_4 <- -4 + 0.03 * edad_cancer_4 +
   0.05 * tamano_tumor_4 - 0.1 * progesterona_4
 
+x_cancer_5 <- cbind(1, edad_cancer_5, gen_cancer_5)
+beta_cancer_5 <- c(-5, 0.08, 1.2)
 logit_cancer_5 <- x_cancer_5 %*% beta_cancer_5
 
+b0_cancer_8 <- -6
+b1_cancer_8 <- 0.1
 log_odds_cancer_8 <- b0_cancer_8 + b1_cancer_8 * edad_cancer_8
 
-log_odds_9 <- -4 + 0.03 * edad_9 + 0.05 * tamano_tumor_9 - 
+log_odds_9 <- -4 + 0.03 * edad_cancer_9 + 0.05 * tamano_tumor_9 - 
   0.1 * progesterona_9 +0.8 * HER2_9 + 0.6 * RE_9 + 
   0.5 * RP_9 + 0.3 * densidad_mamaria_9
 
-log_odds_10 <- -4 + 0.03 * edad_10 + 0.05 * tamano_tumor_10 -
+log_odds_10 <- -4 + 0.03 * edad_cancer_10 + 0.05 * tamano_tumor_10 -
   0.1 * progesterona_10 + 0.8 * HER2_10 + 0.6 * RE_10 +
   0.5 * RP_10 + 0.3 * densidad_mamaria_10
 
-log_odds_11 <- -4 + 0.03 * edad_11 + 
+log_odds_11 <- -4 + 0.03 * edad_cancer_11 + 
   0.05 * tamano_tumor_11 - 0.1 * progesterona_11
 
 #---- PROBABILIDAD SOBREVIVIR ----
@@ -193,8 +186,8 @@ modelo_cancer_11 <- glm(cancer_11 ~ edad_11 +
                         family = binomial, 
                         data = datos_cancer_11)
 summary(modelo_cancer_11)
-## ---- GRAFICA DE SIGMOIDE Y EL MODELO ----
 datos_cancer_1$prob <- predict(modelo_cancer_1, type = "response")
+#---- GRAFICA ----
 ggplot(datos_cancer_1, aes(x = edad, y = prob)) +
   geom_point(aes(color = factor(sobrevivio)), alpha = 0.5) +
   stat_smooth(method = "glm", method.args = list(family = "binomial"), se = FALSE) +

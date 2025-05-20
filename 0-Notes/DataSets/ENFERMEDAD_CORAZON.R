@@ -5,6 +5,10 @@ library(pROC)
 library(ggplot2)
 library(broom)
 ## ---- Simulación de datos de enfermedad coronaria ----
+
+
+
+
 edad_chd_1 <- round(rnorm(n, mean = 60, sd = 8))
 colesterol_1 <- round(rnorm(n, mean = 220, sd = 30), 1)
 presion_1 <- round(rnorm(n, mean = 135, sd = 15), 1)

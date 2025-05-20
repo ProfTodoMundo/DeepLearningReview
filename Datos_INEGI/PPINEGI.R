@@ -1,7 +1,9 @@
 #---- DIRECTORIO DE TRABAJO ----
 setwd("~/Downloads/Datos_INEGI")
+setwd("C:/Users/Carlos Martinez/DeepLearningReview/Datos_INEGI")
 #---- LIBRERIAS ----
 library(readr)
+library(dbplyr)
 #---- LECTURA Y VISUALIZACION DE DATOS ----
 misdatos <- read_csv("RESAGEBURB_09CSV20_b.csv")
 View(RESAGEBURB_09CSV20_b)
@@ -90,6 +92,51 @@ write.csv(misdatos,'Repositorio/misdatos.csv')
 saveRDS(misdatos, file = "Repositorio/mibddwking.rds")
 save.image("Wkspaces/Wkspace1.RData")
 ##---- AGEB ----
+View(misdatos)
 AGEB <- unique(misdatos$AGEB); print(AGEB)
 temp <- factor(AGEB); niveles <- levels(temp)
 misdatos$AGEB <- factor(misdatos$AGEB, levels = AGEB, labels = AGEB); summary(misdatos$AGEB)
+##---- SE CREA COLUMNA MUNICIPIO-AGEB ----
+AGEB_MUN <- paste0(misdatos$AGEB,"_",misdatos$NOM_MUN); head(AGEB_MUN); tail(AGEB_MUN)
+ListaTemasSelectos <- sort(unique(AGEB_MUN));
+head(ListaTemasSelectos,15); tail(ListaTemasSelectos,15)
+temp <- factor(ListaTemasSelectos);  niveles <- levels(temp)
+misdatos$AGEB_MUN <- factor(AGEB_MUN, levels = niveles, 
+                            labels = ListaTemasSelectos)
+summary(misdatos$AGEB_MUN); View(as.data.frame(table(misdatos$AGEB_MUN)))
+View(misdatos)
+##---- RESPALDO 2 ----
+write.csv(misdatos,'Repositorio/misdatos.csv')
+saveRDS(misdatos, file = "Repositorio/mibddwking.rds")
+save.image("Wkspaces/Wkspace2.RData")
+library(dplyr,readr)
+#---- VARIABLES NUMERICAS ----
+m <- ncol(misdatos); temp <- c()
+for(i in 8:227){
+  col_clean <- gsub(",", "", misdatos[[i]])
+  col_clean <- gsub(" ", "", col_clean)
+  misdatos[[i]] <- as.numeric(col_clean)
+}
+summary(misdatos)
+##---- RESPALDO 3 ----
+write.csv(misdatos,'Repositorio/misdatos.csv')
+saveRDS(misdatos, file = "Repositorio/mibddwking.rds")
+save.image("Wkspaces/Wkspace3.RData")
+library(dplyr,readr,ggplot2)
+#---- SOLO LAS ALCALDIAS ----
+misdatosord <- arrange(misdatos,desc(NOM_LOC)); View(misdatosord)
+soloalcaldias <- misdatosord[!(misdatosord$NOM_LOC%in% c(
+  "TOTAL DE LA ENTIDAD","TOTAL DE LA LOCALIDAD URBANA","TOTAL AGEB URBANA","TOTAL DEL MUNICIPIO")),]
+summary(soloalcaldias$NOM_LOC)
+View(soloalcaldias)
+#----   CREACION DE GRAFICOS ----
+solototales <- misdatosord[misdatosord$NOM_LOC%in% c(
+  "TOTAL DE LA ENTIDAD","TOTAL DE LA LOCALIDAD URBANA","TOTAL AGEB URBANA","TOTAL DEL MUNICIPIO"),]
+summary(solototales)
+View(solototales)
+##---- RESPALDO 4 ----
+write.csv(soloalcaldias,'Repositorio/solo_alcaldias.csv')
+write.csv(solototales,'Repositorio/solo_totales.csv')
+saveRDS(soloalcaldias, file = "Repositorio/solo_alcaldias_wking.rds")
+saveRDS(solototales, file = "Repositorio/solo_totales_king.rds")
+save.image("Wkspaces/Wkspace4.RData")

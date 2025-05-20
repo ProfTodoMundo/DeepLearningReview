@@ -5,12 +5,17 @@ library(pROC)
 library(ggplot2)
 library(broom)
 library(dplyr)
-# ---- 1. Simulación de datos de cáncer de mama ----
+# ---- 1. SIMULACION DE DATOS DE CANCER ----
 n_1 <- 1000
 n_2 <- 1300
 n_3 <- 500
 n_4 <- 1000
-
+n_5 <- 200
+n_8 <- 100
+n_9 <- 500
+n_10 <- 500
+n_11 <- 200
+#---- VARIABLES A CONSIDERAR ----
 edad_cancer_1 <- round(rnorm(n_1, mean = 55, sd = 10))
 tamano_tumor_1 <- round(rnorm(n_1, mean = 30, sd = 10), 1)
 progesterona_1 <- round(rnorm(n_1, mean = 15, sd = 5), 1)
@@ -34,7 +39,38 @@ edad_cancer_4 <- round(rnorm(n_4, mean = 55, sd = 10))
 tamano_tumor_4 <- round(rnorm(n_4, mean = 30, sd = 10), 1)
 progesterona_4 <- round(rnorm(n_4, mean = 15, sd = 5), 1)
 
+edad_cancer_5 <- rnorm(n_5, mean = 55, sd = 10)
+gen_cancer_5 <- rbinom(n_5, 1, prob = 0.4)
+x_cancer_5 <- cbind(1, edad_cancer_5, gen_cancer_5)
+beta_cancer_5 <- c(-5, 0.08, 1.2)
 
+edad_cancer_8 <- runif(n_8, 30, 80)
+b0_cancer_8 <- -6
+b1_cancer_8 <- 0.1
+
+
+edad_9 <- rnorm(n_9, mean = 55, sd = 10)
+tamano_tumor_9 <- rnorm(n_9, mean = 2.5, sd = 1)
+progesterona_9 <- rnorm(n_9, mean = 15, sd = 5)
+HER2_9 <- rbinom(n_9, 1, 0.3)
+RE_9 <- rbinom(n_9, 1, 0.6)
+RP_9 <- rbinom(n_9, 1, 0.5)
+densidad_mamaria_9 <- rnorm(n_9, mean = 0.6, sd = 0.2)
+
+
+edad_10 <- rnorm(n_10, mean = 55, sd = 10)
+tamano_tumor_10 <- rnorm(n_10, mean = 2.5, sd = 1)
+progesterona_10 <- rnorm(n_10, mean = 15, sd = 5)
+HER2_10 <- rbinom(n_10, 1, 0.3)
+RE_10 <- rbinom(n_10, 1, 0.6)
+RP_10 <- rbinom(n_10, 1, 0.5)
+densidad_mamaria_10 <- rnorm(n_10, mean = 0.6, sd = 0.2)
+
+edad_11 <- round(runif(n_11, 30, 80))
+tamano_tumor_11 <- round(rnorm(n_11, mean = 25, sd = 10), 1)
+progesterona_11 <- round(rnorm(n_11, mean = 15, sd = 5), 1)
+
+#---- LOG ODDS ----
 
 log_odds_cancer_1 <- -4 + 0.03 * edad_cancer_1 + 
   0.05 * tamano_tumor_1 - 0.1 * progesterona_1
@@ -50,17 +86,42 @@ log_odds_3 <- -4 + 0.03 * edad_3 + 0.05 * tamano_tumor_3 -
 log_odds_cancer_4 <- -4 + 0.03 * edad_cancer_4 +
   0.05 * tamano_tumor_4 - 0.1 * progesterona_4
 
+logit_cancer_5 <- x_cancer_5 %*% beta_cancer_5
 
+log_odds_cancer_8 <- b0_cancer_8 + b1_cancer_8 * edad_cancer_8
+
+log_odds_9 <- -4 + 0.03 * edad_9 + 0.05 * tamano_tumor_9 - 
+  0.1 * progesterona_9 +0.8 * HER2_9 + 0.6 * RE_9 + 
+  0.5 * RP_9 + 0.3 * densidad_mamaria_9
+
+log_odds_10 <- -4 + 0.03 * edad_10 + 0.05 * tamano_tumor_10 -
+  0.1 * progesterona_10 + 0.8 * HER2_10 + 0.6 * RE_10 +
+  0.5 * RP_10 + 0.3 * densidad_mamaria_10
+
+log_odds_11 <- -4 + 0.03 * edad_11 + 
+  0.05 * tamano_tumor_11 - 0.1 * progesterona_11
+
+#---- PROBABILIDAD SOBREVIVIR ----
 prob_sobrevida_1 <- 1 / (1 + exp(-log_odds_cancer_1))
 prob_2 <- 1 / (1 + exp(-log_odds_2))
 prob_3 <- 1 / (1 + exp(-log_odds_3))
 prob_sobrevida_4 <- 1 / (1 + exp(-log_odds_cancer_4))
-
-
+p_cancer_5 <- 1 / (1 + exp(-logit_cancer_5))
+prob_cancer_8 <- 1 / (1 + exp(-log_odds_cancer_8))
+probabilidad_9 <- 1 / (1 + exp(-log_odds_9))
+probabilidad_10 <- 1 / (1 + exp(-log_odds_10))
+probabilidad_cancer_11 <- 1 / (1 + exp(-log_odds_11))
+#---- SOBREVIVENCIA ----
 sobrevivio_1 <- rbinom(n_1, 1, prob_sobrevida_1)
 cancer_type_2 <- rbinom(n_2, 1, prob_2)
 diagnostico_3 <- rbinom(n_3, 1, prob_3)
 sobrevivio_4 <- rbinom(n_4, 1, prob_sobrevida_4)
+y_cancer_5 <- rbinom(n_5, 1, p_cancer_5)
+diagnostico_cancer_8 <- rbinom(n_8, 1, prob_cancer_8)
+cancer_9 <- rbinom(n_9, 1, probabilidad_9)
+cancer_10 <- rbinom(n_10, 1, probabilidad_10)
+cancer_11 <- rbinom(n_11, 1, probabilidad_cancer_11)
+#---- GENERACION DEL DATAFRAME ----
 
 datos_cancer_1 <- data.frame(
   edad = edad_cancer_1,
@@ -82,9 +143,21 @@ datos_cancer_4 <- data.frame(
   progesterona = progesterona_4,
   sobrevivio = sobrevivio_4)
 					
-					
+datos_cancer_8 <- data.frame(
+  Edad = edad_cancer_8, Diagnostico = diagnostico_cancer_8)
 
-## ---- Ajuste del modelo logístico ----
+datos_9 <- data.frame(
+  edad_9, tamano_tumor_9, progesterona_9, HER2_9, RE_9, RP_9,
+  densidad_mamaria_9, cancer_9 = factor(cancer_9)
+)
+
+datos_10 <- data.frame(
+  edad_10, tamano_tumor_10, progesterona_10, HER2_10,
+  RE_10, RP_10, densidad_mamaria_10, cancer_10 = factor(cancer_10))
+
+datos_cancer_11 <- data.frame(edad_11, tamano_tumor_11,
+                              progesterona_11, cancer_11)
+# ---- AJUSTE DEL MODELO ----
 modelo_cancer_1 <- glm(sobrevivio ~ edad + tamano_tumor + progesterona, 
                      data = datos_cancer_1, family = binomial)
 summary(modelo_cancer_1)
@@ -100,10 +173,27 @@ modelo_cancer_4 <- glm(sobrevivio ~ edad + tamano_tumor +
                      data = datos_cancer_4, family = binomial)
 summary(modelo_cancer_4)
 
+modelo_cancer_8 <- glm(diagnostico_cancer_8 ~ Edad_8, family = binomial, data = datos_cancer_8)
+summary(modelo_cancer_8)
 
-## ---- Evaluación: odds ratio e IC 95% ----
-exp(cbind(OR = coef(modelo_cancer_1), confint(modelo_cancer_1)))
-## ---- Gráfico de la sigmoide para cáncer (vs. edad) ----
+modelo_9 <- glm(cancer_9 ~ edad_9 + tamano_tumor_9 +
+                  progesterona_9 + HER2_9 + RE_9 +
+                  RP_9 + densidad_mamaria_9,
+                data = datos_9, family = binomial())
+summary(modelo_cancer_9)
+modelo_10 <- glm(cancer_10 ~ edad_10 + tamano_tumor_10 +
+                   progesterona_10 + HER2_10 + RE_10 +
+                   RP_10 + densidad_mamaria_10,
+                 data = datos_10, family = binomial())
+summary(modelo_10)
+
+modelo_cancer_11 <- glm(cancer_11 ~ edad_11 +
+                          tamano_tumor_11 +
+                          progesterona_11, 
+                        family = binomial, 
+                        data = datos_cancer_11)
+summary(modelo_cancer_11)
+## ---- GRAFICA DE SIGMOIDE Y EL MODELO ----
 datos_cancer_1$prob <- predict(modelo_cancer_1, type = "response")
 ggplot(datos_cancer_1, aes(x = edad, y = prob)) +
   geom_point(aes(color = factor(sobrevivio)), alpha = 0.5) +
@@ -150,75 +240,9 @@ ggplot(datos_cancer_4, aes(x = edad, y = prob)) +
        y = "Probabilidad estimada", color = "Sobrevivió") +
   theme_minimal()
 
-
-#---- 2. Segundo ejemplo de simulacion ----
-##---- Simulación de datos (igual que antes) ----
-##---- Modelo ----
-##---- Gráfico 1: Curva ROC ---- 
-##---- Gráfico 2: Histograma de probabilidades predichas ----
-#---- 3. NUEVO EJERCICIO DE SIMULACION ----
-##---- INICIALIZACION DE VARIABLES ----
-##---- Coeficientes simulados----
-##---- Probabilidad y diagnóstico ----
-##---- Base de datos ----
-##----Modelo de regresión logística (MLE) ----
-##---- Comparar coeficientes verdaderos vs estimados----
-##---- Visualizar con función sigmoide ----
-#---- 4. Simulación y Análisis de Regresión Logística ----
-##---- Simulación de datos de cáncer de mama ----
-##---- Ajuste del modelo logístico ----
-## ---- Evaluación: odds ratio e IC 95% ----
-#---- 5. Simulación de datos: Cáncer ----
-n_5 <- 200
-edad_cancer_5 <- rnorm(n_5, mean = 55, sd = 10)
-gen_cancer_5 <- rbinom(n_5, 1, prob = 0.4)
-x_cancer_5 <- cbind(1, edad_cancer_5, gen_cancer_5)
-beta_cancer_5 <- c(-5, 0.08, 1.2)
-logit_cancer_5 <- x_cancer_5 %*% beta_cancer_5
-p_cancer_5 <- 1 / (1 + exp(-logit_cancer_5))
-y_cancer_5 <- rbinom(n_5, 1, p_cancer_5)
-#----  8. Simulación de datos - Cáncer ----
-set.seed(123)
-n_8 <- 100
-edad_cancer_8 <- runif(n_8, 30, 80)
-b0_cancer_8 <- -6
-b1_cancer_8 <- 0.1
-log_odds_cancer_8 <- b0_cancer_8 + b1_cancer_8 * edad_cancer_8
-prob_cancer_8 <- 1 / (1 + exp(-log_odds_cancer_8))
-diagnostico_cancer_8 <- rbinom(n_8, 1, prob_cancer_8)
-datos_cancer_8 <- data.frame(Edad = edad_cancer_8, Diagnostico = diagnostico_cancer_8)
-##---- Ajuste del modelo y estimación MLE ----
-modelo_cancer_8 <- glm(diagnostico_cancer_8 ~ Edad_8, family = binomial, data = datos_cancer_8)
-summary(modelo_cancer_8)
-#---- 9. Simulación y ajuste de modelo logístico para cáncer de mama ---
-set.seed(123)
-n_9 <- 500
-edad_9 <- rnorm(n_9, mean = 55, sd = 10)
-tamano_tumor_9 <- rnorm(n_9, mean = 2.5, sd = 1)
-progesterona_9 <- rnorm(n_9, mean = 15, sd = 5)
-HER2_9 <- rbinom(n_9, 1, 0.3)
-RE_9 <- rbinom(n_9, 1, 0.6)
-RP_9 <- rbinom(n_9, 1, 0.5)
-densidad_mamaria_9 <- rnorm(n_9, mean = 0.6, sd = 0.2)
-##---- Log-odds simulados con coeficientes reales ----
-log_odds_9 <- -4 + 0.03 * edad_9 + 0.05 * tamano_tumor_9 - 0.1 * progesterona_9 +
-  0.8 * HER2_9 + 0.6 * RE_9 + 0.5 * RP_9 + 0.3 * densidad_mamaria_9
-probabilidad_9 <- 1 / (1 + exp(-log_odds_9))
-cancer_9 <- rbinom(n_9, 1, probabilidad_9)
-##---- Construir el data frame ----
-datos_9 <- data.frame(
-  edad_9, tamano_tumor_9, progesterona_9, HER2_9, RE_9, RP_9,
-  densidad_mamaria_9, cancer_9 = factor(cancer_9)
-)
-##---- Ajustar modelo logístico con glm() ----
-modelo_9 <- glm(cancer_9 ~ edad_9 + tamano_tumor_9 +
-                  progesterona_9 + HER2_9 + RE_9 +
-                  RP_9 + densidad_mamaria_9,
-              data = datos_9, family = binomial())
-##---- Comparación de coeficientes ----
 coef_verdaderos_9 <- c("(Intercept)" = -4, "edad" = 0.03, "tamano_tumor" = 0.05,
-                     "progesterona" = -0.1, "HER2" = 0.8, "RE" = 0.6,
-                     "RP" = 0.5, "densidad_mamaria" = 0.3)
+                       "progesterona" = -0.1, "HER2" = 0.8, "RE" = 0.6,
+                       "RP" = 0.5, "densidad_mamaria" = 0.3)
 coef_estimados_9 <- coef(modelo_9)
 comparacion_9 <- data.frame(
   Coeficiente = names(coef_verdaderos_9),
@@ -227,8 +251,6 @@ comparacion_9 <- data.frame(
   Diferencia = round(coef_estimados_9[names(coef_verdaderos_9)] - coef_verdaderos_9, 4)
 )
 print(comparacion_9)
-##---- Visualizar sigmoide ----
-library(ggplot2)
 datos_9$prob_predicha <- predict(modelo_9, type = "response")
 ggplot(datos_9, aes(x = edad_9, y = prob_predicha, color = cancer_9)) +
   geom_point(alpha = 0.6) +
@@ -236,32 +258,7 @@ ggplot(datos_9, aes(x = edad_9, y = prob_predicha, color = cancer_9)) +
               se = FALSE, color = "black") +
   labs(title = "Probabilidad predicha vs edad",
        y = "Probabilidad predicha", x = "Edad")
-#---- 10. Simulación y ajuste de modelo logístico para cáncer de mama ----
-set.seed(123)
-n_10 <- 500
-edad_10 <- rnorm(n_10, mean = 55, sd = 10)
-tamano_tumor_10 <- rnorm(n_10, mean = 2.5, sd = 1)
-progesterona_10 <- rnorm(n_10, mean = 15, sd = 5)
-HER2_10 <- rbinom(n_10, 1, 0.3)
-RE_10 <- rbinom(n_10, 1, 0.6)
-RP_10 <- rbinom(n_10, 1, 0.5)
-densidad_mamaria_10 <- rnorm(n_10, mean = 0.6, sd = 0.2)
-##---- Log-odds simulados con coeficientes reales ----
-log_odds_10 <- -4 + 0.03 * edad_10 + 0.05 * tamano_tumor_10 -
-  0.1 * progesterona_10 + 0.8 * HER2_10 + 0.6 * RE_10 +
-  0.5 * RP_10 + 0.3 * densidad_mamaria_10
-probabilidad_10 <- 1 / (1 + exp(-log_odds_10))
-cancer_10 <- rbinom(n_10, 1, probabilidad_10)
-##---- Construir el data frame ----
-datos_10 <- data.frame(
-  edad_10, tamano_tumor_10, progesterona_10, HER2_10,
-  RE_10, RP_10, densidad_mamaria_10, cancer_10 = factor(cancer_10))
-##---- Ajustar modelo logístico con glm() ----
-modelo_10 <- glm(cancer_10 ~ edad_10 + tamano_tumor_10 +
-                   progesterona_10 + HER2_10 + RE_10 +
-                   RP_10 + densidad_mamaria_10,
-              data = datos_10, family = binomial())
-##---- Comparación de coeficientes ----
+
 coef_verdaderos_10 <- c("(Intercept)" = -4, "edad" = 0.03, 
                         "tamano_tumor" = 0.05, "progesterona" = -0.1,
                         "HER2" = 0.8, "RE" = 0.6, "RP" = 0.5,
@@ -274,7 +271,6 @@ comparacion_10 <- data.frame(
   Diferencia = round(coef_estimados_10[names(coef_verdaderos_10)] -
                        coef_verdaderos_10, 4))
 print(comparacion_10)
-##---- Visualizar sigmoide ----
 datos_10$prob_predicha <- predict(modelo_10, type = "response")
 ggplot(datos_10, aes(x = edad_10, y = prob_predicha, color = cancer_10)) +
   geom_point(alpha = 0.6) +
@@ -282,28 +278,6 @@ ggplot(datos_10, aes(x = edad_10, y = prob_predicha, color = cancer_10)) +
               se = FALSE, color = "black") +
   labs(title = "Probabilidad predicha vs edad",
        y = "Probabilidad predicha", x = "Edad")
-#---- 11. Simulación de datos de cáncer de mama ----
-set.seed(123)
-n_11 <- 200
-edad_11 <- round(runif(n_11, 30, 80))
-tamano_tumor_11 <- round(rnorm(n_11, mean = 25, sd = 10), 1)
-progesterona_11 <- round(rnorm(n_11, mean = 15, sd = 5), 1)
-##---- Coeficientes simulados para cáncer ----
-log_odds_11 <- -4 + 0.03 * edad_11 + 
-  0.05 * tamano_tumor_11 - 0.1 * progesterona_11
-probabilidad_cancer_11 <- 1 / (1 + exp(-log_odds_11))
-cancer_11 <- rbinom(n_11, 1, probabilidad_cancer_11)
-datos_cancer_11 <- data.frame(edad_11, tamano_tumor_11,
-                              progesterona_11, cancer_11)
-##---- Ajuste de modelo con glm ----
-modelo_cancer_11 <- glm(cancer_11 ~ edad_11 +
-                          tamano_tumor_11 +
-                          progesterona_11, 
-                        family = binomial, 
-                        data = datos_cancer_11)
-summary(modelo_cancer_11)
-##---- Gráfico para visualización ----
-library(ggplot2)
 ggplot(datos_cancer_11, aes(x = edad_11,
                             y = probabilidad_cancer_11,
                             color = factor(cancer_11))) +
@@ -313,4 +287,5 @@ ggplot(datos_cancer_11, aes(x = edad_11,
                                                    coef(modelo_cancer_11)[4]*mean(progesterona_11)))), 
                 color = "black", linetype = "dashed") +
   labs(title = "Regresión logística: Cáncer de mama", y = "Probabilidad estimada", color = "Diagnóstico")
+
 

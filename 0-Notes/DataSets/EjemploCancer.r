@@ -207,5 +207,54 @@ roc_cancer <- roc(datos_cancer$sobrevivio, datos_cancer$prediccion)
 auc(roc_cancer)
 plot(roc_cancer, col = "blue", lwd = 2, main = "Curva ROC - Modelo cáncer simulado")
 abline(a = 0, b = 1, col = "gray", lty = 2)  # Línea diagonal = azar
+#---- 2.10 Training/Test Set ----
+set.seed(123)
+n <- nrow(datos_cancer)
+indices_entrenamiento <- sample(1:n, size = 0.7 * n)
+train_data <- datos_cancer[indices_entrenamiento, ]
+test_data  <- datos_cancer[-indices_entrenamiento, ]
+###---- 2.10.1 Ajuste del modelo con training ----
+modelo_train <- glm(sobrevivio ~  .,
+                    data = train_data, 
+                    family = binomial)
+summary(modelo_train)
+###---- 2.10.2 Prediccion con test set ----
+test_data$prob <- predict(modelo_train, 
+                          newdata = test_data, 
+                          type = "response")
+test_data$clasificacion <- ifelse(test_data$prob >= 0.5, 1, 0)
+###---- 2.10.3 Matriz de confusion y metricas ----
+matriz_test <- table(
+  factor(test_data$sobrevivio, levels = c(0, 1)),
+  factor(test_data$clasificacion, levels = c(0, 1))
+)
+
+TP <- matriz_test["1", "1"]
+TN <- matriz_test["0", "0"]
+FP <- matriz_test["0", "1"]
+FN <- matriz_test["1", "0"]
+
+Accuracy    <- (TP + TN) / sum(matriz_test)
+Precision   <- TP / (TP + FP)
+rRecall     <- TP / (TP + FN)
+Specificity <- TN / (TN + FP)
+F1_Score    <- 2 * (Precision * rRecall) / (Precision + rRecall)
+
+Resultados_test <- data.frame(
+  Accuracy = round(Accuracy, 3),
+  Precision = round(Precision, 3),
+  Recall = round(rRecall, 3),
+  Specificity = round(Specificity, 3),
+  F1_Score = round(F1_Score, 3)
+)
+print(Resultados_test)
+###---- 2.10.4 Curva ROC test ----
+library(pROC)
+roc_test <- roc(test_data$sobrevivio, test_data$prob)
+plot(roc_test, col = "blue", lwd = 2,
+     main = "Curva ROC - Test set (Cancer)")
+abline(a = 0, b = 1, col = "gray", lty = 2)
+auc(roc_test)
+
 
 

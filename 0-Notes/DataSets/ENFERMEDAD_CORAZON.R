@@ -4,324 +4,204 @@ set.seed(123)
 library(pROC)
 library(ggplot2)
 library(broom)
-#---- 1. Simulación de datos de enfermedad coronaria ----
+#---- 1. VARIABLES A CONSIDERAR ----
 n <- 1000
-n_6 <- 200
-n_6 <- 500
-n_7 <- 200
-n_9 <- 200
-
-edad_chd_4 <- round(rnorm(n_4, mean = 60, sd = 8))
-colesterol_4 <- round(rnorm(n_4, mean = 220, sd = 30), 1)
-presion_4 <- round(rnorm(n_4, mean = 135, sd = 15), 1)
-
-edad_chd_1 <- round(rnorm(n, mean = 60, sd = 8))
-colesterol_1 <- round(rnorm(n, mean = 220, sd = 30), 1)
-presion_1 <- round(rnorm(n, mean = 135, sd = 15), 1)
-
-edad_chd_5 <- rnorm(n_5, mean = 60, sd = 12)
-presion_chd_5 <- rnorm(n_5, mean = 140, sd = 20)
-
-AGE_6 <- rnorm(n_6, mean = 55, sd = 10)
-CHOL_6 <- rnorm(n_6, mean = 220, sd = 30)
-SMOKING_6 <- rbinom(n_6, 1, prob = 0.4)
-
-
-edad_6 <- round(runif(n_6, 35, 80))                      # Edad entre 35 y 80
-psistolica_6 <- round(rnorm(n_6, 130, 20))               # Presión sistólica
-colesterol_6 <- round(rnorm(n_6, 200, 40))               # Colesterol total
-diabetes_6 <- rbinom(n_6, 1, 0.2)                        # Presencia de diabetes (20%)
-obesidad_6 <- rbinom(n_6, 1, 0.3)                        # Obesidad (30%)
-tabaco_6 <- rbinom(n_6, 1, 0.25)                         # Fumador (25%)
-
-
-
-AGE_7 <- rnorm(n_7, mean = 55, sd = 10)
-CHOL_7 <- rnorm(n_7, mean = 220, sd = 30)
-SMOKING_7 <- rbinom(n_7, 1, prob = 0.4)
-
-edad_chd_8 <- runif(n_8, 30, 80)
-
-
-##---- Simulación de variables ----
-edad_9 <- rnorm(n_9, mean = 55, sd = 10)
-colesterol_9 <- rnorm(n_9, mean = 220, sd = 30)
-presion_sistolica_9 <- rnorm(n_9, mean = 130, sd = 15)
-fumar_9 <- rbinom(n_9, 1, prob = 0.3)
-diabetes_9 <- rbinom(n_9, 1, prob = 0.2)
-
-
-set.seed(456)
-n_10 <- 200
-edad_chd_10 <- round(runif(n_10, 30, 80))
-colesterol_10 <- round(rnorm(n_10, mean = 200, sd = 30), 1)
-
-
-
-lin_pred_6 <- -6 + 0.05 * AGE_6 + 0.03 * CHOL_6 + 1.5 * SMOKING_6
-lin_pred_7 <- -6 + 0.05 * AGE_7 + 0.03 * CHOL_7 + 1.5 * SMOKING_7
-
-
-log_odds_chd_1 <- -6 + 0.04 * edad_chd_1 + 0.03 * colesterol_1 + 0.02 * presion_1
-log_odds_chd_4 <- -6 + 0.04 * edad_chd_4 +
-  0.03 * colesterol_4 + 0.02 * presion_4
-log_odds_6 <- beta_0 + beta_edad * edad_6 + beta_psis * psistolica_6 + 
-  beta_col * colesterol_6 + beta_diab * diabetes_6 + 
-  beta_obes * obesidad_6 + beta_taba * tabaco_6
-log_odds_chd_10 <- -6 + 0.04 * edad_chd_10 + 0.02 * colesterol_10
-
-log_odds_9 <- -5 + 0.04 * edad_9 + 0.03 * colesterol_9 +
-  0.05 * presion_sistolica_9 + 0.8 * fumar_9 + 1.2 * diabetes_9
-
-b0_chd_8 <- -8
-b1_chd_8 <- 0.12
-log_odds_chd_8 <- b0_chd_8 + b1_chd_8 * edad_chd_8
-
-
-
-
-prob_chd_4 <- 1 / (1 + exp(-log_odds_chd_4))
-prob_chd_6 <- 1 / (1 + exp(-log_odds_6))
-prob_CHD_7 <- 1 / (1 + exp(-lin_pred_7))
-prob_chd_8 <- 1 / (1 + exp(-log_odds_chd_8))
-probabilidades_9 <- 1 / (1 + exp(-log_odds_9))
-probabilidad_chd_10 <- 1 / (1 + exp(-log_odds_chd_10))
-
-
-CHD_6 <- rbinom(n_6, 1, prob_chd_6)
-CHD_7 <- rbinom(n_7, 1, prob_CHD_7)
-chd_10 <- rbinom(n_10, 1, probabilidad_chd_10)
-CHD_9 <- rbinom(n, 1, prob = probabilidades_9)
-CHD_6 <- rbinom(n_6, 1, prob_CHD_6)
-
-prob_chd_1 <- 1 / (1 + exp(-log_odds_chd_1))
-prob_CHD_6 <- 1 / (1 + exp(-lin_pred_6))
-p_chd_5 <- 1 / (1 + exp(-logit_chd_5))
-
-
-enfermedad_corazon_1 <- rbinom(n, 1, prob_chd_1)
-enfermedad_corazon_4 <- rbinom(n_4, 1, prob_chd_4)
-diagnostico_chd_8 <- rbinom(n_8, 1, prob_chd_8)
-
-
-datos_chd_8 <- data.frame(Edad = edad_chd_8,Diagnostico = diagnostico_chd_8)
-
-
-datos_chd_1 <- data.frame(
-  edad = edad_chd_1,
-  colesterol = colesterol_1,
-  presion = presion_1,
-  enfermedad = enfermedad_corazon_1)
-datos_chd_4 <- data.frame(
-  edad = edad_chd_4,
-  colesterol = colesterol_4,
-  presion = presion_4,
-  enfermedad = enfermedad_corazon_4
+##---- 1.1 Edad ----
+edad <- round(rnorm(n, mean = 55, sd = 10))
+##---- 1.2 Colesterol ----
+colesterol <- round(rnorm(n, mean = 220, sd = 30), 1)
+##---- 1.3 Presion Arterial (sistolica) ----
+presion <- round(rnorm(n, mean = 135, sd = 20), 1)
+##---- 1.4 Fumador ----
+tabaco <- rbinom(n, 1, 0.25)                        
+##---- 1.5 Presencia de Diabetes ----
+diabetes <- rbinom(n, 1, 0.2)                     
+##---- 1.6 Presencia de Obsesidad ----
+obesidad <- rbinom(n, 1, 0.3) 
+#---- 2 LOG ODDS ----
+log_odds_chd <- -8 +
+  0.035 * edad +        # impacto moderado por año
+  0.015 * colesterol +  # efecto más suave
+  0.02 * presion +      # efecto leve (presión ya alta)
+  1.0  * tabaco +       # riesgo fuerte si fuma
+  1.5  * diabetes +     # riesgo fuerte si es diabético
+  0.8  * obesidad       # riesgo moderado-alto si tiene obesidad
+#---- 3. PROBABILIDAD SOBREVIVIR ----
+probabilidad_chd <- 1 / (1 + exp(-log_odds_chd))
+#---- 4. SOBREVIVENCIA ----
+enfermedad_corazon <- rbinom(n, 1, probabilidad_chd)
+#---- 5. GENERACION DEL DATAFRAME ----
+datos_chd <- data.frame(
+  Edad = edad, 
+  Colesterol = colesterol, 
+  Presion = presion, 
+  Tabaquismo = tabaco,
+  Diabetes = diabetes,
+  Obesidad = obesidad,
+  Enfermedad = enfermedad_corazon)
+#---- 6. GENERACION DEL MODELO ----
+modelo_chd <- glm(Enfermedad ~ Edad + Colesterol + 
+                    Presion + Tabaquismo + Diabetes +
+                    Obesidad, 
+                    data = datos_chd, family = binomial)
+summary(modelo_chd)
+miscoeficientes <- coef(modelo_chd)
+#---- 7 COMPARACION DE COEFICIENTES ----
+coef_reales <- c(
+  `(Intercept)` = -6,
+  Edad = 0.04,
+  Colesterol = 0.03,
+  Presion = 0.05,
+  Tabaquismo = 0.8,
+  Diabetes = 1.2,
+  Obesidad = 0.5
 )
+comparativo <- data.frame(
+  Coef_estimados = round(miscoeficientes,3),
+  Coef_reales = round(coef_reales[names(miscoeficientes)], 3)
+)
+comparativo$diferencia <- round(comparativo$Coef_estimados-comparativo$Coef_reales,3)
+print(comparativo)
+#---- 8. PREDICCION ----
+datos_chd$prediccion <- predict(modelo_chd,type = "response")
+datos_chd$clasificacion <- ifelse(datos_chd$prediccion >= 0.5, 1, 0)
+##---- 8.1 MATRIZ DE CONFUSION ---- 
+library(caret)
+matriz1 <- table(Real = datos_chd$Enfermedad, 
+                 Prediccion = datos_chd$clasificacion)
+print(matriz1)
+TN <- matriz1["0","0"]
+TP <- matriz1["1","1"]
+FP <- matriz1["0","1"]
+FN <- matriz1["1","0"]
 
-datos_chd_6 <- data.frame(
-  edad_6, psistolica_6, colesterol_6, diabetes_6, 
-  obesidad_6, tabaco_6, CHD_6)
+Accuracy    <- (TP+TN)/sum(matriz1)
+Precision   <- TP/(TP+FP)
+rRecall     <- TP/(TP+FN)
+Specificity <- TN/(TN+FP)
+f1_score    <- 2*(Precision*rRecall)/(Precision+rRecall)
 
-
-data_chd_7 <- data.frame(AGE_7, CHOL_7, SMOKING_7, CHD_7)
-
-
-data_chd_6 <- data.frame(AGE_6, CHOL_6, SMOKING_6, CHD_6)
-
-datos_chd_10 <- data.frame(edad = edad_chd_10, colesterol_10, chd_10)
-datos_chd_9 <- data.frame(edad_9, colesterol_9, presion_sistolica_9, fumar_9, diabetes_9, CHD_9)
-
-
-
-modelo_chd_1 <- glm(enfermedad ~ edad + colesterol + presion, 
-                    data = datos_chd_1, family = binomial)
-summary(modelo_chd_1)
-
-modelo_chd_4 <- glm(enfermedad ~ edad + colesterol + presion, 
-                    data = datos_chd_4, family = binomial)
-summary(modelo_chd_4)
-
-
-modelo_chd_6 <- glm(CHD_6 ~ AGE_6 + CHOL_6 + SMOKING_6,
-                    data = data_chd_6, family = binomial)
-
-modelo_chd_10 <- glm(chd_10 ~ edad + colesterol_10, 
-                     family = binomial, data = datos_chd_10)
-summary(modelo_chd_10)
-
-modelo_chd_7 <- glm(CHD_7 ~ AGE_7 + CHOL_7 + SMOKING_7, data = data_chd_7, family = binomial)
-modelo_glm_9 <- glm(CHD_9 ~ edad_9 + colesterol_9 + 
-                      presion_sistolica_9 + fumar_9 + diabetes_9, 
-                    data = datos_chd_9, family = binomial)
-summary(modelo_glm_9)
-modelo_chd_8 <- glm(diagnostico_chd_8 ~ Edad_8, family = binomial, data = datos_chd_8)
-summary(modelo_chd__8)
-
-
-exp(cbind(OR = coef(modelo_chd_4), confint(modelo_chd_4)))
-exp(cbind(OR = coef(modelo_chd_1), confint(modelo_chd_1)))
-
-
-
-
-## ---- Gráfico de la sigmoide para CHD (vs. colesterol) ----
-datos_chd_1$prob <- predict(modelo_chd_1, type = "response")
-datos_chd_4$prob <- predict(modelo_chd_4, type = "response")
-
-
-
-
-ggplot(datos_chd_1, aes(x = colesterol, y = prob)) +
-  geom_point(aes(color = factor(enfermedad)), alpha = 0.5) +
-  stat_smooth(method = "glm", method.args = list(family = "binomial"), se = FALSE) +
-  labs(title = "Probabilidad de Enfermedad Coronaria vs Colesterol",
-       y = "Probabilidad estimada", color = "Enfermedad") +
-  theme_minimal()
-
-
-ggplot(datos_chd_4, aes(x = colesterol, y = prob)) +
-  geom_point(aes(color = factor(enfermedad)), alpha = 0.5) +
-  stat_smooth(method = "glm", method.args = list(family = "binomial"), se = FALSE) +
-  labs(title = "Probabilidad de Enfermedad Coronaria vs Colesterol",
-       y = "Probabilidad estimada", color = "Enfermedad") +
-  theme_minimal()
-
-n_5 <- 200
-
-# Simulación de datos: CHD
-x_chd_5 <- cbind(1, edad_chd_5, presion_chd_5)
-beta_chd_5 <- c(-6, 0.05, 0.03)
-logit_chd_5 <- x_chd_5 %*% beta_chd_5
-
-
-y_chd_5 <- rbinom(n_5, 1, p_chd_5)
-
-# Simulación de datos para enfermedad cardíaca (CHD)
-set.seed(123)
-
-# Simulación del resultado binario CHD
-
-
-# Predicción del valor lineal y la probabilidad
-xbeta_6 <- predict(modelo_chd_6, type = "link")
-probabilidades_6 <- predict(modelo_chd_6, type = "response")
-
-# Gráfica de la sigmoide con clasificación de puntos
-x_vals_6 <- seq(min(xbeta_6) - 1, max(xbeta_6) + 1, length.out = 500)
-y_vals_6 <- 1 / (1 + exp(-x_vals_6))
-
-# Plot
-plot(x_vals_6, y_vals_6, type = "l", lwd = 2, col = "blue",
-     xlab = expression(X*beta), ylab = "Probabilidad", main = "Curva sigmoide con clasificación")
-abline(h = 0.5, lty = 2, col = "red")
-abline(v = 0, lty = 2, col = "gray")
-
-# Puntos observados
-points(xbeta_6[data_chd_6$CHD_6 == 0], data_chd_6$CHD_6[data_chd_6$CHD_6 == 0], 
-       col = "darkred", pch = 4)
-points(xbeta_6[data_chd_6$CHD_6 == 1], data_chd_6$CHD_6[data_chd_6$CHD_6 == 1], 
-       col = "darkgreen", pch = 16)
-
-# Leyenda
-legend("bottomright", legend = c("Sigmoide", "CHD = 0", "CHD = 1"),
-       col = c("blue", "darkred", "darkgreen"), pch = c(NA, 4, 16), lty = c(1, NA, NA), lwd = c(2, NA, NA))
-
-#---- 6. DATOS DE ENFERMEDADES DEL CORAZON ----
-##---- INICIALIZACION DE PARAMETROS DEL MODELO ----
-beta_0 <- -6;      beta_edad <- 0.04; beta_psis <- 0.02; 
-beta_col <- 0.01;  beta_diab <- 0.7;  beta_obes <- 0.5; beta_taba <- 0.6;
-###---- MODELO LOGIT----
-###---- CREACION DATA FRAME ----
-View(datos_chd_6)
-head(datos_chd)
-##---- CREACION DE ARCHIVO .csv ---- 
-write.csv(datos_chd_6, "datos_simulados_CHD_6.csv", row.names = FALSE)
-#---- 7. Simulación de datos para enfermedad cardíaca (CHD) ----
-##---- Simulación del resultado binario CHD ----
-# Predicción del valor lineal y la probabilidad
-xbeta_7 <- predict(modelo_chd_7, type = "link")
-probabilidades_7 <- predict(modelo_chd_7, type = "response")
-# Gráfica de la sigmoide con clasificación de puntos
-x_vals_7 <- seq(min(xbeta_7) - 1, max(xbeta_7) + 1, length.out = 500)
-y_vals_7 <- 1 / (1 + exp(-x_vals_7))
-# Plot
-plot(x_vals_7, y_vals_7, type = "l", lwd = 2, col = "blue",
-     xlab = expression(X*beta), ylab = "Probabilidad", main = "Curva sigmoide con clasificación")
-abline(h = 0.5, lty = 2, col = "red")
-abline(v = 0, lty = 2, col = "gray")
-# Puntos observados
-points(xbeta_7[data_chd_7$CHD_7 == 0], data_chd_7$CHD_7[data_chd_7$CHD_7 == 0], col = "darkred", pch = 4)
-points(xbeta_7[data_chd_7$CHD_7 == 1], data_chd_7$CHD_7[data_chd_7$CHD_7 == 1], col = "darkgreen", pch = 16)
-# Leyenda
-legend("bottomright", legend = c("Sigmoide", "CHD = 0", "CHD = 1"),
-       col = c("blue", "darkred", "darkgreen"), pch = c(NA, 4, 16), lty = c(1, NA, NA), lwd = c(2, NA, NA))
-
-#----  8. Simulación de datos - Enfermedad Coronaria
-
-##---- Gráfica de la curva sigmoide para CHD ----
-edad_seq_8 <- seq(30, 80, length.out = 300)
-b0_8 <- coef(modelo_chd_8)[1]
-b1_8 <- coef(modelo_chd_8)[2]
-prob_pred_8 <- 1 / (1 + exp(-(b0_8 + b1_8 * edad_seq_8)))
-
-datos_sigmoide_8 <- data.frame(Edad = edad_seq_8, Probabilidad = prob_pred_8)
-
-ggplot() +
-  geom_point(data = datos_chd_8, aes(x = Edad, y = Diagnostico), alpha = 0.5) +
-  geom_line(data = datos_sigmoide_8, aes(x = Edad, y = Probabilidad), color = "blue", size = 1.2) +
-  labs(title = "Curva Sigmoide - Probabilidad de Enfermedad Coronaria",
-       x = "Edad",
-       y = "Probabilidad estimada") +
-  theme_minimal()
-
-##---- Aplicación a los datos simulados de enfermedad cardíaca ----
-datos_chd$edad
-datos_chd$colesterol
-datos_chd$enfermedad
-X_chd <- as.matrix(cbind(1, datos_chd$edad, datos_chd$colesterol))
-y_chd <- as.matrix(datos_chd$enfermedad)
-cg_chd <- conjugate_gradient(X_chd, y_chd)
-print("Coeficientes estimados (CHD):")
-print(cg_chd$beta)
-#---- 9. Simulación de datos para enfermedad coronaria (CHD) ----
-set.seed(123)
-##---- Simular log-odds con coeficientes establecidos manualmente ----
-
-##---- Visualizar la sigmoide respecto a la edad ----
+Resultados <- data.frame(
+  Accuracy = round(Accuracy,3),
+  Precision = round(Precision,3),
+  Recall = round(rRecall,3),
+  Specificity = round(Specificity,3),
+  F1_Score = round(f1_score,3)
+)
+print(Resultados)
+library(pROC)
+roc_chd <- roc(datos_chd$Enfermedad, datos_chd$prediccion)
+auc(roc_chd)
+plot(roc_chd, col = "blue", lwd = 2, 
+     main = "Curva ROC - Modelo Enfermedad Coronaria (Simulacion)")
+abline(a = 0, b = 1, col = "gray", lty = 2)  # Línea diagonal = azar
+#---- 9. GRAFICANDO ----
 library(ggplot2)
-edad_seq_9 <- seq(min(edad_9), max(edad_9), length.out = 100)
-pred_data_9 <- data.frame(
-  edad_9 = edad_seq_9,
-  colesterol_9 = mean(colesterol_9),
-  presion_sistolica_9 = mean(presion_sistolica_9),
-  fumar_9 = 0,
-  diabetes_9 = 0
+##---- 9.1 Edad ----
+ggplot(datos_chd, aes(x = Edad)) +
+  geom_point(aes(y = prediccion, color = factor(Enfermedad)), alpha = 0.5) +
+  stat_smooth(aes(y = Enfermedad), method = "glm", 
+              method.args = list(family = "binomial"), 
+              se = FALSE, color = "black") +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
+  labs(title = "Probabilidad de Enfermedad Coronaria vs Edad",
+       x = "Edad (años)", y = "Probabilidad estimada", color = "Enfermedad") +
+  theme_minimal()
+#---- 9.2 Colesterol ----
+ggplot(datos_chd, aes(x = Colesterol)) +
+  geom_point(aes(y = prediccion, color = factor(Enfermedad)), alpha = 0.5) +
+  stat_smooth(aes(y = Enfermedad), method = "glm", 
+              method.args = list(family = "binomial"), 
+              se = FALSE, color = "black") +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
+  labs(title = "Probabilidad de Enfermedad Coronaria vs Colesterol",
+       x = "Colesterol (mg/dL)", y = "Probabilidad estimada", color = "Enfermedad") +
+  theme_minimal()
+#---- 9.3 Presión Arterial ----
+ggplot(datos_chd, aes(x = Presion)) +
+  geom_point(aes(y = prediccion, color = factor(Enfermedad)), alpha = 0.5) +
+  stat_smooth(aes(y = Enfermedad), method = "glm", 
+              method.args = list(family = "binomial"), 
+              se = FALSE, color = "black") +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
+  labs(title = "Probabilidad de Enfermedad Coronaria vs Presión Arterial",
+       x = "Presión Sistólica (mmHg)", y = "Probabilidad estimada", color = "Enfermedad") +
+  theme_minimal()
+#---- 9.4 Tabaquismo ----
+ggplot(datos_chd, aes(x = Tabaquismo)) +
+  geom_point(aes(y = prediccion, color = factor(Enfermedad)), alpha = 0.5) +
+  stat_smooth(aes(y = Enfermedad), method = "glm", 
+              method.args = list(family = "binomial"), 
+              se = FALSE, color = "black") +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
+  labs(title = "Probabilidad de Enfermedad Coronaria vs Tabaquismo",
+       x = "Tabaquismo (0 = No, 1 = Sí)", y = "Probabilidad estimada", color = "Enfermedad") +
+  theme_minimal()
+#---- 9.5 Diabetes ----
+ggplot(datos_chd, aes(x = Diabetes)) +
+  geom_point(aes(y = prediccion, color = factor(Enfermedad)), alpha = 0.5) +
+  stat_smooth(aes(y = Enfermedad), method = "glm", 
+              method.args = list(family = "binomial"), 
+              se = FALSE, color = "black") +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
+  labs(title = "Probabilidad de Enfermedad Coronaria vs Diabetes",
+       x = "Diabetes (0 = No, 1 = Sí)", y = "Probabilidad estimada", color = "Enfermedad") +
+  theme_minimal()
+#---- 9.6 Obesidad ----
+ggplot(datos_chd, aes(x = Obesidad)) +
+  geom_point(aes(y = prediccion, color = factor(Enfermedad)), alpha = 0.5) +
+  stat_smooth(aes(y = Enfermedad), method = "glm", 
+              method.args = list(family = "binomial"), 
+              se = FALSE, color = "black") +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray") +
+  labs(title = "Probabilidad de Enfermedad Coronaria vs Obesidad",
+       x = "Obesidad (0 = No, 1 = Sí)", y = "Probabilidad estimada", color = "Enfermedad") +
+  theme_minimal()
+#---- 10. Training/Test Set ----
+set.seed(123)
+n <- nrow(datos_chd)
+indices_entrenamiento <- sample(1:n, size = 0.7 * n)
+train_data <- datos_chd[indices_entrenamiento, ]
+test_data  <- datos_chd[-indices_entrenamiento, ]
+#---- 10.1 Ajuste del modelo con training ----
+modelo_train <- glm(Enfermedad ~ Edad + Colesterol + 
+                      Presion + Tabaquismo + Diabetes + Obesidad,
+                    data = train_data, family = binomial)
+#---- 10.2 Prediccion con test set ----
+test_data$prob <- predict(modelo_train, 
+                          newdata = test_data, 
+                          type = "response")
+test_data$clasificacion <- ifelse(test_data$prob >= 0.5, 1, 0)
+#---- 10.3 Matriz de confusion y metricas ----
+matriz_test <- table(
+  factor(test_data$Enfermedad, levels = c(0, 1)),
+  factor(test_data$clasificacion, levels = c(0, 1))
 )
-pred_data_9$prob <- predict(modelo_glm_9, newdata = pred_data_9, type = "response")
-ggplot(datos_chd_9, aes(x = edad_9, y = CHD_9)) +
-  geom_jitter(width = 0.5, height = 0.05, alpha = 0.4) +
-  geom_line(data = pred_data_9, aes(x = edad_9, y = prob), color = "blue", size = 1) +
-  labs(title = "Curva Sigmoide: Probabilidad de CHD vs Edad", y = "Probabilidad estimada", x = "Edad")
 
-#---- 10. Simulación de datos para enfermedad cardíaca ----
-# Coeficientes simulados para CHD
-##---- Ajuste de modelo con glm ----
-##---- Gráfico para visualización ----
-ggplot(datos_chd_10, aes(x = edad, y = probabilidad_chd_10, color = factor(chd_10))) +
-  geom_point(alpha = 0.6) +
-  stat_function(fun = function(x) 1 / (1 + exp(-(coef(modelo_chd_10)[1] + coef(modelo_chd_10)[2]*x +
-                                                   coef(modelo_chd_10)[3]*mean(colesterol_10)))), 
-                color = "black", linetype = "dashed") +
-  labs(title = "Regresión logística: Enfermedad cardíaca", y = "Probabilidad estimada", color = "Diagnóstico")
+TP <- matriz_test["1", "1"]
+TN <- matriz_test["0", "0"]
+FP <- matriz_test["0", "1"]
+FN <- matriz_test["1", "0"]
 
+Accuracy    <- (TP + TN) / sum(matriz_test)
+Precision   <- TP / (TP + FP)
+rRecall     <- TP / (TP + FN)
+Specificity <- TN / (TN + FP)
+F1_Score    <- 2 * (Precision * rRecall) / (Precision + rRecall)
 
+Resultados_test <- data.frame(
+  Accuracy = round(Accuracy, 3),
+  Precision = round(Precision, 3),
+  rRecall = round(rRecall, 3),
+  Specificity = round(Specificity, 3),
+  F1_Score = round(F1_Score, 3)
+)
+print(Resultados_test)
+#---- 10.4 Curva ROC test ----
+library(pROC)
+roc_test <- roc(test_data$Enfermedad, test_data$prob)
+plot(roc_test, col = "blue", lwd = 2,
+     main = "Curva ROC - Test set (CHD)")
+abline(a = 0, b = 1, col = "gray", lty = 2)
+auc(roc_test)
 
-
-coef_simulados_9 <- c("(Intercept)" = -5, edad_9 = 0.04, 
-                      colestero_9l = 0.03, presion_sistolica_9 = 0.05,
-                      fumar_9 = 0.8, diabetes_9 = 1.2)
-coef_estimados_9 <- coef(modelo_glm_9)
-comparacion_9 <- data.frame(Simulado = coef_simulados_9[names(coef_estimados_9)],
-                            Estimado = round(coef_estimados_9, 3))
-print(comparacion_9)

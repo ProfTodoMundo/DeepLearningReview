@@ -1404,6 +1404,83 @@ Las ventajas de las pruebas de Hosmer-Lemeshow incluyen su aplicaci\'on sencilla
 Otras alternativas menos comunes para evaluar el ajuste del modelo son descritas por Hosmer et al \cite{hosmer1997} y Kuss \cite{kuss2002}.
 
 \end{Note}
+%>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==
+\section{Ejemplos Num\'ericos}
+
+\subsection{Simulaci\'on de enfermedad de c\'ancer}
+\begin{verbatim}
+#---- 0. SEMILLA INICIAL Y LIBRERIAS---- 
+set.seed(123)
+##---- Librerias ----
+library(pROC)
+library(ggplot2)
+library(broom)
+library(dplyr)
+# ---- 1. SIMULACION DE DATOS DE CANCER ----
+#---- 2. EJEMPLO UNIFICADO ----
+n <- 1000
+#---- 2.1 VARIABLES A CONSIDERAR ----
+###---- 2.1.1 EDAD ----
+edad_cancer  <- round(rnorm(n, mean = 55, sd = 10))
+###---- 2.1.2 TAMANHO DEL TUMOR ----
+tamano_tumor <- round(rnorm(n, mean = 2.5, sd = 1), 1)
+###---- 2.1.3 PROGESTERONA ----
+progesterona <- round(rnorm(n, mean = 15, sd = 5), 1)
+###---- 2.1.4 HER ----
+HER2 <- rbinom(n, 1, 0.3)
+###---- 2.1.5 RE ----
+RE  <- rbinom(n, 1, 0.6)
+###----2.1.6  RP ----
+RP  <- rbinom(n, 1, 0.5)
+###---- 2.1.7 DENSIDAD MAMARIA ----
+densidad_mamaria  <- rnorm(n, mean = 0.6, sd = 0.2)
+###----2.1.8 MARCADOR A ----
+marker_A <- round(rnorm(n, 1.0, 0.3), 1)
+###---- 2.1.9 MARCADOR B ----
+marker_B <- round(rnorm(n, 1.2, 0.4), 1)
+##---- 2.2 LOG ODDS ----
+log_odds_cancer <- -4 + 1.348 * marker_A + 0.898 * marker_B +
+  0.03 * edad_cancer + 0.05 * tamano_tumor -  0.1 * progesterona +
+  0.8 * HER2 + 0.6 * RE + 0.5 * RP +  0.3 * densidad_mamaria
+##---- 2.3 PROBABILIDAD SOBREVIVIR ----
+probabilidad_cancer <- 1 / (1 + exp(-log_odds_cancer))
+##---- SOBREVIVENCIA ----
+recidiva <- rbinom(n, 1, probabilidad_cancer)
+##---- 2.4 GENERACION DEL DATAFRAME ----
+datos_cancer <- data.frame(
+  edad = edad_cancer,  tamano_tumor = tamano_tumor,
+  progesterona = progesterona,HER2 = HER2, RE = RE,
+  RP = RP, Densidad = densidad_mamaria,
+  MarcadorA = marker_A,MarcadorB = marker_B,
+  sobrevivio = recidiva)
+##---- 2.5 GENERACION DEL MODELO ----
+modelo_cancer <- glm(sobrevivio ~  .,data = datos_cancer, family = binomial)
+summary(modelo_cancer)
+miscoeficientes <- coef(modelo_cancer)
+##---- 2.6 COMPARACION DE COEFICIENTES ----
+coef_reales <- c(
+  `(Intercept)` = -4,
+  edad = 0.03,
+  tamano_tumor = 0.05,
+  progesterona = -0.1,
+  HER2 = 0.8,
+  RE = 0.6,
+  RP = 0.5,
+  Densidad = 0.3,
+  MarcadorA = 1.348,
+  MarcadorB = 0.898
+)
+comparativo <- data.frame(
+  Coef_estimados = round(miscoeficientes,3),
+  Coef_reales = round(coef_reales[names(miscoeficientes)], 3)
+)
+comparativo$diferencia <- round(comparativo$Coef_estimados-comparativo$Coef_reales,3)
+print(comparativo)
+\end{verbatim}
+
+\subsection{Simulaci\'on de enfermedad del coraz\'on}
+
+%>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==
 
 
 %>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<>==<%

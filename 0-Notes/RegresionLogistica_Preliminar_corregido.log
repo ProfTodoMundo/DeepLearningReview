@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  21 MAY 2025 19:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.10)  22 MAY 2025 18:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -711,19 +711,37 @@ LaTeX Warning: Reference `Eq.Hessiana1' on page 14 undefined on input line 689.
 
 
 [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28]
-[29] [30] [31] [32]
-Underfull \hbox (badness 10000) in paragraph at lines 1686--1687
+[29] [30]
+Underfull \hbox (badness 10000) in paragraph at lines 1621--1622
 []\OT1/cmr/m/n/10.95 Bileschi, M. L. et al. Us-ing deep learn-ing to an-no-tate
  the pro-tein uni-verse. Nat.
  []
 
-[33]
-Underfull \hbox (badness 10000) in paragraph at lines 1724--1725
+[31]
+Underfull \hbox (badness 10000) in paragraph at lines 1659--1660
 []\OT1/cmr/m/n/10.95 Hu, W. et al. Strate-gies for pre-training graph neu-ral n
 et-works. Preprint at
  []
 
-[34] (./RegresionLogistica_Preliminar_corregido.aux)
+[32] [33] [34] [35] [36] [37] [38] [39] [40]
+Overfull \hbox (15.13876pt too wide) in paragraph at lines 2258--2258
+[]       \OT1/cmtt/m/n/10.95 x = "Tabaquismo (0 = No, 1 = S^^S^^P)", y = "Proba
+bilidad estimada", color = "Enfermedad") +[] 
+ []
+
+
+Overfull \hbox (3.64139pt too wide) in paragraph at lines 2258--2258
+[]       \OT1/cmtt/m/n/10.95 x = "Diabetes (0 = No, 1 = S^^S^^P)", y = "Probabi
+lidad estimada", color = "Enfermedad") +[] 
+ []
+
+
+Overfull \hbox (3.64139pt too wide) in paragraph at lines 2258--2258
+[]       \OT1/cmtt/m/n/10.95 x = "Obesidad (0 = No, 1 = S^^S^^P)", y = "Probabi
+lidad estimada", color = "Enfermedad") +[] 
+ []
+
+[41] [42] [43] [44] (./RegresionLogistica_Preliminar_corregido.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -732,16 +750,13 @@ L3 programming layer <2024-02-20>
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `RegresionLogistica_Preliminar_corregido.out'
  has not changed.
 (rerunfilecheck)             Checksum: 946D0A26CD15254B6DBC92B412BFE72A;2326.
  ) 
 Here is how much of TeX's memory you used:
- 14872 strings out of 474116
- 230724 string characters out of 5743681
+ 14882 strings out of 474116
+ 230794 string characters out of 5743681
  1950187 words of memory out of 5000000
  36810 multiletter control sequences out of 15000+600000
  574477 words of font info for 95 fonts, out of 8000000 for 9000
@@ -773,11 +788,11 @@ e/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
 024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texli
 ve/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/t
 exlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on RegresionLogistica_Preliminar_corregido.pdf (34 pages, 453239
+Output written on RegresionLogistica_Preliminar_corregido.pdf (44 pages, 466789
  bytes).
 PDF statistics:
- 579 PDF objects out of 1000 (max. 8388607)
- 486 compressed objects within 5 object streams
- 210 named destinations out of 1000 (max. 500000)
+ 629 PDF objects out of 1000 (max. 8388607)
+ 525 compressed objects within 6 object streams
+ 220 named destinations out of 1000 (max. 500000)
  97 words of extra memory for PDF output out of 10000 (max. 10000000)
 

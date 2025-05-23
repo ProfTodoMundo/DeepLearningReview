@@ -9,4 +9,4 @@
 \contentsline {section}{\numberline {3}Notas finales}{21}{section.3}%
 \contentsline {section}{\numberline {4}Ejemplos Num\'ericos}{26}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Simulaci\'on de enfermedad de c\'ancer}{26}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Simulaci\'on de enfermedad del coraz\'on}{28}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.2}Simulaci\'on de enfermedad del coraz\'on}{26}{subsection.4.2}%
